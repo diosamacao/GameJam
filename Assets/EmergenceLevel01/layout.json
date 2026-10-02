@@ -1,0 +1,1711 @@
+{
+  "width": 640,
+  "height": 240,
+  "ppu": 16,
+  "items": [
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 8,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 72,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 136,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 200,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 264,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 328,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 392,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 456,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 520,
+      "y": 24,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 584,
+      "y": 24,
+      "w": 48,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 8,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 72,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 136,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 200,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 264,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 328,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 392,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 456,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 520,
+      "y": 88,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 584,
+      "y": 88,
+      "w": 48,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 8,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 72,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 136,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 200,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 264,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 328,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 392,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_bolts",
+      "group": "Tiles",
+      "x": 456,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 520,
+      "y": 152,
+      "w": 64,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_plain",
+      "group": "Tiles",
+      "x": 584,
+      "y": 152,
+      "w": 48,
+      "h": 64,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 0,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 0,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 0,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 32,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 32,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 32,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 64,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 64,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 64,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 96,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 96,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 96,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 128,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 128,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 128,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 160,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 160,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 160,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 192,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 192,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 192,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 224,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 224,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 224,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 256,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 256,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 256,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 288,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 288,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 288,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 320,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 320,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 320,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 352,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 352,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 352,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 384,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 384,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 384,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 416,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 416,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 416,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 448,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 448,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 448,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 480,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 480,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 480,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 512,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 512,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 512,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 544,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 544,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 544,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 576,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 576,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 576,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "floor",
+      "group": "Tiles",
+      "x": 608,
+      "y": 16,
+      "w": 32,
+      "h": 8,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling",
+      "group": "Tiles",
+      "x": 608,
+      "y": 216,
+      "w": 32,
+      "h": 12,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "foundation",
+      "group": "Tiles",
+      "x": 608,
+      "y": 8,
+      "w": 32,
+      "h": 8,
+      "order": 0,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_left",
+      "group": "Tiles",
+      "x": 0,
+      "y": 24,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_right",
+      "group": "Tiles",
+      "x": 632,
+      "y": 24,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_left",
+      "group": "Tiles",
+      "x": 0,
+      "y": 56,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_right",
+      "group": "Tiles",
+      "x": 632,
+      "y": 56,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_left",
+      "group": "Tiles",
+      "x": 0,
+      "y": 88,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_right",
+      "group": "Tiles",
+      "x": 632,
+      "y": 88,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_left",
+      "group": "Tiles",
+      "x": 0,
+      "y": 120,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_right",
+      "group": "Tiles",
+      "x": 632,
+      "y": 120,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_left",
+      "group": "Tiles",
+      "x": 0,
+      "y": 152,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_right",
+      "group": "Tiles",
+      "x": 632,
+      "y": 152,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_left",
+      "group": "Tiles",
+      "x": 0,
+      "y": 184,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "wall_right",
+      "group": "Tiles",
+      "x": 632,
+      "y": 184,
+      "w": 8,
+      "h": 32,
+      "order": 20,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling_light",
+      "group": "Props",
+      "x": 120,
+      "y": 209,
+      "w": 24,
+      "h": 8,
+      "order": 21,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "ceiling_light",
+      "group": "Props",
+      "x": 496,
+      "y": 209,
+      "w": 24,
+      "h": 8,
+      "order": 21,
+      "parent": "Environment",
+      "alpha": 1
+    },
+    {
+      "name": "pod_sleep_body",
+      "group": "Props",
+      "x": 48,
+      "y": 24,
+      "w": 32,
+      "h": 64,
+      "order": 5,
+      "parent": "SleepPod0",
+      "alpha": 1
+    },
+    {
+      "name": "robot_sleep",
+      "group": "Characters",
+      "x": 48,
+      "y": 28,
+      "w": 32,
+      "h": 40,
+      "order": 6,
+      "parent": "SleepPod0",
+      "alpha": 1
+    },
+    {
+      "name": "pod_sleep_glass",
+      "group": "Props",
+      "x": 52,
+      "y": 31,
+      "w": 24,
+      "h": 46,
+      "order": 7,
+      "parent": "SleepPod0",
+      "alpha": 0.22
+    },
+    {
+      "name": "pod_sleep_body",
+      "group": "Props",
+      "x": 88,
+      "y": 24,
+      "w": 32,
+      "h": 64,
+      "order": 5,
+      "parent": "SleepPod1",
+      "alpha": 1
+    },
+    {
+      "name": "robot_sleep",
+      "group": "Characters",
+      "x": 88,
+      "y": 28,
+      "w": 32,
+      "h": 40,
+      "order": 6,
+      "parent": "SleepPod1",
+      "alpha": 1
+    },
+    {
+      "name": "pod_sleep_glass",
+      "group": "Props",
+      "x": 92,
+      "y": 31,
+      "w": 24,
+      "h": 46,
+      "order": 7,
+      "parent": "SleepPod1",
+      "alpha": 0.22
+    },
+    {
+      "name": "pod_sleep_body",
+      "group": "Props",
+      "x": 128,
+      "y": 24,
+      "w": 32,
+      "h": 64,
+      "order": 5,
+      "parent": "SleepPod2",
+      "alpha": 1
+    },
+    {
+      "name": "robot_sleep",
+      "group": "Characters",
+      "x": 128,
+      "y": 28,
+      "w": 32,
+      "h": 40,
+      "order": 6,
+      "parent": "SleepPod2",
+      "alpha": 1
+    },
+    {
+      "name": "pod_sleep_glass",
+      "group": "Props",
+      "x": 132,
+      "y": 31,
+      "w": 24,
+      "h": 46,
+      "order": 7,
+      "parent": "SleepPod2",
+      "alpha": 0.22
+    },
+    {
+      "name": "pod_experiment_body",
+      "group": "Props",
+      "x": 410,
+      "y": 24,
+      "w": 32,
+      "h": 64,
+      "order": 5,
+      "parent": "ExperimentPod0",
+      "alpha": 1
+    },
+    {
+      "name": "robot_idle",
+      "group": "Characters",
+      "x": 410,
+      "y": 28,
+      "w": 32,
+      "h": 40,
+      "order": 6,
+      "parent": "ExperimentPod0",
+      "alpha": 1
+    },
+    {
+      "name": "pod_experiment_glass",
+      "group": "Props",
+      "x": 414,
+      "y": 31,
+      "w": 24,
+      "h": 46,
+      "order": 7,
+      "parent": "ExperimentPod0",
+      "alpha": 0.22
+    },
+    {
+      "name": "pod_experiment_body",
+      "group": "Props",
+      "x": 450,
+      "y": 24,
+      "w": 32,
+      "h": 64,
+      "order": 5,
+      "parent": "ExperimentPod1",
+      "alpha": 1
+    },
+    {
+      "name": "companion_idle",
+      "group": "Characters",
+      "x": 450,
+      "y": 28,
+      "w": 32,
+      "h": 40,
+      "order": 6,
+      "parent": "ExperimentPod1",
+      "alpha": 1
+    },
+    {
+      "name": "pod_experiment_glass",
+      "group": "Props",
+      "x": 454,
+      "y": 31,
+      "w": 24,
+      "h": 46,
+      "order": 7,
+      "parent": "ExperimentPod1",
+      "alpha": 0.22
+    },
+    {
+      "name": "terminal_frame",
+      "group": "Props",
+      "x": 252,
+      "y": 76,
+      "w": 96,
+      "h": 56,
+      "order": 5,
+      "parent": "Terminal",
+      "alpha": 1
+    },
+    {
+      "name": "terminal_display",
+      "group": "Props",
+      "x": 268,
+      "y": 86,
+      "w": 64,
+      "h": 36,
+      "order": 6,
+      "parent": "Terminal",
+      "alpha": 1
+    },
+    {
+      "name": "terminal_keyboard",
+      "group": "Props",
+      "x": 304,
+      "y": 50,
+      "w": 32,
+      "h": 12,
+      "order": 6,
+      "parent": "Terminal",
+      "alpha": 1
+    },
+    {
+      "name": "scientist_work_0",
+      "group": "Characters",
+      "x": 292,
+      "y": 24,
+      "w": 32,
+      "h": 48,
+      "order": 8,
+      "parent": "Scientist",
+      "alpha": 1
+    },
+    {
+      "name": "door_frame",
+      "group": "Props",
+      "x": 576,
+      "y": 24,
+      "w": 32,
+      "h": 64,
+      "order": 12,
+      "parent": "ExitDoor",
+      "alpha": 1
+    },
+    {
+      "name": "door_lower",
+      "group": "Props",
+      "x": 580,
+      "y": 30,
+      "w": 24,
+      "h": 26,
+      "order": 10,
+      "parent": "ExitDoor",
+      "alpha": 1
+    },
+    {
+      "name": "door_upper",
+      "group": "Props",
+      "x": 580,
+      "y": 56,
+      "w": 24,
+      "h": 26,
+      "order": 10,
+      "parent": "ExitDoor",
+      "alpha": 1
+    },
+    {
+      "name": "door_switch",
+      "group": "Props",
+      "x": 613,
+      "y": 44,
+      "w": 8,
+      "h": 12,
+      "order": 12,
+      "parent": "ExitDoor",
+      "alpha": 1
+    },
+    {
+      "name": "wire_green_h",
+      "group": "Data",
+      "x": 64,
+      "y": 132,
+      "w": 188,
+      "h": 2,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_green_v",
+      "group": "Data",
+      "x": 64,
+      "y": 88,
+      "w": 2,
+      "h": 44,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_green",
+      "group": "Props",
+      "x": 61,
+      "y": 85,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_green",
+      "group": "Props",
+      "x": 248,
+      "y": 129,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_green_h",
+      "group": "Data",
+      "x": 104,
+      "y": 124,
+      "w": 148,
+      "h": 2,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_green_v",
+      "group": "Data",
+      "x": 104,
+      "y": 88,
+      "w": 2,
+      "h": 36,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_green",
+      "group": "Props",
+      "x": 101,
+      "y": 85,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_green",
+      "group": "Props",
+      "x": 248,
+      "y": 121,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_green_h",
+      "group": "Data",
+      "x": 144,
+      "y": 116,
+      "w": 108,
+      "h": 2,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_green_v",
+      "group": "Data",
+      "x": 144,
+      "y": 88,
+      "w": 2,
+      "h": 28,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_green",
+      "group": "Props",
+      "x": 141,
+      "y": 85,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_green",
+      "group": "Props",
+      "x": 248,
+      "y": 113,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_blue_h",
+      "group": "Data",
+      "x": 348,
+      "y": 124,
+      "w": 80,
+      "h": 2,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_blue_v",
+      "group": "Data",
+      "x": 426,
+      "y": 88,
+      "w": 2,
+      "h": 36,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_blue",
+      "group": "Props",
+      "x": 423,
+      "y": 85,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_blue",
+      "group": "Props",
+      "x": 344,
+      "y": 121,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_blue_h",
+      "group": "Data",
+      "x": 348,
+      "y": 132,
+      "w": 120,
+      "h": 2,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "wire_blue_v",
+      "group": "Data",
+      "x": 466,
+      "y": 88,
+      "w": 2,
+      "h": 44,
+      "order": 2,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_blue",
+      "group": "Props",
+      "x": 463,
+      "y": 85,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    },
+    {
+      "name": "socket_blue",
+      "group": "Props",
+      "x": 344,
+      "y": 129,
+      "w": 8,
+      "h": 8,
+      "order": 4,
+      "parent": "DataLines",
+      "alpha": 1
+    }
+  ],
+  "paths": [
+    {
+      "color": "green",
+      "points": [
+        {
+          "x": 65,
+          "y": 89
+        },
+        {
+          "x": 65,
+          "y": 133
+        },
+        {
+          "x": 252,
+          "y": 133
+        }
+      ]
+    },
+    {
+      "color": "green",
+      "points": [
+        {
+          "x": 105,
+          "y": 89
+        },
+        {
+          "x": 105,
+          "y": 125
+        },
+        {
+          "x": 252,
+          "y": 125
+        }
+      ]
+    },
+    {
+      "color": "green",
+      "points": [
+        {
+          "x": 145,
+          "y": 89
+        },
+        {
+          "x": 145,
+          "y": 117
+        },
+        {
+          "x": 252,
+          "y": 117
+        }
+      ]
+    },
+    {
+      "color": "blue",
+      "points": [
+        {
+          "x": 348,
+          "y": 125
+        },
+        {
+          "x": 427,
+          "y": 125
+        },
+        {
+          "x": 427,
+          "y": 89
+        }
+      ]
+    },
+    {
+      "color": "blue",
+      "points": [
+        {
+          "x": 348,
+          "y": 133
+        },
+        {
+          "x": 467,
+          "y": 133
+        },
+        {
+          "x": 467,
+          "y": 89
+        }
+      ]
+    }
+  ]
+}

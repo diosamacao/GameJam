@@ -1,0 +1,114 @@
+[
+  {
+    "name": "bg_plain",
+    "collider": "None",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "bg_bolts",
+    "collider": "None",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "bg_vent",
+    "collider": "None",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "bg_light",
+    "collider": "None",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "solid_fill",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "floor_top",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "ceiling_bottom",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "wall_left",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "wall_right",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "corner_top_left",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "corner_top_right",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "corner_bottom_left",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "corner_bottom_right",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "platform_left",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "platform_middle",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  },
+  {
+    "name": "platform_right",
+    "collider": "Grid",
+    "ppu": 64,
+    "width": 64,
+    "height": 64
+  }
+]
