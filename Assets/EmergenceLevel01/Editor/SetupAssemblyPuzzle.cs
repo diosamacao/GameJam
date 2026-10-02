@@ -8,6 +8,7 @@ namespace Emergence.Level01.Editor
 {
     public static class SetupAssemblyPuzzle
     {
+        private static string test = "";
         const string Base="Assets/EmergenceLevel01/";
         [MenuItem("Tools/Emergence/Setup Door Assembly Puzzle")]
         public static void Setup()
