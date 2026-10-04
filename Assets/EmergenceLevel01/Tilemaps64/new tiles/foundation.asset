@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: bg_bolts
+  m_Name: foundation
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: c48c20b0dd919b2488aed79a9c25d451, type: 3}
-  m_Color: {r: 0.8820755, g: 0.9071506, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: fba410e4a2828d4419227fb45a878b05, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
     e01: 0
@@ -33,4 +33,4 @@ MonoBehaviour:
     e33: 1
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
-  m_ColliderType: 0
+  m_ColliderType: 1
