@@ -74,7 +74,7 @@ namespace Emergence.Level01.Editor
         static void Configure(RobotMotor2D motor,RobotEmotionConfig config)
         {
             if(!motor || !motor.visual) throw new Exception("Player motor/visual missing");
-            motor.idle=Sprite("body_idle");motor.walk=new[]{Sprite("body_walk_0"),Sprite("body_walk_1"),Sprite("body_walk_2"),Sprite("body_walk_3")};motor.visual.sprite=motor.idle;
+            motor.idle=Sprite("body_idle");motor.walk=new[]{Sprite("body_walk_0"),Sprite("body_walk_1"),Sprite("body_walk_2"),Sprite("body_walk_3")};motor.visual.sprite=motor.idle;motor.jump=Sprite("body_jump");motor.fall=Sprite("body_fall");motor.land=Sprite("body_land");
             var controller=motor.GetComponent<RobotEmotionController>();if(!controller)controller=motor.gameObject.AddComponent<RobotEmotionController>();
             var head=motor.visual.transform.Find("EmotionHead");if(!head){head=new GameObject("EmotionHead").transform;head.SetParent(motor.visual.transform,false);}
             var renderer=head.GetComponent<SpriteRenderer>();if(!renderer)renderer=head.gameObject.AddComponent<SpriteRenderer>();

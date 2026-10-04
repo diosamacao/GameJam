@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  jumpHeight: 2
   visual: {fileID: 7344507955489075811}
   idle: {fileID: 21300000, guid: 674e67935c1dc294192b24405011975c, type: 3}
   walk:
@@ -130,7 +131,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 904c2c494c9748c49a2138f851645bec, type: 3}
   - {fileID: 21300000, guid: 1971e5ce03a81a4489bc60c4f6036dc0, type: 3}
   - {fileID: 21300000, guid: af899448e900a0243a8bb33d98a67598, type: 3}
+  jump: {fileID: 21300000, guid: 117523f960701fa40beef6a6fd004719, type: 3}
+  fall: {fileID: 21300000, guid: edd4515aee5a1e446b8fa5593fd3aae8, type: 3}
+  land: {fileID: 21300000, guid: 60cb8a4d6f61b754fa1f3f06dcfd8249, type: 3}
   walkFps: 8
+  landingDuration: 0.1
 --- !u!114 &4853005638692219486
 MonoBehaviour:
   m_ObjectHideFlags: 0

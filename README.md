@@ -7,6 +7,8 @@
 使用 Unity 2022.3.62f3c1 打开仓库根目录，等待资源导入，打开 `Assets/EmergenceLevel01/Generated/Level01_InitialLab.unity` 后运行。
 
 - A / D：机器人左右移动。
+- 空格：跳跃；PlayerRobot 的 RobotMotor2D → Jump Height 配置高度，默认 2。
+- Y / U / I / O / P：喜、怒、哀、乐、空白表情。
 - 点击可合成方块选中，再点击对应虚线位置放入。
 - 门的上下两个部件安装完成后，点击门控制开合。
 - 右键 / Esc：取消选择。
