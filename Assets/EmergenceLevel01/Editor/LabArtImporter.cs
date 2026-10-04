@@ -10,7 +10,7 @@ namespace Emergence.Level01.Editor
             var t = (TextureImporter)assetImporter;
             t.textureType = TextureImporterType.Sprite;
             t.spriteImportMode = SpriteImportMode.Single;
-            t.spritePixelsPerUnit = assetPath.Contains("/Tiles64/") ? 64 : 16;
+            t.spritePixelsPerUnit = assetPath.Contains("/RobotModular/") ? 48 : (assetPath.Contains("/Tiles64/") ? 64 : 16);
             t.filterMode = FilterMode.Point;
             t.textureCompression = TextureImporterCompression.Uncompressed;
             t.mipmapEnabled = false;

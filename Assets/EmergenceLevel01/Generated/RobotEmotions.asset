@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ac49c7ff4ec254c9cf8f3d228d5f95, type: 3}
+  m_Name: RobotEmotions
+  m_EditorClassIdentifier: 
+  joy: {fileID: 21300000, guid: 647d77151e595004798f84b4018d7bf6, type: 3}
+  anger: {fileID: 21300000, guid: c736cb5e51c6a3b42985b31b9ee701f3, type: 3}
+  sadness: {fileID: 21300000, guid: 4296ab3ce6f33a941a5f16d4a39e5f7c, type: 3}
+  delight: {fileID: 21300000, guid: c4b220d8104b09d4aa764326d0d95df5, type: 3}
+  blank: {fileID: 21300000, guid: c7f88ac77de07ba4680a9787d4b45214, type: 3}
+  frames:
+  - body: {fileID: 21300000, guid: e77658478845dc043b6a899c46a2ee46, type: 3}
+    neck: {x: 0, y: 0.8958333}
+  - body: {fileID: 21300000, guid: 904c2c494c9748c49a2138f851645bec, type: 3}
+    neck: {x: 0, y: 0.8958333}
+  - body: {fileID: 21300000, guid: 1971e5ce03a81a4489bc60c4f6036dc0, type: 3}
+    neck: {x: 0, y: 0.8958333}
+  - body: {fileID: 21300000, guid: af899448e900a0243a8bb33d98a67598, type: 3}
+    neck: {x: 0, y: 0.8958333}
+  - body: {fileID: 21300000, guid: 674e67935c1dc294192b24405011975c, type: 3}
+    neck: {x: 0, y: 0.875}
+  - body: {fileID: 21300000, guid: 117523f960701fa40beef6a6fd004719, type: 3}
+    neck: {x: 0, y: 0.7916667}
+  - body: {fileID: 21300000, guid: edd4515aee5a1e446b8fa5593fd3aae8, type: 3}
+    neck: {x: 0, y: 0.9166667}
+  - body: {fileID: 21300000, guid: 60cb8a4d6f61b754fa1f3f06dcfd8249, type: 3}
+    neck: {x: 0, y: 0.6875}
+  fallbackNeck: {x: 0, y: 0.875}
