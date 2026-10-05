@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4853005638692219486}
   - component: {fileID: 7256631849693935819}
   - component: {fileID: 8067554408707097230}
+  - component: {fileID: 2769377242966152987}
   m_Layer: 0
   m_Name: PlayerRobot
   m_TagString: Player
@@ -176,7 +177,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41e540aaa21eb44386550ee52a77569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableKeyboardTest: 1
+  enableKeyboardTest: 0
+--- !u!114 &2769377242966152987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993940386601983178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d9f17957f89114f94e47c65a7da39d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilities: {fileID: 11400000, guid: b49c265a7e8276243ab9f5c3ee33f570, type: 2}
+  levelGrid: {fileID: 0}
+  keyboardInput: 1
+  showSelection: 1
 --- !u!1 &8073755569527328643
 GameObject:
   m_ObjectHideFlags: 0

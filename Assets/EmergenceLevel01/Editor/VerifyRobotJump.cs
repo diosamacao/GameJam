@@ -33,7 +33,7 @@ namespace Emergence.Level01.Editor
                     motor=UnityEngine.Object.FindObjectOfType<RobotMotor2D>();body=motor.GetComponent<Rigidbody2D>();emotion=motor.GetComponent<RobotEmotionController>();
                     motor.GetComponent<RobotKeyboardInput>().enabled=false;
                     Check(motor.IsGrounded,"Standing floor detected");
-                    emotion.SetEmotion(RobotEmotion.Joy);motor.jumpHeight=2;baseline=body.position.y;peak=baseline;startX=body.position.x;
+                    emotion.SetEmotion(RobotEmotion.Joy);var gameplay=motor.GetComponent<RobotEmotionGameplay>();if(gameplay){gameplay.keyboardInput=false;gameplay.levelGrid=null;gameplay.abilities=UnityEngine.Object.Instantiate(gameplay.abilities);gameplay.abilities.fallbackCellHeight=1;gameplay.abilities.happyJumpCells=2;}motor.jumpHeight=2;baseline=body.position.y;peak=baseline;startX=body.position.x;
                     Check(motor.RequestJump() && !motor.RequestJump(),"Grounded jump accepted, duplicate request rejected");motor.SetMoveInput(.2f);phase=1;return;
                 }
                 peak=Mathf.Max(peak,body.position.y);
@@ -49,12 +49,12 @@ namespace Emergence.Level01.Editor
                 if(phase==3 && Time.time-started>.25f){
                     Check(sawLand,"Landing sprite displayed");
                     Check(motor.visual.sprite==motor.idle,"Landing returns to idle");
-                    motor.jumpHeight=3;peak=baseline=body.position.y;Check(motor.RequestJump(),"Runtime height change accepts next jump");phase=4;return;
+                    motor.jumpHeight=3;var gameplay=motor.GetComponent<RobotEmotionGameplay>();if(gameplay)gameplay.abilities.happyJumpCells=3;peak=baseline=body.position.y;Check(motor.RequestJump(),"Runtime height change accepts next jump");phase=4;return;
                 }
                 if(phase==4 && body.velocity.y>1)phase=5;
                 if(phase==5 && motor.IsGrounded){
                     Check(Mathf.Abs((peak-baseline)-3)<.18f,"Runtime change to 3 units changes measured apex");
-                    motor.jumpHeight=0;Check(!motor.RequestJump(),"Zero height disables jumping");Finish(null);
+                    motor.jumpHeight=0;var gameplay=motor.GetComponent<RobotEmotionGameplay>();if(gameplay)gameplay.abilities.happyJumpCells=0;Check(!motor.RequestJump(),"Zero height disables jumping");Finish(null);
                 }
             }catch(Exception e){Finish("FAIL: "+e.Message);}
         }

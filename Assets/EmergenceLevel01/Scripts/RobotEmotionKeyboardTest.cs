@@ -5,7 +5,7 @@ namespace Emergence.Level01
     public sealed class RobotEmotionKeyboardTest : MonoBehaviour
     {
         [Tooltip("Disable this component when gameplay takes ownership of emotions.")]
-        public bool enableKeyboardTest = true;
+        public bool enableKeyboardTest = false;
         RobotEmotionController target;
         void Awake() { target = GetComponent<RobotEmotionController>(); }
         public static bool TryMapKey(KeyCode key, out RobotEmotion emotion)

@@ -5,7 +5,7 @@ namespace Emergence.Level01
     public sealed class RobotMotor2D : MonoBehaviour
     {
         [Min(0)] public float moveSpeed = 5f;
-        [Tooltip("Jump height in world units; can be changed while running.")]
+        [Tooltip("Fallback jump height without RobotEmotionGameplay. With emotions enabled, configure EmotionAbilities instead.")]
         [Min(0)] public float jumpHeight = 2f;
         public SpriteRenderer visual;
         public Sprite idle;
@@ -14,15 +14,19 @@ namespace Emergence.Level01
         [Min(1)] public float walkFps = 8f;
         [Min(0)] public float landingDuration = .1f;
         public bool IsGrounded { get; private set; }
+        public bool ControlsLocked { get; private set; }
+        RobotEmotionGameplay emotionGameplay;
+        public float EffectiveJumpHeight => emotionGameplay && emotionGameplay.enabled ? emotionGameplay.JumpHeight : jumpHeight;
+        public void SetControlsLocked(bool value) { ControlsLocked=value;if(value){input=0;jumpQueued=false;if(body)body.velocity=new Vector2(0,body.velocity.y);} }
         Rigidbody2D body;
         readonly ContactPoint2D[] contacts = new ContactPoint2D[32];
         float input, frameTime, landingUntil;
         bool jumpQueued;
-        void Awake() { body = GetComponent<Rigidbody2D>(); }
-        public void SetMoveInput(float value) { input = Mathf.Clamp(value, -1f, 1f); }
+        void Awake() { body = GetComponent<Rigidbody2D>(); emotionGameplay=GetComponent<RobotEmotionGameplay>(); }
+        public void SetMoveInput(float value) { input = ControlsLocked ? 0 : Mathf.Clamp(value, -1f, 1f); }
         public bool RequestJump()
         {
-            if (!isActiveAndEnabled || !body || !IsGrounded || jumpQueued || jumpHeight <= 0 || Physics2D.gravity.y * body.gravityScale >= 0) return false;
+            if (ControlsLocked || !isActiveAndEnabled || !body || !IsGrounded || jumpQueued || EffectiveJumpHeight <= 0 || Physics2D.gravity.y * body.gravityScale >= 0) return false;
             jumpQueued = true;
             return true;
         }
@@ -37,12 +41,12 @@ namespace Emergence.Level01
                     if (contacts[i].normal.y > .65f) { IsGrounded = true; break; }
             if (!wasGrounded && IsGrounded) landingUntil = Time.time + landingDuration;
             float vy = body.velocity.y;
-            if (jumpQueued && IsGrounded && jumpHeight > 0)
+            if (!ControlsLocked && jumpQueued && IsGrounded && EffectiveJumpHeight > 0)
             {
                 float gravity = -Physics2D.gravity.y * body.gravityScale;
                 if (gravity > 0)
                 {
-                    vy = Mathf.Sqrt(2f * gravity * jumpHeight);
+                    vy = Mathf.Sqrt(2f * gravity * EffectiveJumpHeight);
                     IsGrounded = false;
                     landingUntil = 0;
                 }

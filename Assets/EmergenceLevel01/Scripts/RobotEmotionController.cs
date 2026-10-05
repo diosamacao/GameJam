@@ -16,6 +16,11 @@ namespace Emergence.Level01
         void LateUpdate() { RefreshVisual(); }
         public bool SetEmotion(RobotEmotion emotion)
         {
+            var gameplay=GetComponent<RobotEmotionGameplay>();
+            return gameplay && gameplay.isActiveAndEnabled ? gameplay.TrySetEmotion(emotion) : SetVisualEmotion(emotion);
+        }
+        internal bool SetVisualEmotion(RobotEmotion emotion)
+        {
             if(!config || !config.GetHead(emotion)) return false;
             bool changed = emotion != currentEmotion;
             currentEmotion = emotion;
