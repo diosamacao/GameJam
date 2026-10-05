@@ -15,6 +15,7 @@ namespace Emergence.Level01
         [Min(0)] public float landingDuration = .1f;
         public bool IsGrounded { get; private set; }
         public bool ControlsLocked { get; private set; }
+        public bool InputBlocked => ControlsLocked || DialogueDirector.IsBlockingInput;
         RobotEmotionGameplay emotionGameplay;
         public float EffectiveJumpHeight => emotionGameplay && emotionGameplay.enabled ? emotionGameplay.JumpHeight : jumpHeight;
         public void SetControlsLocked(bool value) { ControlsLocked=value;if(value){input=0;jumpQueued=false;if(body)body.velocity=new Vector2(0,body.velocity.y);} }
@@ -23,10 +24,10 @@ namespace Emergence.Level01
         float input, frameTime, landingUntil;
         bool jumpQueued;
         void Awake() { body = GetComponent<Rigidbody2D>(); emotionGameplay=GetComponent<RobotEmotionGameplay>(); }
-        public void SetMoveInput(float value) { input = ControlsLocked ? 0 : Mathf.Clamp(value, -1f, 1f); }
+        public void SetMoveInput(float value) { input = InputBlocked ? 0 : Mathf.Clamp(value, -1f, 1f); }
         public bool RequestJump()
         {
-            if (ControlsLocked || !isActiveAndEnabled || !body || !IsGrounded || jumpQueued || EffectiveJumpHeight <= 0 || Physics2D.gravity.y * body.gravityScale >= 0) return false;
+            if (InputBlocked || !isActiveAndEnabled || !body || !IsGrounded || jumpQueued || EffectiveJumpHeight <= 0 || Physics2D.gravity.y * body.gravityScale >= 0) return false;
             jumpQueued = true;
             return true;
         }
@@ -41,7 +42,7 @@ namespace Emergence.Level01
                     if (contacts[i].normal.y > .65f) { IsGrounded = true; break; }
             if (!wasGrounded && IsGrounded) landingUntil = Time.time + landingDuration;
             float vy = body.velocity.y;
-            if (!ControlsLocked && jumpQueued && IsGrounded && EffectiveJumpHeight > 0)
+            if (!InputBlocked && jumpQueued && IsGrounded && EffectiveJumpHeight > 0)
             {
                 float gravity = -Physics2D.gravity.y * body.gravityScale;
                 if (gravity > 0)
@@ -52,7 +53,7 @@ namespace Emergence.Level01
                 }
             }
             jumpQueued = false;
-            body.velocity = new Vector2(input * moveSpeed, vy);
+            body.velocity = new Vector2(InputBlocked ? 0 : input * moveSpeed, vy);
         }
         void Update()
         {

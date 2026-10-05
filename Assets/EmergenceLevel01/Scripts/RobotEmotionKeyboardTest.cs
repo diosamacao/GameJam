@@ -21,7 +21,7 @@ namespace Emergence.Level01
         }
         void Update()
         {
-            if(!enableKeyboardTest || !target) return;
+            if(DialogueDirector.IsBlockingInput || !enableKeyboardTest || !target) return;
             if(Input.GetKeyDown(KeyCode.Y)) target.SetEmotion(RobotEmotion.Joy);
             else if(Input.GetKeyDown(KeyCode.U)) target.SetEmotion(RobotEmotion.Anger);
             else if(Input.GetKeyDown(KeyCode.I)) target.SetEmotion(RobotEmotion.Sadness);

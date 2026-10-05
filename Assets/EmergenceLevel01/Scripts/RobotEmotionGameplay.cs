@@ -14,7 +14,7 @@ namespace Emergence.Level01
         public RobotEmotion CurrentEmotion {get;private set;}
         public RobotEmotion? TargetEmotion {get;private set;}
         public float Progress => IsSwitching ? Mathf.Clamp01((Time.time-started)/HoldSeconds) : 0;
-        public bool CanBreak => isActiveAndEnabled && !IsSwitching && CurrentEmotion==RobotEmotion.Anger;
+        public bool CanBreak => !DialogueDirector.IsBlockingInput && isActiveAndEnabled && !IsSwitching && CurrentEmotion==RobotEmotion.Anger;
         public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight;
         float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):1;
         float BaseCells => abilities ? abilities.baseJumpCells:2;
@@ -30,7 +30,7 @@ namespace Emergence.Level01
         void Start(){if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
         public bool BeginSwitch()
         {
-            if(!isActiveAndEnabled || IsSwitching || !motor.IsGrounded)return false;
+            if(DialogueDirector.IsBlockingInput || !isActiveAndEnabled || IsSwitching || !motor.IsGrounded)return false;
             IsSwitching=true;TargetEmotion=NextEmotion(CurrentEmotion);started=Time.time;motor.SetControlsLocked(true);
             face.SetVisualEmotion(RobotEmotion.Blank);return true;
         }
@@ -92,7 +92,7 @@ namespace Emergence.Level01
         void OnDisable(){CancelSwitch();}
         void OnGUI()
         {
-            if(!showSwitchProgress)return;
+            if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},18);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=18,alignment=TextAnchor.MiddleCenter};
             if(!IsSwitching){GUI.Label(new Rect(10,Screen.height-82,Screen.width-20,30),"长按 Q 顺序切换情绪  ·  空格跳跃",style);return;}

@@ -1,0 +1,39 @@
+剧情对话系统
+
+使用方式
+1. 第一关 Level01_InitialLab 进入运行时自动播放博士开场。C 每按一次前进一句，最后一句再按 C 关闭。
+2. 配置目录 Assets/EmergenceLevel01/Dialogue。选择 .asset，在 Inspector 的 Lines 中编辑 Speaker、Text、Minimum Display Seconds 和 Cue；Speaker 为空时不显示姓名。
+3. 新建资源：Project 右键 > Create > Emergence > Dialogue Sequence。
+4. Block Player Input 默认开启：禁止移动、跳跃、Q 情绪切换、愤怒破坏和鼠标合成操作；保留重力。关闭该选项可制作边走边说的对话。
+5. 对话采用整句显示。剧情原稿中的“（1s）”当前转成该句最少显示1秒，不是句内打字停顿；演出备注保存在 Staging Notes，不显示给玩家。
+
+代码调用（using Emergence.Level01）
+DialogueDirector.Instance.TryPlay(sequence); // 返回是否成功；正在对话时不会覆盖
+DialogueDirector.Instance.Advance();         // 推进一句；受最小显示时间限制
+DialogueDirector.Instance.Stop();            // 取消；不会触发正常完成事件
+
+接口与事件
+Director.Play(DialogueSequence) 是可在 Inspector UnityEvent 中选择的 void 接口。
+Director.Started / LineChanged / Finished / Cancelled 为 C# 事件。
+LineChanged(sequence, lineIndex) 可读取 sequence.lines[lineIndex].cue 来触发说话、转身、换表情等动作。
+Director 的 On Started / On Finished 可在 Inspector 挂接事件。
+
+触发区域与关卡事件
+在场景物体上挂 DialogueTrigger，指定 Sequence。
+调用 Trigger()（可绑定 UnityEvent）或 TryTrigger()（返回成功与否）。
+需要靠近触发时：添加 Collider2D 并勾选 Is Trigger，开启 Trigger On Enter；玩家必须有 Rigidbody2D 和 Collider2D。
+Play Once 默认开启；正常完成后只播放一次。中途取消则允许重新触发。
+On Completed 只在该触发器发起的对话正常结束时调用，可挂接开舱、角色走位或下一段剧情。
+
+当前第一关资源
+01_Opening：博士开场，7句。
+02_Greeting：伊和博士见面，4句，玩家首句不显示名字。
+03_ExperimentBriefing：尼启动和实验说明，9句。
+04_ChamberConversation：实验舱旁的交谈，3句。
+第一关 DialogueSystem 下已提供后三段的 DialogueTrigger，供关卡事件调用。尚未替关卡布置接近博士/实验舱的触发区域，也未驱动开舱、NPC走位、转身、黑屏或关卡跳转；这些演出需求保留在各资源的 Staging Notes 中。
+第二关仅配置对话系统，不自动播放第一关开场。
+
+验证
+Tools > Emergence > Verify Dialogue System
+报告 Logs/Dialogue/verification.txt，画面 Logs/Dialogue/preview.png。
+重新安装菜单 Setup Dialogue System 不覆盖已有剧情资源，避免清除手动改过的文本。

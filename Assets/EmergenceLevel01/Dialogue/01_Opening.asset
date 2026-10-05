@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
+  m_Name: 01_Opening
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 1
+  lines:
+  - speaker: "\u535A\u58EB"
+    text: "\u7EC8\u4E8E\u5B8C\u6210\u4E86\uFF01"
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u60C5\u611F\u6570\u636E\u6838\u5FC3\uFF01\uFF01"
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u53EA\u8981\u628A\u5B83\u642D\u8F7D\u5230\u673A\u68B0\u4E0A\uFF0C\u4ED6\u4EEC\u5C31\u80FD\u4EA7\u751F\u60C5\u611F\u4E86\u2026\u2026\u5427\uFF1F"
+    minimumDisplaySeconds: 1
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u4E3A\u6B64\u6211\u8FD8\u7ED9\u4ED6\u4EEC\u6362\u4E0A\u4E86\u80FD\u591F\u53CD\u6620\u60C5\u611F\u7684\u667A\u80FD\u8868\u60C5\u5934\u90E8\u5462\uFF01\uFF01"
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u867D\u7136\u53EA\u6709\u4E24\u4E2A\u673A\u68B0\u5177\u5907\u4E86\u8FD9\u6837\u7684\u6761\u4EF6\u3002"
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u4E0D\u7BA1\u600E\u6837\uFF0C\u5B9E\u8DF5\u51FA\u771F\u77E5\uFF01"
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u542F\u52A8\uFF01\uFF01"
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: "\u7ED3\u675F\u540E\uFF1A\u53F33\u84DD\u8272\u8231\u95E8\u6253\u5F00\uFF0C\u73A9\u5BB6\u8D70\u51FA\u5E76\u6062\u590D\u64CD\u63A7\u3002\u9760\u8FD1\u535A\u58EB\u4E00\u683C\u65F6\u89E6\u53D102_Greeting\u3002\u6F14\u51FA\u7531DialogueTrigger.onCompleted\u6216Director.Finished\u6302\u63A5\u3002"
