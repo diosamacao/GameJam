@@ -9,7 +9,7 @@ namespace Emergence.Level01.Editor
     public static class SetupRobotEmotions
     {
         const string Root="Assets/EmergenceLevel01/";
-        const string Art=Root+"Art/Characters/RobotModular/";
+        const string Art=Root+"Art/Characters/OriginalBody/";
         static readonly string[] Emotions={"joy","anger","sadness","delight","blank"};
         static readonly string[] Bodies={"walk_0","walk_1","walk_2","walk_3","idle","jump","fall","land"};
         [MenuItem("Tools/Emergence/Setup Modular Robot Emotions")]
@@ -17,31 +17,25 @@ namespace Emergence.Level01.Editor
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode) throw new Exception("Stop Play mode first.");
             Directory.CreateDirectory(Art);
-            var bodyImage=Read("ArtSource/RobotMonitorAnimations/body-atlas.png");
-            int cw=bodyImage.width/4,ch=bodyImage.height/2;
-            var idleRect=Bounds(bodyImage,new RectInt(0,0,cw,ch));
-            float scale=44f/idleRect.height;
-            var anchors=new Vector2[8];
-            for(int i=0;i<8;i++) {
-                var area=new RectInt((i%4)*cw,(1-i/4)*ch,cw,ch);
-                var box=Bounds(bodyImage,area);
-                var result=new Texture2D(64,64,TextureFormat.RGBA32,false);
-                result.SetPixels32(new Color32[4096]);
-                int w=Mathf.Clamp(Mathf.RoundToInt(box.width*scale),1,62),h=Mathf.Clamp(Mathf.RoundToInt(box.height*scale),1,60);
-                Blit(bodyImage,box,result,(64-w)/2,0,w,h);
-                int neckY=0;
-                for(int y=0;y<64;y++) for(int x=29;x<=34;x++) if(result.GetPixel(x,y).a>.5f) neckY=Mathf.Max(neckY,y);
-                anchors[i]=new Vector2(0,(neckY-1)/48f);
-                File.WriteAllBytes(Art+"body_"+Bodies[i]+".png",result.EncodeToPNG());
-                UnityEngine.Object.DestroyImmediate(result);
+            // Top-left pixel coordinates from the original 32x40 animation sheets.
+            var rects=new[]{new RectInt(10,13,12,10),new RectInt(11,13,12,10),new RectInt(10,13,12,10),new RectInt(11,13,12,10),new RectInt(11,13,11,10),new RectInt(10,14,12,10),new RectInt(10,12,12,10),new RectInt(12,18,12,10)};
+            var anchors=new Vector2[Bodies.Length];
+            for(int i=0;i<Bodies.Length;i++) {
+                var body=Read(Root+"Art/Characters/robot_"+Bodies[i]+".png");
+                var r=rects[i];
+                if(body.width!=32 || body.height!=40)throw new Exception("Unexpected original body dimensions");
+                for(int y=r.yMin;y<r.yMax;y++)for(int x=r.xMin;x<r.xMax;x++)body.SetPixel(x,39-y,Color.clear);
+                body.Apply();
+                anchors[i]=new Vector2((r.x+r.width*.5f-16)/16f,(40-r.yMax-1)/16f);
+                File.WriteAllBytes(Art+"body_"+Bodies[i]+".png",body.EncodeToPNG());
+                UnityEngine.Object.DestroyImmediate(body);
             }
-            UnityEngine.Object.DestroyImmediate(bodyImage);
             foreach(var name in Emotions) {
                 var source=Read("ArtSource/RobotMonitorHeads/robot_head_"+name+".png");
                 var box=Bounds(source,new RectInt(0,0,source.width,source.height));
-                var result=new Texture2D(64,64,TextureFormat.RGBA32,false);
-                result.SetPixels32(new Color32[4096]);
-                Blit(source,box,result,6,0,52,36);
+                var result=new Texture2D(160,112,TextureFormat.RGBA32,false);
+                result.SetPixels32(new Color32[160*112]);
+                Blit(source,box,result,8,0,144,Mathf.RoundToInt(144f*box.height/box.width));
                 File.WriteAllBytes(Art+"head_"+name+".png",result.EncodeToPNG());
                 UnityEngine.Object.DestroyImmediate(result);UnityEngine.Object.DestroyImmediate(source);
             }
@@ -56,19 +50,31 @@ namespace Emergence.Level01.Editor
             var contents=PrefabUtility.LoadPrefabContents(prefab);
             try { Configure(contents.GetComponent<RobotMotor2D>(),config);PrefabUtility.SaveAsPrefabAsset(contents,prefab); }
             finally { PrefabUtility.UnloadPrefabContents(contents); }
-            // Update any scene instance that overrides the original motor sprites.
-            foreach(var motor in UnityEngine.Object.FindObjectsOfType<RobotMotor2D>()) {
-                Configure(motor,config);
-                PrefabUtility.RecordPrefabInstancePropertyModifications(motor);
-                PrefabUtility.RecordPrefabInstancePropertyModifications(motor.visual);
-                EditorSceneManager.MarkSceneDirty(motor.gameObject.scene);
+            string labPath=Root+"Generated/Level01_Laboratory.prefab";
+            if(File.Exists(labPath)) {
+                var lab=PrefabUtility.LoadPrefabContents(labPath);
+                try {foreach(var motor in lab.GetComponentsInChildren<RobotMotor2D>(true))Configure(motor,config);PrefabUtility.SaveAsPrefabAsset(lab,labPath);}
+                finally {PrefabUtility.UnloadPrefabContents(lab);}
             }
-            var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
-            if(scene.path==Root+"Generated/Level01_InitialLab.unity") {
-                EditorSceneManager.SaveScene(scene);
-                var lab=GameObject.Find("Level01_InitialLaboratory");
-                if(lab) PrefabUtility.SaveAsPrefabAsset(lab,Root+"Generated/Level01_Laboratory.prefab");
+            // Open other game scenes additively; preserve the user's active scene and layout.
+            var active=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            foreach(var guid in AssetDatabase.FindAssets("t:Scene",new[]{"Assets/Scenes"})) {
+                string path=AssetDatabase.GUIDToAssetPath(guid);
+                var scene=UnityEngine.SceneManagement.SceneManager.GetSceneByPath(path);
+                bool opened=!scene.isLoaded;
+                if(opened)scene=EditorSceneManager.OpenScene(path,OpenSceneMode.Additive);
+                bool changed=false;
+                foreach(var root in scene.GetRootGameObjects())foreach(var motor in root.GetComponentsInChildren<RobotMotor2D>(true)) {
+                    Configure(motor,config);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(motor);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(motor.visual);
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(motor.GetComponent<RobotEmotionController>());
+                    changed=true;
+                }
+                if(changed){EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);}
+                if(opened)EditorSceneManager.CloseScene(scene,true);
             }
+            UnityEngine.SceneManagement.SceneManager.SetActiveScene(active);
             AssetDatabase.SaveAssets();Debug.Log("ROBOT_EMOTIONS_READY");
         }
         static void Configure(RobotMotor2D motor,RobotEmotionConfig config)

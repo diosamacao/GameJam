@@ -1,0 +1,4 @@
+身体动画源图V2：参考用户提供的细长机器人实机截图生成。
+4列×2行，从左至右、从上至下：walk_0, walk_1, walk_2, walk_3, idle, jump, fall, land。
+透明背景，头部单独挂接。此处为新版源图，尚未替换正在使用的动画。
+生成工具：内置imagegen。完整提示词见generation-prompt.txt。

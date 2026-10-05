@@ -1,0 +1,1 @@
+Reuses original 32x40 body animation pixels. Removed old head only within per-frame rectangle; preserved raised arms. Existing monitor anger expression attached at original head/body seam with 1 source-pixel overlap. Head width18 source pixels. Enlarged preview x8. Jump offsets illustrative, not gameplay physics. No runtime assets changed.

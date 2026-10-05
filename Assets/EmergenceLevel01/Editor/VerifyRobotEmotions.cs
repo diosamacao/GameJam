@@ -13,7 +13,7 @@ namespace Emergence.Level01.Editor
         static RobotEmotionController controller;
         static RobotMotor2D motor;
         static float time;
-        static int phase;
+        static int phase; static bool previousBackground;
         static Sprite firstWalk;
         static VerifyRobotEmotions() { EditorApplication.playModeStateChanged+=Mode; }
         [MenuItem("Tools/Emergence/Verify Robot Emotions")]
@@ -23,13 +23,13 @@ namespace Emergence.Level01.Editor
         }
         static void Mode(PlayModeStateChange state) {
             if(state==PlayModeStateChange.EnteredPlayMode && SessionState.GetBool(Key,false)) {
-                results.Clear();phase=0;time=Time.realtimeSinceStartup;EditorApplication.update+=Tick;
+                previousBackground=Application.runInBackground;Application.runInBackground=true;results.Clear();phase=0;time=Time.time;EditorApplication.update+=Tick;
             }
             if(state==PlayModeStateChange.ExitingPlayMode)EditorApplication.update-=Tick;
         }
         static void Check(bool condition,string description) { if(!condition)throw new Exception(description);results.Add("PASS: "+description); }
         static void Tick() {
-            if(!EditorApplication.isPlaying || Time.realtimeSinceStartup-time<.65f)return;
+            if(!EditorApplication.isPlaying || Time.time-time<.65f)return;
             try {
                 if(phase==0) {
                     controller=UnityEngine.Object.FindObjectOfType<RobotEmotionController>();
@@ -61,12 +61,12 @@ namespace Emergence.Level01.Editor
                     Check(motor.visual.sprite==motor.idle && controller.headRenderer.sprite==controller.config.delight,"Idle body retains selected emotion");
                     Check(UnityEngine.Object.FindObjectOfType<AssemblyInteraction>(),"Assembly gameplay remains present");Finish(null);return;
                 }
-                phase++;time=Time.realtimeSinceStartup;
+                phase++;time=Time.time;
             } catch(Exception e) {Finish("FAIL: "+e.Message);}
         }
         static void Finish(string failure) {
             if(failure!=null)results.Add(failure);Directory.CreateDirectory("Logs/RobotEmotions");File.WriteAllLines("Logs/RobotEmotions/verification.txt",results);
-            SessionState.SetBool(Key,false);EditorApplication.update-=Tick;EditorApplication.isPlaying=false;
+            Application.runInBackground=previousBackground;SessionState.SetBool(Key,false);EditorApplication.update-=Tick;EditorApplication.isPlaying=false;
             Debug.Log(string.Join("\n",results));
         }
     }

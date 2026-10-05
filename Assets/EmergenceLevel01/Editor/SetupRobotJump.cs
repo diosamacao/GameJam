@@ -28,9 +28,9 @@ namespace Emergence.Level01.Editor
         }
         static void Configure(RobotMotor2D motor){
             if(!motor)throw new Exception("Motor missing");
-            motor.jump=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/Characters/RobotModular/body_jump.png");
-            motor.fall=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/Characters/RobotModular/body_fall.png");
-            motor.land=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/Characters/RobotModular/body_land.png");
+            motor.jump=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/Characters/OriginalBody/body_jump.png");
+            motor.fall=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/Characters/OriginalBody/body_fall.png");
+            motor.land=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/Characters/OriginalBody/body_land.png");
             if(!motor.jump || !motor.fall || !motor.land)throw new Exception("Missing jump animation sprites");
             EditorUtility.SetDirty(motor);
         }

@@ -1,0 +1,1 @@
+Preview made by sequencing existing V4 sprites with the existing monitor head. Walk: 4 frames, 125ms each, looping. GIF centisecond rounding may yield 120ms. Jump: illustrative pose timing and vertical offsets, not Unity physics playback. Body cell alignment is preserved; alpha threshold 128 removes nearly transparent fringes for GIF. No game assets changed.

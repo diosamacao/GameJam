@@ -21,11 +21,11 @@ SetEmotion 返回是否成功设置；重复设置同一表情不重复触发事
 
 ## 美术与动画
 
-Art/Characters/RobotModular 包含五张头部、四帧行走，以及待机、跳跃、下落和落地身体帧。每张64×64、Point过滤、无压缩，PPU48用于保持角色世界尺寸；地形仍为PPU64。
+Art/Characters/OriginalBody 使用最初版机器人的身体：32×40，PPU16，只去除原头部，保留原有身体像素。包含四帧行走、待机、起跳、下落、落地。五张显示器头部为160×112画布、PPU128，显示器可见宽144像素，相当于身体18像素。使用Point过滤、无压缩。
 
-身体素材由内置 imagegen 生成，源图及提示词位于 ArtSource/RobotMonitorAnimations。头部源图位于 ArtSource/RobotMonitorHeads。编辑器工具仅进行透明边界裁切、最近邻缩放和统一基线导出。
+头部源图位于 ArtSource/RobotMonitorHeads。每个身体帧使用独立接头位置，显示器底边覆盖原接缝1个身体像素；地形规格仍为64×64。
 
 头身分层，头部在LateUpdate根据当前身体Sprite选择锚点并同步翻转，不会被走路动画覆盖。移动控制器根据地面接触和竖直速度播放待机、行走、起跳、下落与落地，表情独立保持。对外可调用RequestJump()请求跳跃，通过IsGrounded读取地面状态。运行时在Inspector修改的值退出Play后会恢复；要长期保存请在编辑模式修改并保存场景或预制体。
 
-Tools > Emergence > Setup Modular Robot Emotions 可重新导出并配置素材（会覆盖RobotModular导出图及默认配置，请在修改配置前备份）。
+Tools > Emergence > Setup Modular Robot Emotions 可重新导出并配置素材（会覆盖OriginalBody导出图及默认配置，请在修改配置前备份）。
 Tools > Emergence > Verify Robot Emotions 运行接口与动画集成检查，报告输出 Logs/RobotEmotions/verification.txt。
