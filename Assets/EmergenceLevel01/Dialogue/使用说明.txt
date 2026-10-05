@@ -1,11 +1,14 @@
 剧情对话系统
 
 使用方式
-1. 第一关 Level01_InitialLab 进入运行时自动播放博士开场。C 每按一次前进一句，最后一句再按 C 关闭。
+1. 第一关 Level01_InitialLab 进入运行时自动播放博士开场。文字逐字出现；未显示完时按 C 立即显示全文，显示完后再按 C 前进一句，最后一句再按 C 关闭。
 2. 配置目录 Assets/EmergenceLevel01/Dialogue。选择 .asset，在 Inspector 的 Lines 中编辑 Speaker、Text、Minimum Display Seconds 和 Cue；Speaker 为空时不显示姓名。
 3. 新建资源：Project 右键 > Create > Emergence > Dialogue Sequence。
 4. Block Player Input 默认开启：禁止移动、跳跃、Q 情绪切换、愤怒破坏和鼠标合成操作；保留重力。关闭该选项可制作边走边说的对话。
-5. 对话采用整句显示。剧情原稿中的“（1s）”当前转成该句最少显示1秒，不是句内打字停顿；演出备注保存在 Staging Notes，不显示给玩家。
+5. Typewriter 控制是否逐字显示。剧情资源 Characters Per Second 默认为30字/秒；单句同名字段为0时继承，可设不同速度。
+6. 同段文本内插入 <pause=秒数> 配置句间或句中停顿，例如：伊……<pause=1>这是我的代号吗？<pause=0.5>我明白了。标签不显示，可以使用多个不同停顿。
+7. 按 C 补全时会跳过本段所有剩余停顿。Minimum Display Seconds 仍是从本段开始算起的最短显示时间，不代替句间停顿。停顿和打字使用不受 Time.timeScale 影响的时间。
+8. 演出备注保存在 Staging Notes，不显示给玩家。
 
 代码调用（using Emergence.Level01）
 DialogueDirector.Instance.TryPlay(sequence); // 返回是否成功；正在对话时不会覆盖
@@ -37,3 +40,5 @@ On Completed 只在该触发器发起的对话正常结束时调用，可挂接�
 Tools > Emergence > Verify Dialogue System
 报告 Logs/Dialogue/verification.txt，画面 Logs/Dialogue/preview.png。
 重新安装菜单 Setup Dialogue System 不覆盖已有剧情资源，避免清除手动改过的文本。
+
+CompleteCurrentLine() 可立即补全当前句。IsRevealing / VisibleText / FullText 可供外部UI查询；Advance() 在打字中只补全，不同时跳到下一句。

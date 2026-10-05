@@ -13,12 +13,12 @@ namespace Emergence.Level01.Editor
             if(EditorApplication.isPlayingOrWillChangePlaymode)throw new System.Exception("Stop play first");
             Directory.CreateDirectory(Root+"Dialogue");
             var opening=Create("01_Opening",new[]{
-                L("博士","终于完成了！"),L("博士","情感数据核心！！"),L("博士","只要把它搭载到机械上，他们就能产生情感了……吧？",1),
+                L("博士","终于完成了！"),L("博士","情感数据核心！！"),L("博士","只要把它搭载到机械上，他们就能产生情感了……<pause=1>吧？",0),
                 L("博士","为此我还给他们换上了能够反映情感的智能表情头部呢！！"),L("博士","虽然只有两个机械具备了这样的条件。"),L("博士","不管怎样，实践出真知！"),L("博士","启动！！")
             },"结束后：右3蓝色舱门打开，玩家走出并恢复操控。靠近博士一格时触发02_Greeting。演出由DialogueTrigger.onCompleted或Director.Finished挂接。");
             var greeting=Create("02_Greeting",new[]{
                 L("","早上好，博士。"),L("博士","噢！你好！你是第一个搭载了情感数据核心的机械，就叫你伊吧！",0,"doctor_face_player"),
-                L("伊","伊……这是我的代号吗？",1),L("博士","对！你就是机械体，代号：伊。")
+                L("伊","伊……<pause=1>这是我的代号吗？",0),L("博士","对！你就是机械体，代号：伊。")
             },"首句不显示姓名。博士变idle并转身面对玩家。结束后右2蓝色舱门打开，配角走出，再触发03_ExperimentBriefing。");
             var briefing=Create("03_ExperimentBriefing",new[]{
                 L("博士","第二个机械也成功启动了！太好了！",0,"ni_walk_to_player"),L("博士","你的代号就叫尼吧！"),L("尼","好的，博士。"),

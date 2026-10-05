@@ -30,7 +30,7 @@ namespace Emergence.Level01.Editor
                 Check(director.advanceKey==KeyCode.C,"C configured as advance key");
                 motor=UnityEngine.Object.FindObjectOfType<RobotMotor2D>();emotion=motor.GetComponent<RobotEmotionGameplay>();motor.GetComponent<RobotKeyboardInput>().enabled=false;emotion.keyboardInput=false;
                 var source=AssetDatabase.LoadAssetAtPath<DialogueSequence>("Assets/EmergenceLevel01/Dialogue/02_Greeting.asset");
-                sample=ScriptableObject.CreateInstance<DialogueSequence>();sample.lines=new[]{new DialogueSequence.Line{speaker="",text=source.lines[0].text,minimumDisplaySeconds=.3f},source.lines[1]};
+                sample=ScriptableObject.CreateInstance<DialogueSequence>();sample.typewriter=false;sample.lines=new[]{new DialogueSequence.Line{speaker="",text=source.lines[0].text,minimumDisplaySeconds=.3f},source.lines[1]};
                 director.Finished+=s=>completed++;director.Cancelled+=s=>cancelled++;director.LineChanged+=(s,i)=>lineEvents++;Next();return;
             }
             if(phase==1){if(Time.time-started<.5f)return;
