@@ -15,10 +15,10 @@ namespace Emergence.Level01
         public RobotEmotion? TargetEmotion {get;private set;}
         public float Progress => IsSwitching ? Mathf.Clamp01((Time.time-started)/HoldSeconds) : 0;
         public bool CanBreak => !DialogueDirector.IsBlockingInput && isActiveAndEnabled && !IsSwitching && CurrentEmotion==RobotEmotion.Anger;
-        public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight;
+        public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*1.2f;
         float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):1;
-        float BaseCells => abilities ? abilities.baseJumpCells:2;
-        float HappyCells => abilities ? abilities.happyJumpCells:3;
+        float BaseCells => abilities ? abilities.baseJumpCells:2f;
+        float HappyCells => abilities ? abilities.happyJumpCells:3f;
         float CellHeight => levelGrid ? levelGrid.transform.TransformVector(new Vector3(0,levelGrid.cellSize.y,0)).magnitude : (abilities?abilities.fallbackCellHeight:1);
         RobotMotor2D motor;
         RobotEmotionController face;

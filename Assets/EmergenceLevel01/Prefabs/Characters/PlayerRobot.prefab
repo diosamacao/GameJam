@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a6aa36f3f9f8a4897f1f3c03bf9e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpHeight: 2
+  moveSpeed: 8
+  jumpHeight: 2.4
   visual: {fileID: 7344507955489075811}
   idle: {fileID: 21300000, guid: acb264810825dee4f86628b2285e810d, type: 3}
   walk:
@@ -193,7 +193,7 @@ MonoBehaviour:
   abilities: {fileID: 11400000, guid: b49c265a7e8276243ab9f5c3ee33f570, type: 2}
   levelGrid: {fileID: 0}
   keyboardInput: 1
-  showSelection: 1
+  showSwitchProgress: 1
 --- !u!1 &8073755569527328643
 GameObject:
   m_ObjectHideFlags: 0

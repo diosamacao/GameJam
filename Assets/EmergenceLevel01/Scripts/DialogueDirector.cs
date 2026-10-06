@@ -72,9 +72,9 @@ namespace Emergence.Level01
         void OnGUI()
         {
             if(!IsPlaying)return;
-            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},24);
+            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},22);
             float scale=Mathf.Clamp(Screen.width/1280f,.65f,1.5f);
-            float width=Mathf.Min(Screen.width-32,1100*scale),x=(Screen.width-width)*.5f,y=20*scale,pad=22*scale;
+            float width=Mathf.Min(Screen.width-32,900*scale),x=(Screen.width-width)*.5f,y=20*scale,pad=22*scale;
             var body=new GUIStyle(GUI.skin.label){font=font,fontSize=Mathf.RoundToInt(23*scale),wordWrap=true,richText=false};body.normal.textColor=new Color(.88f,.95f,1);
             var heading=new GUIStyle(body){fontSize=Mathf.RoundToInt(19*scale),fontStyle=FontStyle.Bold};heading.normal.textColor=new Color(.4f,.88f,1);
             float speakerHeight=string.IsNullOrEmpty(CurrentLine.speaker)?0:32*scale;
