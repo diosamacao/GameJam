@@ -31,6 +31,7 @@ namespace Emergence.Level01
             jumpQueued = true;
             return true;
         }
+        public void ResetGroundState(){IsGrounded=false;jumpQueued=false;landingUntil=0;}
         public void CancelJumpRequest() { jumpQueued = false; }
         void FixedUpdate()
         {

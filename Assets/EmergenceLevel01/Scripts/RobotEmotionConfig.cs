@@ -6,6 +6,7 @@ namespace Emergence.Level01
     public sealed class RobotEmotionConfig : ScriptableObject
     {
         public Sprite joy, anger, sadness, delight, blank;
+        public Sprite strongAnger, courage;
         [Serializable] public struct FrameAnchor { public Sprite body; public Vector2 neck; }
         public FrameAnchor[] frames;
         public Vector2 fallbackNeck = new Vector2(0, .9f);
@@ -17,6 +18,8 @@ namespace Emergence.Level01
                 case RobotEmotion.Sadness: return sadness;
                 case RobotEmotion.Delight: return delight;
                 case RobotEmotion.Blank: return blank;
+                case RobotEmotion.StrongAnger: return strongAnger ? strongAnger : anger;
+                case RobotEmotion.Courage: return courage ? courage : (delight ? delight : joy);
                 default: return null;
             }
         }

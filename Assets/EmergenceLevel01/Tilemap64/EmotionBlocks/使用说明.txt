@@ -1,0 +1,33 @@
+四种情绪方块（64×64，PPU64）
+
+Tile Palette：选择 EmotionBlocks_64x64；Active Tilemap 选择关卡 Grid 下的 EmotionBlocks，然后绘制。
+Tile资源：Assets/EmergenceLevel01/Tilemap64/EmotionBlocks/Tiles
+单独方块和示例Grid：Assets/EmergenceLevel01/Tilemap64/EmotionBlocks/Prefabs
+正式关卡已有空的EmotionBlocks图层，既有地形布局未替换。新增关卡可拖入EmotionBlocksGrid.prefab，再擦掉其四格示例。
+
+规则
+anger / 红色裂纹：愤怒、加强愤怒接触可破坏。
+sadness / 蓝色虚线：悲伤接触后消失。
+reinforced / 红灯装甲：仅加强愤怒可破坏。
+electric / 黄色闪电：勇气安全接触和站立；其他情绪触电返回出生点。电块始终保留实体碰撞，不是穿墙能力。
+破坏或消失持续到重新加载关卡；当前没有自动再生与存档。
+Q长按满1秒自动依次切换：开心→愤怒→悲伤→加强愤怒→勇气→开心。每次按住只触发一次。
+蓄力或阻塞操作的剧情播放期间，方块能力暂停。
+
+配置
+玩家RobotEmotionGameplay的Respawn Point可指定检查点；不指定则使用角色本次运行的初始位置。Electric Grace Seconds为触电复位后的短暂无敌时间。
+独立方块EmotionBlock.kind决定类型，On Removed可绑定音效/特效。
+自定义Tile必须是EmotionBlockTile，且目标Tilemap带EmotionBlockMap和TilemapCollider2D。普通Tile不会被当成特殊方块处理。
+新增的加强愤怒/勇气在RobotEmotionConfig中可分别指定Strong Anger/Courage头像；未指定时复用愤怒/乐头像，HUD显示状态名。
+剧情可调用RobotEmotionController.SetEmotion(RobotEmotion.StrongAnger)或Courage。
+现有跳跃高度计算中的1.2倍率保持不变。
+
+美术
+四张独立PNG在Art/Tiles64/EmotionBlocks，原始生成图和预览在项目根目录ArtSource/EmotionBlocks。
+使用内置image_gen生成，最近邻缩小到64×64；完整提示词见ArtSource/EmotionBlocks/prompts.json。
+这套是有框的独立机械方块，连续铺设会保留格缝，不作为无缝墙面纹理。
+
+验证
+Tools > Emergence > Verify Four Emotion Blocks
+报告：Logs/EmotionBlocks/verification.txt。
+重新生成资源：Tools > Emergence > Setup Four Emotion Blocks（会覆盖这四种专用Tile和预制体）。

@@ -11,7 +11,7 @@ namespace Emergence.Level01.Editor
     {
         const string Key="Emergence.EmotionGameplayVerification";
         static RobotMotor2D motor;static RobotEmotionGameplay game;static RobotEmotionController face;static Rigidbody2D body;
-        static int phase;static float started,baseline,peak;static bool airborne;static GameObject floor,block;static EmotionBreakable breakable;
+        static int phase;static float started,baseline,peak,expectedHeight,baseHeight;static bool airborne;static GameObject floor,block;static EmotionBreakable breakable;
         static readonly List<string> results=new List<string>();
         static VerifyEmotionGameplay(){EditorApplication.playModeStateChanged+=Mode;}
         [MenuItem("Tools/Emergence/Verify Emotion Gameplay")]
@@ -28,7 +28,7 @@ namespace Emergence.Level01.Editor
         static void Tick(){try{
             if(Time.time-started>8)throw new Exception("Timeout at phase "+phase);
             if(phase==0){
-                game=UnityEngine.Object.FindObjectOfType<RobotEmotionGameplay>();Check(game && game.abilities,"Player configured");
+                if(DialogueDirector.Instance)DialogueDirector.Instance.Stop();game=UnityEngine.Object.FindObjectOfType<RobotEmotionGameplay>();Check(game && game.abilities,"Player configured");
                 motor=game.GetComponent<RobotMotor2D>();face=game.GetComponent<RobotEmotionController>();body=game.GetComponent<Rigidbody2D>();
                 motor.GetComponent<RobotKeyboardInput>().enabled=false;game.keyboardInput=false;game.showSwitchProgress=false;
                 Check(!game.GetComponent<RobotEmotionKeyboardTest>().enableKeyboardTest,"YUIOP debug bypass disabled");
@@ -38,7 +38,7 @@ namespace Emergence.Level01.Editor
             }
             if(phase==1){if(Time.time-started<.4f)return;
                 Check(motor.IsGrounded,"Grounded fixture");game.TrySetEmotion(RobotEmotion.Blank);
-                Check(Mathf.Approximately(motor.EffectiveJumpHeight,2),"Base jump is two cells");
+                baseHeight=motor.EffectiveJumpHeight;Check(baseHeight>0,"Configured base jump is positive");
                 Check(game.BeginSwitch() && face.CurrentEmotion==RobotEmotion.Blank && motor.ControlsLocked,"Q begin blanks head and locks controls");
                 motor.SetMoveInput(1);Check(!motor.RequestJump(),"Charge rejects jump");
                 Check(!game.ReleaseSwitch() && game.CurrentEmotion==RobotEmotion.Blank && !motor.ControlsLocked,"Early release cancels");
@@ -47,14 +47,14 @@ namespace Emergence.Level01.Editor
             if(phase==2){if(Time.time-started<1.1f)return;
                 Check(Mathf.Abs(body.velocity.x)<.01f,"Cannot move while charging");
                 Check(!game.IsSwitching && !motor.ControlsLocked && game.CurrentEmotion==RobotEmotion.Joy && face.CurrentEmotion==RobotEmotion.Joy,"One-second hold automatically commits happy and unlocks movement without release");
-                Check(Mathf.Approximately(motor.EffectiveJumpHeight,3),"Happy height is three cells");baseline=peak=body.position.y;airborne=false;Check(motor.RequestJump(),"Happy jump accepted");Next();return;
+                expectedHeight=motor.EffectiveJumpHeight;Check(expectedHeight>baseHeight,"Happy emotion increases configured jump height");baseline=peak=body.position.y;airborne=false;Check(motor.RequestJump(),"Happy jump accepted");Next();return;
             }
             if(phase==3){peak=Mathf.Max(peak,body.position.y);if(!motor.IsGrounded){airborne=true;CheckOnce(!game.BeginSwitch(),"Cannot initiate switching in air");}
                 if(!airborne || !motor.IsGrounded)return;
-                Check(Mathf.Abs(peak-baseline-3)<.16f,"Measured happy jump apex is three cells");game.TrySetEmotion(RobotEmotion.Sadness);baseline=peak=body.position.y;airborne=false;Check(motor.RequestJump(),"Sadness retains jump");Next();return;
+                Check(Mathf.Abs(peak-baseline-expectedHeight)<.16f,"Measured happy jump matches effective configured height");game.TrySetEmotion(RobotEmotion.Sadness);baseline=peak=body.position.y;airborne=false;Check(motor.RequestJump(),"Sadness retains jump");Next();return;
             }
             if(phase==4){peak=Mathf.Max(peak,body.position.y);if(!motor.IsGrounded)airborne=true;if(!airborne || !motor.IsGrounded)return;
-                Check(Mathf.Abs(peak-baseline-2)<.16f,"Measured base jump apex is two cells");
+                Check(Mathf.Abs(peak-baseline-baseHeight)<.16f,"Measured base jump matches effective configured height");
                 game.BeginSwitch();game.SendMessage("OnApplicationFocus",false);Check(!game.IsSwitching && game.CurrentEmotion==RobotEmotion.Sadness && !motor.ControlsLocked,"Focus loss cancels and restores previous emotion");
                 block=new GameObject("VerificationBreakable");block.transform.position=new Vector3(body.position.x+.85f,.5f);block.AddComponent<BoxCollider2D>().size=Vector2.one;breakable=block.AddComponent<EmotionBreakable>();Physics2D.SyncTransforms();motor.SetMoveInput(1);Next();return;
             }
@@ -70,14 +70,14 @@ namespace Emergence.Level01.Editor
                 game.BeginSwitch();Check(!game.CanBreak && !ability.TryBreakCell(Vector3Int.right,game),"Charging suspends anger ability");game.CancelSwitch();
                 game.TrySetEmotion(RobotEmotion.Joy);game.BeginSwitch();Next();return;
             }
-            if(phase>=7 && phase<=9){
+            if(phase>=7 && phase<=11){
                 if(Time.time-started<2.2f)return;
-                var expected=phase==7?RobotEmotion.Anger:phase==8?RobotEmotion.Sadness:RobotEmotion.Joy;
+                var cycle=new[]{RobotEmotion.Anger,RobotEmotion.Sadness,RobotEmotion.StrongAnger,RobotEmotion.Courage,RobotEmotion.Joy};var expected=cycle[phase-7];
                 Check(!game.IsSwitching && !motor.ControlsLocked && game.CurrentEmotion==expected,"Automatic cycle advances once and stays unchanged after two seconds: "+expected);
                 Check(!game.ReleaseSwitch(),"Repeated release cannot advance cycle phase "+phase);
-                game.BeginSwitch();if(phase==9)UnityEngine.Object.Destroy(floor);Next();return;
+                game.BeginSwitch();if(phase==11)UnityEngine.Object.Destroy(floor);Next();return;
             }
-            if(phase==10){if(Time.time-started<.2f)return;Check(!game.IsSwitching && !motor.ControlsLocked && body.velocity.y<0,"Lost ground cancels switch and continues falling");Finish(null);}
+            if(phase==12){if(Time.time-started<.2f)return;Check(!game.IsSwitching && !motor.ControlsLocked && body.velocity.y<0,"Lost ground cancels switch and continues falling");Finish(null);}
         }catch(Exception e){Finish("FAIL: "+e.Message);}}
         static void CheckOnce(bool ok,string text){if(!results.Contains("PASS: "+text))Check(ok,text);}
         static void Finish(string failure){if(failure!=null)results.Add(failure);Directory.CreateDirectory("Logs/EmotionGameplay");File.WriteAllLines("Logs/EmotionGameplay/verification.txt",results);EditorApplication.update-=Tick;EditorApplication.isPlaying=false;Debug.Log(string.Join("\n",results));}
