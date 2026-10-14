@@ -20,15 +20,23 @@ namespace Emergence.Level01
         public Transform respawnPoint;
         [Min(.1f)] public float electricGraceSeconds=1;
         public UnityEngine.Events.UnityEvent onElectrocuted=new UnityEngine.Events.UnityEvent();
+        public UnityEngine.Events.UnityEvent onDied=new UnityEngine.Events.UnityEvent();
         Vector2 initialPosition;
         float safeUntil;
         public void SetRespawnPoint(Transform point){respawnPoint=point;}
         public bool HandleElectricContact(){
             if(!CanUseEmotionAbilities || CurrentEmotion==RobotEmotion.Courage || Time.time<safeUntil)return false;
+            if(!DieAndRespawn())return false;
+            onElectrocuted.Invoke();return true;
+        }
+        // Lethal hazards bypass emotion immunity and cancel any pending switch.
+        public bool DieAndRespawn(){
+            if(Time.time<safeUntil || !isActiveAndEnabled)return false;
             safeUntil=Time.time+electricGraceSeconds;
+            CancelSwitch();
             motor.SetMoveInput(0);motor.CancelJumpRequest();
             body.position=respawnPoint?(Vector2)respawnPoint.position:initialPosition;body.velocity=Vector2.zero;
-            motor.ResetGroundState();onElectrocuted.Invoke();return true;
+            motor.ResetGroundState();onDied.Invoke();return true;
         }
         public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*1.2f;
         float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):1;

@@ -1,0 +1,16 @@
+激光发射器（64×64，PPU 64）
+
+1. 打开 Window > 2D > Tile Palette，选择 Lasers_64x64。
+2. 调色板从左到右是：向右、向上、向左、向下。
+3. Active Tilemap 选择关卡 Grid 下的 Hazard_Lasers，然后绘制。
+4. 进入运行模式后，LaserEmitterMap 为每格创建发射器。不要在同一格再画实体地形，否则会堵住发射口。
+5. 发射器本身有实体碰撞；光束会被最近的非 Trigger Collider2D 遮挡，包括普通地形、情绪方块、其他发射器和玩家。仅作事件区域的 Trigger 不挡光。
+6. 碰撞体被关闭或方块破坏后，激光会在下一次物理更新延伸；恢复碰撞后重新挡住激光。悲伤方块的 3 秒消失也适用。
+7. 任意情绪碰到光束均立即死亡并重生，包括勇气和 Q 蓄力中。优先返回 RobotEmotionGameplay.respawnPoint；未指定则返回玩家初始位置。沿用现有 electricGraceSeconds 重生保护时间，默认 1 秒。
+8. 独立摆放可拖入 Prefabs/LaserEmitter_Right、Up、Left、Down。Inspector 的 maxDistance 是射程（默认 30 世界单位），beamWidth 是光束宽度，blockingLayers 是检测层，laserEnabled 可控制开关。
+9. 通过调色板绘制的发射器使用对应预制体配置；修改预制体后重新运行生效。新关卡可拖入 Prefabs/LaserGrid，也可自行创建 Tilemap 并挂 LaserEmitterMap。
+10. 对外死亡接口：RobotEmotionGameplay.DieAndRespawn()；事件：onDied。当前表现为立即返回重生点，未添加死亡动画。
+
+资源目录：Assets/EmergenceLevel01/Tilemap64/Lasers
+重新安装菜单：Tools > Emergence > Setup Laser Emitters（会重建默认配置）。
+验证菜单：Tools > Emergence > Verify Lasers。
