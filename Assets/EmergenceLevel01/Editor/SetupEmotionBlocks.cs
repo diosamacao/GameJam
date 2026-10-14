@@ -50,7 +50,7 @@ namespace Emergence.Level01.Editor
                 EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);if(opened)EditorSceneManager.CloseScene(scene,true);
             }
             if(active.IsValid() && active.isLoaded)UnityEngine.SceneManagement.SceneManager.SetActiveScene(active);
-            AssetDatabase.SaveAssets();Debug.Log("FOUR_EMOTION_BLOCKS_READY");
+            AssetDatabase.SaveAssets();ConfigureEmotionBlockLayers.Build();Debug.Log("FOUR_EMOTION_BLOCKS_READY");
         }
         static Tilemap CreateLayer(Transform parent,Material material){
             var go=new GameObject("EmotionBlocks",typeof(Tilemap),typeof(TilemapRenderer),typeof(TilemapCollider2D),typeof(EmotionBlockMap));go.transform.SetParent(parent,false);

@@ -44,7 +44,7 @@ namespace Emergence.Level01.Editor
                 block=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(SetupEmotionBlocks.Dir+"Prefabs/Block_sadness.prefab"));block.transform.position=new Vector3(1000.85f,.5f);player.TrySetEmotion(RobotEmotion.Joy);motor.SetMoveInput(1);Physics2D.SyncTransforms();Next();return;
             }
             if(phase==1){if(Time.time-started<.4f)return;Check(block.activeSelf,"Wrong emotion preserves touched blue block");player.TrySetEmotion(RobotEmotion.Sadness);motor.SetMoveInput(0);Next();return;}
-            if(phase==2){if(Time.time-started<.15f)return;Check(!block.activeSelf,"Sadness removes already touching blue block");
+            if(phase==2){if(Time.time-started<.15f)return;Check(block.activeSelf && !block.GetComponent<Collider2D>().enabled && Mathf.Approximately(block.GetComponent<SpriteRenderer>().color.a,.3f),"Sadness fades and disables already touching blue block");
                 var grid=new GameObject("BlockTestGrid",typeof(Grid));var child=new GameObject("Tiles",typeof(Tilemap),typeof(TilemapCollider2D),typeof(EmotionBlockMap));child.transform.SetParent(grid.transform,false);map=child.GetComponent<Tilemap>();rules=child.GetComponent<EmotionBlockMap>();
                 for(int i=0;i<4;i++)map.SetTile(new Vector3Int(i,0,0),tiles[i]);bool respawned;
                 player.TrySetEmotion(RobotEmotion.Anger);Check(!rules.TryInteractCell(new Vector3Int(2,0,0),player,out respawned),"Normal anger cannot remove hard tile");

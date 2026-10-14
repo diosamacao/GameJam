@@ -1,16 +1,21 @@
 四种情绪方块（64×64，PPU64）
 
-Tile Palette：选择 EmotionBlocks_64x64；Active Tilemap 选择关卡 Grid 下的 EmotionBlocks，然后绘制。
+Tile Palette 与 Active Tilemap 分别选择：
+Anger_64x64 → Emotion_Anger（愤怒）
+Sadness_64x64 → Emotion_Sadness（悲伤）
+Reinforced_64x64 → Emotion_Reinforced（加强愤怒）
+Electric_64x64 → Emotion_Electric（带电）
+EmotionBlocks_64x64 仍保留为四种素材的总览调色板。
 Tile资源：Assets/EmergenceLevel01/Tilemap64/EmotionBlocks/Tiles
 单独方块和示例Grid：Assets/EmergenceLevel01/Tilemap64/EmotionBlocks/Prefabs
-正式关卡已有空的EmotionBlocks图层，既有地形布局未替换。新增关卡可拖入EmotionBlocksGrid.prefab，再擦掉其四格示例。
+正式关卡已拆成上述四个独立图层，已铺设的特殊方块按类型迁移，普通地形保持原图层。新增关卡可拖入EmotionBlocksGrid.prefab，再擦掉其四格示例。
 
 规则
 anger / 红色裂纹：愤怒、加强愤怒接触可破坏。
-sadness / 蓝色虚线：悲伤接触后消失。
+sadness / 蓝色虚线：悲伤接触后保持30%不透明度，取消该格碰撞，3秒后恢复原不透明度与碰撞。每格独立计时，期间重复触碰不会重置计时。
 reinforced / 红灯装甲：仅加强愤怒可破坏。
 electric / 黄色闪电：勇气安全接触和站立；其他情绪触电返回出生点。电块始终保留实体碰撞，不是穿墙能力。
-破坏或消失持续到重新加载关卡；当前没有自动再生与存档。
+红色裂纹与硬质块破坏后播放约0.55秒的16片贴图碎裂、飞散、旋转、淡出动画，碰撞立即移除，碎片不参与碰撞；破坏持续至重新加载关卡。悲伤块会自动恢复；当前无跨关卡存档。
 Q长按满1秒自动依次切换：开心→愤怒→悲伤→加强愤怒→勇气→开心。每次按住只触发一次。
 蓄力或阻塞操作的剧情播放期间，方块能力暂停。
 
@@ -31,3 +36,7 @@ Q长按满1秒自动依次切换：开心→愤怒→悲伤→加强愤怒→勇
 Tools > Emergence > Verify Four Emotion Blocks
 报告：Logs/EmotionBlocks/verification.txt。
 重新生成资源：Tools > Emergence > Setup Four Emotion Blocks（会覆盖这四种专用Tile和预制体）。
+
+重新配置独立图层：Tools > Emergence > Configure Emotion Block Layers。
+恢复与动画检查：Tools > Emergence > Verify Block Recovery And Shatter。
+动图预览：Logs/BlockRecovery/anger-shatter.gif。
