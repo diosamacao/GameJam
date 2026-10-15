@@ -8,6 +8,7 @@ namespace Emergence.Level01
         [Tooltip("Only enable on a separate map containing exclusively destructible tiles.")]
         public bool allTilesBreakable;
         public TileBase[] breakableTiles=new TileBase[0];
+        [Min(0)] public float contactInset=.02f;
         Tilemap map;
         void Awake(){map=GetComponent<Tilemap>();}
         public bool TryBreakCell(Vector3Int cell,RobotEmotionGameplay source)
@@ -24,7 +25,7 @@ namespace Emergence.Level01
         {
             if(!map)map=GetComponent<Tilemap>();
             // Contact normal points away from the obstacle toward the robot.
-            return TryBreakCell(map.WorldToCell(point-normal*.02f),source);
+            return TryBreakCell(map.WorldToCell(point-normal*contactInset),source);
         }
     }
 }

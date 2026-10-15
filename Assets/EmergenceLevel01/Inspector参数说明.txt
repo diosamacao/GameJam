@@ -1,0 +1,47 @@
+Inspector 参数配置入口
+
+本次整理覆盖 Assets/EmergenceLevel01/Scripts 的游戏运行脚本。
+默认值沿用现有效果，包括跳跃1.2倍、悲伤渐隐0.5秒/透明度0.3/无碰撞3秒。
+索引、方向符号、物理公式中的2、百分比换算、缓存容量、防除零下限等实现常量不作为玩法参数暴露。
+Editor 中的场景生成脚本和自动验证脚本仍是工具代码，其布局坐标与测试期望值不属于运行时Inspector参数。
+
+角色
+- PlayerRobot > RobotMotor2D：移动速度、备用跳高、走路帧率、落地动画时长、地面法线阈值、垂直速度容差、起跳动画阈值、走路输入阈值。
+- PlayerRobot > RobotKeyboardInput：左移、右移、跳跃按键。
+- Generated/EmotionAbilities.asset：基础跳跃格数、开心跳跃格数、切换蓄力秒数、无Grid时格高、Jump Height Multiplier最终跳高倍率。
+- RobotEmotionGameplay：Abilities有配置时优先使用该资源；未指定时使用Inspector中的备用参数。可配置切换/取消键、重生保护秒数、重生点、情绪提示字号/布局/颜色。
+- RobotEmotionController：头部相对身体的排序偏移；RobotEmotionConfig资源仍配置每帧头部锚点。
+- RobotEmotionKeyboardTest：测试表情按键，默认仍为Y/U/I/O/P。
+
+情绪方块
+- 调色板画出的方块：选择关卡Grid下对应的Emotion_*图层，修改EmotionBlockMap。
+- 独立预制体：修改Block_*预制体上的EmotionBlock。
+- Fade Seconds：渐隐时长（秒）；0为立即渐隐并关闭碰撞。
+- Faded Alpha：渐隐后的不透明度0~1。
+- Restore Seconds：碰撞关闭后等待多少秒恢复，不包含渐隐阶段。
+- Shatter折叠项：碎片行列数、持续秒数、水平速度、纵向分散速度、向上速度、重力、旋转速度（度/秒）、闪光秒数、颜色、排序偏移。
+- Contact Inset：Tilemap接触点采样向内部偏移的世界距离。
+- 每个方块/图层可独立配置；更改正在计时的参数可能影响当前效果，建议在编辑模式调整。
+
+激光
+- Tilemap使用Tile资产引用的LaserEmitter_*预制体；修改对应预制体后重新运行。
+- 独立发射器可直接修改场景中的LaserEmitter组件。
+- 射程、光束宽度、方向、发射口偏移、检测厚度、碰撞层、Trigger是否挡光、开关。
+- 外光/亮芯颜色、亮芯宽度比例、排序及亮芯排序偏移。运行中颜色和宽度修改会同步显示。
+
+对话
+- DialogueSequence：逐字速度、每行速度覆盖、最短显示秒数；句间停顿仍由正文<pause=秒数>配置。
+- DialogueDirector：下一段按键、参考宽度、缩放上下限、面板宽高/边距/顶部位置/内边距、各文字字号、说话人/正文/背景/边线颜色。
+
+场景与合成
+- LabDoor：移动距离、开关秒数、解除碰撞的开启进度。
+- LabChamber：开/关状态玻璃透明度、过渡秒数。
+- LabDataPacket：路径、速度、初始相位（原有参数）。
+- AssemblyOutline：虚线间距、段长、线宽、整体尺寸、颜色、排序。
+- AssemblyPiece / AssemblyDoor：选择色、普通色、修复完成/未完成颜色。
+- AssemblyInteraction：鼠标键、取消键、提示字号/颜色/边距/高度；进度总数读取实际插槽数量。
+
+使用提示
+场景内调整只影响该场景实例；希望复用应修改预制体或Apply覆盖。
+运行模式中的修改通常不会在退出运行后保存。
+Setup/Build菜单是重新生成资源的工具，可能重建相关资源；日常调参直接在Inspector编辑，无需再次运行生成菜单。

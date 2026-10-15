@@ -11,6 +11,16 @@ namespace Emergence.Level01
         public static bool IsBlockingInput => Instance && Instance.IsPlaying && Instance.Sequence.blockPlayerInput;
         public DialogueSequence playOnStart;
         public KeyCode advanceKey=KeyCode.C;
+        [Header("对话框布局（参考分辨率下的像素）")]
+        [Min(1)] public float referenceWidth=1280;
+        public Vector2 scaleRange=new Vector2(.65f,1.5f);
+        [Min(1)] public float panelWidth=900, minimumHeight=130;
+        [Min(0)] public float screenMargin=32, topOffset=20, padding=22;
+        [Min(0)] public float speakerLineHeight=32, footerHeight=30, hintHeight=25, accentHeight=3;
+        [Header("对话文字与颜色")]
+        [Min(1)] public int bodyFontSize=23, speakerFontSize=19, hintFontSize=15;
+        public Color bodyColor=new Color(.88f,.95f,1), speakerColor=new Color(.4f,.88f,1);
+        public Color panelColor=new Color(.035f,.065f,.1f,.97f), accentColor=new Color(.3f,.7f,.85f);
         public UnityEvent onStarted=new UnityEvent();
         public UnityEvent onFinished=new UnityEvent();
         public event Action<DialogueSequence> Started;
@@ -72,20 +82,20 @@ namespace Emergence.Level01
         void OnGUI()
         {
             if(!IsPlaying)return;
-            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},22);
-            float scale=Mathf.Clamp(Screen.width/1280f,.65f,1.5f);
-            float width=Mathf.Min(Screen.width-32,900*scale),x=(Screen.width-width)*.5f,y=20*scale,pad=22*scale;
-            var body=new GUIStyle(GUI.skin.label){font=font,fontSize=Mathf.RoundToInt(23*scale),wordWrap=true,richText=false};body.normal.textColor=new Color(.88f,.95f,1);
-            var heading=new GUIStyle(body){fontSize=Mathf.RoundToInt(19*scale),fontStyle=FontStyle.Bold};heading.normal.textColor=new Color(.4f,.88f,1);
-            float speakerHeight=string.IsNullOrEmpty(CurrentLine.speaker)?0:32*scale;
+            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},bodyFontSize);
+            float scale=Mathf.Clamp(Screen.width/Mathf.Max(1,referenceWidth),Mathf.Max(.01f,scaleRange.x),Mathf.Max(scaleRange.x,scaleRange.y));
+            float width=Mathf.Min(Screen.width-screenMargin,panelWidth*scale),x=(Screen.width-width)*.5f,y=topOffset*scale,pad=padding*scale;
+            var body=new GUIStyle(GUI.skin.label){font=font,fontSize=Mathf.RoundToInt(bodyFontSize*scale),wordWrap=true,richText=false};body.normal.textColor=bodyColor;
+            var heading=new GUIStyle(body){fontSize=Mathf.RoundToInt(speakerFontSize*scale),fontStyle=FontStyle.Bold};heading.normal.textColor=speakerColor;
+            float speakerHeight=string.IsNullOrEmpty(CurrentLine.speaker)?0:speakerLineHeight*scale;
             float textHeight=body.CalcHeight(new GUIContent(FullText),width-pad*2);
-            float height=Mathf.Max(130*scale,pad*2+speakerHeight+textHeight+30*scale);
-            var old=GUI.color;GUI.color=new Color(.035f,.065f,.1f,.97f);GUI.DrawTexture(new Rect(x,y,width,height),Texture2D.whiteTexture);
-            GUI.color=new Color(.3f,.7f,.85f);GUI.DrawTexture(new Rect(x,y,width,3*scale),Texture2D.whiteTexture);GUI.color=old;
+            float height=Mathf.Max(minimumHeight*scale,pad*2+speakerHeight+textHeight+footerHeight*scale);
+            var old=GUI.color;GUI.color=panelColor;GUI.DrawTexture(new Rect(x,y,width,height),Texture2D.whiteTexture);
+            GUI.color=accentColor;GUI.DrawTexture(new Rect(x,y,width,accentHeight*scale),Texture2D.whiteTexture);GUI.color=old;
             if(speakerHeight>0)GUI.Label(new Rect(x+pad,y+pad,width-pad*2,speakerHeight),CurrentLine.speaker,heading);
             GUI.Label(new Rect(x+pad,y+pad+speakerHeight,width-pad*2,textHeight),VisibleText,body);
-            var hint=new GUIStyle(heading){alignment=TextAnchor.MiddleRight,fontSize=Mathf.RoundToInt(15*scale),fontStyle=FontStyle.Normal};
-            GUI.Label(new Rect(x+pad,y+height-30*scale,width-pad*2,25*scale),IsRevealing?advanceKey+"  显示全文":CanAdvance?advanceKey+"  "+(LineIndex==Sequence.lines.Length-1?"结束对话":"下一段"):"…",hint);
+            var hint=new GUIStyle(heading){alignment=TextAnchor.MiddleRight,fontSize=Mathf.RoundToInt(hintFontSize*scale),fontStyle=FontStyle.Normal};
+            GUI.Label(new Rect(x+pad,y+height-footerHeight*scale,width-pad*2,hintHeight*scale),IsRevealing?advanceKey+"  显示全文":CanAdvance?advanceKey+"  "+(LineIndex==Sequence.lines.Length-1?"结束对话":"下一段"):"…",hint);
         }
         void OnDestroy(){if(font)Destroy(font);}
     }

@@ -30,18 +30,32 @@ namespace Emergence.Level01.Editor
                 var grid=new GameObject("RecoveryGrid",typeof(Grid));grid.transform.position=new Vector3(1020,0);var go=new GameObject("Sadness",typeof(Tilemap),typeof(TilemapCollider2D),typeof(EmotionBlockMap));go.transform.SetParent(grid.transform,false);map=go.GetComponent<Tilemap>();rules=go.GetComponent<EmotionBlockMap>();
                 var tile=AssetDatabase.LoadAssetAtPath<EmotionBlockTile>(SetupEmotionBlocks.Dir+"Tiles/sadness.asset");map.SetTile(Vector3Int.zero,tile);map.SetTile(Vector3Int.right,tile);
                 bool respawned;Check(blue.TryInteract(player) && rules.TryInteractCell(Vector3Int.zero,player,out respawned),"Sadness activates prefab and cell");
+                Check(blue.GetComponent<Collider2D>().enabled && Mathf.Approximately(blue.GetComponent<SpriteRenderer>().color.a,.8f),"Prefab starts fading without immediately removing collision");
+                Check(map.GetColliderType(Vector3Int.zero)==Tile.ColliderType.Grid && Mathf.Approximately(map.GetColor(Vector3Int.zero).a,1),"Tile starts fading with original collision");
+                started=Time.time;phase=10;return;
+            }
+            if(phase==10){if(Time.time-started<.25f)return;
+                float alpha=blue.GetComponent<SpriteRenderer>().color.a;
+                Check(alpha>.3f && alpha<.8f && blue.GetComponent<Collider2D>().enabled,"Prefab progressively fades while retaining collision");
+                alpha=map.GetColor(Vector3Int.zero).a;
+                Check(alpha>.3f && alpha<1 && map.GetColliderType(Vector3Int.zero)==Tile.ColliderType.Grid,"Tile progressively fades while retaining collision");phase=11;return;
+            }
+            if(phase==11){if(Time.time-started<.65f)return;bool respawned;
                 Check(blue.gameObject.activeSelf && Mathf.Approximately(blue.GetComponent<SpriteRenderer>().color.a,.3f) && !blue.GetComponent<Collider2D>().enabled,"Prefab remains visible at 30 percent without collision");
                 Check(map.HasTile(Vector3Int.zero) && Mathf.Approximately(map.GetColor(Vector3Int.zero).a,.3f) && map.GetColliderType(Vector3Int.zero)==Tile.ColliderType.None,"Tile remains at 30 percent without collision");
                 Check(map.GetColliderType(Vector3Int.right)==Tile.ColliderType.Grid && Mathf.Approximately(map.GetColor(Vector3Int.right).a,1),"Neighbor unaffected");
-                Check(!blue.TryInteract(player) && !rules.TryInteractCell(Vector3Int.zero,player,out respawned),"Repeated touch cannot restart timer");started=Time.time;phase=1;return;
+                Check(!blue.TryInteract(player) && !rules.TryInteractCell(Vector3Int.zero,player,out respawned),"Repeated touch cannot restart timer");phase=1;return;
             }
             if(phase==1){if(Time.time-started<1)return;bool respawned;rules.TryInteractCell(Vector3Int.right,player,out respawned);phase=2;return;}
-            if(phase==2){if(Time.time-started<3.15f)return;
+            if(phase==2){if(Time.time-started<3.25f)return;
+                Check(!blue.GetComponent<Collider2D>().enabled && map.GetColliderType(Vector3Int.zero)==Tile.ColliderType.None,"Three-second intangible duration starts after fade completes");phase=12;return;
+            }
+            if(phase==12){if(Time.time-started<3.7f)return;
                 Check(blue.GetComponent<Collider2D>().enabled && Mathf.Approximately(blue.GetComponent<SpriteRenderer>().color.a,.8f),"Prefab restores original opacity and collision after three seconds");
                 Check(map.GetColliderType(Vector3Int.zero)==Tile.ColliderType.Grid && Mathf.Approximately(map.GetColor(Vector3Int.zero).a,1),"Tile restores opacity and collision after three seconds");
                 Check(map.GetColliderType(Vector3Int.right)==Tile.ColliderType.None,"Neighbor has its own timer");phase=3;return;
             }
-            if(phase==3){if(Time.time-started<4.2f)return;
+            if(phase==3){if(Time.time-started<4.7f)return;
                 Check(map.GetColliderType(Vector3Int.right)==Tile.ColliderType.Grid,"Second cell independently restores");bool respawned;rules.TryInteractCell(Vector3Int.zero,player,out respawned);rules.enabled=false;Check(map.GetColliderType(Vector3Int.zero)==Tile.ColliderType.Grid,"Disabling map restores pending cells");
                 blue.TryInteract(player);blue.enabled=false;Check(blue.GetComponent<Collider2D>().enabled,"Disabling block restores pending collider");
                 red=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(SetupEmotionBlocks.Dir+"Prefabs/Block_anger.prefab"),new Vector3(1000,0),Quaternion.identity).GetComponent<EmotionBlock>();

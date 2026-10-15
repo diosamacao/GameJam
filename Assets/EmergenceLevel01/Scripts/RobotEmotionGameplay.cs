@@ -7,6 +7,15 @@ namespace Emergence.Level01
     {
         public EmotionAbilityConfig abilities;
         public Grid levelGrid;
+        [Header("未指定能力配置时的备用参数")]
+        [Min(.1f)] public float fallbackHoldSeconds=1;
+        [Min(0)] public float fallbackBaseJumpCells=2;
+        [Min(0)] public float fallbackHappyJumpCells=3;
+        [Min(.01f)] public float fallbackCellHeight=1;
+        [Min(0)] public float fallbackJumpMultiplier=1.2f;
+        [Header("按键")]
+        public KeyCode switchKey=KeyCode.Q;
+        public KeyCode cancelSwitchKey=KeyCode.Escape;
         public bool keyboardInput=true;
         [UnityEngine.Serialization.FormerlySerializedAs("showSelection")]
         public bool showSwitchProgress=true;
@@ -38,15 +47,24 @@ namespace Emergence.Level01
             body.position=respawnPoint?(Vector2)respawnPoint.position:initialPosition;body.velocity=Vector2.zero;
             motor.ResetGroundState();onDied.Invoke();return true;
         }
-        public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*1.2f;
-        float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):1;
-        float BaseCells => abilities ? abilities.baseJumpCells:2f;
-        float HappyCells => abilities ? abilities.happyJumpCells:3f;
-        float CellHeight => levelGrid ? levelGrid.transform.TransformVector(new Vector3(0,levelGrid.cellSize.y,0)).magnitude : (abilities?abilities.fallbackCellHeight:1);
+        public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier);
+        float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):Mathf.Max(.1f,fallbackHoldSeconds);
+        float BaseCells => abilities ? abilities.baseJumpCells:fallbackBaseJumpCells;
+        float HappyCells => abilities ? abilities.happyJumpCells:fallbackHappyJumpCells;
+        float CellHeight => levelGrid ? levelGrid.transform.TransformVector(new Vector3(0,levelGrid.cellSize.y,0)).magnitude : (abilities?abilities.fallbackCellHeight:fallbackCellHeight);
         RobotMotor2D motor;
         RobotEmotionController face;
         Rigidbody2D body;
         float started;
+        [Header("情绪提示布局（像素）")]
+        [Min(1)] public int hudFontSize=18;
+        public float hudSideMargin=10, statusBottomOffset=82, statusHeight=30, chargeBottomOffset=150;
+        public Rect chargePanel=new Rect(-180,-12,360,78);
+        public Rect chargeLabel=new Rect(-175,-8,350,32);
+        public Rect progressBar=new Rect(-160,26,320,6);
+        public Rect chargeHint=new Rect(-175,34,350,30);
+        public Color progressColor=new Color(.3f,.85f,1);
+        static Rect Offset(Rect rect,float x,float y){rect.position+=new Vector2(x,y);return rect;}
         Font font;
         readonly ContactPoint2D[] contacts=new ContactPoint2D[64];
         void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=face.CurrentEmotion;initialPosition=transform.position;}
@@ -91,9 +109,9 @@ namespace Emergence.Level01
             if(IsSwitching && !motor.IsGrounded)CancelSwitch();
             if(keyboardInput) {
                 // A fresh key-down is required, so holding Q cannot restart the cycle.
-                if(Input.GetKeyDown(KeyCode.Q))BeginSwitch();
-                if(IsSwitching && Input.GetKeyDown(KeyCode.Escape)){CancelSwitch();return;}
-                if(IsSwitching && (Input.GetKeyUp(KeyCode.Q) || !Input.GetKey(KeyCode.Q)))ReleaseSwitch();
+                if(Input.GetKeyDown(switchKey))BeginSwitch();
+                if(IsSwitching && Input.GetKeyDown(cancelSwitchKey)){CancelSwitch();return;}
+                if(IsSwitching && (Input.GetKeyUp(switchKey) || !Input.GetKey(switchKey)))ReleaseSwitch();
             }
             // Complete on the threshold frame, independently of key release.
             if(IsSwitching && Progress>=1)ReleaseSwitch();
@@ -122,16 +140,16 @@ namespace Emergence.Level01
         void OnGUI()
         {
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
-            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},18);
-            var style=new GUIStyle(GUI.skin.label){font=font,fontSize=18,alignment=TextAnchor.MiddleCenter};
-            if(!IsSwitching){GUI.Label(new Rect(10,Screen.height-82,Screen.width-20,30),"当前："+EmotionName(CurrentEmotion)+"  ·  长按 Q 切换  ·  空格跳跃",style);return;}
-            float x=Screen.width*.5f,y=Screen.height-150;
-            GUI.Box(new Rect(x-180,y-12,360,78),GUIContent.none);
+            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},hudFontSize);
+            var style=new GUIStyle(GUI.skin.label){font=font,fontSize=hudFontSize,alignment=TextAnchor.MiddleCenter};
+            if(!IsSwitching){GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+"  ·  长按 "+switchKey+" 切换",style);return;}
+            float x=Screen.width*.5f,y=Screen.height-chargeBottomOffset;
+            GUI.Box(Offset(chargePanel,x,y),GUIContent.none);
             string name=EmotionName(TargetEmotion??CurrentEmotion);
-            GUI.Label(new Rect(x-175,y-8,350,32),"下一情绪："+name+"  ·  "+Mathf.CeilToInt(Progress*100)+"%",style);
-            var old=GUI.color;GUI.color=new Color(.3f,.85f,1);
-            GUI.DrawTexture(new Rect(x-160,y+26,320*Progress,6),Texture2D.whiteTexture);GUI.color=old;
-            GUI.Label(new Rect(x-175,y+34,350,30),"蓄力满 1 秒自动切换 · Esc 取消",style);
+            GUI.Label(Offset(chargeLabel,x,y),"下一情绪："+name+"  ·  "+Mathf.CeilToInt(Progress*100)+"%",style);
+            var old=GUI.color;GUI.color=progressColor;
+            GUI.DrawTexture(new Rect(x+progressBar.x,y+progressBar.y,progressBar.width*Progress,progressBar.height),Texture2D.whiteTexture);GUI.color=old;
+            GUI.Label(Offset(chargeHint,x,y),"蓄力满 "+HoldSeconds.ToString("0.##")+" 秒自动切换 · "+cancelSwitchKey+" 取消",style);
         }
         public static string EmotionName(RobotEmotion value){switch(value){case RobotEmotion.Joy:return "开心";case RobotEmotion.Anger:return "愤怒";case RobotEmotion.Sadness:return "悲伤";case RobotEmotion.StrongAnger:return "加强愤怒";case RobotEmotion.Courage:return "勇气";default:return "空白";}}
         void OnDestroy(){if(font)Destroy(font);}

@@ -6,6 +6,7 @@ namespace Emergence.Level01
     {
         [Tooltip("Disable this component when gameplay takes ownership of emotions.")]
         public bool enableKeyboardTest = false;
+        public KeyCode joyKey=KeyCode.Y, angerKey=KeyCode.U, sadnessKey=KeyCode.I, delightKey=KeyCode.O, blankKey=KeyCode.P;
         RobotEmotionController target;
         void Awake() { target = GetComponent<RobotEmotionController>(); }
         public static bool TryMapKey(KeyCode key, out RobotEmotion emotion)
@@ -22,11 +23,11 @@ namespace Emergence.Level01
         void Update()
         {
             if(DialogueDirector.IsBlockingInput || !enableKeyboardTest || !target) return;
-            if(Input.GetKeyDown(KeyCode.Y)) target.SetEmotion(RobotEmotion.Joy);
-            else if(Input.GetKeyDown(KeyCode.U)) target.SetEmotion(RobotEmotion.Anger);
-            else if(Input.GetKeyDown(KeyCode.I)) target.SetEmotion(RobotEmotion.Sadness);
-            else if(Input.GetKeyDown(KeyCode.O)) target.SetEmotion(RobotEmotion.Delight);
-            else if(Input.GetKeyDown(KeyCode.P)) target.SetEmotion(RobotEmotion.Blank);
+            if(Input.GetKeyDown(joyKey)) target.SetEmotion(RobotEmotion.Joy);
+            else if(Input.GetKeyDown(angerKey)) target.SetEmotion(RobotEmotion.Anger);
+            else if(Input.GetKeyDown(sadnessKey)) target.SetEmotion(RobotEmotion.Sadness);
+            else if(Input.GetKeyDown(delightKey)) target.SetEmotion(RobotEmotion.Delight);
+            else if(Input.GetKeyDown(blankKey)) target.SetEmotion(RobotEmotion.Blank);
         }
     }
 }

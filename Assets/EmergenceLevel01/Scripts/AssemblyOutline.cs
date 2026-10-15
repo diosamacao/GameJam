@@ -7,6 +7,9 @@ namespace Emergence.Level01
         public Color color = new Color(1f, .76f, .22f);
         public Material material;
         public bool dashed = true;
+        [Min(.001f)] public float dashSpacing=.3125f;
+        [Min(.001f)] public float dashLength=.1875f;
+        [Min(.001f)] public float lineWidth=.0625f;
         public int sortingOrder = 25;
         GameObject drawing;
         static Sprite pixel;
@@ -28,13 +31,13 @@ namespace Emergence.Level01
         }
         void Edge(Vector2 start,Vector2 direction,float length)
         {
-            float step=dashed?.3125f:length, dash=dashed?.1875f:length;
+            float step=dashed?Mathf.Max(.001f,dashSpacing):length, dash=dashed?Mathf.Max(.001f,dashLength):length;
             for(float t=0;t<length;t+=step)
             {
                 float segment=Mathf.Min(dash,length-t);
                 var go=new GameObject("Dash");go.transform.SetParent(drawing.transform,false);
                 go.transform.localPosition=start+direction*(t+segment*.5f);
-                go.transform.localScale=direction.x!=0?new Vector3(segment,.0625f,1):new Vector3(.0625f,segment,1);
+                go.transform.localScale=direction.x!=0?new Vector3(segment,lineWidth,1):new Vector3(lineWidth,segment,1);
                 var sr=go.AddComponent<SpriteRenderer>();sr.sprite=pixel;sr.sharedMaterial=material;sr.color=color;sr.sortingOrder=sortingOrder;
             }
         }

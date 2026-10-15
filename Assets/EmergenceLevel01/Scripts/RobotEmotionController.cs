@@ -6,6 +6,7 @@ namespace Emergence.Level01
     public sealed class RobotEmotionController : MonoBehaviour
     {
         public RobotEmotionConfig config;
+        public int headSortingOffset=1;
         public SpriteRenderer bodyRenderer;
         public SpriteRenderer headRenderer;
         [SerializeField] RobotEmotion currentEmotion = RobotEmotion.Blank;
@@ -45,7 +46,7 @@ namespace Emergence.Level01
             headRenderer.flipY = bodyRenderer.flipY;
             headRenderer.color = bodyRenderer.color;
             headRenderer.sortingLayerID = bodyRenderer.sortingLayerID;
-            headRenderer.sortingOrder = bodyRenderer.sortingOrder + 1;
+            headRenderer.sortingOrder = bodyRenderer.sortingOrder + headSortingOffset;
         }
         void OnDisable() { if(headRenderer) headRenderer.enabled = false; }
     }

@@ -7,6 +7,7 @@ namespace Emergence.Level01
         public BoxCollider2D blocker;
         public float travel = 26f / 16f;
         public float seconds = .6f;
+        [Tooltip("门开启到此进度时关闭阻挡碰撞。")][Range(0,1)] public float collisionReleaseProgress=.98f;
         public bool open;
         Vector3 upperClosed, lowerClosed;
         float progress;
@@ -19,7 +20,7 @@ namespace Emergence.Level01
             progress = Mathf.MoveTowards(progress, open ? 1f : 0f, Time.deltaTime / Mathf.Max(.01f, seconds));
             upper.localPosition = upperClosed + Vector3.up * travel * progress;
             lower.localPosition = lowerClosed + Vector3.down * travel * progress;
-            if (blocker) blocker.enabled = progress < .98f;
+            if (blocker) blocker.enabled = progress < collisionReleaseProgress;
         }
     }
 }

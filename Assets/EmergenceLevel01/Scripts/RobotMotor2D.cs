@@ -13,6 +13,11 @@ namespace Emergence.Level01
         public Sprite jump, fall, land;
         [Min(1)] public float walkFps = 8f;
         [Min(0)] public float landingDuration = .1f;
+        [Header("落地与动画判定")]
+        [Range(0,1)] public float groundNormalThreshold=.65f;
+        [Min(0)] public float groundedVelocityTolerance=.1f;
+        [Min(0)] public float risingAnimationThreshold=.1f;
+        [Range(0,1)] public float walkInputThreshold=.01f;
         public bool IsGrounded { get; private set; }
         public bool ControlsLocked { get; private set; }
         public bool InputBlocked => ControlsLocked || DialogueDirector.IsBlockingInput;
@@ -38,9 +43,9 @@ namespace Emergence.Level01
             bool wasGrounded = IsGrounded;
             IsGrounded = false;
             int count = body.GetContacts(contacts);
-            if (body.velocity.y <= .1f)
+            if (body.velocity.y <= groundedVelocityTolerance)
                 for (int i = 0; i < count; i++)
-                    if (contacts[i].normal.y > .65f) { IsGrounded = true; break; }
+                    if (contacts[i].normal.y > groundNormalThreshold) { IsGrounded = true; break; }
             if (!wasGrounded && IsGrounded) landingUntil = Time.time + landingDuration;
             float vy = body.velocity.y;
             if (!InputBlocked && jumpQueued && IsGrounded && EffectiveJumpHeight > 0)
@@ -60,11 +65,11 @@ namespace Emergence.Level01
         {
             if (!visual) return;
             if (input != 0) visual.flipX = input < 0;
-            if (!IsGrounded && body && (body.velocity.y > .1f ? jump : fall))
-            { visual.sprite = body.velocity.y > .1f ? jump : fall; frameTime = 0; }
+            if (!IsGrounded && body && (body.velocity.y > risingAnimationThreshold ? jump : fall))
+            { visual.sprite = body.velocity.y > risingAnimationThreshold ? jump : fall; frameTime = 0; }
             else if (IsGrounded && Time.time < landingUntil && land)
             { visual.sprite = land; frameTime = 0; }
-            else if (Mathf.Abs(input) > .01f && walk != null && walk.Length > 0)
+            else if (Mathf.Abs(input) > walkInputThreshold && walk != null && walk.Length > 0)
             { frameTime += Time.deltaTime; visual.sprite = walk[Mathf.FloorToInt(frameTime * walkFps) % walk.Length]; }
             else { frameTime = 0; visual.sprite = idle; }
         }
