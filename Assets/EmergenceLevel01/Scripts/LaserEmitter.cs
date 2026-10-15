@@ -35,16 +35,17 @@ namespace Emergence.Level01
             if(!laserEnabled){BeamLength=0;Show(false);return;}
             ApplyStyle(beam,beamColor,beamWidth,sortingOrder);ApplyStyle(core,coreColor,beamWidth*coreWidthRatio,sortingOrder+coreSortingOffset);
             var origin=BeamOrigin;var dir=BeamDirection;
-            var filter=new ContactFilter2D();filter.SetLayerMask(blockingLayers);filter.useTriggers=triggersBlockBeam;
+            var filter=new ContactFilter2D();filter.SetLayerMask(blockingLayers);filter.useTriggers=true;
             hits.Clear();Physics2D.BoxCast(origin,new Vector2(Mathf.Max(.0001f,castDepth),Mathf.Max(.001f,beamWidth)),Mathf.Atan2(dir.y,dir.x)*Mathf.Rad2Deg,dir,filter,hits,maxDistance);
             RaycastHit2D nearest=default;float distance=maxDistance;
             foreach(var hit in hits){
                 if(!hit.collider || hit.collider.transform.IsChildOf(transform))continue;
+                if(hit.collider.isTrigger && !triggersBlockBeam && !hit.collider.GetComponent<EmotionShield>())continue;
                 if(hit.distance<=distance){distance=hit.distance;nearest=hit;}
             }
             BeamLength=distance;Show(true);
             var end=origin+dir*distance;SetLine(beam,origin,end);SetLine(core,origin,end);
-            if(applyDamage && nearest.collider){var player=nearest.collider.GetComponentInParent<RobotEmotionGameplay>();if(player)player.DieAndRespawn();}
+            if(applyDamage && nearest.collider && !nearest.collider.GetComponent<EmotionShield>()){var player=nearest.collider.GetComponentInParent<RobotEmotionGameplay>();if(player)player.DieAndRespawn();}
         }
         void ApplyStyle(LineRenderer line,Color color,float width,int order){if(!line)return;line.startWidth=line.endWidth=Mathf.Max(0,width);line.startColor=line.endColor=color;line.sortingOrder=order;line.sharedMaterial=beamMaterial;}
         static void SetLine(LineRenderer line,Vector2 a,Vector2 b){if(line){line.SetPosition(0,a);line.SetPosition(1,b);}}

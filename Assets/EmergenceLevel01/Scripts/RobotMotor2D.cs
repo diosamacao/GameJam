@@ -7,6 +7,10 @@ namespace Emergence.Level01
         [Min(0)] public float moveSpeed = 5f;
         [Tooltip("Fallback jump height without RobotEmotionGameplay. With emotions enabled, configure EmotionAbilities instead.")]
         [Min(0)] public float jumpHeight = 2f;
+        [Min(0)] public float minimumJumpHeight=1;
+        public bool variableJump=true;
+        [Tooltip("由NPC移动组件驱动位置，保留身体动画。")]
+        public bool externallyDriven;
         public SpriteRenderer visual;
         public Sprite idle;
         public Sprite[] walk;
@@ -27,19 +31,23 @@ namespace Emergence.Level01
         Rigidbody2D body;
         readonly ContactPoint2D[] contacts = new ContactPoint2D[32];
         float input, frameTime, landingUntil;
-        bool jumpQueued;
+        bool jumpQueued,jumpHeld,jumpActive;int jumpsUsed;float takeoffY,activeMinimum;
+        public void SetJumpHeld(bool held){jumpHeld=held;}
         void Awake() { body = GetComponent<Rigidbody2D>(); emotionGameplay=GetComponent<RobotEmotionGameplay>(); }
         public void SetMoveInput(float value) { input = InputBlocked ? 0 : Mathf.Clamp(value, -1f, 1f); }
         public bool RequestJump()
         {
-            if (InputBlocked || !isActiveAndEnabled || !body || !IsGrounded || jumpQueued || EffectiveJumpHeight <= 0 || Physics2D.gravity.y * body.gravityScale >= 0) return false;
-            jumpQueued = true;
+            var powers=GetComponent<EmotionResonance>();
+            bool second=!IsGrounded && jumpsUsed==1 && powers && powers.Enhanced && powers.Emotion==RobotEmotion.Joy;
+            if (InputBlocked || !isActiveAndEnabled || !body || (!IsGrounded && !second) || jumpQueued || EffectiveJumpHeight <= 0 || Physics2D.gravity.y * body.gravityScale >= 0) return false;
+            jumpQueued = true;jumpHeld=true;
             return true;
         }
-        public void ResetGroundState(){IsGrounded=false;jumpQueued=false;landingUntil=0;}
-        public void CancelJumpRequest() { jumpQueued = false; }
+        public void ResetGroundState(){IsGrounded=false;jumpQueued=false;jumpActive=false;jumpsUsed=0;landingUntil=0;}
+        public void CancelJumpRequest() { jumpQueued = false;jumpHeld=false; }
         void FixedUpdate()
         {
+            if(externallyDriven){IsGrounded=true;return;}
             bool wasGrounded = IsGrounded;
             IsGrounded = false;
             int count = body.GetContacts(contacts);
@@ -47,18 +55,27 @@ namespace Emergence.Level01
                 for (int i = 0; i < count; i++)
                     if (contacts[i].normal.y > groundNormalThreshold) { IsGrounded = true; break; }
             if (!wasGrounded && IsGrounded) landingUntil = Time.time + landingDuration;
+            if(IsGrounded){jumpsUsed=0;jumpActive=false;}
             float vy = body.velocity.y;
-            if (!InputBlocked && jumpQueued && IsGrounded && EffectiveJumpHeight > 0)
+            var powers=GetComponent<EmotionResonance>();
+            bool second=!IsGrounded && jumpsUsed==1 && powers && powers.Enhanced && powers.Emotion==RobotEmotion.Joy;
+            if (!InputBlocked && jumpQueued && (IsGrounded || second) && EffectiveJumpHeight > 0)
             {
                 float gravity = -Physics2D.gravity.y * body.gravityScale;
                 if (gravity > 0)
                 {
-                    vy = Mathf.Sqrt(2f * gravity * EffectiveJumpHeight);
+                    float maximum=second ? powers.SecondJumpMaximum : EffectiveJumpHeight;
+                    activeMinimum=Mathf.Clamp(second ? powers.SecondJumpMinimum : (emotionGameplay ? emotionGameplay.MinimumJumpHeight : minimumJumpHeight),0,maximum);
+                    vy = Mathf.Sqrt(2f * gravity * maximum);takeoffY=body.position.y;jumpActive=true;jumpsUsed++;
                     IsGrounded = false;
                     landingUntil = 0;
                 }
             }
             jumpQueued = false;
+            if(variableJump && jumpActive && !jumpHeld && vy>0){
+                float gravity=-Physics2D.gravity.y*body.gravityScale;
+                vy=Mathf.Min(vy,Mathf.Sqrt(2*Mathf.Max(0,gravity)*Mathf.Max(0,activeMinimum-(body.position.y-takeoffY))));jumpActive=false;
+            }
             body.velocity = new Vector2(InputBlocked ? 0 : input * moveSpeed, vy);
         }
         void Update()
@@ -75,7 +92,7 @@ namespace Emergence.Level01
         }
         void OnDisable()
         {
-            input = 0; jumpQueued = false; IsGrounded = false;
+            input = 0; jumpQueued = false; IsGrounded = false;jumpActive=false;jumpsUsed=0;
             if (body) body.velocity = new Vector2(0, body.velocity.y);
             if (visual && idle) visual.sprite = idle;
         }

@@ -11,12 +11,19 @@ namespace Emergence.Level01
         [Min(.1f)] public float fallbackHoldSeconds=1;
         [Min(0)] public float fallbackBaseJumpCells=2;
         [Min(0)] public float fallbackHappyJumpCells=3;
+        [Min(0)] public float fallbackMinimumJumpCells=1, fallbackHappyMinimumJumpCells=1.5f;
         [Min(.01f)] public float fallbackCellHeight=1;
         [Min(0)] public float fallbackJumpMultiplier=1.2f;
         [Header("按键")]
         public KeyCode switchKey=KeyCode.Q;
         public KeyCode cancelSwitchKey=KeyCode.Escape;
         public bool keyboardInput=true;
+        [Tooltip("NPC不能自行切换情感，只能接受玩家传递。")]
+        public bool isNpc;
+        bool receiving;
+        public RobotEmotion EffectiveEmotion {
+            get {var resonance=GetComponent<EmotionResonance>();return CurrentEmotion==RobotEmotion.Anger && resonance && resonance.Enhanced?RobotEmotion.StrongAnger:CurrentEmotion;}
+        }
         [UnityEngine.Serialization.FormerlySerializedAs("showSelection")]
         public bool showSwitchProgress=true;
         public bool IsSwitching {get;private set;}
@@ -48,6 +55,8 @@ namespace Emergence.Level01
             motor.ResetGroundState();onDied.Invoke();return true;
         }
         public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier);
+        public float MinimumJumpHeight => Mathf.Min(JumpHeight,(abilities?(CurrentEmotion==RobotEmotion.Joy?abilities.happyMinimumJumpCells:abilities.minimumJumpCells):(CurrentEmotion==RobotEmotion.Joy?fallbackHappyMinimumJumpCells:fallbackMinimumJumpCells))*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier));
+        public float GridCellHeight => CellHeight;
         float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):Mathf.Max(.1f,fallbackHoldSeconds);
         float BaseCells => abilities ? abilities.baseJumpCells:fallbackBaseJumpCells;
         float HappyCells => abilities ? abilities.happyJumpCells:fallbackHappyJumpCells;
@@ -71,17 +80,19 @@ namespace Emergence.Level01
         void Start(){if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
         public bool BeginSwitch()
         {
-            if(DialogueDirector.IsBlockingInput || !isActiveAndEnabled || IsSwitching || !motor.IsGrounded)return false;
+            if(isNpc || DialogueDirector.IsBlockingInput || !isActiveAndEnabled || IsSwitching || !motor.IsGrounded)return false;
             IsSwitching=true;TargetEmotion=NextEmotion(CurrentEmotion);started=Time.time;motor.SetControlsLocked(true);
-            face.SetVisualEmotion(RobotEmotion.Blank);return true;
+            face.SetVisualEmotion(RobotEmotion.Loading);return true;
         }
         static RobotEmotion NextEmotion(RobotEmotion current)
         {
             switch(current) {
                 case RobotEmotion.Joy: return RobotEmotion.Anger;
                 case RobotEmotion.Anger: return RobotEmotion.Sadness;
-                case RobotEmotion.Sadness: return RobotEmotion.StrongAnger;
+                case RobotEmotion.Sadness: return RobotEmotion.Courage;
                 case RobotEmotion.StrongAnger: return RobotEmotion.Courage;
+                case RobotEmotion.Courage: return RobotEmotion.Guardian;
+                case RobotEmotion.Guardian: return RobotEmotion.Memory;
                 default: return RobotEmotion.Joy;
             }
         }
@@ -101,8 +112,15 @@ namespace Emergence.Level01
         // External gameplay/debug entry point; cannot bypass an in-progress switch.
         public bool TrySetEmotion(RobotEmotion value)
         {
-            if(IsSwitching || !face.SetVisualEmotion(value))return false;
+            if((isNpc && !receiving) || IsSwitching || value==RobotEmotion.Loading || !face.SetVisualEmotion(value))return false;
             CurrentEmotion=value;return true;
+        }
+        public bool ReceiveEmotion(RobotEmotionGameplay source){
+            if(!isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
+            var resonance=source.GetComponent<EmotionResonance>();
+            if(!resonance || Vector2.Distance(transform.position,source.transform.position)>resonance.radius)return false;
+            if(source.CurrentEmotion==RobotEmotion.Blank || source.CurrentEmotion==RobotEmotion.Loading)return false;
+            receiving=true;try{return TrySetEmotion(source.CurrentEmotion==RobotEmotion.StrongAnger?RobotEmotion.Anger:source.CurrentEmotion);}finally{receiving=false;}
         }
         void Update()
         {
@@ -142,7 +160,7 @@ namespace Emergence.Level01
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},hudFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=hudFontSize,alignment=TextAnchor.MiddleCenter};
-            if(!IsSwitching){GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+"  ·  长按 "+switchKey+" 切换",style);return;}
+            if(!IsSwitching){var resonance=GetComponent<EmotionResonance>();var transfer=GetComponent<EmotionTransfer>();string suffix=resonance && resonance.Enhanced?"（增强）":"";string interaction=transfer?"  ·  "+transfer.interactKey+" 传递 / 怀念交互":"";GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+suffix+"  ·  长按 "+switchKey+" 切换"+interaction,style);return;}
             float x=Screen.width*.5f,y=Screen.height-chargeBottomOffset;
             GUI.Box(Offset(chargePanel,x,y),GUIContent.none);
             string name=EmotionName(TargetEmotion??CurrentEmotion);
@@ -151,7 +169,7 @@ namespace Emergence.Level01
             GUI.DrawTexture(new Rect(x+progressBar.x,y+progressBar.y,progressBar.width*Progress,progressBar.height),Texture2D.whiteTexture);GUI.color=old;
             GUI.Label(Offset(chargeHint,x,y),"蓄力满 "+HoldSeconds.ToString("0.##")+" 秒自动切换 · "+cancelSwitchKey+" 取消",style);
         }
-        public static string EmotionName(RobotEmotion value){switch(value){case RobotEmotion.Joy:return "开心";case RobotEmotion.Anger:return "愤怒";case RobotEmotion.Sadness:return "悲伤";case RobotEmotion.StrongAnger:return "加强愤怒";case RobotEmotion.Courage:return "勇气";default:return "空白";}}
+        public static string EmotionName(RobotEmotion value){switch(value){case RobotEmotion.Joy:return "开心";case RobotEmotion.Anger:return "愤怒";case RobotEmotion.Sadness:return "悲伤";case RobotEmotion.StrongAnger:return "加强愤怒";case RobotEmotion.Courage:return "勇气";case RobotEmotion.Guardian:return "守护";case RobotEmotion.Memory:return "怀念";case RobotEmotion.Loading:return "加载中";default:return "空白";}}
         void OnDestroy(){if(font)Destroy(font);}
     }
 }

@@ -12,6 +12,7 @@ namespace Emergence.Level01
         {
             motor.SetMoveInput(AxisFromKeys(Input.GetKey(leftKey), Input.GetKey(rightKey)));
             if (Input.GetKeyDown(jumpKey)) motor.RequestJump();
+            motor.SetJumpHeld(Input.GetKey(jumpKey));
         }
         void ClearInput() { if (motor) { motor.SetMoveInput(0); motor.CancelJumpRequest(); } }
         void OnDisable() { ClearInput(); }

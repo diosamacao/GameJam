@@ -17,6 +17,18 @@ MonoBehaviour:
   sadness: {fileID: 21300000, guid: dc1081221d9de9248b278b2f2ff2d442, type: 3}
   delight: {fileID: 21300000, guid: 82ccdc6d9bb082c46b5fb01470eee951, type: 3}
   blank: {fileID: 21300000, guid: 280939cfaf7eafa46a5096ea26dd4f42, type: 3}
+  strongAnger: {fileID: 0}
+  courage: {fileID: 21300000, guid: c43a27e43f7342c989bc1dc4c5eacc6e, type: 3}
+  neutral: {fileID: 21300000, guid: 7099c0e6f1d44621b90ff6c9e01536fe, type: 3}
+  loading: {fileID: 21300000, guid: f2d484c7abae4345888e61d6303e095c, type: 3}
+  guardian: {fileID: 21300000, guid: 4ec319ac76604ad69781236b57e0013b, type: 3}
+  memory: {fileID: 21300000, guid: dd17f1e9d00846fbb28042c9067eaf42, type: 3}
+  neutralScreen: {fileID: 21300000, guid: 78c600872b0d43e9ab1a010a3cb6303c, type: 3}
+  loadingScreen: {fileID: 21300000, guid: 1dc8d7198b4a40b9895796664db0837c, type: 3}
+  memoryScreen: {fileID: 21300000, guid: 871d2bb1d83645cbb0fdea637604d68e, type: 3}
+  guardianScreen: {fileID: 21300000, guid: d0fd747928084b628867a1df2d514fed, type: 3}
+  courageScreen: {fileID: 21300000, guid: 83df7151f2c4431f85d0f80adac11185, type: 3}
+  screenOffset: {x: 0, y: 0.3828125}
   frames:
   - body: {fileID: 21300000, guid: 1f02cbf9dd0263f4ab501151c5ae9efd, type: 3}
     neck: {x: 0, y: 1}

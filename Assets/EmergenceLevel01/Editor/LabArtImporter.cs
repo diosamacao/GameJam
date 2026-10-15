@@ -10,7 +10,7 @@ namespace Emergence.Level01.Editor
             var t = (TextureImporter)assetImporter;
             t.textureType = TextureImporterType.Sprite;
             t.spriteImportMode = SpriteImportMode.Single;
-            t.spritePixelsPerUnit = assetPath.Contains("/OriginalBody/head_") ? 128 : assetPath.Contains("/RobotModular/") ? 48 : (assetPath.Contains("/Tiles64/") ? 64 : 16);
+            t.spritePixelsPerUnit = (assetPath.Contains("/OriginalBody/head_") || assetPath.Contains("/OriginalBody/screen_")) ? 128 : assetPath.Contains("/RobotModular/") ? 48 : (assetPath.Contains("/Tiles64/") ? 64 : 16);
             t.filterMode = FilterMode.Point;
             t.textureCompression = TextureImporterCompression.Uncompressed;
             t.mipmapEnabled = false;
@@ -21,7 +21,7 @@ namespace Emergence.Level01.Editor
             t.ReadTextureSettings(settings);
             settings.spriteMeshType = SpriteMeshType.FullRect;
             settings.spriteAlignment = (int)SpriteAlignment.Custom;
-            settings.spritePivot = assetPath.Contains("/Characters/") ? new Vector2(.5f, 0) : new Vector2(.5f, .5f);
+            settings.spritePivot = assetPath.Contains("/Characters/") && !assetPath.Contains("/OriginalBody/screen_") ? new Vector2(.5f, 0) : new Vector2(.5f, .5f);
             t.SetTextureSettings(settings);
         }
     }

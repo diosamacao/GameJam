@@ -4382,6 +4382,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   targetDoor: {fileID: 0}
+  selectMouseButton: 0
+  cancelMouseButton: 1
+  cancelKey: 27
+  titleFontSize: 18
+  hintFontSize: 15
+  titleColor: {r: 0.82, g: 0.91, b: 1, a: 1}
+  hintColor: {r: 0.58, g: 0.7, b: 0.8, a: 1}
+  sideMargin: 10
+  titleTop: 18
+  titleHeight: 34
+  hintBottom: 42
+  hintHeight: 30
 --- !u!50 &6720409012442930709
 Rigidbody2D:
   serializedVersion: 4
@@ -6112,7 +6124,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -15579,14 +15591,14 @@ Tilemap:
   - m_RefCount: 172
     m_Data: {fileID: 11400000, guid: b63a441bca14c3d4c88f4e6452796563, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 5a6a4aaaa36b1bc4dbce72964abe28ea, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 532325937f8385c43ad10027efcb5fa7, type: 3}
   - m_RefCount: 76
     m_Data: {fileID: 21300000, guid: 01bf47a36d50a3d4baf208b7f0b92bb9, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 5a6a4aaaa36b1bc4dbce72964abe28ea, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: 635e7ebce487f284a9ffd66313cc0b0b, type: 3}
   - m_RefCount: 479

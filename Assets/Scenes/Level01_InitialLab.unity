@@ -1627,6 +1627,18 @@ MonoBehaviour:
   - {fileID: 1348564474}
   - {fileID: 723446656}
   targetDoor: {fileID: 9070345702295023937}
+  selectMouseButton: 0
+  cancelMouseButton: 1
+  cancelKey: 27
+  titleFontSize: 18
+  hintFontSize: 15
+  titleColor: {r: 0.82, g: 0.91, b: 1, a: 1}
+  hintColor: {r: 0.58, g: 0.7, b: 0.8, a: 1}
+  sideMargin: 10
+  titleTop: 18
+  titleHeight: 34
+  hintBottom: 42
+  hintHeight: 30
 --- !u!1001 &6683522391862212179
 PrefabInstance:
   m_ObjectHideFlags: 0

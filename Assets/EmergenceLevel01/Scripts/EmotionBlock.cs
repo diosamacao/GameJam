@@ -12,7 +12,7 @@ namespace Emergence.Level01
         {
             if(Removed || vanishing || !isActiveAndEnabled || !player || !player.CanUseEmotionAbilities)return false;
             if(kind==EmotionBlockKind.Electric)return player.HandleElectricContact();
-            if(!EmotionBlockRules.CanRemove(kind,player.CurrentEmotion))return false;
+            if(!EmotionBlockRules.CanRemove(kind,player.EffectiveEmotion))return false;
             if(kind==EmotionBlockKind.Vanishing){StartCoroutine(Vanish());return true;}
             foreach(var sr in GetComponentsInChildren<SpriteRenderer>())BlockShatterEffect.Spawn(sr.sprite,sr.transform.localToWorldMatrix,sr.sharedMaterial,sr.sortingLayerID,sr.sortingOrder,sr.color,shatter);
             Removed=true;onRemoved.Invoke();gameObject.SetActive(false);return true;

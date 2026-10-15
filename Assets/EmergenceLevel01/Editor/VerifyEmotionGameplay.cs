@@ -39,7 +39,7 @@ namespace Emergence.Level01.Editor
             if(phase==1){if(Time.time-started<.4f)return;
                 Check(motor.IsGrounded,"Grounded fixture");game.TrySetEmotion(RobotEmotion.Blank);
                 baseHeight=motor.EffectiveJumpHeight;Check(baseHeight>0,"Configured base jump is positive");
-                Check(game.BeginSwitch() && face.CurrentEmotion==RobotEmotion.Blank && motor.ControlsLocked,"Q begin blanks head and locks controls");
+                Check(game.BeginSwitch() && face.CurrentEmotion==RobotEmotion.Loading && motor.ControlsLocked,"Q begin shows loading head and locks controls");
                 motor.SetMoveInput(1);Check(!motor.RequestJump(),"Charge rejects jump");
                 Check(!game.ReleaseSwitch() && game.CurrentEmotion==RobotEmotion.Blank && !motor.ControlsLocked,"Early release cancels");
                 game.BeginSwitch();Check(!face.SetEmotion(RobotEmotion.Anger),"External switch blocked during charge");Next();return;
@@ -70,14 +70,14 @@ namespace Emergence.Level01.Editor
                 game.BeginSwitch();Check(!game.CanBreak && !ability.TryBreakCell(Vector3Int.right,game),"Charging suspends anger ability");game.CancelSwitch();
                 game.TrySetEmotion(RobotEmotion.Joy);game.BeginSwitch();Next();return;
             }
-            if(phase>=7 && phase<=11){
+            if(phase>=7 && phase<=12){
                 if(Time.time-started<2.2f)return;
-                var cycle=new[]{RobotEmotion.Anger,RobotEmotion.Sadness,RobotEmotion.StrongAnger,RobotEmotion.Courage,RobotEmotion.Joy};var expected=cycle[phase-7];
+                var cycle=new[]{RobotEmotion.Anger,RobotEmotion.Sadness,RobotEmotion.Courage,RobotEmotion.Guardian,RobotEmotion.Memory,RobotEmotion.Joy};var expected=cycle[phase-7];
                 Check(!game.IsSwitching && !motor.ControlsLocked && game.CurrentEmotion==expected,"Automatic cycle advances once and stays unchanged after two seconds: "+expected);
                 Check(!game.ReleaseSwitch(),"Repeated release cannot advance cycle phase "+phase);
-                game.BeginSwitch();if(phase==11)UnityEngine.Object.Destroy(floor);Next();return;
+                game.BeginSwitch();if(phase==12)UnityEngine.Object.Destroy(floor);Next();return;
             }
-            if(phase==12){if(Time.time-started<.2f)return;Check(!game.IsSwitching && !motor.ControlsLocked && body.velocity.y<0,"Lost ground cancels switch and continues falling");Finish(null);}
+            if(phase==13){if(Time.time-started<.2f)return;Check(!game.IsSwitching && !motor.ControlsLocked && body.velocity.y<0,"Lost ground cancels switch and continues falling");Finish(null);}
         }catch(Exception e){Finish("FAIL: "+e.Message);}}
         static void CheckOnce(bool ok,string text){if(!results.Contains("PASS: "+text))Check(ok,text);}
         static void Finish(string failure){if(failure!=null)results.Add(failure);Directory.CreateDirectory("Logs/EmotionGameplay");File.WriteAllLines("Logs/EmotionGameplay/verification.txt",results);EditorApplication.update-=Tick;EditorApplication.isPlaying=false;Debug.Log(string.Join("\n",results));}

@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 7256631849693935819}
   - component: {fileID: 8067554408707097230}
   - component: {fileID: 2769377242966152987}
+  - component: {fileID: 3268231440997505186}
+  - component: {fileID: 7279245944140856413}
   m_Layer: 0
   m_Name: PlayerRobot
   m_TagString: Player
@@ -125,6 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 8
   jumpHeight: 2.4
+  minimumJumpHeight: 1
+  variableJump: 1
+  externallyDriven: 0
   visual: {fileID: 7344507955489075811}
   idle: {fileID: 21300000, guid: acb264810825dee4f86628b2285e810d, type: 3}
   walk:
@@ -137,6 +142,10 @@ MonoBehaviour:
   land: {fileID: 21300000, guid: 69a9d81ada41526449986c3742292d6a, type: 3}
   walkFps: 8
   landingDuration: 0.1
+  groundNormalThreshold: 0.65
+  groundedVelocityTolerance: 0.1
+  risingAnimationThreshold: 0.1
+  walkInputThreshold: 0.01
 --- !u!114 &4853005638692219486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7b0ef359579f0498fb2bde6bb3ed2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftKey: 97
+  rightKey: 100
+  jumpKey: 32
 --- !u!114 &7256631849693935819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: b2a8b4b05e92a2f4496b986f5eeb0ac5, type: 2}
+  headSortingOffset: 1
   bodyRenderer: {fileID: 7344507955489075811}
   headRenderer: {fileID: 6275193560300950589}
   currentEmotion: 4
@@ -178,6 +191,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableKeyboardTest: 0
+  joyKey: 121
+  angerKey: 117
+  sadnessKey: 105
+  delightKey: 111
+  blankKey: 112
 --- !u!114 &2769377242966152987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,8 +210,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities: {fileID: 11400000, guid: b49c265a7e8276243ab9f5c3ee33f570, type: 2}
   levelGrid: {fileID: 0}
+  fallbackHoldSeconds: 1
+  fallbackBaseJumpCells: 2
+  fallbackHappyJumpCells: 3
+  fallbackMinimumJumpCells: 1
+  fallbackHappyMinimumJumpCells: 1.5
+  fallbackCellHeight: 1
+  fallbackJumpMultiplier: 1.2
+  switchKey: 113
+  cancelSwitchKey: 27
   keyboardInput: 1
+  isNpc: 0
   showSwitchProgress: 1
+  respawnPoint: {fileID: 0}
+  electricGraceSeconds: 1
+  onElectrocuted:
+    m_PersistentCalls:
+      m_Calls: []
+  onDied:
+    m_PersistentCalls:
+      m_Calls: []
+  hudFontSize: 18
+  hudSideMargin: 10
+  statusBottomOffset: 82
+  statusHeight: 30
+  chargeBottomOffset: 150
+  chargePanel:
+    serializedVersion: 2
+    x: -180
+    y: -12
+    width: 360
+    height: 78
+  chargeLabel:
+    serializedVersion: 2
+    x: -175
+    y: -8
+    width: 350
+    height: 32
+  progressBar:
+    serializedVersion: 2
+    x: -160
+    y: 26
+    width: 320
+    height: 6
+  chargeHint:
+    serializedVersion: 2
+    x: -175
+    y: 34
+    width: 350
+    height: 30
+  progressColor: {r: 0.3, g: 0.85, b: 1, a: 1}
+--- !u!114 &3268231440997505186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993940386601983178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7cdb3a56e0a4e11bd7b7ef4a53892dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 5
+  joyColor: {r: 1, g: 0.85, b: 0.15, a: 1}
+  angerColor: {r: 1, g: 0.2, b: 0.15, a: 1}
+  sadnessColor: {r: 0.15, g: 0.6, b: 1, a: 1}
+  courageColor: {r: 1, g: 0.5, b: 0.08, a: 1}
+  guardianColor: {r: 0.2, g: 1, b: 0.65, a: 1}
+  memoryColor: {r: 0.75, g: 0.4, b: 1, a: 1}
+  auraRadius: 1.1
+  auraWidth: 0.045
+  pulseSpeed: 3
+  pulseAmount: 0.15
+  visualCenter: {x: 0, y: 0.8}
+  secondJumpMinimumCells: 1
+  secondJumpMaximumCells: 2
+  shieldDistance: 2
+  frontShieldSize: {x: 0.15, y: 2}
+  fullShieldRadius: 1.3
+  shieldLineWidth: 0.06
+  circleSegments: 48
+  effectSortingOrder: 35
+--- !u!114 &7279245944140856413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993940386601983178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb5761634cbc452ebc42ff1230a8db62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactKey: 101
+  automaticTransfer: 0
 --- !u!1 &8073755569527328643
 GameObject:
   m_ObjectHideFlags: 0

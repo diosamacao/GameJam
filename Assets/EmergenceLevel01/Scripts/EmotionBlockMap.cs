@@ -17,7 +17,7 @@ namespace Emergence.Level01
             var tile=map.GetTile(cell) as EmotionBlockTile;if(!tile)return false;
             if(hidden.ContainsKey(cell))return false;
             if(tile.kind==EmotionBlockKind.Electric){respawned=player.HandleElectricContact();return respawned;}
-            if(!EmotionBlockRules.CanRemove(tile.kind,player.CurrentEmotion))return false;
+            if(!EmotionBlockRules.CanRemove(tile.kind,player.EffectiveEmotion))return false;
             if(tile.kind==EmotionBlockKind.Vanishing){StartCoroutine(Vanish(cell,tile));return true;}
             var renderer=GetComponent<TilemapRenderer>();
             if(renderer)BlockShatterEffect.Spawn(tile.sprite,map.transform.localToWorldMatrix*Matrix4x4.Translate(map.CellToLocalInterpolated((Vector3)cell+map.tileAnchor))*map.GetTransformMatrix(cell),renderer.sharedMaterial,renderer.sortingLayerID,renderer.sortingOrder,map.GetColor(cell)*map.color,shatter);

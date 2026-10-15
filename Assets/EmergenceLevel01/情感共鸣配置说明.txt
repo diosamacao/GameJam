@@ -1,0 +1,64 @@
+情感共鸣与NPC配置
+
+操作
+A/D移动，空格跳跃：短按较低，持续按住到顶点跳得最高，中途松开得到中间高度。
+长按Q完成情感切换：开心→愤怒→悲伤→勇气→守护→怀念→开心。
+无情感为两只普通眼睛；Q蓄力期间显示加载省略号；怀念为思考表情。
+按E向共鸣范围内最近的NPC传递当前情感。怀念状态下附近存在可交互物品时优先与物品交互。
+E与自动传递开关在玩家的EmotionTransfer中配置；NPC不能自行用Q切换，也不能向其他NPC传递。
+
+跳跃高度
+Generated/EmotionAbilities.asset：Base Jump Cells / Happy Jump Cells是长按最大格数；Minimum Jump Cells / Happy Minimum Jump Cells是短按最小格数。
+以上一段跳格数仍乘Jump Height Multiplier（默认1.2）和Grid格高，保留原跳跃手感。
+RobotMotor2D的Variable Jump关闭后恢复固定最大跳高；未挂情感组件时使用其Jump Height和Minimum Jump Height。
+增强开心增加一次空中跳跃；在EmotionResonance中配置Second Jump Minimum Cells / Maximum Cells，默认1/2格。这一跳不乘旧1.2倍率，保证长按最高2格。落地后重置次数，不能三连跳。
+
+NPC
+拖入Prefabs/EmotionExpansion/EmotionNPC.prefab。
+EmotionNpc的Destination指定目标Transform；没有指定时使用Destination Position世界坐标。每个NPC实例独立配置速度、到达误差与碰撞层。
+勾Activate On Start可开局移动；也可由剧情或交互UnityEvent调用Activate()、MoveTo(Transform)、StopMoving()，到达时触发On Arrived。
+此版本沿直线路径移动并在实体障碍前停止，没有自动寻路或绕障。配置目标时应保证路径可达。
+NPC使用与玩家相同的情感、破坏、护盾和共鸣机制；初始无情感，只有玩家传递能改变其情感。
+
+共鸣
+玩家与NPC同情感且处于玩家Radius范围内时，双方自动增强；默认半径5世界单位。离开范围、改变情感或Q蓄力会取消共鸣。
+EmotionResonance配置各情感颜色、光环半径/线宽/脉动速度、守护距离/护盾尺寸。
+NPC自身增强后的停时、怀念作用范围使用其自己的Radius，默认同样为5。
+多个共鸣来源同时覆盖物品时，只要还有有效来源，效果就会保持。
+旧StrongAnger枚举保留兼容历史数据；正常循环不再单独选择，加强愤怒由共鸣产生。
+
+情感效果
+开心：保持原跳高加成；增强后获得二段跳。
+愤怒：碰触破坏普通红块；增强后也能破坏坚硬方块。
+悲伤：碰触蓝块后0.5秒渐隐至0.3，随后关闭碰撞3秒，参数仍可配置；增强后暂停范围内标记为LocalTimeTarget的目标。
+勇气：继续免疫原带电方块；增强后可以进入DangerZone。激光仍然致命，需要守护护盾阻挡。
+守护：身前默认2世界单位生成直立护盾；增强时改为全身圆形护盾。两种护盾均可挡激光，尺寸可配置；护盾不阻碍玩家/NPC行走，不自动免疫DangerZone。
+怀念：E改变MemoryInteractable物品状态；增强后控制范围内指定Grid/Tilemap出现或消失。
+
+移动平台与停时
+拖入Prefabs/EmotionExpansion/MovingPlatform.prefab；LocalMovingPlatform的Travel是相对起点偏移，Speed是速度，Ping Pong控制往返。
+平台已挂LocalTimeTarget，进入增强悲伤范围自动停止；范围移走后从原位置继续，不重置路线。
+其他自制移动对象也可挂LocalTimeTarget，把需要暂停的脚本放到Pause Behaviours、动画放到Animators、刚体放到Target Body。
+只暂停指定目标，不使用Time.timeScale，不暂停玩家或整局游戏。
+若自制脚本用Time.time计算绝对位置，恢复时可能跳到新的时间位置；应改为暂停时不累计的本地计时方式。自带平台不受此问题影响。
+
+危险区域
+拖入Prefabs/EmotionExpansion/DangerZone.prefab，调整BoxCollider2D的触发区大小。
+默认只有增强勇气安全；其余情感接触后沿用现有死亡重生与保护时间。取消Enhanced Courage Is Safe后该区域对任何情感都致命。
+
+怀念物品与Grid
+MemoryObject.prefab自带前后两种颜色状态；MemoryInteractable可替换State Off Visual / State On Visual，配置交互半径、是否来回切换、On Remembered / On Forgotten事件。
+可把On Remembered绑定NPC的Activate，实现回忆后NPC出发。
+MemoryGridController.prefab的Target指定要控制的Grid或Tilemap对象；控制器必须放在目标层级之外。
+Visible In Range未勾选：增强怀念范围内隐藏；勾选：范围内出现。离开范围恢复目标开局的显隐状态。
+以Target的Transform位置判断是否在范围内。建议每个可变区域独立放在小Grid下，不要把整个关卡根Grid设为目标。
+
+素材
+原显示器外壳继续使用OriginalBody/head_blank；五种新screen_*贴图只覆盖屏幕内部，统一128 PPU与中心锚点。
+RobotEmotions.asset的Screen Offset控制屏幕层位置，默认已经对齐。
+Generated目录的配置已接入玩家；新增预制体位于Prefabs/EmotionExpansion。
+
+验证与维护
+Tools > Emergence > Setup Emotion Expansion：添加缺失组件、连接头像、创建缺失预制体，保留已经存在的新增预制体配置。
+Tools > Emergence > Verify Emotion Expansion：请先保存场景；运行自动验证后恢复先前场景。
+验证报告Logs/EmotionExpansion/verification.txt，实际头像渲染Logs/EmotionExpansion/heads-preview.png。

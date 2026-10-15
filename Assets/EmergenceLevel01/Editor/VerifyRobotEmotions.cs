@@ -40,7 +40,7 @@ namespace Emergence.Level01.Editor
                     int events=0;controller.EmotionChanged+=e=>events++;
                     for(int i=0;i<5;i++) {
                         RobotEmotion emotion;Check(RobotEmotionKeyboardTest.TryMapKey(keys[i],out emotion) && (int)emotion==i,"Key "+keys[i]+" maps to "+(RobotEmotion)i);
-                        Check(controller.SetEmotion(emotion) && controller.headRenderer.sprite==controller.config.GetHead(emotion),"API displays "+emotion);
+                        Check(controller.SetEmotion(emotion) && controller.headRenderer.sprite==(controller.config.GetScreen(emotion)?controller.config.blank:controller.config.GetHead(emotion)),"API displays "+emotion);
                     }
                     Check(events==5,"Change events fire once per transition");controller.SetEmotion(RobotEmotion.Blank);
                     Check(events==5 && !controller.SetEmotion((RobotEmotion)99) && controller.CurrentEmotion==RobotEmotion.Blank,"Repeated or invalid emotion preserves state");

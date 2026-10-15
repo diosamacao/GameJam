@@ -8,6 +8,9 @@ namespace Emergence.Level01
         [Min(.1f)] public float holdSeconds=1;
         [Min(0)] public float baseJumpCells=2;
         [Min(0)] public float happyJumpCells=3;
+        [Header("短按跳跃最低格数（最终倍率同样生效）")]
+        [Min(0)] public float minimumJumpCells=1;
+        [Min(0)] public float happyMinimumJumpCells=1.5f;
         [Min(.01f)] public float fallbackCellHeight=1;
     }
 }

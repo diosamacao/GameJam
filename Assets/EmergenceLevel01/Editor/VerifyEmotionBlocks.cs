@@ -59,7 +59,7 @@ namespace Emergence.Level01.Editor
             }
             if(phase==4){if(Time.time-started<.4f)return;Check(body.position.x<1001,"Physical electric contact is safe with courage");player.TrySetEmotion(RobotEmotion.Anger);motor.SetMoveInput(0);Next();return;}
             if(phase==5){if(Time.time-started<.2f)return;Check(body.position.x>1004,"Leaving courage while touching electric block triggers respawn");player.TrySetEmotion(RobotEmotion.Joy);Check(player.BeginSwitch() && !player.CanUseEmotionAbilities,"Charge suspends new block abilities");Next();return;}
-            if(phase>=6 && phase<=10){if(Time.time-started<1.2f)return;var cycle=new[]{RobotEmotion.Anger,RobotEmotion.Sadness,RobotEmotion.StrongAnger,RobotEmotion.Courage,RobotEmotion.Joy};Check(!player.IsSwitching && player.CurrentEmotion==cycle[phase-6],"Automatic Q cycle reaches "+cycle[phase-6]);if(phase==10){Finish(null);return;}Check(player.BeginSwitch(),"Next grounded charge starts");Next();}
+            if(phase>=6 && phase<=11){if(Time.time-started<1.2f)return;var cycle=new[]{RobotEmotion.Anger,RobotEmotion.Sadness,RobotEmotion.Courage,RobotEmotion.Guardian,RobotEmotion.Memory,RobotEmotion.Joy};Check(!player.IsSwitching && player.CurrentEmotion==cycle[phase-6],"Automatic Q cycle reaches "+cycle[phase-6]);if(phase==11){Finish(null);return;}Check(player.BeginSwitch(),"Next grounded charge starts");Next();}
         }catch(Exception e){Finish("FAIL: "+e.Message);}}
         static void Finish(string failure){if(failure!=null)results.Add(failure);Directory.CreateDirectory("Logs/EmotionBlocks");File.WriteAllLines("Logs/EmotionBlocks/verification.txt",results);EditorApplication.update-=Tick;EditorApplication.isPlaying=false;Debug.Log(string.Join("\n",results));}
     }
