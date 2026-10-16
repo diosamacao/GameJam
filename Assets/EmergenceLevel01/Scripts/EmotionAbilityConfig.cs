@@ -5,7 +5,7 @@ namespace Emergence.Level01
     public sealed class EmotionAbilityConfig : ScriptableObject
     {
         [Tooltip("跳跃高度最终倍率，默认保留现有1.2倍。")][Min(0)] public float jumpHeightMultiplier=1.2f;
-        [Min(.1f)] public float holdSeconds=1;
+        [Min(.1f)] public float holdSeconds=.5f;
         [Min(0)] public float baseJumpCells=2;
         [Min(0)] public float happyJumpCells=3;
         [Header("短按跳跃最低格数（最终倍率同样生效）")]

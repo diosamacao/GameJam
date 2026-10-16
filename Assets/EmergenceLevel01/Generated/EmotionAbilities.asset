@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc8073177f27a8449fe8705a0c52367, type: 3}
   m_Name: EmotionAbilities
   m_EditorClassIdentifier: 
-  holdSeconds: 1
+  holdSeconds: 0.5
   baseJumpCells: 2
   happyJumpCells: 3
   fallbackCellHeight: 1

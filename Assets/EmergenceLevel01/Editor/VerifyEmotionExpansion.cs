@@ -44,7 +44,7 @@ namespace Emergence.Level01.Editor
             }finally{if(rt)UnityEngine.Object.DestroyImmediate(rt);if(sheet)UnityEngine.Object.DestroyImmediate(sheet);EditorSceneManager.ClosePreviewScene(scene);}
         }
         static void Next(){phase++;start=Time.time;}
-        static void Emotion(RobotEmotion emotion){player.TrySetEmotion(emotion);npc.ReceiveEmotion(player);resonance.RefreshState();npcResonance.RefreshState();}
+        static void Emotion(RobotEmotion emotion){player.TrySetEmotion(emotion);var previous=npc.transform.position;npc.transform.position=player.transform.position+Vector3.right*1.5f;npc.ReceiveEmotion(player);npc.transform.position=previous;resonance.RefreshState();npcResonance.RefreshState();}
         static void Tick(){try{
             if(Time.time-start>15)throw new Exception("Timeout phase "+phase);
             if(phase==0){

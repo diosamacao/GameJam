@@ -2,10 +2,12 @@
 
 操作
 A/D移动，空格跳跃：短按较低，持续按住到顶点跳得最高，中途松开得到中间高度。
-长按Q完成情感切换：开心→愤怒→悲伤→勇气→守护→怀念→开心。
-无情感为两只普通眼睛；Q蓄力期间显示加载省略号；怀念为思考表情。
-按E向共鸣范围内最近的NPC传递当前情感。怀念状态下附近存在可交互物品时优先与物品交互。
-E与自动传递开关在玩家的EmotionTransfer中配置；NPC不能自行用Q切换，也不能向其他NPC传递。
+按数字1/2/3/4/5/6选择开心/愤怒/悲伤/勇气/守护/怀念。按一下后自动进行0.5秒切换，不必持续按住；期间禁止移动，Esc取消。
+RobotEmotionGameplay可分别改六个按键；Generated/EmotionAbilities.asset的Hold Seconds控制切换时间。
+无情感为两只普通眼睛；切换期间显示加载省略号；怀念为思考表情。
+靠近NPC到2世界单位内，按住E满0.5秒传递。松手、离开范围、切换情绪或进入剧情会取消，需要重新按住。每次按住只完成一次。
+交互优先级：接触的传送门 > 怀念物品 > NPC传递。
+EmotionTransfer配置Interact Key、Transfer Radius、Hold Seconds与进度框；NPC不能自行切换，也不能向其他NPC传递。
 
 跳跃高度
 Generated/EmotionAbilities.asset：Base Jump Cells / Happy Jump Cells是长按最大格数；Minimum Jump Cells / Happy Minimum Jump Cells是短按最小格数。
@@ -21,11 +23,12 @@ EmotionNpc的Destination指定目标Transform；没有指定时使用Destination
 NPC使用与玩家相同的情感、破坏、护盾和共鸣机制；初始无情感，只有玩家传递能改变其情感。
 
 共鸣
-玩家与NPC同情感且处于玩家Radius范围内时，双方自动增强；默认半径5世界单位。离开范围、改变情感或Q蓄力会取消共鸣。
+玩家与NPC同情感且处于玩家Radius范围内时，双方自动增强；默认半径5世界单位。离开范围、改变情感或正在切换会取消共鸣。
 EmotionResonance配置各情感颜色、光环半径/线宽/脉动速度、守护距离/护盾尺寸。
 NPC自身增强后的停时、怀念作用范围使用其自己的Radius，默认同样为5。
+增强悲伤、怀念的光环以角色Transform为圆心，半径严格使用Radius，不脉动、不受角色缩放影响；实际停时和怀念判定共用此半径。其余情感仍使用Aura Radius和脉动设置。
 多个共鸣来源同时覆盖物品时，只要还有有效来源，效果就会保持。
-旧StrongAnger枚举保留兼容历史数据；正常循环不再单独选择，加强愤怒由共鸣产生。
+旧StrongAnger枚举保留兼容历史数据；数字键不再单独选择，加强愤怒由共鸣产生。
 
 情感效果
 开心：保持原跳高加成；增强后获得二段跳。
@@ -37,6 +40,10 @@ NPC自身增强后的停时、怀念作用范围使用其自己的Radius，默�
 
 移动平台与停时
 拖入Prefabs/EmotionExpansion/MovingPlatform.prefab；LocalMovingPlatform的Travel是相对起点偏移，Speed是速度，Ping Pong控制往返。
+Endpoint Wait Seconds默认1秒，端点等待也受停时影响。One Way默认打开，可从下方跳上，Surface Arc配置有效站立面角度。
+SinglePlatformSwitch.prefab：配好的单次平台与地面开关，每次新踩下切换目标，走到目标后停住，踩住不连触发；途中重新踩下会反向。
+ContinuousPlatformSwitch.prefab：踩住期间往返，松开后立即结束等待并返回原点停下。
+展开组合预制体，把PressureSwitch摆在地面，MovingPlatform摆在起点；平台Travel配置终点偏移，Speed配置速度，Activation配置模式。开关Platforms可绑定多个平台，Allow NPC决定NPC能否踩，Feet Tolerance配置脚部判定容差。多个持续开关中任意一个踩住都有效。
 平台已挂LocalTimeTarget，进入增强悲伤范围自动停止；范围移走后从原位置继续，不重置路线。
 其他自制移动对象也可挂LocalTimeTarget，把需要暂停的脚本放到Pause Behaviours、动画放到Animators、刚体放到Target Body。
 只暂停指定目标，不使用Time.timeScale，不暂停玩家或整局游戏。
@@ -62,3 +69,8 @@ Generated目录的配置已接入玩家；新增预制体位于Prefabs/EmotionEx
 Tools > Emergence > Setup Emotion Expansion：添加缺失组件、连接头像、创建缺失预制体，保留已经存在的新增预制体配置。
 Tools > Emergence > Verify Emotion Expansion：请先保存场景；运行自动验证后恢复先前场景。
 验证报告Logs/EmotionExpansion/verification.txt，实际头像渲染Logs/EmotionExpansion/heads-preview.png。
+
+传送门
+拖入Prefabs/EmotionExpansion/InteractionPortal.prefab。把Destination拖入目标空物体；未指定时使用Destination Position世界坐标。
+玩家必须接触触发区，按交互键E才传送，单纯走入不会传送。Collider尺寸可调，Clear Velocity控制是否清速度，Cooldown Seconds控制连续传送冷却，On Teleported可接剧情事件。
+Setup Interaction Upgrade菜单只创建缺失的组合与传送门预制体，并为旧MovingPlatform补齐单向碰撞；现有场景需自行摆放新增机关。

@@ -47,11 +47,17 @@ namespace Emergence.Level01
             var go=new GameObject(name);go.transform.SetParent(parent,false);var line=go.AddComponent<LineRenderer>();line.useWorldSpace=false;line.sortingOrder=effectSortingOrder;
             var face=GetComponent<RobotEmotionController>();if(face && face.bodyRenderer){line.sharedMaterial=face.bodyRenderer.sharedMaterial;line.sortingLayerID=face.bodyRenderer.sortingLayerID;}return line;
         }
-        void Circle(LineRenderer line,float radius,float width,Color color){line.loop=true;line.positionCount=Mathf.Clamp(circleSegments,12,128);line.startWidth=line.endWidth=width;line.startColor=line.endColor=color;for(int i=0;i<line.positionCount;i++){float a=i*Mathf.PI*2/line.positionCount;line.SetPosition(i,new Vector3(Mathf.Cos(a),Mathf.Sin(a))*radius);}}
+        void Circle(LineRenderer line,float radius,float width,Color color){line.loop=true;line.positionCount=Mathf.Clamp(circleSegments,12,128);line.startWidth=line.endWidth=width;line.startColor=line.endColor=color;for(int i=0;i<line.positionCount;i++){float a=i*Mathf.PI*2/line.positionCount;line.SetPosition(i,(line.useWorldSpace?transform.position:Vector3.zero)+new Vector3(Mathf.Cos(a),Mathf.Sin(a))*radius);}}
         void DrawEffects(){
             if(!aura){aura=NewLine("EmotionAura",transform);halo=NewLine("EmotionHalo",transform);}
             aura.enabled=halo.enabled=Enhanced;aura.transform.localPosition=halo.transform.localPosition=visualCenter;
-            if(Enhanced){var color=EmotionColor;float pulse=1+Mathf.Sin(Time.time*pulseSpeed)*pulseAmount;Circle(aura,auraRadius*pulse,auraWidth,color);color.a*=.2f;Circle(halo,auraRadius*pulse,auraWidth*4,color);}
+            if(Enhanced){
+                bool rangeEffect=Emotion==RobotEmotion.Sadness || Emotion==RobotEmotion.Memory;
+                aura.useWorldSpace=halo.useWorldSpace=rangeEffect;
+                var color=EmotionColor;
+                float size=rangeEffect?radius:auraRadius*(1+Mathf.Sin(Time.time*pulseSpeed)*pulseAmount);
+                Circle(aura,size,auraWidth,color);color.a*=.2f;Circle(halo,size,auraWidth*4,color);
+            }
             bool protecting=Actor.CanUseEmotionAbilities && Emotion==RobotEmotion.Guardian;
             if(!protecting){if(shield)shield.SetActive(false);return;}
             if(!shield){shield=new GameObject("EmotionShield",typeof(EmotionShield));shield.transform.SetParent(transform,false);front=shield.AddComponent<BoxCollider2D>();bubble=shield.AddComponent<CircleCollider2D>();front.isTrigger=bubble.isTrigger=true;shieldLine=NewLine("ShieldVisual",shield.transform);}

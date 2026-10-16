@@ -51,9 +51,16 @@ namespace Emergence.Level01
             bool wasGrounded = IsGrounded;
             IsGrounded = false;
             int count = body.GetContacts(contacts);
-            if (body.velocity.y <= groundedVelocityTolerance)
-                for (int i = 0; i < count; i++)
-                    if (contacts[i].normal.y > groundNormalThreshold) { IsGrounded = true; break; }
+            Vector2 supportVelocity=Vector2.zero;
+            for(int i=0;i<count;i++){
+                if(contacts[i].normal.y<=groundNormalThreshold)continue;
+                var other=contacts[i].collider;
+                if(other && other.attachedRigidbody==body)other=contacts[i].otherCollider;
+                var platform=other?other.GetComponentInParent<LocalMovingPlatform>():null;
+                Vector2 velocity=platform && platform.isActiveAndEnabled?platform.MotionVelocity:Vector2.zero;
+                if(body.velocity.y>velocity.y+groundedVelocityTolerance)continue;
+                IsGrounded=true;supportVelocity=velocity;break;
+            }
             if (!wasGrounded && IsGrounded) landingUntil = Time.time + landingDuration;
             if(IsGrounded){jumpsUsed=0;jumpActive=false;}
             float vy = body.velocity.y;
@@ -76,7 +83,7 @@ namespace Emergence.Level01
                 float gravity=-Physics2D.gravity.y*body.gravityScale;
                 vy=Mathf.Min(vy,Mathf.Sqrt(2*Mathf.Max(0,gravity)*Mathf.Max(0,activeMinimum-(body.position.y-takeoffY))));jumpActive=false;
             }
-            body.velocity = new Vector2(InputBlocked ? 0 : input * moveSpeed, vy);
+            body.velocity = new Vector2((InputBlocked ? 0 : input * moveSpeed)+(IsGrounded?supportVelocity.x:0), vy);
         }
         void Update()
         {
