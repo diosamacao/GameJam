@@ -50,3 +50,8 @@ Level04_InitialLab → Level01_InitialLab（对应剧情）→ Level05_InitialLa
 Tools > Emergence > Setup Doctor And Level Flow：生成缺失配置/变体/出口并更新博士素材引用；已有路线和交互配置保留。
 Tools > Emergence > Preview Doctor Emotions：输出七种站姿预览至 Logs/DoctorFlow/doctor-idle-preview.png。
 预览从左到右：默认、开心、愤怒、悲伤、勇气、守护、怀念。
+
+换关黑幕
+LevelFlow.asset 的 Fade Out Seconds 控制画面变黑时长，Fade In Seconds 控制新场景黑幕消退时长，默认各0.35秒；Black Hold Seconds为新场景加载后的全黑停留，默认0.1秒。
+先完全遮黑才加载，加载期间保持全黑，到达后淡出。返回实验室的剧情在黑幕消退后播放；剧情结束再遮黑并加载下一关。
+使用真实时间，不受Time.timeScale影响。时长设为0可关闭对应渐变，但加载时仍会遮黑。

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 namespace Emergence.Level01
@@ -44,7 +45,7 @@ namespace Emergence.Level01
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetStatics(){Instance=null;}
         void OnEnable(){if(Instance && Instance!=this){Debug.LogWarning("Only one DialogueDirector should be active.",this);enabled=false;return;}Instance=this;}
-        void Start(){if(playOnStart && !LevelFlowController.SuppressSceneIntro)TryPlay(playOnStart);}
+        IEnumerator Start(){while(LevelFlowController.IsFading)yield return null;if(playOnStart && !LevelFlowController.SuppressSceneIntro)TryPlay(playOnStart);}
         public bool TryPlay(DialogueSequence sequence)
         {
             if(!isActiveAndEnabled || IsPlaying || !sequence || sequence.lines==null || sequence.lines.Length==0)return false;
