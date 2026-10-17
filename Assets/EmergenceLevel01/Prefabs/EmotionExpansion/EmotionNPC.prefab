@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8034913556619820822}
   - component: {fileID: 7170151950312864630}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7570138268076211641}
   - component: {fileID: 5112507836309863655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EmotionHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 5208093734199073400}
   - component: {fileID: 8218650656936472715}
   - component: {fileID: 1544606895816892230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EmotionNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,6 +383,8 @@ MonoBehaviour:
   fallbackHoldSeconds: 1
   fallbackBaseJumpCells: 2
   fallbackHappyJumpCells: 3
+  fallbackMinimumJumpCells: 1
+  fallbackHappyMinimumJumpCells: 1.5
   fallbackCellHeight: 1
   fallbackJumpMultiplier: 1.2
   switchKey: 113

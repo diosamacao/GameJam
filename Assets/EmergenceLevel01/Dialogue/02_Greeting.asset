@@ -27,7 +27,7 @@ MonoBehaviour:
     minimumDisplaySeconds: 0
     cue: doctor_face_player
   - speaker: "\u4F0A"
-    text: "\u4F0A\u2026\u2026<pause=1>\u8FD9\u662F\u6211\u7684\u4EE3\u53F7\u5417\uFF1F"
+    text: "\u4F0A\u2026\u2026<pause=0.5>\u8FD9\u662F\u6211\u7684\u4EE3\u53F7\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

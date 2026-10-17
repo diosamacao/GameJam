@@ -93,7 +93,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8562568526106959669}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -147,3 +147,18 @@ MonoBehaviour:
   onRemoved:
     m_PersistentCalls:
       m_Calls: []
+  fadeSeconds: 0.5
+  fadedAlpha: 0.3
+  restoreSeconds: 3
+  shatter:
+    columns: 4
+    rows: 4
+    lifetime: 0.55
+    horizontalSpeed: 1.5
+    verticalSpread: 1.3
+    upwardSpeed: 1.4
+    gravity: 7
+    rotationSpeed: 180
+    flashSeconds: 0.08
+    flashColor: {r: 1, g: 0.6, b: 0.5, a: 1}
+    sortingOffset: 1

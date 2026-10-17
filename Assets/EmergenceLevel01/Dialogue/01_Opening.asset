@@ -27,7 +27,7 @@ MonoBehaviour:
     minimumDisplaySeconds: 0
     cue: 
   - speaker: "\u535A\u58EB"
-    text: "\u53EA\u8981\u628A\u5B83\u642D\u8F7D\u5230\u673A\u68B0\u4E0A\uFF0C\u4ED6\u4EEC\u5C31\u80FD\u4EA7\u751F\u60C5\u611F\u4E86\u2026\u2026<pause=1>\u5427\uFF1F"
+    text: "\u53EA\u8981\u628A\u5B83\u642D\u8F7D\u5230\u673A\u68B0\u4E0A\uFF0C\u4ED6\u4EEC\u5C31\u80FD\u4EA7\u751F\u60C5\u611F\u4E86\u2026\u2026<pause=0.5>\u5427\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

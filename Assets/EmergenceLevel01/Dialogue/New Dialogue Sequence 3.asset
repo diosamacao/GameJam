@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
+  m_Name: New Dialogue Sequence 3
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 0
+  typewriter: 1
+  charactersPerSecond: 20
+  lines:
+  - speaker: "\u4F11\u6BD4"
+    text: "\u7231\uFF0C\u662F\u9634\u6C89\u6C89\u7684\u96E8\u5929"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F11\u6BD4"
+    text: "\u4F60\u5728\u8DEF\u8FB9\u8D70\u7740\uFF0C\u6CA1\u6709\u6491\u4F1E\u3002\r\n"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: 
