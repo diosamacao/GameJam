@@ -1,0 +1,13 @@
+生成方式：内置 image_gen。六张图分别生成，之后分别进行了眼部和边缘修正。参考：Art/Characters/scientist_idle.png。
+首轮通用提示词：
+Create one production game sprite, using attached image as exact character/style reference. A single full-body side-view male scientist facing RIGHT, brown hair, light skin, long white lab coat, dark blue trousers, dark shoes. Minimal chunky pixel art matching the attached tiny original 2D platform game scientist; approximately 32x48 logical pixels, no smooth shading or antialiasing. Preserve character identity, same age, proportions, colors and simple coat. Emotion idle pose: [情绪姿态]. Single character only, transparent background, no text, no props, no ground shadow, no effects. Full body including feet visible, centered with modest transparent padding. Flat orthographic sprite, readable silhouette, emotion mainly in head and slight arm/body pose, NOT an action pose. This is the [name] idle sprite; no sprite sheet, no additional frames.
+各图情绪姿态：
+joy：开心：温和微笑，放松的站姿，一只手轻轻举起示意
+anger：愤怒：皱眉，嘴巴严肃，一只手握拳放在身旁
+sadness：悲伤：低头，肩膀下垂，双手自然低垂
+courage：勇气：抬头坚定目光，挺胸直立，一只手轻握拳在胸前
+guardian：守护：关切的神情，一只手伸出保护姿势但身体保持静止站立
+memory：怀念：思考的神情，一只手轻触下巴，头微微低下
+修正提示词：
+精确编辑第一张博士角色精灵，保持人物衣服、颜色、姿态、头发、身体比例和情绪不变。第二张是原版角色参考。修正两点：1. 移除所有眼镜和镜片，眼部统一成原版简单的黑色像素眼睛，眉毛/嘴巴继续表达第一张情绪；不要添加眼镜边框。2. 完全移除人物轮廓之外的所有蓝色柔光、辉光、阴影、灰色光晕和杂像素，人物内部每一个像素必须完全不透明，只有人物外部完全透明，边缘是硬边像素块，不使用任何半透明抗锯齿。输出唯一一个完整全身角色，可直接用于2D平台游戏的像素美术sprite，背景真实透明。不要文字，不要增加其他元素，不要改变姿势或重新设计角色。
+接入：PNG保留生成的原始透明度；游戏中以DoctorPixel材质去除低透明度柔光，并采样到16 PPU的像素栅格。可配置Alpha Cutoff与Pixels Per Unit。实际效果请看Logs/DoctorFlow/doctor-idle-preview.png。

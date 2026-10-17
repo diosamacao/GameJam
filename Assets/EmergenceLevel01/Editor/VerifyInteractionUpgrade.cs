@@ -33,7 +33,7 @@ namespace Emergence.Level01.Editor
         static IEnumerator Tests(){
             var floor=new GameObject("Floor",typeof(BoxCollider2D));floor.transform.position=new Vector3(1000,-.5f);floor.GetComponent<BoxCollider2D>().size=new Vector2(20,1);
             var player=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/EmergenceLevel01/Prefabs/Characters/PlayerRobot.prefab"),new Vector3(1000,0),Quaternion.identity).GetComponent<RobotEmotionGameplay>();
-            player.keyboardInput=false;player.GetComponent<RobotKeyboardInput>().enabled=false;
+            player.keyboardInput=false;player.requireEmotionUnlocks=false;player.GetComponent<RobotKeyboardInput>().enabled=false;
             var npc=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(SetupEmotionExpansion.Dir+"EmotionNPC.prefab"),new Vector3(1001.5f,0),Quaternion.identity).GetComponent<RobotEmotionGameplay>();
             var transfer=player.GetComponent<EmotionTransfer>();var aura=player.GetComponent<EmotionResonance>();var body=player.GetComponent<Rigidbody2D>();
             yield return Wait(.4f);

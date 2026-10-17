@@ -7,6 +7,7 @@ namespace Emergence.Level01.Editor
         void OnPreprocessTexture()
         {
             if (!assetPath.Contains("/EmergenceLevel01/Art/") || !assetPath.EndsWith(".png")) return;
+            if(assetPath.Contains("/DoctorEmotions/"))return; // Per-sprite alpha bounds determine scale and foot pivot in SetupDoctorAndLevelFlow.
             var t = (TextureImporter)assetImporter;
             t.textureType = TextureImporterType.Sprite;
             t.spriteImportMode = SpriteImportMode.Single;

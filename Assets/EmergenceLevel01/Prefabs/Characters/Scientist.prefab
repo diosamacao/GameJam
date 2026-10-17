@@ -101,7 +101,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -115,6 +115,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3242063792332742026}
+  - component: {fileID: 5657629521655872999}
+  - component: {fileID: 2567520164516780587}
   m_Layer: 0
   m_Name: Scientist
   m_TagString: Untagged
@@ -138,3 +140,52 @@ Transform:
   - {fileID: 4939384893432903477}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5657629521655872999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229829469553839711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eec990e9ba43d180cf87a2e2ca65cc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  interactionRadius: 2
+  interactionHint: "E \u4E0E\u535A\u58EB\u4EA4\u8C08"
+  showHint: 1
+  hintSize: {x: 220, y: 30}
+  hintBottomOffset: 120
+  dialogue: {fileID: 0}
+  unlockEmotion: 4
+  interactOnce: 0
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2567520164516780587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229829469553839711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73122d19c97b47a0a85c2f2be81a2e1f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  visual: {fileID: 6124753174261862477}
+  workAnimator: {fileID: 7906462860903916169}
+  neutral: {fileID: 21300000, guid: c788f5c2614bb3b4b9f277fb9766c466, type: 3}
+  joy: {fileID: 21300000, guid: 96edd9a3d27bd5448a4d0eab0e2827b4, type: 3}
+  anger: {fileID: 21300000, guid: f3fba9f3d4c60ac4d9e3167a08b611f2, type: 3}
+  sadness: {fileID: 21300000, guid: bbe71aacf2b173146a662b86c1d391ee, type: 3}
+  courage: {fileID: 21300000, guid: 2a13717227ca546419bb0e918c1c67cd, type: 3}
+  guardian: {fileID: 21300000, guid: 9440286117108a847bcba1763ef2498e, type: 3}
+  memory: {fileID: 21300000, guid: 7f1d3e3a93b709349abe468ee5a6ab61, type: 3}
+  emotion: 4
+  useEmotionIdle: 1
+  pixelMaterial: {fileID: 2100000, guid: dccec1fdd89747145ad8af7010023747, type: 2}
+  pixelsPerUnit: 16
+  alphaCutoff: 0.5

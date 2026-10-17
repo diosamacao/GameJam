@@ -50,7 +50,7 @@ namespace Emergence.Level01.Editor
             if(phase==0){
                 new GameObject("Camera",typeof(Camera)).transform.position=new Vector3(1000,2,-10);new GameObject("Light",typeof(Light));
                 var floor=new GameObject("Floor",typeof(BoxCollider2D));floor.transform.position=new Vector3(1000,-.5f);floor.GetComponent<BoxCollider2D>().size=new Vector2(30,1);
-                player=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/EmergenceLevel01/Prefabs/Characters/PlayerRobot.prefab"),new Vector3(1000,0),Quaternion.identity).GetComponent<RobotEmotionGameplay>();player.keyboardInput=false;player.GetComponent<RobotKeyboardInput>().enabled=false;motor=player.GetComponent<RobotMotor2D>();body=player.GetComponent<Rigidbody2D>();resonance=player.GetComponent<EmotionResonance>();
+                player=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/EmergenceLevel01/Prefabs/Characters/PlayerRobot.prefab"),new Vector3(1000,0),Quaternion.identity).GetComponent<RobotEmotionGameplay>();player.keyboardInput=false;player.requireEmotionUnlocks=false;player.GetComponent<RobotKeyboardInput>().enabled=false;motor=player.GetComponent<RobotMotor2D>();body=player.GetComponent<Rigidbody2D>();resonance=player.GetComponent<EmotionResonance>();
                 npc=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(SetupEmotionExpansion.Dir+"EmotionNPC.prefab"),new Vector3(1003,0),Quaternion.identity).GetComponent<RobotEmotionGameplay>();npcResonance=npc.GetComponent<EmotionResonance>();mover=npc.GetComponent<EmotionNpc>();Next();return;
             }
             if(phase==1){if(Time.time-start<.3f)return;

@@ -21,6 +21,10 @@ namespace Emergence.Level01
         public bool keyboardInput=true;
         [Tooltip("NPC不能自行切换情感，只能接受玩家传递。")]
         public bool isNpc;
+        [Tooltip("玩家只能切换已由博士解锁的情感。关闭仅用于关卡调试。")]
+        public bool requireEmotionUnlocks=true;
+        public bool IsEmotionUnlocked(RobotEmotion emotion)=>!requireEmotionUnlocks || EmotionProgress.IsUnlocked(emotion);
+        public void UnlockEmotion(RobotEmotion emotion){EmotionProgress.Unlock(emotion);}
         bool receiving;
         public RobotEmotion EffectiveEmotion {
             get {var resonance=GetComponent<EmotionResonance>();return CurrentEmotion==RobotEmotion.Anger && resonance && resonance.Enhanced?RobotEmotion.StrongAnger:CurrentEmotion;}
@@ -31,7 +35,7 @@ namespace Emergence.Level01
         public RobotEmotion CurrentEmotion {get;private set;}
         public RobotEmotion? TargetEmotion {get;private set;}
         public float Progress => IsSwitching ? Mathf.Clamp01((Time.time-started)/HoldSeconds) : 0;
-        public bool CanUseEmotionAbilities => !DialogueDirector.IsBlockingInput && isActiveAndEnabled && !IsSwitching;
+        public bool CanUseEmotionAbilities => !DialogueDirector.IsBlockingInput && !LevelFlowController.IsTransitioning && isActiveAndEnabled && !IsSwitching;
         public bool CanBreak => CanUseEmotionAbilities && (CurrentEmotion==RobotEmotion.Anger || CurrentEmotion==RobotEmotion.StrongAnger);
         [Tooltip("Optional checkpoint. If unset, respawn at the initial player position.")]
         public Transform respawnPoint;
@@ -78,12 +82,12 @@ namespace Emergence.Level01
         static Rect Offset(Rect rect,float x,float y){rect.position+=new Vector2(x,y);return rect;}
         Font font;
         readonly ContactPoint2D[] contacts=new ContactPoint2D[64];
-        void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=face.CurrentEmotion;initialPosition=transform.position;}
+        void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=!isNpc && requireEmotionUnlocks?EmotionProgress.Current:face.CurrentEmotion;if(!isNpc)face.SetVisualEmotion(CurrentEmotion);initialPosition=transform.position;}
         void Start(){if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
         public bool BeginSwitch()=>BeginSwitch(NextEmotion(CurrentEmotion));
         public bool BeginSwitch(RobotEmotion target)
         {
-            if(isNpc || DialogueDirector.IsBlockingInput || !isActiveAndEnabled || IsSwitching || !motor.IsGrounded)return false;
+            if(isNpc || !CanUseEmotionAbilities || !motor.IsGrounded || !IsEmotionUnlocked(target))return false;
             if(target==CurrentEmotion || (target!=RobotEmotion.Joy && target!=RobotEmotion.Anger && target!=RobotEmotion.Sadness && target!=RobotEmotion.Courage && target!=RobotEmotion.Guardian && target!=RobotEmotion.Memory))return false;
             IsSwitching=true;TargetEmotion=target;started=Time.time;motor.SetControlsLocked(true);
             face.SetVisualEmotion(RobotEmotion.Loading);return true;
@@ -116,8 +120,8 @@ namespace Emergence.Level01
         // External gameplay/debug entry point; cannot bypass an in-progress switch.
         public bool TrySetEmotion(RobotEmotion value)
         {
-            if((isNpc && !receiving) || IsSwitching || value==RobotEmotion.Loading || !face.SetVisualEmotion(value))return false;
-            CurrentEmotion=value;return true;
+            if((isNpc && !receiving) || (!isNpc && !IsEmotionUnlocked(value)) || IsSwitching || value==RobotEmotion.Loading || !face.SetVisualEmotion(value))return false;
+            CurrentEmotion=value;if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
         }
         public bool ReceiveEmotion(RobotEmotionGameplay source){
             if(!isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
@@ -167,7 +171,7 @@ namespace Emergence.Level01
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},hudFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=hudFontSize,alignment=TextAnchor.MiddleCenter};
-            if(!IsSwitching){var resonance=GetComponent<EmotionResonance>();var transfer=GetComponent<EmotionTransfer>();string suffix=resonance && resonance.Enhanced?"（增强）":"";string interaction=transfer?"  ·  "+transfer.interactKey+" 长按传递 / 交互":"";GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+suffix+"  ·  "+KeyLabel(joyKey)+"开心 "+KeyLabel(angerKey)+"愤怒 "+KeyLabel(sadnessKey)+"悲伤 "+KeyLabel(courageKey)+"勇气 "+KeyLabel(guardianKey)+"守护 "+KeyLabel(memoryKey)+"怀念"+interaction,style);return;}
+            if(!IsSwitching){var resonance=GetComponent<EmotionResonance>();var transfer=GetComponent<EmotionTransfer>();string suffix=resonance && resonance.Enhanced?"（增强）":"";string interaction=transfer?"  ·  "+transfer.interactKey+" 长按传递 / 交互":"";GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+suffix+"  ·  "+UnlockedHints()+interaction,style);return;}
             float x=Screen.width*.5f,y=Screen.height-chargeBottomOffset;
             GUI.Box(Offset(chargePanel,x,y),GUIContent.none);
             string name=EmotionName(TargetEmotion??CurrentEmotion);
@@ -175,6 +179,13 @@ namespace Emergence.Level01
             var old=GUI.color;GUI.color=progressColor;
             GUI.DrawTexture(new Rect(x+progressBar.x,y+progressBar.y,progressBar.width*Progress,progressBar.height),Texture2D.whiteTexture);GUI.color=old;
             GUI.Label(Offset(chargeHint,x,y),"蓄力满 "+HoldSeconds.ToString("0.##")+" 秒自动切换 · "+cancelSwitchKey+" 取消",style);
+        }
+        string UnlockedHints(){
+            string text="";
+            var emotions=new[]{RobotEmotion.Joy,RobotEmotion.Anger,RobotEmotion.Sadness,RobotEmotion.Courage,RobotEmotion.Guardian,RobotEmotion.Memory};
+            var keys=new[]{joyKey,angerKey,sadnessKey,courageKey,guardianKey,memoryKey};
+            for(int i=0;i<emotions.Length;i++)if(IsEmotionUnlocked(emotions[i]))text+=KeyLabel(keys[i])+EmotionName(emotions[i])+" ";
+            return text.Length>0?text:"情感尚未解锁 · 与博士交谈";
         }
         static string KeyLabel(KeyCode key)=>key.ToString().Replace("Alpha", "");
         public static string EmotionName(RobotEmotion value){switch(value){case RobotEmotion.Joy:return "开心";case RobotEmotion.Anger:return "愤怒";case RobotEmotion.Sadness:return "悲伤";case RobotEmotion.StrongAnger:return "加强愤怒";case RobotEmotion.Courage:return "勇气";case RobotEmotion.Guardian:return "守护";case RobotEmotion.Memory:return "怀念";case RobotEmotion.Loading:return "加载中";default:return "空白";}}

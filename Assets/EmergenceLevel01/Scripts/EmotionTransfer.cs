@@ -16,7 +16,7 @@ namespace Emergence.Level01
             if(!Input.GetKey(interactKey)){CancelTransfer();consumed=false;return;}
             if(source.Actor.isNpc || !source.Actor.CanUseEmotionAbilities){CancelTransfer();consumed=true;return;}
             if(Input.GetKeyDown(interactKey)){
-                if(InteractionPortal.TryContact(source.Actor) || (source.Emotion==RobotEmotion.Memory && MemoryInteractable.TryNearest(source))){consumed=true;return;}
+                if(StoryInteractable.TryNearest(source.Actor) || InteractionPortal.TryContact(source.Actor) || (source.Emotion==RobotEmotion.Memory && MemoryInteractable.TryNearest(source))){consumed=true;return;}
                 BeginTransfer();
             }
             if(!consumed)AdvanceTransfer(Time.deltaTime);

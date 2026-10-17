@@ -1,0 +1,52 @@
+博士与关卡流程配置说明
+
+博士交互
+现有 Scientist 预制体已添加 DoctorInteraction 和 DoctorIdleAppearance。
+玩家靠近后按 E 交互；交互键沿用玩家 EmotionTransfer.Interact Key，距离由 Interaction Radius 配置。
+DoctorInteraction.Dialogue：拖入 DialogueSequence 对话资产，留空不播放。
+Unlock Emotion：指定解锁情感，Blank 表示不解锁；仅支持开心、愤怒、悲伤、勇气、守护、怀念。
+有对话时，完整播放结束才解锁；取消对话不解锁，可再次交互。无对话时立即解锁。
+Interact Once：本次场景实例只成功交互一次。重复进入场景后可再次交谈；情感解锁不会重复增加。
+On Completed：可接其他剧情事件。
+原 Scientist 默认不解锁、不播放对话，请配置该关需要的内容。
+Prefabs/Characters/Doctors 下提供六个变体，已分别设置对应外观和解锁情感；默认无对话，拖入后可自行指定 Dialogue。
+
+博士外观
+DoctorIdleAppearance.Emotion 选择 Idle 情感，Blank 使用原版普通站立。
+Use Emotion Idle 打开使用静态情感姿态，关闭恢复原工作动画。头像/姿态的情感和解锁的情感是独立配置。
+每种姿态可替换独立 Sprite。素材位于 Art/Characters/DoctorEmotions。
+原图由内置 imagegen 生成并修正。DoctorPixel 材质按 16 PPU 栅格渲染，去掉低透明度柔光，让场景中轮廓保持像素硬边；Pixels Per Unit 和 Alpha Cutoff 可调。
+导入时统一人物实际高度和脚底锚点，避免切换 Idle 时脚底漂移。
+
+情感进度
+新开一局时玩家默认无情感，1—6只能切换已解锁的情感；HUD只列出已解锁项。
+解锁不自动切换玩家当前情感。玩家按对应数字键切换，过程仍为0.5秒。
+本次游戏期间，已解锁情感和当前情感跨场景保留。退出运行后重开清空，不写磁盘存档。
+关卡单独调试时，可暂时取消玩家 RobotEmotionGameplay.Require Emotion Unlocks。
+外部代码：EmotionProgress.Unlock(emotion)、IsUnlocked(emotion)、Reset()；玩家组件也提供 UnlockEmotion(emotion)。
+
+过关交互物
+将 Prefabs/Gameplay/LevelExit.prefab 拖到关卡出口，配置 Interaction Radius；蓝色方块只是可替换的外观，不带阻挡碰撞。
+也可在任何门、终端或其他物体上添加 LevelExitInteraction，把 Generated/LevelFlow.asset 拖到 Flow。
+靠近后按 E 才过关，不会触碰即切换。不要在同一对象上同时放过关、博士和传送门等多种交互。
+博士/过关交互物优先于传送门、怀念物品和NPC传递；多个博士/出口在范围内时选择最近者。
+新增出口预制体未替你随意摆入关卡，需在设计的出口位置放置或把组件挂到指定物体。
+
+路线与实验室剧情
+打开 Generated/LevelFlow.asset：
+Level01_InitialLab → Level02_InitialLab（直接）
+Level02_InitialLab → Level01_InitialLab（对应剧情）→ Level03_InitialLab
+Level03_InitialLab → Level01_InitialLab（对应剧情）→ Level04_InitialLab
+Level04_InitialLab → Level01_InitialLab（对应剧情）→ Level05_InitialLab
+当前只有五关，Level05 不会自动跳到不存在的第六关。增加新关后，在 Routes 增加一条并将场景加入 Build Settings。
+每条 Route 的 Laboratory Dialogue 可独立指定。Dialogue/Returns 下已创建三份占位对白，请策划替换。
+返回实验室会跳过原有 playOnStart 开场对白和自动触发对白；C 按原规则显示全文/推进，对话全部结束后自动进目标关。
+没有配置 Laboratory Dialogue 时，返回实验室后立即进入目标关。
+如果中转剧情被外部 Stop() 取消，不会擅自进入下一关；流程停止并留在实验室。
+加载过程和中转剧情期间锁定玩家操作，防止重复触发出口。
+五个现有关卡已加入 Build Settings，Level01 排在首位，保留其他已有场景条目。
+
+编辑器工具
+Tools > Emergence > Setup Doctor And Level Flow：生成缺失配置/变体/出口并更新博士素材引用；已有路线和交互配置保留。
+Tools > Emergence > Preview Doctor Emotions：输出七种站姿预览至 Logs/DoctorFlow/doctor-idle-preview.png。
+预览从左到右：默认、开心、愤怒、悲伤、勇气、守护、怀念。

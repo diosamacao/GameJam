@@ -44,7 +44,7 @@ namespace Emergence.Level01
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void ResetStatics(){Instance=null;}
         void OnEnable(){if(Instance && Instance!=this){Debug.LogWarning("Only one DialogueDirector should be active.",this);enabled=false;return;}Instance=this;}
-        void Start(){if(playOnStart)TryPlay(playOnStart);}
+        void Start(){if(playOnStart && !LevelFlowController.SuppressSceneIntro)TryPlay(playOnStart);}
         public bool TryPlay(DialogueSequence sequence)
         {
             if(!isActiveAndEnabled || IsPlaying || !sequence || sequence.lines==null || sequence.lines.Length==0)return false;

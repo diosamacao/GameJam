@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
+  m_Name: ReturnFromLevel02
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 1
+  typewriter: 1
+  charactersPerSecond: 30
+  lines:
+  - speaker: "\u535A\u58EB"
+    text: "\u8FD9\u6B21\u5B9E\u9A8C\u7684\u8BB0\u5F55\u5DF2\u7ECF\u4FDD\u5B58\u3002<pause=0.5>\u51C6\u5907\u597D\u540E\uFF0C\u6211\u4EEC\u7EE7\u7EED\u4E0B\u4E00\u9636\u6BB5\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: "\u8FD4\u56DE\u5B9E\u9A8C\u5BA4\u7684\u5360\u4F4D\u53F0\u8BCD\uFF0C\u8BF7\u7B56\u5212\u66FF\u6362\uFF1B\u5BF9\u8BDD\u7ED3\u675F\u540E\u81EA\u52A8\u524D\u5F80
+    Level03_InitialLab"

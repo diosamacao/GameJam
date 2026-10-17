@@ -13,7 +13,7 @@ namespace Emergence.Level01
         DialogueDirector listening;
         public bool TryTrigger()
         {
-            if(!isActiveAndEnabled || listening || (playOnce && HasPlayed))return false;
+            if(!isActiveAndEnabled || listening || LevelFlowController.SuppressSceneIntro || (playOnce && HasPlayed))return false;
             var target=director?director:DialogueDirector.Instance;if(!target)return false;
             if(!target.TryPlay(sequence))return false;
             HasPlayed=true;listening=target;listening.Finished+=Completed;listening.Cancelled+=Cancelled;return true;

@@ -25,25 +25,27 @@ namespace Emergence.Level01
         public void ClickWorld(Vector2 point)
         {
             if(DialogueDirector.IsBlockingInput)return;
+            if(!targetDoor){CancelSelection();return;}
+            if(pieces!=null)
             foreach(var piece in pieces)
-                if(piece && !piece.Consumed && piece.gameObject.activeInHierarchy && piece.hitArea.OverlapPoint(point))
+                if(piece && !piece.Consumed && piece.gameObject.activeInHierarchy && piece.hitArea && piece.hitArea.OverlapPoint(point))
                 { Select(Selected==piece?null:piece);return; }
-            if(Selected)
+            if(Selected && targetDoor.sockets!=null)
                 foreach(var slot in targetDoor.sockets)
-                    if(slot.Highlighted && slot.hitArea.OverlapPoint(point))
+                    if(slot && slot.Highlighted && slot.hitArea && slot.hitArea.OverlapPoint(point))
                     { if(slot.TryPlace(Selected)){Selected=null;RefreshHighlights();targetDoor.RefreshState();}return; }
-            if(targetDoor.interactionArea.OverlapPoint(point))
+            if(targetDoor.interactionArea && targetDoor.interactionArea.OverlapPoint(point))
             { if(targetDoor.TryUse())CancelSelection();return; }
             CancelSelection();
         }
         public void Select(AssemblyPiece piece)
         { if(Selected)Selected.Select(false);Selected=piece && !piece.Consumed?piece:null;if(Selected)Selected.Select(true);RefreshHighlights(); }
         public void CancelSelection(){Select(null);}
-        void RefreshHighlights(){foreach(var slot in targetDoor.sockets)slot.Highlight(slot.Accepts(Selected));}
-        void OnDisable(){if(targetDoor)CancelSelection();}
+        void RefreshHighlights(){if(!targetDoor || targetDoor.sockets==null)return;foreach(var slot in targetDoor.sockets)if(slot)slot.Highlight(slot.Accepts(Selected));}
+        void OnDisable(){CancelSelection();}
         void OnGUI()
         {
-            if(!targetDoor || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return;
+            if(!targetDoor || targetDoor.sockets==null || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},titleFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=titleFontSize,alignment=TextAnchor.MiddleCenter};style.normal.textColor=titleColor;
             string text=targetDoor.Complete?"门已修复  "+targetDoor.FilledCount+" / "+targetDoor.sockets.Length+"  ·  点击门开关":"修复出口门  "+targetDoor.FilledCount+" / "+targetDoor.sockets.Length+"  ·  "+(Selected?"点击门上的虚线框放入选中门板":"点击场景中的门板进行选择");
