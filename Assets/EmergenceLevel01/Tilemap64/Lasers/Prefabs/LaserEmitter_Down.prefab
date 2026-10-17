@@ -176,10 +176,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
-  maxDistance: 30
+  maxDistance: 40
   beamWidth: 0.08
   blockingLayers:
     serializedVersion: 2
     m_Bits: 4294967295
   beamMaterial: {fileID: 2100000, guid: cf9b71da193b5ce44b43f0ac640936d7, type: 2}
   laserEnabled: 1
+  muzzleOffset: 0.49
+  castDepth: 0.002
+  triggersBlockBeam: 0
+  beamColor: {r: 1, g: 0.06, b: 0.12, a: 1}
+  coreColor: {r: 1, g: 0.85, b: 0.85, a: 1}
+  coreWidthRatio: 0.3
+  sortingOrder: 30
+  coreSortingOffset: 1
