@@ -14,7 +14,7 @@ namespace Emergence.Level01
         public void Highlight(bool value) { if(outline)outline.SetVisible(value && !Filled);if(hitArea)hitArea.enabled=value && !Filled; }
         public bool TryPlace(AssemblyPiece piece)
         {
-            if(!Accepts(piece))return false;
+            if(LocalTimeTarget.IsStopped(this) || (piece && LocalTimeTarget.IsStopped(piece)) || !Accepts(piece))return false;
             Filled=true;if(installedVisual)installedVisual.enabled=true;
             piece.Consume();Highlight(false);return true;
         }

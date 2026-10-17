@@ -20,7 +20,7 @@ namespace Emergence.Level01
         public static void Spawn(Sprite sprite,Matrix4x4 matrix,Material material,int layer,int order,Color color,BlockShatterSettings settings=null)
         {
             if(!sprite)return;
-            var root=new GameObject("BlockShatter");var effect=root.AddComponent<BlockShatterEffect>();effect.tint=color;
+            var root=new GameObject("BlockShatter");root.transform.position=matrix.MultiplyPoint3x4(Vector3.zero);var effect=root.AddComponent<BlockShatterEffect>();effect.tint=color;
             effect.settings=settings??new BlockShatterSettings();var config=effect.settings;
             int columns=Mathf.Clamp(config.columns,1,Mathf.Min(16,(int)sprite.rect.width)),rows=Mathf.Clamp(config.rows,1,Mathf.Min(16,(int)sprite.rect.height)),count=columns*rows;
             effect.pieces=new SpriteRenderer[count];effect.sprites=new Sprite[count];effect.velocities=new Vector3[count];
@@ -37,6 +37,7 @@ namespace Emergence.Level01
             }
         }
         void Update(){
+            if(LocalTimeTarget.IsStopped(this))return;
             float lifetime=Mathf.Max(.01f,settings.lifetime);age+=Time.deltaTime;if(age>=lifetime){Destroy(gameObject);return;}
             for(int i=0;i<pieces.Length;i++){
                 velocities[i]+=Vector3.down*(settings.gravity*Time.deltaTime);pieces[i].transform.position+=velocities[i]*Time.deltaTime;

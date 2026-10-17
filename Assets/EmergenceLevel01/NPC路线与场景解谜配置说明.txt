@@ -1,0 +1,37 @@
+NPC路线、情感碎片与范围时停配置
+
+一、NPC路线
+使用 Prefabs/EmotionExpansion/EmotionNPC.prefab。现有NPC也会在运行时启用Dynamic刚体、重力和旋转锁定，可站在升降台上。
+EmotionNpc > Route 添加节点：Target优先使用场景Transform；未填则使用Position世界坐标。目标点对应机器人脚底/根节点位置。
+Movement：Walk沿地面走到节点；Jump按重力抛物线跳到节点。Wait Seconds为落地抵达后等待时间，Loop Route控制循环。
+Jump Apex Height为高于起点和终点较高者的额外顶点高度；Maximum Jump Speed限制水平跳跃速度。不可达或速度超限时停在起跳处，JumpBlocked为true，不会传送穿墙。
+Speed、Gravity Scale、Arrival Distance和Vertical Tolerance均可配置。路线不做自动寻路，请为高台提供着陆面、净空和可达节点。
+Activate On Start自动出发；事件可绑定Activate()；StopMoving()停止；MoveTo(Transform)使用单个目标。Route为空时兼容原Destination配置。
+NPC仍只接受玩家传递情感；双方同情感且满足共鸣半径时自动增强，颜色与半径在EmotionResonance配置。增强悲伤会冻结NPC自身，但保留共鸣源；玩家离开范围或切换情感后恢复。
+
+二、情感碎片
+拖入 Prefabs/EmotionExpansion/EmotionFragment.prefab。运行时显示可配置颜色的悬浮菱形；场景视图显示菱形Gizmo。
+玩家接触自动收集；NPC不能收集。Pickup Radius、颜色、尺寸、浮动速度/幅度、On Collected事件可配置。
+Required For Exit默认开启。当前场景全部必收集碎片收齐后，LevelExitInteraction才允许通关；未收齐时显示剩余数量。没有必收集碎片的场景不受限制。
+未启用的必收集碎片也计入，适合之后激活的谜题。不要删除未收集碎片来开门：销毁未收集碎片仍视为缺失。可选奖励关闭Required For Exit。
+计数属于当前场景，重新载入重置。实验室过场自动跳转不受过场实验室碎片影响。
+
+三、循环悲伤方块
+直接拖入 Prefabs/EmotionExpansion/CyclicVanishingBlock.prefab；或给已有方块挂CyclicVanishingBlock。普通物体需有Renderer和Collider2D，脚本自动补EmotionBlock。
+Visible Seconds：每轮保持显示的时间；Initial Delay：首轮额外等待。
+EmotionBlock内Fade Seconds、Faded Alpha、Restore Seconds控制渐隐时长、最低透明度和无碰撞持续时间。默认渐隐0.5秒到0.3，再关闭碰撞3秒后恢复。
+也可挂到悲伤Tilemap：只循环该图层中的Vanishing类型EmotionBlockTile，渐隐参数配置在EmotionBlockMap。运行时修改格子后调用RefreshCells()刷新循环列表。
+显示、渐隐、无碰撞恢复阶段都能时停，离开时停范围后继续剩余进度。显示中被冻结的方块保持实体碰撞。
+
+四、范围时停
+已有情感方块、循环方块、破坏效果、升降台、踩踏开关、激光发射器、危险区、实验仓/门、数据粒子、剧情交互物、传送门、怀念物品、碎片与NPC已接入。
+玩家及玩家子对象免疫。范围使用增强悲伤的共鸣半径，多来源取并集。普通物体按Transform位置判定；Tilemap按每格中心独立判定，不冻结整张地图。
+冻结保留碰撞与画面；激光发射器冻结时保留光束画面、暂停射线更新与伤害。范围外的发射器照常工作。
+场景加载时自动给非玩家Rigidbody2D、Animator、ParticleSystem安装LocalTimeTarget，恢复速度、动画和粒子进度。
+以后新增自定义机关脚本，应在更新和交互入口判断LocalTimeTarget.IsStopped(this)，计时使用LocalTimeTarget.DeltaTime(this)。自定义协程必须累加局部时间，不能直接WaitForSeconds。
+动态生成的普通物理/动画对象调用LocalTimeWorld.Ensure(gameObject)。自定义脚本也可手动放入LocalTimeTarget的Pause Behaviours，但其OnDisable不得清空进度；现有内置机关不要放入该列表。
+
+五、预制体与验证
+Tools > Emergence > Setup NPC Routes And Fragments可补建预制体，不向关卡自动放置路线或碎片。
+新增内容请按实际关卡放置，场景布局保持原样。
+Editor/VerifyNpcRoutes.cs提供独立工程批处理运行测试，不应直接在正在编辑的工程运行Batch。

@@ -28,7 +28,7 @@ namespace Emergence.Level01
             if(!targetDoor){CancelSelection();return;}
             if(pieces!=null)
             foreach(var piece in pieces)
-                if(piece && !piece.Consumed && piece.gameObject.activeInHierarchy && piece.hitArea && piece.hitArea.OverlapPoint(point))
+                if(piece && !LocalTimeTarget.IsStopped(piece) && !piece.Consumed && piece.gameObject.activeInHierarchy && piece.hitArea && piece.hitArea.OverlapPoint(point))
                 { Select(Selected==piece?null:piece);return; }
             if(Selected && targetDoor.sockets!=null)
                 foreach(var slot in targetDoor.sockets)

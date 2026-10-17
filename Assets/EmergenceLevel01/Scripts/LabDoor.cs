@@ -17,7 +17,7 @@ namespace Emergence.Level01
         [ContextMenu("Close (Play mode)")] void Close() { open = false; }
         void Update()
         {
-            progress = Mathf.MoveTowards(progress, open ? 1f : 0f, Time.deltaTime / Mathf.Max(.01f, seconds));
+            progress = Mathf.MoveTowards(progress, open ? 1f : 0f, LocalTimeTarget.DeltaTime(this) / Mathf.Max(.01f, seconds));
             upper.localPosition = upperClosed + Vector3.up * travel * progress;
             lower.localPosition = lowerClosed + Vector3.down * travel * progress;
             if (blocker) blocker.enabled = progress < collisionReleaseProgress;

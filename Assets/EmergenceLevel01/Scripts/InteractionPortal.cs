@@ -20,7 +20,7 @@ namespace Emergence.Level01
         void OnTriggerEnter2D(Collider2D other){contacts.Add(other);}
         void OnTriggerExit2D(Collider2D other){contacts.Remove(other);}
         public bool TryTeleport(RobotEmotionGameplay actor){
-            if(!actor || actor.isNpc || !actor.CanUseEmotionAbilities)return false;
+            if(LocalTimeTarget.IsStopped(this) || !actor || actor.isNpc || !actor.CanUseEmotionAbilities)return false;
             bool touching=false;foreach(var c in contacts)if(c && c.enabled && c.GetComponentInParent<RobotEmotionGameplay>()==actor && GetComponent<Collider2D>().IsTouching(c)){touching=true;break;}
             if(!touching)return false;
             int id=actor.GetInstanceID();if(cooldowns.TryGetValue(id,out float until) && Time.time<until)return false;

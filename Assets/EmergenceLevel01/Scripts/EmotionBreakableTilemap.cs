@@ -15,6 +15,7 @@ namespace Emergence.Level01
         {
             if(!source || !source.CanBreak)return false;
             if(!map)map=GetComponent<Tilemap>();
+            if(EmotionResonance.InEnhancedRange(map.GetCellCenterWorld(cell),RobotEmotion.Sadness))return false;
             var tile=map.GetTile(cell);
             if(!tile || (!allTilesBreakable && System.Array.IndexOf(breakableTiles,tile)<0))return false;
             map.SetTile(cell,null);

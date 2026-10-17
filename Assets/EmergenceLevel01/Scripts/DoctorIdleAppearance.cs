@@ -15,7 +15,7 @@ namespace Emergence.Level01
         Material originalMaterial;MaterialPropertyBlock properties;
         bool captured, animatorWasEnabled;
         void OnEnable(){if(visual)originalMaterial=visual.sharedMaterial;if(workAnimator){animatorWasEnabled=workAnimator.enabled;captured=true;}}
-        void LateUpdate(){Apply();}
+        void LateUpdate(){if(!LocalTimeTarget.IsStopped(this))Apply();}
         public void Apply(){
             if(workAnimator)workAnimator.enabled=useEmotionIdle?false:animatorWasEnabled;
             if(!visual)return;

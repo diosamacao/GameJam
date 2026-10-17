@@ -28,6 +28,7 @@ namespace Emergence.Level01
         public RobotEmotion Emotion => Normalize(Actor.CurrentEmotion);
         public float SecondJumpMaximum=>Mathf.Max(0,secondJumpMaximumCells)*Actor.GridCellHeight;
         public float SecondJumpMinimum=>Mathf.Min(secondJumpMinimumCells,secondJumpMaximumCells)*Actor.GridCellHeight;
+        float effectTime;
         LineRenderer aura,halo,shieldLine;GameObject shield;BoxCollider2D front;CircleCollider2D bubble;
         public static RobotEmotion Normalize(RobotEmotion value)=>value==RobotEmotion.StrongAnger?RobotEmotion.Anger:value;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetRegistry(){Actors.Clear();}
@@ -41,7 +42,7 @@ namespace Emergence.Level01
             return ((Vector2)(transform.position-other.transform.position)).sqrMagnitude<=range*range;
         }
         public void RefreshState(){Enhanced=false;foreach(var other in Actors)if(Matches(other)){Enhanced=true;break;}}
-        void Update(){RefreshState();DrawEffects();}
+        void Update(){RefreshState();if(!LocalTimeTarget.IsStopped(this))effectTime+=Time.deltaTime;DrawEffects();}
         public Color EmotionColor {get {switch(Emotion){case RobotEmotion.Joy:return joyColor;case RobotEmotion.Anger:return angerColor;case RobotEmotion.Sadness:return sadnessColor;case RobotEmotion.Courage:return courageColor;case RobotEmotion.Guardian:return guardianColor;case RobotEmotion.Memory:return memoryColor;default:return Color.white;}}}
         LineRenderer NewLine(string name,Transform parent){
             var go=new GameObject(name);go.transform.SetParent(parent,false);var line=go.AddComponent<LineRenderer>();line.useWorldSpace=false;line.sortingOrder=effectSortingOrder;
@@ -55,7 +56,7 @@ namespace Emergence.Level01
                 bool rangeEffect=Emotion==RobotEmotion.Sadness || Emotion==RobotEmotion.Memory;
                 aura.useWorldSpace=halo.useWorldSpace=rangeEffect;
                 var color=EmotionColor;
-                float size=rangeEffect?radius:auraRadius*(1+Mathf.Sin(Time.time*pulseSpeed)*pulseAmount);
+                float size=rangeEffect?radius:auraRadius*(1+Mathf.Sin(effectTime*pulseSpeed)*pulseAmount);
                 Circle(aura,size,auraWidth,color);color.a*=.2f;Circle(halo,size,auraWidth*4,color);
             }
             bool protecting=Actor.CanUseEmotionAbilities && Emotion==RobotEmotion.Guardian;

@@ -16,7 +16,7 @@ namespace Emergence.Level01
         DialogueDirector listening;DialogueSequence expected;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetState(){instance=null;}
         public static bool Begin(LevelFlowConfig config){
-            if(!config || IsTransitioning || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return false;
+            if(EmotionFragment.Remaining(SceneManager.GetActiveScene())>0 || !config || IsTransitioning || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return false;
             string source=SceneManager.GetActiveScene().name;var route=config.Find(source);
             if(route==null || string.IsNullOrWhiteSpace(route.nextScene))return false;
             bool viaLab=source!=config.laboratoryScene;

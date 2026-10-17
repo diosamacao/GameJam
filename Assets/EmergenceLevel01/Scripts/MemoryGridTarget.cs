@@ -8,7 +8,7 @@ namespace Emergence.Level01
         public bool visibleInRange;
         bool initial,initialized;
         void Start(){if(target && target!=gameObject && !transform.IsChildOf(target.transform)){initial=target.activeSelf;initialized=true;}else{Debug.LogWarning("MemoryGridTarget must be outside its target hierarchy",this);enabled=false;}}
-        void Update(){if(initialized && target)target.SetActive(EmotionResonance.InEnhancedRange(target.transform.position,RobotEmotion.Memory)?visibleInRange:initial);}
+        void Update(){if(initialized && target && !LocalTimeTarget.IsStopped(target.transform))target.SetActive(EmotionResonance.InEnhancedRange(target.transform.position,RobotEmotion.Memory)?visibleInRange:initial);}
         void OnDisable(){if(initialized && target)target.SetActive(initial);}
     }
 }

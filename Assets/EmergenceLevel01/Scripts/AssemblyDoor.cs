@@ -14,6 +14,6 @@ namespace Emergence.Level01
         void Start() { door.SetOpen(false);RefreshState(); }
         public void RefreshState()
         { if(!Complete)door.SetOpen(false);if(indicator)indicator.color=Complete?completeColor:incompleteColor; }
-        public bool TryUse() { if(!Complete)return false;door.SetOpen(!door.open);return true; }
+        public bool TryUse() { if(LocalTimeTarget.IsStopped(this) || !Complete)return false;door.SetOpen(!door.open);return true; }
     }
 }

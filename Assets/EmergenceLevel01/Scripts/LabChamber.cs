@@ -13,7 +13,7 @@ namespace Emergence.Level01
         {
             if (!glass) return;
             var c = glass.color;
-            c.a = Mathf.MoveTowards(c.a, open ? openAlpha : closedAlpha, Time.deltaTime * Mathf.Abs(closedAlpha-openAlpha) / Mathf.Max(.01f, seconds));
+            c.a = Mathf.MoveTowards(c.a, open ? openAlpha : closedAlpha, LocalTimeTarget.DeltaTime(this) * Mathf.Abs(closedAlpha-openAlpha) / Mathf.Max(.01f, seconds));
             glass.color = c;
         }
     }

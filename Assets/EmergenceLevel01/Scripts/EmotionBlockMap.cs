@@ -9,16 +9,19 @@ namespace Emergence.Level01
         Tilemap map;
         struct HiddenCell {public TileBase tile;public Color color;public TileFlags flags;public Tile.ColliderType collider;}
         readonly System.Collections.Generic.Dictionary<Vector3Int,HiddenCell> hidden=new System.Collections.Generic.Dictionary<Vector3Int,HiddenCell>();
+        public bool IsVanishing(Vector3Int cell)=>hidden.ContainsKey(cell);
+        public bool IsFrozenCell(Vector3Int cell){if(!map)map=GetComponent<Tilemap>();return EmotionResonance.InEnhancedRange(map.GetCellCenterWorld(cell),RobotEmotion.Sadness);}
+        public bool BeginVanish(Vector3Int cell){if(!map)map=GetComponent<Tilemap>();var tile=map.GetTile(cell);if(!tile || !isActiveAndEnabled || hidden.ContainsKey(cell) || IsFrozenCell(cell))return false;StartCoroutine(Vanish(cell,tile));return true;}
         public bool TryInteractCell(Vector3Int cell,RobotEmotionGameplay player,out bool respawned)
         {
             respawned=false;
-            if(!isActiveAndEnabled || !player || !player.CanUseEmotionAbilities)return false;
+            if(!isActiveAndEnabled || !player || !player.CanUseEmotionAbilities || IsFrozenCell(cell))return false;
             if(!map)map=GetComponent<Tilemap>();
             var tile=map.GetTile(cell) as EmotionBlockTile;if(!tile)return false;
             if(hidden.ContainsKey(cell))return false;
             if(tile.kind==EmotionBlockKind.Electric){respawned=player.HandleElectricContact();return respawned;}
             if(!EmotionBlockRules.CanRemove(tile.kind,player.EffectiveEmotion))return false;
-            if(tile.kind==EmotionBlockKind.Vanishing){StartCoroutine(Vanish(cell,tile));return true;}
+            if(tile.kind==EmotionBlockKind.Vanishing)return BeginVanish(cell);
             var renderer=GetComponent<TilemapRenderer>();
             if(renderer)BlockShatterEffect.Spawn(tile.sprite,map.transform.localToWorldMatrix*Matrix4x4.Translate(map.CellToLocalInterpolated((Vector3)cell+map.tileAnchor))*map.GetTransformMatrix(cell),renderer.sharedMaterial,renderer.sortingLayerID,renderer.sortingOrder,map.GetColor(cell)*map.color,shatter);
             map.SetTile(cell,null);RefreshCollision();
@@ -33,14 +36,14 @@ namespace Emergence.Level01
         System.Collections.IEnumerator Vanish(Vector3Int cell,TileBase tile){
             var state=new HiddenCell{tile=tile,color=map.GetColor(cell),flags=map.GetTileFlags(cell),collider=map.GetColliderType(cell)};hidden.Add(cell,state);
             map.SetTileFlags(cell,state.flags & ~TileFlags.LockColor);
-            float started=Time.time;var color=state.color;
-            while(Time.time-started<fadeSeconds){
+            float elapsed=0;var color=state.color;
+            while(elapsed<fadeSeconds || IsFrozenCell(cell)){
                 if(map.GetTile(cell)!=tile){hidden.Remove(cell);yield break;}
-                color.a=Mathf.Lerp(state.color.a,fadedAlpha,(Time.time-started)/Mathf.Max(.001f,fadeSeconds));map.SetColor(cell,color);yield return null;
+                if(!IsFrozenCell(cell)){elapsed+=Time.deltaTime;color.a=Mathf.Lerp(state.color.a,fadedAlpha,elapsed/Mathf.Max(.001f,fadeSeconds));map.SetColor(cell,color);}yield return null;
             }
             if(map.GetTile(cell)!=tile){hidden.Remove(cell);yield break;}
             color.a=fadedAlpha;map.SetColor(cell,color);map.SetColliderType(cell,Tile.ColliderType.None);RefreshCollision();
-            yield return new WaitForSeconds(Mathf.Max(0,restoreSeconds));Restore(cell);
+            elapsed=0;while(elapsed<restoreSeconds || IsFrozenCell(cell)){if(!IsFrozenCell(cell))elapsed+=Time.deltaTime;yield return null;}Restore(cell);
         }
         void Restore(Vector3Int cell){HiddenCell state;if(!hidden.TryGetValue(cell,out state))return;
             if(map && map.GetTile(cell)==state.tile){map.SetTileFlags(cell,TileFlags.None);map.SetColor(cell,state.color);map.SetColliderType(cell,state.collider);map.SetTileFlags(cell,state.flags);RefreshCollision();}hidden.Remove(cell);

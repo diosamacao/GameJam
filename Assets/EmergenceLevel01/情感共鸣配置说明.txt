@@ -18,9 +18,9 @@ RobotMotor2D的Variable Jump关闭后恢复固定最大跳高；未挂情感组�
 
 NPC
 拖入Prefabs/EmotionExpansion/EmotionNPC.prefab。
-EmotionNpc的Destination指定目标Transform；没有指定时使用Destination Position世界坐标。每个NPC实例独立配置速度、到达误差与碰撞层。
+EmotionNpc的Route配置走路/跳跃节点；为空时兼容Destination或Destination Position世界坐标。每个NPC可独立配置速度、重力与到达误差。
 勾Activate On Start可开局移动；也可由剧情或交互UnityEvent调用Activate()、MoveTo(Transform)、StopMoving()，到达时触发On Arrived。
-此版本沿直线路径移动并在实体障碍前停止，没有自动寻路或绕障。配置目标时应保证路径可达。
+NPC使用真实碰撞和重力，可由升降台承载；路线不自动寻路，配置跳跃节点时保证着陆面与净空。详细见NPC路线与场景解谜配置说明.txt。
 NPC使用与玩家相同的情感、破坏、护盾和共鸣机制；初始无情感，只有玩家传递能改变其情感。
 
 共鸣
@@ -34,7 +34,7 @@ NPC自身增强后的停时、怀念作用范围使用其自己的Radius，默�
 情感效果
 开心：保持原跳高加成；增强后获得二段跳。
 愤怒：碰触破坏普通红块；增强后也能破坏坚硬方块。
-悲伤：碰触蓝块后0.5秒渐隐至0.3，随后关闭碰撞3秒，参数仍可配置；增强后暂停范围内标记为LocalTimeTarget的目标。
+悲伤：碰触蓝块后0.5秒渐隐至0.3，随后关闭碰撞3秒，参数仍可配置；增强后暂停范围内的方块、机关、NPC及物理/动画对象，只有玩家免疫；详细覆盖与扩展接入见NPC路线与场景解谜配置说明.txt。
 勇气：继续免疫原带电方块；增强后可以进入DangerZone。激光仍然致命，需要守护护盾阻挡。
 守护：身前默认2世界单位生成直立护盾；增强时改为全身圆形护盾。两种护盾均可挡激光，尺寸可配置；护盾不阻碍玩家/NPC行走，不自动免疫DangerZone。
 怀念：E改变MemoryInteractable物品状态；增强后控制范围内指定Grid/Tilemap出现或消失。

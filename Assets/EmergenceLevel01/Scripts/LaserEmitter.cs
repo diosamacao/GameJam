@@ -32,6 +32,7 @@ namespace Emergence.Level01
         void FixedUpdate(){Trace(true);}
         // A box cast matches the visible beam thickness, so edge contact is lethal too.
         public void Trace(bool applyDamage){
+            if(LocalTimeTarget.IsStopped(this))return;
             if(!laserEnabled){BeamLength=0;Show(false);return;}
             ApplyStyle(beam,beamColor,beamWidth,sortingOrder);ApplyStyle(core,coreColor,beamWidth*coreWidthRatio,sortingOrder+coreSortingOffset);
             var origin=BeamOrigin;var dir=BeamDirection;

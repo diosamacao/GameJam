@@ -22,7 +22,7 @@ namespace Emergence.Level01.Editor
                 var npc=PrefabUtility.LoadPrefabContents(playerPath);try{
                     npc.name="EmotionNPC";npc.tag="Untagged";var actor=npc.GetComponent<RobotEmotionGameplay>();actor.isNpc=true;actor.keyboardInput=false;actor.showSwitchProgress=false;
                     var keyboard=npc.GetComponent<RobotKeyboardInput>();keyboard.enabled=false;var test=npc.GetComponent<RobotEmotionKeyboardTest>();if(test)test.enabled=false;
-                    npc.GetComponent<RobotMotor2D>().externallyDriven=true;var body=npc.GetComponent<Rigidbody2D>();body.bodyType=RigidbodyType2D.Kinematic;body.useFullKinematicContacts=true;
+                    npc.GetComponent<RobotMotor2D>().externallyDriven=false;var body=npc.GetComponent<Rigidbody2D>();body.bodyType=RigidbodyType2D.Dynamic;body.gravityScale=3;
                     npc.AddComponent<EmotionNpc>();PrefabUtility.SaveAsPrefabAsset(npc,npcPath);
                 }finally{PrefabUtility.UnloadPrefabContents(npc);}
             }

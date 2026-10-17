@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 5208093734199073400}
   - component: {fileID: 8218650656936472715}
   - component: {fileID: 1544606895816892230}
+  - component: {fileID: 5267118822337019912}
   m_Layer: 6
   m_Name: EmotionNPC
   m_TagString: Untagged
@@ -219,7 +220,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7708103269012172701}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -299,7 +300,7 @@ MonoBehaviour:
   jumpHeight: 2.4
   minimumJumpHeight: 1
   variableJump: 1
-  externallyDriven: 1
+  externallyDriven: 0
   visual: {fileID: 7170151950312864630}
   idle: {fileID: 21300000, guid: acb264810825dee4f86628b2285e810d, type: 3}
   walk:
@@ -387,10 +388,16 @@ MonoBehaviour:
   fallbackHappyMinimumJumpCells: 1.5
   fallbackCellHeight: 1
   fallbackJumpMultiplier: 1.2
-  switchKey: 113
+  joyKey: 49
+  angerKey: 50
+  sadnessKey: 51
+  courageKey: 52
+  guardianKey: 53
+  memoryKey: 54
   cancelSwitchKey: 27
   keyboardInput: 0
   isNpc: 1
+  requireEmotionUnlocks: 1
   showSwitchProgress: 0
   respawnPoint: {fileID: 0}
   electricGraceSeconds: 1
@@ -475,7 +482,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 101
-  automaticTransfer: 0
+  transferRadius: 2
+  holdSeconds: 0.5
+  showProgress: 1
+  progressRect:
+    serializedVersion: 2
+    x: 20
+    y: 80
+    width: 260
+    height: 28
 --- !u!114 &1544606895816892230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,15 +503,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f31c6896f334a09b087747204cd46d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  route: []
+  loopRoute: 0
   destination: {fileID: 0}
   destinationPosition: {x: 0, y: 0}
   speed: 2
+  gravityScale: 3
   arrivalDistance: 0.05
-  collisionSkin: 0.02
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  verticalTolerance: 0.2
   activateOnStart: 0
   onArrived:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5267118822337019912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708103269012172701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3522eaf4a54c3d8b3665aa08d22eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseBehaviours: []
+  animators: []
+  targetBody: {fileID: 0}
+  discoverAnimators: 1

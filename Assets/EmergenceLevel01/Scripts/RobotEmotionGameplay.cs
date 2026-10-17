@@ -124,7 +124,7 @@ namespace Emergence.Level01
             CurrentEmotion=value;if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
         }
         public bool ReceiveEmotion(RobotEmotionGameplay source){
-            if(!isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
+            if(LocalTimeTarget.IsStopped(this) || !isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
             var transfer=source.GetComponent<EmotionTransfer>();
             if(!isActiveAndEnabled || !transfer || Vector2.Distance(transform.position,source.transform.position)>transfer.transferRadius)return false;
             if(source.CurrentEmotion==RobotEmotion.Blank || source.CurrentEmotion==RobotEmotion.Loading)return false;
@@ -148,7 +148,7 @@ namespace Emergence.Level01
 
         void FixedUpdate()
         {
-            if(!CanUseEmotionAbilities || !body)return;
+            if(!CanUseEmotionAbilities || !body || LocalTimeTarget.IsStopped(this))return;
             int n=body.GetContacts(contacts);
             for(int i=0;i<n;i++) {
                 var hit=contacts[i];var other=hit.collider;
