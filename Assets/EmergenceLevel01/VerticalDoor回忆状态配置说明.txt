@@ -1,0 +1,11 @@
+VerticalDoor回忆状态
+
+Equipment/VerticalDoor.prefab上的LabDoor已开启Enable Memory States，默认State为Normal。
+Normal Alpha默认1（100%不透明），Memory Alpha默认0.5（50%不透明），Interaction Radius默认2，可在Inspector修改。
+玩家处于怀念情感时，靠近按E在Normal与Memory之间切换；E沿用玩家EmotionTransfer.Interact Key。
+进入回忆状态不会自动开门；靠近按F切换开/关，Toggle Door Key可改键。F只要求门处于Memory状态，不要求玩家继续保持怀念。
+回到Normal会关闭门、恢复100%不透明，并禁止F开门。
+按本次需求，两种状态均保持Blocker碰撞启用，包括回忆状态下动画完全打开之后。因此开门动画不会让这个阻挡体变得可穿过。
+对话、切换情感、场景切换期间不可互动；范围时停也会暂停门动画与互动。
+其余LabDoor默认不开Enable Memory States，保持原有自动开关及开门释放碰撞逻辑。
+已有VerticalDoor预制体实例自动继承；若某扇门已解包或重写组件字段，请手动勾选Enable Memory States。

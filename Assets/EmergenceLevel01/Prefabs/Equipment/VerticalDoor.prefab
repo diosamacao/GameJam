@@ -137,6 +137,12 @@ MonoBehaviour:
   upper: {fileID: 7946859332760169738}
   lower: {fileID: 2419641441743556698}
   blocker: {fileID: 5810065248081847914}
+  enableMemoryStates: 1
+  state: 0
+  normalAlpha: 1
+  memoryAlpha: 0.5
+  interactionRadius: 2
+  toggleDoorKey: 102
   travel: 1.625
   seconds: 0.6
   open: 0
