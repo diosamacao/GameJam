@@ -46,6 +46,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playOnStart: {fileID: 0}
   advanceKey: 99
+  referenceWidth: 1280
+  scaleRange: {x: 0.65, y: 1.5}
+  panelWidth: 700
+  minimumHeight: 130
+  screenMargin: 32
+  topOffset: 20
+  padding: 22
+  speakerLineHeight: 32
+  footerHeight: 30
+  hintHeight: 25
+  accentHeight: 3
+  bodyFontSize: 22
+  speakerFontSize: 20
+  hintFontSize: 15
+  bodyColor: {r: 0.88, g: 0.95, b: 1, a: 1}
+  speakerColor: {r: 0.4, g: 0.88, b: 1, a: 1}
+  panelColor: {r: 0.035, g: 0.065, b: 0.1, a: 0.50980395}
+  accentColor: {r: 0.3, g: 0.7, b: 0.85, a: 1}
   onStarted:
     m_PersistentCalls:
       m_Calls: []

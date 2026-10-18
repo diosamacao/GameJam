@@ -608,8 +608,16 @@ PrefabInstance:
       value: DialogueSystem
       objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
+      propertyPath: topOffset
+      value: 585
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: advanceKey
       value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
+      propertyPath: panelWidth
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: playOnStart
@@ -770,6 +778,63 @@ MonoBehaviour:
   hintSize: {x: 220, y: 30}
   hintBottomOffset: 120
   flow: {fileID: 11400000, guid: 6efb79beab74dfb409caea7b6233d079, type: 2}
+--- !u!1001 &2093078700
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.014761
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.6252685
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7708103269012172701, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: m_Name
+      value: EmotionNPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
 --- !u!1001 &2104532911
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3058,7 +3123,8 @@ PrefabInstance:
       value: SleepPod2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4590877803649980948, guid: 1ae776b3c5feed34da2d7373dc465200, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ae776b3c5feed34da2d7373dc465200, type: 3}
@@ -7874,3 +7940,4 @@ SceneRoots:
   - {fileID: 1231942095}
   - {fileID: 1240943005}
   - {fileID: 2104532911}
+  - {fileID: 2093078700}

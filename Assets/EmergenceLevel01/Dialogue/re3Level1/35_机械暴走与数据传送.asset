@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
+  m_Name: "35_机械暴走与数据传送"
+  m_EditorClassIdentifier: ""
+  blockPlayerInput: 1
+  typewriter: 1
+  charactersPerSecond: 30
+  lines:
+  - speaker: "伊"
+    text: "博士！休比怎么没出来？"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "什么休比？我量产了情感核心，结果搭载了它的机械都出现了异常！！"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "它们都失控暴走了！！"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "伊"
+    text: "怎么回事？"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "可能是情感数据紊乱了，现在没有办法了。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "只能将你们的数据传送回过去来避免这场灾难了！！"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "快！进入实验仓！"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "伊"
+    text: "所以休比才会留在那里吗？"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  stagingNotes: "原稿第35段：机械暴走与数据传送。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
