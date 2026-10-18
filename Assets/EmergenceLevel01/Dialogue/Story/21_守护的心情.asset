@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ""
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "尼"
     text: "虽然这里是模拟空间，也许博士他真的失去过一只猫猫。\n你能体会到想要守护什么的心情吗？"

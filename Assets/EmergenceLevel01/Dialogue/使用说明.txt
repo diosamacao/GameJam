@@ -1,11 +1,11 @@
 剧情对话系统
 
 使用方式
-1. 第一关 Level01_InitialLab 进入运行时自动播放博士开场。文字逐字出现；未显示完时按 C 立即显示全文，显示完后再按 C 前进一句，最后一句再按 C 关闭。
+1. 第一关 Level01_InitialLab 进入运行时自动播放博士开场。默认文字逐字出现，显示完后等待2秒自动前进，最后一句自动关闭。关闭Auto Play后按C手动推进；打字中按C可立即显示全文。
 2. 配置目录 Assets/EmergenceLevel01/Dialogue。选择 .asset，在 Inspector 的 Lines 中编辑 Speaker、Text、Minimum Display Seconds 和 Cue；Speaker 为空时不显示姓名。
 3. 新建资源：Project 右键 > Create > Emergence > Dialogue Sequence。
 4. Block Player Input 默认开启：禁止移动、跳跃、Q 情绪切换、愤怒破坏和鼠标合成操作；保留重力。关闭该选项可制作边走边说的对话。
-5. Typewriter 控制是否逐字显示。剧情资源 Characters Per Second 默认为30字/秒；单句同名字段为0时继承，可设不同速度。
+5. Typewriter 控制是否逐字显示。剧情资源 Characters Per Second 默认为20字/秒；单句同名字段为0时继承，可设不同速度。
 6. 同段文本内插入 <pause=秒数> 配置句间或句中停顿，例如：伊……<pause=1>这是我的代号吗？<pause=0.5>我明白了。标签不显示，可以使用多个不同停顿。
 7. 按 C 补全时会跳过本段所有剩余停顿。Minimum Display Seconds 仍是从本段开始算起的最短显示时间，不代替句间停顿。停顿和打字使用不受 Time.timeScale 影响的时间。
 8. 演出备注保存在 Staging Notes，不显示给玩家。
@@ -42,3 +42,7 @@ Tools > Emergence > Verify Dialogue System
 重新安装菜单 Setup Dialogue System 不覆盖已有剧情资源，避免清除手动改过的文本。
 
 CompleteCurrentLine() 可立即补全当前句。IsRevealing / VisibleText / FullText 可供外部UI查询；Advance() 在打字中只补全，不同时跳到下一句。
+
+自动播放：每个DialogueSequence可配置Auto Play，默认开启；Auto Advance Delay默认为2秒，从文字（包括<pause>停顿）显示完毕起计时。最后一句等待后自动结束。关闭Auto Play恢复手动翻页。
+自动播放开启时隐藏底部按键/下一句提示；仍可按C补全文字或提前翻页，补全后等待重新从补全时刻计时。计时不受Time.timeScale影响，仍遵守单句Minimum Display Seconds。
+所有现有剧情速度已统一20字/秒，单句速度设0继承剧情速度，仍可在Inspector自行覆盖。

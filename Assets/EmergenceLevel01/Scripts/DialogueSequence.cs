@@ -17,7 +17,11 @@ namespace Emergence.Level01
         }
         public bool blockPlayerInput=true;
         public bool typewriter=true;
-        [Min(1)] public float charactersPerSecond=30;
+        [Min(1)] public float charactersPerSecond=20;
+        [Tooltip("文字显示完毕后自动前进，最后一句结束后自动关闭对话。")]
+        public bool autoPlay=true;
+        [Tooltip("全文显示完毕后的等待秒数，包含手动补全后的等待。")]
+        [Min(0)] public float autoAdvanceDelay=2;
         public Line[] lines=new Line[0];
         [TextArea(3,12)] public string stagingNotes;
     }

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ""
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "尼"
     text: "他看上去很愤怒的样子。\n感受他的情感吧。"

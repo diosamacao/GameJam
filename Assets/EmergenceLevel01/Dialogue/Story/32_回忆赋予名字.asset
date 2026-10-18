@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ""
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "里克"
     text: "你的名字就叫休比吧。\n今后，你就可以带着自己的情感，去感受，去爱这个世界了。"

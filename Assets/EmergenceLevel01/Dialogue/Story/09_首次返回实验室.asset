@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ""
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "博士"
     text: "看来实验进行得很成功啊，你们进入休眠仓好好睡一觉吧。"

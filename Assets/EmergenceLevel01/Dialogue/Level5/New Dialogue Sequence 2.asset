@@ -15,6 +15,8 @@ MonoBehaviour:
   blockPlayerInput: 0
   typewriter: 1
   charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "\u4F11\u6BD4"
     text: "\u7231\uFF0C\u662F\u5728\u4F34\u968F\u8749\u58F0\u7684\u5632\u7B11\u4E2D"

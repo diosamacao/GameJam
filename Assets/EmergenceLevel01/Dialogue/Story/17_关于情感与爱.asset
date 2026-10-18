@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: ""
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "伊"
     text: "尼，之前实验的时候我只是读取了情感数据。\n现在我能感受到它们了。\n但是我要怎么才能自发的产生情感呢？"

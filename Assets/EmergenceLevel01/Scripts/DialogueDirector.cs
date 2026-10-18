@@ -37,7 +37,8 @@ namespace Emergence.Level01
         public string VisibleText => !IsPlaying ? "" : IsRevealing ? reveal.VisibleAt(Time.unscaledTime-revealStarted) : reveal.Text;
         public bool CanAdvance => IsPlaying && !IsRevealing && Time.unscaledTime>=advanceAt;
         DialogueRevealTimeline reveal;
-        float revealStarted;
+        float revealStarted, completedAt;
+        public bool ShowAdvanceHint=>IsPlaying && !Sequence.autoPlay;
         bool revealSkipped;
         float advanceAt;
         int changedFrame;
@@ -71,14 +72,21 @@ namespace Emergence.Level01
         {
             if(!IsPlaying)return;var cancelled=Sequence;Sequence=null;LineIndex=-1;Cancelled?.Invoke(cancelled);
         }
-        public void CompleteCurrentLine(){if(IsPlaying)revealSkipped=true;}
+        public void CompleteCurrentLine(){if(IsRevealing){completedAt=Time.unscaledTime;revealSkipped=true;}}
         void SetLineTiming(){
             advanceAt=Time.unscaledTime+Mathf.Max(0,CurrentLine.minimumDisplaySeconds);
-            changedFrame=Time.frameCount;revealStarted=Time.unscaledTime;revealSkipped=!Sequence.typewriter;
+            changedFrame=Time.frameCount;revealStarted=Time.unscaledTime;revealSkipped=!Sequence.typewriter;completedAt=revealStarted;
             float speed=CurrentLine.charactersPerSecond>0?CurrentLine.charactersPerSecond:Sequence.charactersPerSecond;
             reveal=new DialogueRevealTimeline(CurrentLine.text,speed);
         }
-        void Update(){if(IsPlaying && Time.frameCount>changedFrame && Input.GetKeyDown(advanceKey))Advance();}
+        void Update(){
+            if(!IsPlaying || Time.frameCount<=changedFrame)return;
+            if(Input.GetKeyDown(advanceKey)){Advance();return;}
+            if(Sequence.autoPlay && CanAdvance){
+                double finishedAt=revealSkipped?completedAt:revealStarted+reveal.Duration;
+                if(Time.unscaledTime>=finishedAt+Mathf.Max(0,Sequence.autoAdvanceDelay))Advance();
+            }
+        }
         void OnDisable(){Stop();if(Instance==this)Instance=null;}
         void OnGUI()
         {
@@ -95,6 +103,7 @@ namespace Emergence.Level01
             GUI.color=accentColor;GUI.DrawTexture(new Rect(x,y,width,accentHeight*scale),Texture2D.whiteTexture);GUI.color=old;
             if(speakerHeight>0)GUI.Label(new Rect(x+pad,y+pad,width-pad*2,speakerHeight),CurrentLine.speaker,heading);
             GUI.Label(new Rect(x+pad,y+pad+speakerHeight,width-pad*2,textHeight),VisibleText,body);
+            if(!ShowAdvanceHint)return;
             var hint=new GUIStyle(heading){alignment=TextAnchor.MiddleRight,fontSize=Mathf.RoundToInt(hintFontSize*scale),fontStyle=FontStyle.Normal};
             GUI.Label(new Rect(x+pad,y+height-footerHeight*scale,width-pad*2,hintHeight*scale),IsRevealing?advanceKey+"  显示全文":CanAdvance?advanceKey+"  "+(LineIndex==Sequence.lines.Length-1?"结束对话":"下一段"):"…",hint);
         }

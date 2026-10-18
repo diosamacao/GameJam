@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 03_ExperimentBriefing
   m_EditorClassIdentifier: 
   blockPlayerInput: 1
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "\u535A\u58EB"
     text: "\u7B2C\u4E8C\u4E2A\u673A\u68B0\u4E5F\u6210\u529F\u542F\u52A8\u4E86\uFF01\u592A\u597D\u4E86\uFF01"

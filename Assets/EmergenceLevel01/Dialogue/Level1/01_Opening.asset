@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "\u535A\u58EB"
     text: "\u7EC8\u4E8E\u5B8C\u6210\u4E86\uFF01"

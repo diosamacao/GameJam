@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: 04_ChamberConversation
   m_EditorClassIdentifier: 
   blockPlayerInput: 1
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
   - speaker: "\u5C3C"
     text: "\u4F60\u597D\uFF0C\u4F60\u662F\u53EB\u4F0A\u5BF9\u5427\uFF1F"
