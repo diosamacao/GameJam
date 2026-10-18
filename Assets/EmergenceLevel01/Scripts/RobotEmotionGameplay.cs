@@ -35,7 +35,8 @@ namespace Emergence.Level01
         public RobotEmotion CurrentEmotion {get;private set;}
         public RobotEmotion? TargetEmotion {get;private set;}
         public float Progress => IsSwitching ? Mathf.Clamp01((Time.time-started)/HoldSeconds) : 0;
-        public bool CanUseEmotionAbilities => !DialogueDirector.IsBlockingInput && !LevelFlowController.IsTransitioning && isActiveAndEnabled && !IsSwitching;
+        public bool EmotionMechanicsEnabled=>MemoryNpcStateController.AllowsEmotion(this);
+        public bool CanUseEmotionAbilities => EmotionMechanicsEnabled && !DialogueDirector.IsBlockingInput && !LevelFlowController.IsTransitioning && isActiveAndEnabled && !IsSwitching;
         public bool CanBreak => CanUseEmotionAbilities && (CurrentEmotion==RobotEmotion.Anger || CurrentEmotion==RobotEmotion.StrongAnger);
         [Tooltip("Optional checkpoint. If unset, respawn at the initial player position.")]
         public Transform respawnPoint;
@@ -63,8 +64,8 @@ namespace Emergence.Level01
             var npc=GetComponent<EmotionNpc>();if(isNpc && npc)npc.ResetRouteAfterDeath();
             motor.ResetGroundState();onDied.Invoke();return true;
         }
-        public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier);
-        public float MinimumJumpHeight => Mathf.Min(JumpHeight,(abilities?(CurrentEmotion==RobotEmotion.Joy?abilities.happyMinimumJumpCells:abilities.minimumJumpCells):(CurrentEmotion==RobotEmotion.Joy?fallbackHappyMinimumJumpCells:fallbackMinimumJumpCells))*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier));
+        public float JumpHeight => (EmotionMechanicsEnabled && CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier);
+        public float MinimumJumpHeight => Mathf.Min(JumpHeight,(abilities?(EmotionMechanicsEnabled && CurrentEmotion==RobotEmotion.Joy?abilities.happyMinimumJumpCells:abilities.minimumJumpCells):(EmotionMechanicsEnabled && CurrentEmotion==RobotEmotion.Joy?fallbackHappyMinimumJumpCells:fallbackMinimumJumpCells))*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier));
         public float GridCellHeight => CellHeight;
         float HoldSeconds => abilities ? Mathf.Max(.1f,abilities.holdSeconds):Mathf.Max(.1f,fallbackHoldSeconds);
         float BaseCells => abilities ? abilities.baseJumpCells:fallbackBaseJumpCells;
@@ -127,7 +128,7 @@ namespace Emergence.Level01
             CurrentEmotion=value;if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
         }
         public bool ReceiveEmotion(RobotEmotionGameplay source){
-            if(LocalTimeTarget.IsStopped(this) || !isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
+            if(!CanUseEmotionAbilities || LocalTimeTarget.IsStopped(this) || !isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
             var transfer=source.GetComponent<EmotionTransfer>();
             if(!isActiveAndEnabled || !transfer || Vector2.Distance(transform.position,source.transform.position)>transfer.transferRadius)return false;
             if(source.CurrentEmotion==RobotEmotion.Blank || source.CurrentEmotion==RobotEmotion.Loading)return false;
