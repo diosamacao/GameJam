@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: emotion
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2567520164516780587, guid: 6a681e274cde5b54db18741208cf03b0, type: 3}
+      propertyPath: pixelsPerUnit
+      value: 127
+      objectReference: {fileID: 0}
     - target: {fileID: 3242063792332742026, guid: 6a681e274cde5b54db18741208cf03b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

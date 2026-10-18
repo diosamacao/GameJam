@@ -82,11 +82,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   requiredForExit: 1
   color: {r: 0.4, g: 1, b: 1, a: 1}
-  size: 0.25
-  lineWidth: 0.06
-  pickupRadius: 0.35
-  bobAmplitude: 0.08
-  bobSpeed: 2
+  size: 0.5
+  lineWidth: 0.1
+  pickupRadius: 0.62
+  bobAmplitude: 0.1
+  bobSpeed: 3
   sortingOrder: 60
   onCollected:
     m_PersistentCalls:

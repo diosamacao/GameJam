@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LevelFlow
   m_EditorClassIdentifier: 
   laboratoryScene: Level01_InitialLab
-  fadeOutSeconds: 0.35
-  fadeInSeconds: 0.35
+  fadeOutSeconds: 0.5
+  fadeInSeconds: 0.5
   blackHoldSeconds: 0.1
   routes:
   - fromScene: Level01_InitialLab

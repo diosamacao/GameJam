@@ -210,7 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platforms:
   - {fileID: 3888698982513348892}
-  allowNpc: 0
+  allowNpc: 1
   feetTolerance: 0.15
   indicator: {fileID: 7103771002174729319}
   idleColor: {r: 1, g: 1, b: 1, a: 1}
