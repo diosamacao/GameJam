@@ -1,0 +1,20 @@
+增强怀念方块（64x64）
+
+Tile Palette选择：
+MemoryAppear_64x64：紫色，默认隐藏；进入增强怀念范围时显现。
+MemoryDisappear_64x64：粉紫色，默认显现；进入增强怀念范围时隐藏。
+沿用现有64x64机械方块贴图，以Tile颜色区分，Sprite和Color可在Tile资源修改。
+
+显现时100%不透明并启用整格碰撞；隐藏时0透明度且取消碰撞。
+在编辑模式两种均显示，方便绘制；运行后按各自规则初始化。
+逐格使用世界坐标中心判断增强怀念范围，范围取EmotionResonance的Radius。离开范围后恢复默认状态。
+增强悲伤时停优先：暂停每格的显隐和碰撞状态更新，解冻后重新判断怀念范围。
+
+推荐拖入Prefabs/MemoryBlocksGrid.prefab：含MemoryAppear和MemoryDisappear两个独立Tilemap图层，各自有TilemapCollider2D及MemoryBlockMap。
+模板各有一个示例格子，可擦除后绘制实际关卡。
+也可用现有Grid新建两个Tilemap图层，然后使用相应调色板绘制。
+运行时会自动为含MemoryBlockTile的Tilemap补充MemoryBlockMap和TilemapCollider2D，不需要逐格挂脚本。运行中新增/替换/擦除也会更新。
+请使用独立图层，以免原有MemoryGridTarget或其他控制器整体隐藏该图层。
+
+Tiles/MemoryAppear.asset和MemoryDisappear.asset中的Visible In Memory控制方向，可独立修改。
+Tools > Emergence > Setup Memory Blocks可补建缺失素材；不会改动现有关卡布局。
