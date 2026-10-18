@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
+  m_Name: "03_情感碎片教学"
+  m_EditorClassIdentifier: ""
+  blockPlayerInput: 1
+  typewriter: 1
+  charactersPerSecond: 30
+  lines:
+  - speaker: "尼"
+    text: "这是情感碎片。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "尼"
+    text: "在离开模拟空间之前，我们需要收集足够多的情感碎片。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "尼"
+    text: "这样我们才能获得情感数据。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "尼"
+    text: "走吧。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  stagingNotes: "原稿第03段：情感碎片教学。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"

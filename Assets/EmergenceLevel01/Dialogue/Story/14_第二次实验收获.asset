@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
+  m_Name: "14_第二次实验收获"
+  m_EditorClassIdentifier: ""
+  blockPlayerInput: 1
+  typewriter: 1
+  charactersPerSecond: 30
+  lines:
+  - speaker: "尼"
+    text: "今天也收获满满呢！"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "怎么样？"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "博士"
+    text: "没有出现数据错误之类的异常吧？"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "伊"
+    text: "没有问题。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "伊"
+    text: "只是，我感觉身体好像多了一些东西。"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  - speaker: "尼"
+    text: "是感受到情感了吗？"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: ""
+  stagingNotes: "原稿第14段：第二次实验收获。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
