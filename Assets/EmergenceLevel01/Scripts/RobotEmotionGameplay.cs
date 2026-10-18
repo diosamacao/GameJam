@@ -52,12 +52,15 @@ namespace Emergence.Level01
         }
         // Lethal hazards bypass emotion immunity and cancel any pending switch.
         public bool DieAndRespawn(){
-            if(Time.time<safeUntil || !isActiveAndEnabled)return false;
+            if(Time.time<safeUntil || !isActiveAndEnabled || LevelFlowController.IsTransitioning || LocalTimeTarget.IsStopped(this))return false;
             safeUntil=Time.time+electricGraceSeconds;
             CancelSwitch();
             var transfer=GetComponent<EmotionTransfer>();if(transfer)transfer.CancelTransfer();
             motor.SetMoveInput(0);motor.CancelJumpRequest();
-            body.position=respawnPoint?(Vector2)respawnPoint.position:initialPosition;body.velocity=Vector2.zero;
+            var target=initialPosition;
+            if(!isNpc && !SceneCheckpointState.TryGet(gameObject.scene,out target))target=respawnPoint?(Vector2)respawnPoint.position:initialPosition;
+            transform.position=new Vector3(target.x,target.y,transform.position.z);body.position=target;body.velocity=Vector2.zero;body.angularVelocity=0;
+            var npc=GetComponent<EmotionNpc>();if(isNpc && npc)npc.ResetRouteAfterDeath();
             motor.ResetGroundState();onDied.Invoke();return true;
         }
         public float JumpHeight => (CurrentEmotion==RobotEmotion.Joy && !IsSwitching ? HappyCells : BaseCells)*CellHeight*(abilities?abilities.jumpHeightMultiplier:fallbackJumpMultiplier);
@@ -82,7 +85,7 @@ namespace Emergence.Level01
         static Rect Offset(Rect rect,float x,float y){rect.position+=new Vector2(x,y);return rect;}
         Font font;
         readonly ContactPoint2D[] contacts=new ContactPoint2D[64];
-        void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=!isNpc && requireEmotionUnlocks?EmotionProgress.Current:face.CurrentEmotion;if(!isNpc)face.SetVisualEmotion(CurrentEmotion);initialPosition=transform.position;}
+        void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=!isNpc && requireEmotionUnlocks?EmotionProgress.Current:face.CurrentEmotion;if(!isNpc)face.SetVisualEmotion(CurrentEmotion);initialPosition=transform.position;if(!isNpc && SceneCheckpointState.TryGet(gameObject.scene,out var checkpoint)){transform.position=new Vector3(checkpoint.x,checkpoint.y,transform.position.z);body.position=checkpoint;body.velocity=Vector2.zero;}}
         void Start(){if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
         public bool BeginSwitch()=>BeginSwitch(NextEmotion(CurrentEmotion));
         public bool BeginSwitch(RobotEmotion target)

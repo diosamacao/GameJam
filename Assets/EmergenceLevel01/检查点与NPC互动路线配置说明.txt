@@ -1,0 +1,32 @@
+NPC互动路线与场景检查点
+
+1. NPC路线
+在EmotionNpc > Route中，每个元素新增Requires Player Interaction。
+勾选：在前往该节点之前等待，玩家靠近后按E放行当前节点。下一节点独立判断，不会一次放行整条路线。
+不勾选：按照原有流程自动执行。Activate On Start及Activate()仍用于启动自动路线；第0个节点需要互动时，也可直接靠近按E启动。
+Interaction Radius配置互动距离，按键沿用玩家EmotionTransfer.Interact Key。等待时会显示操作提示。
+等待节点的路线互动优先于情感传递，本次按键不会同时传递情感；需要传递时松开后再长按E。
+NPC死亡会清空速度、跳跃请求、节点等待计时和互动授权，回到自身出生点，从Route元素0重新开始；若元素0需要互动，会重新等待。NPC保留已接收的情感。
+NPC可被危险区、激光及原有电击逻辑杀死。DangerZone只有增强勇气可免疫（其Enhanced Courage Is Safe关闭则任何情感都不免疫）。普通勇气不免疫DangerZone；电块原有普通勇气免疫规则不变。
+NPC冻结时不受伤。死亡后的短暂无敌时间配置RobotEmotionGameplay > Electric Grace Seconds。
+
+2. 场景检查点（不是持久游戏存档）
+预制体：Prefabs/EmotionExpansion/SceneCheckpoint.prefab。
+将预制体根节点放在安全地面上的玩家脚底出生位置，触发框默认向上覆盖2单位。玩家接触后激活；NPC不能激活。
+可指定Spawn Point或Spawn Offset调整出生位置；位置在触碰时记录。Indicator和Active/Inactive Color配置标记颜色，On Activated用于音效等事件。
+玩家死亡回到最后触碰的检查点；没有检查点时兼容原Respawn Point，未指定则回初始出生点。
+检查点只存在于当前运行内存；停止运行、正常切换/重新进入关卡时清空。不会写硬盘，不会保存机关或碎片状态。
+同场景有多个检查点时，最后触碰的生效。重叠检查点可能互相覆盖，请避免触发区重叠。
+
+3. R键重置场景
+运行时自动安装SceneResetController，无需逐场景手工添加。
+需要在编辑器配置时，拖入Prefabs/EmotionExpansion/SceneResetController.prefab；每场景只放一个。
+Reset Key默认R；Fade Config可使用Generated/LevelFlow.asset共用换关黑幕时长。留空则查找场景出口的Flow，再使用本组件的备用时长。
+按R：取消当前对话与操作，画面渐黑，重新载入当前场景，玩家放到最后检查点，再渐入。重置中拒绝重复触发。
+场景必须已保存并加入Build Settings。R不受碎片收集门槛影响，且不会播放关卡开场或返回实验室剧情。
+机关、碎片、NPC等场景对象恢复场景初始配置；只有检查点位置跨本次重载保留。已有全局情感解锁进度沿用原系统，不因重置清空。
+没有检查点时R重置回场景初始出生位置。检查点应放在重置后仍有地面的位置，不要放在会移动的平台上。
+可通过SceneResetController.ResetScene()绑定按钮/UnityEvent；TryReset()返回是否成功启动。
+
+4. 预制体生成
+Tools > Emergence > Setup Scene Checkpoints可补建两个预制体，不自动改变关卡布局。

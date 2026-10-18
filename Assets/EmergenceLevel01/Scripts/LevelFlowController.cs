@@ -9,7 +9,8 @@ namespace Emergence.Level01
         public static bool IsTransitioning=>instance && instance.busy;
         public static bool IsFading=>instance && instance.fading;
         public static float FadeOpacity=>instance?instance.opacity:0;
-        public static bool SuppressSceneIntro=>instance && instance.busy && instance.returningToLab;
+        public static bool SuppressSceneIntro=>instance && instance.busy && (instance.returningToLab || instance.resettingScene);
+        bool resettingScene;
         bool busy,returningToLab,finished,cancelled;
         bool fading;
         float opacity;
@@ -23,6 +24,23 @@ namespace Emergence.Level01
             if(!Application.CanStreamedLevelBeLoaded(route.nextScene) || (viaLab && !Application.CanStreamedLevelBeLoaded(config.laboratoryScene))){Debug.LogError("关卡未加入Build Settings，请运行Setup Doctor And Level Flow或检查LevelFlow配置。",config);return false;}
             if(!instance){var go=new GameObject("LevelFlowController");instance=go.AddComponent<LevelFlowController>();DontDestroyOnLoad(go);}
             instance.busy=true;instance.StartCoroutine(instance.Transition(config,route.nextScene,route.laboratoryDialogue,viaLab));return true;
+        }
+        public static bool ResetCurrentScene(float fadeOut=.35f,float fadeIn=.35f,float hold=.1f){
+            var scene=SceneManager.GetActiveScene();
+            if(IsTransitioning || string.IsNullOrEmpty(scene.path) || !Application.CanStreamedLevelBeLoaded(scene.path))return false;
+            if(!instance){var go=new GameObject("LevelFlowController");instance=go.AddComponent<LevelFlowController>();DontDestroyOnLoad(go);}
+            instance.busy=instance.resettingScene=true;
+            SceneCheckpointState.PrepareReload(scene);
+            if(DialogueDirector.Instance)DialogueDirector.Instance.Stop();
+            instance.StartCoroutine(instance.ResetScene(scene.path,fadeOut,fadeIn,hold));return true;
+        }
+        IEnumerator ResetScene(string scene,float fadeOut,float fadeIn,float hold){
+            foreach(var actor in FindObjectsOfType<RobotEmotionGameplay>()){actor.CancelSwitch();var motor=actor.GetComponent<RobotMotor2D>();motor.SetMoveInput(0);motor.CancelJumpRequest();motor.CancelDirectedJump();var transfer=actor.GetComponent<EmotionTransfer>();if(transfer)transfer.CancelTransfer();}
+            var config=ScriptableObject.CreateInstance<LevelFlowConfig>();config.fadeOutSeconds=Mathf.Max(0,fadeOut);config.fadeInSeconds=Mathf.Max(0,fadeIn);config.blackHoldSeconds=Mathf.Max(0,hold);
+            yield return LoadWithFade(scene,config);
+            // Let scene Start coroutines observe intro suppression after the fade ends.
+            yield return null;
+            Destroy(config);resettingScene=busy=false;
         }
         IEnumerator Transition(LevelFlowConfig config,string next,DialogueSequence dialogue,bool viaLab){
             foreach(var actor in FindObjectsOfType<RobotEmotionGameplay>()){actor.CancelSwitch();var motor=actor.GetComponent<RobotMotor2D>();motor.SetMoveInput(0);motor.CancelJumpRequest();}
