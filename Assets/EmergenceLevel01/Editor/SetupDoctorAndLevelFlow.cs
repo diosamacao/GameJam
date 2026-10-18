@@ -43,9 +43,6 @@ namespace Emergence.Level01.Editor
                 config=ScriptableObject.CreateInstance<LevelFlowConfig>();var routes=new List<LevelFlowConfig.Route>();
                 for(int i=0;i<scenes.Length-1;i++){
                     var route=new LevelFlowConfig.Route{fromScene=Path.GetFileNameWithoutExtension(scenes[i]),nextScene=Path.GetFileNameWithoutExtension(scenes[i+1])};
-                    if(i>0){string dialoguePath=Root+"Dialogue/Returns/ReturnFromLevel"+(i+1).ToString("00")+".asset";var dialogue=AssetDatabase.LoadAssetAtPath<DialogueSequence>(dialoguePath);
-                        if(!dialogue){dialogue=ScriptableObject.CreateInstance<DialogueSequence>();dialogue.stagingNotes="返回实验室的占位台词，请策划替换；对话结束后自动前往 "+route.nextScene;dialogue.lines=new[]{new DialogueSequence.Line{speaker="博士",text="这次实验的记录已经保存。<pause=0.5>准备好后，我们继续下一阶段。"}};AssetDatabase.CreateAsset(dialogue,dialoguePath);}route.laboratoryDialogue=dialogue;
-                    }
                     routes.Add(route);
                 }
                 config.routes=routes.ToArray();AssetDatabase.CreateAsset(config,ConfigPath);

@@ -39,21 +39,19 @@ namespace Emergence.Level01.Editor
             var initialLoad=SceneManager.LoadSceneAsync("Level01_InitialLab");while(!initialLoad.isDone)yield return null;yield return Wait(.25f);if(DialogueDirector.Instance)DialogueDirector.Instance.Stop();
             var activePlayers=UnityEngine.Object.FindObjectsOfType<RobotEmotionGameplay>();RobotEmotionGameplay activePlayer=null;foreach(var actor in activePlayers)if(!actor.isNpc){activePlayer=actor;break;}Check(activePlayer && activePlayer.CurrentEmotion==RobotEmotion.Joy,"Equipped emotion restores on newly loaded player");var exit=new GameObject("ExitProbe").AddComponent<LevelExitInteraction>();exit.flow=flow;exit.transform.position=activePlayer.transform.position;loadAlphas.Clear();sawPartialFade=false;SceneManager.sceneLoaded+=Loaded;Time.timeScale=0;Check(exit.TryInteract(activePlayer),"Configured level exit interaction starts transition");Check(!LevelFlowController.Begin(flow),"Duplicate exit interaction rejected during transition");while(LevelFlowController.IsTransitioning)yield return null;
             Time.timeScale=1;Check(SceneManager.GetActiveScene().name=="Level02_InitialLab","Level 1 goes directly to level 2 even when time scale is zero");Check(!LevelFlowController.IsFading && LevelFlowController.FadeOpacity==0,"Fade is fully cleared after arriving");
-            foreach(var route in flow.routes){
-                if(route.fromScene==flow.laboratoryScene)continue;
-                yield return Wait(.2f);if(DialogueDirector.Instance)DialogueDirector.Instance.Stop();
+            flow.laboratoryScene="Unused_Laboratory_Not_In_Build";
+            for(int i=1;i<flow.routes.Length;i++){
+                var route=flow.routes[i];yield return Wait(.2f);if(DialogueDirector.Instance)DialogueDirector.Instance.Stop();
                 Check(SceneManager.GetActiveScene().name==route.fromScene,"Route starts in "+route.fromScene);
                 if(route.fromScene=="Level04_InitialLab"){flow.fadeOutSeconds=0;flow.fadeInSeconds=0;flow.blackHoldSeconds=0;}
-                Check(LevelFlowController.Begin(flow),"Exit accepts route to "+route.nextScene);
-                while(SceneManager.GetActiveScene().name!=flow.laboratoryScene || !DialogueDirector.Instance || !DialogueDirector.Instance.IsPlaying)yield return null;
-                Check(!LevelFlowController.IsFading && LevelFlowController.FadeOpacity==0,"Lab dialogue begins only after the black overlay clears");
-                Check(DialogueDirector.Instance.Sequence==route.laboratoryDialogue,"Returned lab plays route dialogue instead of original opening");
-                yield return Wait(.15f);Check(LevelFlowController.IsTransitioning && SceneManager.GetActiveScene().name==flow.laboratoryScene,"Next level waits for dialogue completion");
-                Check(EmotionProgress.IsUnlocked(RobotEmotion.Joy) && EmotionProgress.IsUnlocked(RobotEmotion.Anger) && !EmotionProgress.IsUnlocked(RobotEmotion.Sadness),"Unlock progress survives scene loads");
-                DialogueDirector.Instance.Advance();while(LevelFlowController.IsTransitioning)yield return null;
-                Check(SceneManager.GetActiveScene().name==route.nextScene,"Dialogue completion loads "+route.nextScene);
+                int before=loadAlphas.Count;
+                Check(LevelFlowController.Begin(flow),"Direct exit accepts route with invalid legacy lab and configured legacy dialogue");
+                while(LevelFlowController.IsTransitioning)yield return null;
+                Check(SceneManager.GetActiveScene().name==route.nextScene && loadAlphas.Count==before+1,"Exactly one load directly enters "+route.nextScene);
+                Check(!LevelFlowController.SuppressSceneIntro,"Destination intro remains enabled");
+                Check(EmotionProgress.IsUnlocked(RobotEmotion.Joy) && EmotionProgress.IsUnlocked(RobotEmotion.Anger) && !EmotionProgress.IsUnlocked(RobotEmotion.Sadness),"Unlock progress survives direct scene loads");
             }
-            Check(sawPartialFade,"Transition includes intermediate opacity frames");Check(loadAlphas.Count==7 && loadAlphas.TrueForAll(alpha=>alpha>=.999f),"All seven scene loads happen behind fully opaque black, including zero-duration transitions");
+            Check(sawPartialFade,"Transition includes intermediate opacity frames");Check(loadAlphas.Count==4 && loadAlphas.TrueForAll(alpha=>alpha>=.999f),"All four direct scene loads happen behind fully opaque black, including zero-duration transitions");
             Check(flow.Find("Level05_InitialLab")==null,"Final existing level has no invented next scene");
             EmotionProgress.Reset();Check(!EmotionProgress.IsUnlocked(RobotEmotion.Joy) && EmotionProgress.Current==RobotEmotion.Blank,"New-game reset clears emotion progress");
         }

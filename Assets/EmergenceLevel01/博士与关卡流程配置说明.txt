@@ -32,18 +32,17 @@ Use Emotion Idle 打开使用静态情感姿态，关闭恢复原工作动画。
 博士/过关交互物优先于传送门、怀念物品和NPC传递；多个博士/出口在范围内时选择最近者。
 新增出口预制体未替你随意摆入关卡，需在设计的出口位置放置或把组件挂到指定物体。
 
-路线与实验室剧情
-打开 Generated/LevelFlow.asset：
-Level01_InitialLab → Level02_InitialLab（直接）
-Level02_InitialLab → Level01_InitialLab（对应剧情）→ Level03_InitialLab
-Level03_InitialLab → Level01_InitialLab（对应剧情）→ Level04_InitialLab
-Level04_InitialLab → Level01_InitialLab（对应剧情）→ Level05_InitialLab
-当前只有五关，Level05 不会自动跳到不存在的第六关。增加新关后，在 Routes 增加一条并将场景加入 Build Settings。
-每条 Route 的 Laboratory Dialogue 可独立指定。Dialogue/Returns 下已创建三份占位对白，请策划替换。
-返回实验室会跳过原有 playOnStart 开场对白和自动触发对白；C 按原规则显示全文/推进，对话全部结束后自动进目标关。
-没有配置 Laboratory Dialogue 时，返回实验室后立即进入目标关。
-如果中转剧情被外部 Stop() 取消，不会擅自进入下一关；流程停止并留在实验室。
-加载过程和中转剧情期间锁定玩家操作，防止重复触发出口。
+直接切换目标关卡
+打开 Generated/LevelFlow.asset，在 Routes 中配置 From Scene（当前关卡）和 Next Scene（目标关卡）：
+Level01_InitialLab → Level02_InitialLab
+Level02_InitialLab → Level03_InitialLab
+Level03_InitialLab → Level04_InitialLab
+Level04_InitialLab → Level05_InitialLab
+所有出口只进入该条路线的Next Scene，不再返回Level01，也不播放中转对白。
+原Laboratory Scene和Laboratory Dialogue字段已隐藏并停止使用，旧对白资源保留，可自行绑定普通剧情触发器。
+目标场景自身的开场剧情仍按其配置正常播放。
+当前只有五关，Level05不会自动跳到不存在的第六关。增加新关后，在Routes增加一条并将场景加入Build Settings。
+加载期间锁定玩家操作，防止重复触发出口；碎片收集门槛和R键检查点重置保持原规则。
 五个现有关卡已加入 Build Settings，Level01 排在首位，保留其他已有场景条目。
 
 编辑器工具
@@ -53,5 +52,5 @@ Tools > Emergence > Preview Doctor Emotions：输出七种站姿预览至 Logs/D
 
 换关黑幕
 LevelFlow.asset 的 Fade Out Seconds 控制画面变黑时长，Fade In Seconds 控制新场景黑幕消退时长，默认各0.35秒；Black Hold Seconds为新场景加载后的全黑停留，默认0.1秒。
-先完全遮黑才加载，加载期间保持全黑，到达后淡出。返回实验室的剧情在黑幕消退后播放；剧情结束再遮黑并加载下一关。
+先完全遮黑才加载目标关卡，加载期间保持全黑，到达后淡出。每次通关只加载一次目标场景。
 使用真实时间，不受Time.timeScale影响。时长设为0可关闭对应渐变，但加载时仍会遮黑。
