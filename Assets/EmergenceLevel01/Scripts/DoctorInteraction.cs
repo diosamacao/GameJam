@@ -26,6 +26,6 @@ namespace Emergence.Level01
         void Complete(){if(EmotionProgress.IsPlayable(unlockEmotion))EmotionProgress.Unlock(unlockEmotion);Completed=true;onCompleted.Invoke();}
         void Detach(){if(listening){listening.Finished-=Finished;listening.Cancelled-=Cancelled;}listening=null;playing=null;}
         protected override void OnDisable(){Detach();base.OnDisable();}
-        void Reset(){interactionHint="F 与博士交谈";}
+        void Reset(){interactionHint="F 交谈";}
     }
 }

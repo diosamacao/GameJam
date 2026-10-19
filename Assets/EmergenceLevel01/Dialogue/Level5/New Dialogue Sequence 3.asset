@@ -17,6 +17,7 @@ MonoBehaviour:
   charactersPerSecond: 20
   autoPlay: 1
   autoAdvanceDelay: 2
+  memoryAfterCompletion: {fileID: 0}
   lines:
   - speaker: "\u4F11\u6BD4"
     text: "\u7231\uFF0C\u662F\u9634\u6C89\u6C89\u7684\u96E8\u5929"
@@ -24,7 +25,7 @@ MonoBehaviour:
     minimumDisplaySeconds: 0
     cue: 
   - speaker: "\u4F11\u6BD4"
-    text: "\u4F60\u5728\u8DEF\u8FB9\u8D70\u7740\uFF0C\u6CA1\u6709\u6491\u4F1E\u3002\r\n"
+    text: "\u4F60\u5728\u8DEF\u8FB9\u8D70\u7740\uFF0C\u6CA1\u6709\u6491\u4F1E\u3002\r"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

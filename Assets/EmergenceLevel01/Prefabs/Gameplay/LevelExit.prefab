@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3915f505d5af449bafad66166a436973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 2
-  interactionHint: "E \u524D\u5F80\u4E0B\u4E00\u5173"
+  interactionRadius: 3.65
+  interactionHint: "F \u8FDB\u5165"
   showHint: 1
-  hintSize: {x: 220, y: 30}
+  hintSize: {x: 100, y: 30}
   hintBottomOffset: 120
   flow: {fileID: 11400000, guid: 6efb79beab74dfb409caea7b6233d079, type: 2}
 --- !u!212 &8110211823994681643

@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 101
+  interactionKey: 102
   transferRadius: 2
   holdSeconds: 0.5
   showProgress: 1
@@ -506,7 +507,7 @@ MonoBehaviour:
   interactionRadius: 2
   interactionHint: "E \u4EA4\u4E92"
   showHint: 1
-  hintSize: {x: 220, y: 30}
+  hintSize: {x: 100, y: 30}
   hintBottomOffset: 120
   route:
   - target: {fileID: 0}

@@ -6,8 +6,8 @@ namespace Emergence.Level01
     {
         public LevelFlowConfig flow;
         protected override bool Available=>flow && flow.Find(SceneManager.GetActiveScene().name)!=null;
-        protected override string DisplayHint=>EmotionFragment.Remaining(gameObject.scene)>0 ? "还需收集情感碎片："+EmotionFragment.Remaining(gameObject.scene) : base.DisplayHint;
+        protected override string DisplayHint=>EmotionFragment.Remaining(gameObject.scene)>0 ? "情感碎片："+EmotionFragment.Remaining(gameObject.scene) : base.DisplayHint;
         protected override bool Interact(RobotEmotionGameplay player)=>EmotionFragment.Remaining(gameObject.scene)==0 && LevelFlowController.Begin(flow);
-        void Reset(){interactionHint="F 前往下一关";}
+        void Reset(){interactionHint="F 进入";}
     }
 }

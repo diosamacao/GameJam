@@ -613,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: advanceKey
-      value: 32
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: panelWidth
@@ -623,6 +623,10 @@ PrefabInstance:
       propertyPath: playOnStart
       value: 
       objectReference: {fileID: 11400000, guid: 4305bfc3bce08944787763513842af56, type: 2}
+    - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
+      propertyPath: panelColor.a
+      value: 0.7176471
+      objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: onStarted.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -1062,6 +1066,10 @@ PrefabInstance:
       propertyPath: levelGrid
       value: 
       objectReference: {fileID: 7836921009342018738}
+    - target: {fileID: 2769377242966152987, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
+      propertyPath: showSwitchProgress
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6879504927973330936, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.04
@@ -1101,6 +1109,10 @@ PrefabInstance:
     - target: {fileID: 6879504927973330936, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7279245944140856413, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
+      propertyPath: progressRect.y
+      value: 900
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -17,7 +17,13 @@ MonoBehaviour:
   charactersPerSecond: 20
   autoPlay: 1
   autoAdvanceDelay: 1.5
+  memoryAfterCompletion: {fileID: 0}
   lines:
+  - speaker: "\u5C3C"
+    text: "\u6570\u5B57\u952E\u53EF\u4EE5\u5207\u6362\u5BF9\u5E94\u60C5\u611F\u54E6\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
   - speaker: "\u5C3C"
     text: "\u4E0D\u540C\u7684\u60C5\u611F\u4F1A\u8BA9\u4F60\u62E5\u6709\u4E0D\u540C\u72B6\u6001\uFF0C\u8BD5\u7740\u53BB\u7406\u89E3\u5427\u3002"
     charactersPerSecond: 0

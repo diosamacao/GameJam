@@ -20,7 +20,7 @@ MonoBehaviour:
   memoryAfterCompletion: {fileID: 0}
   lines:
   - speaker: "\u91CC\u514B"
-    text: "\u4F60\u7684\u540D\u5B57\u5C31\u53EB\u4F11\u6BD4\u5427\u3002\n"
+    text: "\u4F60\u7684\u540D\u5B57\u5C31\u53EB\u4F11\u6BD4\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

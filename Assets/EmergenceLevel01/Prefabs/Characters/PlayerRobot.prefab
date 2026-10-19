@@ -318,8 +318,8 @@ MonoBehaviour:
   showProgress: 1
   progressRect:
     serializedVersion: 2
-    x: 20
-    y: 80
+    x: 840
+    y: 900
     width: 260
     height: 28
 --- !u!114 &7980644001623311471
@@ -329,11 +329,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993940386601983178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8b2b4dd5be24f598c8d92700376b654, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   effectEnabled: 1
   entryAlpha: 0.45
   restingAlpha: 0.12

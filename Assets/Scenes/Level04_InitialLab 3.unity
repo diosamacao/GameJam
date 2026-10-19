@@ -670,7 +670,7 @@ Transform:
   m_GameObject: {fileID: 374344340}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 420.17, y: 26.75, z: 0}
+  m_LocalPosition: {x: 421.05, y: 26.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -815,7 +815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8230354082560471708, guid: 579237e3bd6955845ae7bcb8a27e6131, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 421.39
+      value: 421.44
       objectReference: {fileID: 0}
     - target: {fileID: 8230354082560471708, guid: 579237e3bd6955845ae7bcb8a27e6131, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1754,6 +1754,26 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 2147483649
+  - first: {x: 398, y: 19, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 3
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
+  - first: {x: 399, y: 19, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 3
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 3
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 2147483649
   - first: {x: 400, y: 19, z: 0}
     second:
       serializedVersion: 2
@@ -2200,7 +2220,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 64
+  - m_RefCount: 66
     m_Data: {fileID: 11400000, guid: 98f57f7d2b5246d418fbd16be05be4a6, type: 2}
   - m_RefCount: 34
     m_Data: {fileID: 11400000, guid: dc889182f74339f4f8c450cb71e13c9d, type: 2}
@@ -2213,12 +2233,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 98
+  - m_RefCount: 100
     m_Data: {fileID: 21300000, guid: 9ce01f0bd70471e4193361ea15c8cd8c, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 98
+  - m_RefCount: 100
     m_Data:
       e00: 1
       e01: 0
@@ -2243,7 +2263,7 @@ Tilemap:
     m_Data: {r: 1.34928e-40, g: 1.34928e-40, b: 1.34928e-40, a: 1.34928e-40}
   - m_RefCount: 34
     m_Data: {r: 1, g: 0.65, b: 0.8, a: 1}
-  - m_RefCount: 64
+  - m_RefCount: 66
     m_Data: {r: 0.75, g: 0.5, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -2323,26 +2343,6 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 864855540}
     m_ColliderPaths:
-    - - X: 4020000000
-        Y: 200000000
-      - X: 4000000000
-        Y: 200000000
-      - X: 4000000000
-        Y: 190000000
-      - X: 3980000000
-        Y: 190000000
-      - X: 3980000000
-        Y: 230000000
-      - X: 3969999872
-        Y: 230000000
-      - X: 3969999872
-        Y: 170000000
-      - X: 3929999872
-        Y: 170000000
-      - X: 3929999872
-        Y: 160000000
-      - X: 4020000000
-        Y: 160000000
     - - X: 4100000000
         Y: 180000000
       - X: 4110000128
@@ -2431,6 +2431,22 @@ CompositeCollider2D:
         Y: 170000000
       - X: 4240000000
         Y: 170000000
+    - - X: 4020000000
+        Y: 200000000
+      - X: 3980000000
+        Y: 200000000
+      - X: 3980000000
+        Y: 230000000
+      - X: 3969999872
+        Y: 230000000
+      - X: 3969999872
+        Y: 170000000
+      - X: 3929999872
+        Y: 170000000
+      - X: 3929999872
+        Y: 160000000
+      - X: 4020000000
+        Y: 160000000
     - - X: 3800000000
         Y: 220000000
       - X: 3780000000
@@ -2515,9 +2531,7 @@ CompositeCollider2D:
       - {x: 409.00003, y: 17}
     - - {x: 401.99997, y: 16}
       - {x: 401.99997, y: 20}
-      - {x: 400, y: 19.999971}
-      - {x: 399.99997, y: 19}
-      - {x: 398, y: 19.000029}
+      - {x: 398, y: 20.000029}
       - {x: 397.99997, y: 23}
       - {x: 397, y: 22.999971}
       - {x: 396.99997, y: 17}
@@ -8182,7 +8196,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 41bd949f04cebb646a6697127e6af583, type: 2}
     - target: {fileID: 5657629521655872999, guid: 6a681e274cde5b54db18741208cf03b0, type: 3}
       propertyPath: interactOnce
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

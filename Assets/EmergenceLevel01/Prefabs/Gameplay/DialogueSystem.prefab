@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playOnStart: {fileID: 0}
-  advanceKey: 99
+  advanceKey: 9
   referenceWidth: 1280
   scaleRange: {x: 0.65, y: 1.5}
   panelWidth: 700
   minimumHeight: 130
   screenMargin: 32
-  topOffset: 20
+  topOffset: 3
   padding: 22
   speakerLineHeight: 32
   footerHeight: 30

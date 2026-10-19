@@ -17,9 +17,50 @@ MonoBehaviour:
   charactersPerSecond: 20
   autoPlay: 0
   autoAdvanceDelay: 2
+  memoryAfterCompletion: {fileID: 0}
   lines:
   - speaker: "\u4F0A"
     text: "\u4F11\u6BD4\uFF01\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u535A\u58EB\uFF01\u4F11\u6BD4\u600E\u4E48\u6CA1\u51FA\u6765\uFF1F"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u4EC0\u4E48\u4F11\u6BD4\uFF1F\u6211\u91CF\u4EA7\u4E86\u60C5\u611F\u6838\u5FC3\uFF0C\u7ED3\u679C\u642D\u8F7D\u4E86\u5B83\u7684\u673A\u68B0\u90FD\u51FA\u73B0\u4E86\u5F02\u5E38\uFF01\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u5B83\u4EEC\u90FD\u5931\u63A7\u66B4\u8D70\u4E86\uFF01\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u600E\u4E48\u56DE\u4E8B\uFF1F"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u53EF\u80FD\u662F\u60C5\u611F\u6570\u636E\u7D0A\u4E71\u4E86\uFF0C\u73B0\u5728\u6CA1\u6709\u529E\u6CD5\u4E86\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u53EA\u80FD\u5C06\u4F60\u4EEC\u7684\u6570\u636E\u4F20\u9001\u56DE\u8FC7\u53BB\u6765\u907F\u514D\u8FD9\u573A\u707E\u96BE\u4E86\uFF01\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u5FEB\uFF01\u8FDB\u5165\u5B9E\u9A8C\u4ED3\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6240\u4EE5\u4F11\u6BD4\u624D\u4F1A\u7559\u5728\u90A3\u91CC\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

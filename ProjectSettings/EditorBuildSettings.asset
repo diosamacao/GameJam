@@ -53,4 +53,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level04_InitialLab 2.unity
     guid: 75be49882f8c7b0409a72f6e04b937f9
+  - enabled: 1
+    path: Assets/Scenes/Level01_InitialLab re5.unity
+    guid: 5a66c5697ad431e4eab3f6ab68d0d0f1
+  - enabled: 1
+    path: Assets/Scenes/Level01_InitialLab re6.unity
+    guid: bc39299a87fb4ad42b3e721c11b2b13a
+  - enabled: 1
+    path: Assets/Scenes/Level04_InitialLab 3.unity
+    guid: df6846fbca6de994c996414b808b2517
   m_configObjects: {}

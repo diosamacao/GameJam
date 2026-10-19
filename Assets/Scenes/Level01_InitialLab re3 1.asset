@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   memoryScene: Level01_InitialLab re3
   dialogue: {fileID: 11400000, guid: b29ff2f0b2b988a4cba00dd76b04131d, type: 2}
-  fadeOutSeconds: 0.35
-  fadeInSeconds: 0.35
+  transitionColor: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 0.6901961}
+  fadeOutSeconds: 0.3
+  fadeInSeconds: 0.3
   blackHoldSeconds: 0.1

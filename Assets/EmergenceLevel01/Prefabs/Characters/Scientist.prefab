@@ -155,7 +155,7 @@ MonoBehaviour:
   interactionRadius: 2
   interactionHint: "E \u4E0E\u535A\u58EB\u4EA4\u8C08"
   showHint: 1
-  hintSize: {x: 220, y: 30}
+  hintSize: {x: 100, y: 30}
   hintBottomOffset: 120
   dialogue: {fileID: 0}
   unlockEmotion: 4

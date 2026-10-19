@@ -511,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: advanceKey
-      value: 32
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: panelWidth
@@ -521,6 +521,10 @@ PrefabInstance:
       propertyPath: playOnStart
       value: 
       objectReference: {fileID: 11400000, guid: b29ff2f0b2b988a4cba00dd76b04131d, type: 2}
+    - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
+      propertyPath: panelColor.a
+      value: 0.7019608
+      objectReference: {fileID: 0}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: onStarted.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -567,34 +571,11 @@ Transform:
   - {fileID: 326449109}
   m_Father: {fileID: 5526239894497568248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1782935673 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 466908417874321893, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
-  m_PrefabInstance: {fileID: 3630731544706701792}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1925953718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8684167014431305360, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
   m_PrefabInstance: {fileID: 3630731544706701792}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1925953719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782935673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3915f505d5af449bafad66166a436973, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionRadius: 2.6
-  interactionHint: "E \u524D\u5F80\u4E0B\u4E00\u5173"
-  showHint: 1
-  hintSize: {x: 220, y: 30}
-  hintBottomOffset: 120
-  flow: {fileID: 11400000, guid: 6efb79beab74dfb409caea7b6233d079, type: 2}
 --- !u!1001 &2093078700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -875,6 +856,10 @@ PrefabInstance:
       propertyPath: levelGrid
       value: 
       objectReference: {fileID: 7836921009342018738}
+    - target: {fileID: 2769377242966152987, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
+      propertyPath: showSwitchProgress
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6275193560300950589, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1161,14 +1146,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExperimentPod0
       objectReference: {fileID: 0}
-    - target: {fileID: 4695144534300382746, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
-      propertyPath: open
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695144534300382746, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
-      propertyPath: openAlpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8684167014431305360, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 26.31
@@ -1212,10 +1189,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 466908417874321893, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1925953719}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
 --- !u!4 &4017639881018505407
 Transform:

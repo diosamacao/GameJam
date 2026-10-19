@@ -184,10 +184,10 @@ namespace Emergence.Level01
             float x=Screen.width*.5f,y=Screen.height-chargeBottomOffset;
             GUI.Box(Offset(chargePanel,x,y),GUIContent.none);
             string name=EmotionName(TargetEmotion??CurrentEmotion);
-            GUI.Label(Offset(chargeLabel,x,y),"下一情绪："+name+"  ·  "+Mathf.CeilToInt(Progress*100)+"%",style);
+            //GUI.Label(Offset(chargeLabel,x,y),"下一情绪："+name+"  ·  "+Mathf.CeilToInt(Progress*100)+"%",style);
             var old=GUI.color;GUI.color=progressColor;
             GUI.DrawTexture(new Rect(x+progressBar.x,y+progressBar.y,progressBar.width*Progress,progressBar.height),Texture2D.whiteTexture);GUI.color=old;
-            GUI.Label(Offset(chargeHint,x,y),"蓄力满 "+HoldSeconds.ToString("0.##")+" 秒自动切换 · "+cancelSwitchKey+" 取消",style);
+           //GUI.Label(Offset(chargeHint,x,y),"蓄力满 "+HoldSeconds.ToString("0.##")+" 秒自动切换 · "+cancelSwitchKey+" 取消",style);
         }
         string UnlockedHints(){
             string text="";
