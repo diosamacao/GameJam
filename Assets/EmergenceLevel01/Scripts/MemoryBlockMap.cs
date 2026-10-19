@@ -15,7 +15,7 @@ namespace Emergence.Level01
         static void Painted(Tilemap candidate,Tilemap.SyncTile[] tiles){if(!Application.isPlaying || !candidate || !candidate.gameObject.scene.IsValid())return;foreach(var item in tiles)if(candidate.GetTile(item.position) is MemoryBlockTile){Ensure(candidate);break;}}
         static void Ensure(Tilemap candidate){if(!candidate.GetComponent<MemoryBlockMap>())candidate.gameObject.AddComponent<MemoryBlockMap>();}
         void OnEnable(){map=GetComponent<Tilemap>();Tilemap.tilemapTileChanged+=Changed;RefreshCells();}
-        void Changed(Tilemap candidate,Tilemap.SyncTile[] tiles){if(candidate!=map)return;foreach(var item in tiles)if(!cells.TryGetValue(item.position,out var old) || map.GetTile(item.position)!=old.tile){dirty=true;break;}}
+        void Changed(Tilemap candidate,Tilemap.SyncTile[] tiles){if(candidate!=map)return;foreach(var item in tiles)if(cells.TryGetValue(item.position,out var old)?map.GetTile(item.position)!=old.tile:map.GetTile(item.position) is MemoryBlockTile){dirty=true;break;}}
         public void RefreshCells(){
             if(!map)map=GetComponent<Tilemap>();dirty=false;
             foreach(var pos in new List<Vector3Int>(cells.Keys))if(map.GetTile(pos)!=cells[pos].tile)cells.Remove(pos);
@@ -26,7 +26,7 @@ namespace Emergence.Level01
         }
         void Update(){if(dirty)RefreshCells();else Evaluate();}
         void FixedUpdate(){if(dirty)RefreshCells();else Evaluate();}
-        void Evaluate(){bool changed=false;foreach(var pair in cells){var pos=pair.Key;var cell=pair.Value;if(map.GetTile(pos)!=cell.tile)continue;var center=map.GetCellCenterWorld(pos);
+        void Evaluate(){bool changed=false;foreach(var pair in cells){var pos=pair.Key;var cell=pair.Value;var center=map.GetCellCenterWorld(pos);
                 if(EmotionResonance.InEnhancedRange(center,RobotEmotion.Sadness))continue;
                 bool visible=EmotionResonance.InEnhancedRange(center,RobotEmotion.Memory)==cell.tile.visibleInMemory;
                 if(cell.visible==visible)continue;cell.visible=visible;Apply(pos,cell);changed=true;

@@ -60,7 +60,7 @@ namespace Emergence.Level01
             motor.SetMoveInput(0);motor.CancelJumpRequest();
             var target=initialPosition;
             if(!isNpc && !SceneCheckpointState.TryGet(gameObject.scene,out target))target=respawnPoint?(Vector2)respawnPoint.position:initialPosition;
-            transform.position=new Vector3(target.x,target.y,transform.position.z);body.position=target;body.velocity=Vector2.zero;body.angularVelocity=0;
+            EmotionResonance.InvalidateStates();transform.position=new Vector3(target.x,target.y,transform.position.z);body.position=target;body.velocity=Vector2.zero;body.angularVelocity=0;
             var npc=GetComponent<EmotionNpc>();if(isNpc && npc)npc.ResetRouteAfterDeath();
             motor.ResetGroundState();onDied.Invoke();return true;
         }
@@ -93,7 +93,7 @@ namespace Emergence.Level01
         {
             if(isNpc || !CanUseEmotionAbilities || !motor.IsGrounded || !IsEmotionUnlocked(target))return false;
             if(target==CurrentEmotion || (target!=RobotEmotion.Joy && target!=RobotEmotion.Anger && target!=RobotEmotion.Sadness && target!=RobotEmotion.Courage && target!=RobotEmotion.Guardian && target!=RobotEmotion.Memory))return false;
-            IsSwitching=true;TargetEmotion=target;started=Time.time;motor.SetControlsLocked(true);
+            EmotionResonance.InvalidateStates();IsSwitching=true;TargetEmotion=target;started=Time.time;motor.SetControlsLocked(true);
             face.SetVisualEmotion(RobotEmotion.Loading);return true;
         }
         static RobotEmotion NextEmotion(RobotEmotion current)
@@ -119,13 +119,13 @@ namespace Emergence.Level01
         public void CancelSwitch()
         {
             if(!IsSwitching)return;
-            IsSwitching=false;TargetEmotion=null;motor.SetControlsLocked(false);face.SetVisualEmotion(CurrentEmotion);
+            EmotionResonance.InvalidateStates();IsSwitching=false;TargetEmotion=null;motor.SetControlsLocked(false);face.SetVisualEmotion(CurrentEmotion);
         }
         // External gameplay/debug entry point; cannot bypass an in-progress switch.
         public bool TrySetEmotion(RobotEmotion value)
         {
             if((isNpc && !receiving) || (!isNpc && !IsEmotionUnlocked(value)) || IsSwitching || value==RobotEmotion.Loading || !face.SetVisualEmotion(value))return false;
-            CurrentEmotion=value;if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
+            CurrentEmotion=value;EmotionResonance.InvalidateStates();if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
         }
         public bool ReceiveEmotion(RobotEmotionGameplay source){
             if(!CanUseEmotionAbilities || LocalTimeTarget.IsStopped(this) || !isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
@@ -169,7 +169,8 @@ namespace Emergence.Level01
             }
         }
         void OnApplicationFocus(bool focus){if(!focus)CancelSwitch();}
-        void OnDisable(){CancelSwitch();}
+        void OnEnable(){EmotionResonance.InvalidateStates();}
+        void OnDisable(){EmotionResonance.InvalidateStates();CancelSwitch();}
         void OnGUI()
         {
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;

@@ -27,7 +27,7 @@ namespace Emergence.Level01
             cooldowns[id]=Time.time+cooldownSeconds;
             var motor=actor.GetComponent<RobotMotor2D>();var body=actor.GetComponent<Rigidbody2D>();
             actor.CancelSwitch();motor.CancelJumpRequest();motor.SetMoveInput(0);motor.ResetGroundState();
-            body.position=destination?(Vector2)destination.position:destinationPosition;if(clearVelocity)body.velocity=Vector2.zero;
+            EmotionResonance.InvalidateStates();body.position=destination?(Vector2)destination.position:destinationPosition;if(clearVelocity)body.velocity=Vector2.zero;
             var transfer=actor.GetComponent<EmotionTransfer>();if(transfer)transfer.CancelTransfer();
             contacts.Clear();onTeleported.Invoke();return true;
         }

@@ -7,7 +7,7 @@ namespace Emergence.Level01
     {
         static readonly HashSet<RobotEmotion> unlocked=new HashSet<RobotEmotion>();
         public static bool EnhancementUnlocked {get;private set;}
-        public static void UnlockEnhancement(){EnhancementUnlocked=true;}
+        public static void UnlockEnhancement(){EnhancementUnlocked=true;EmotionResonance.InvalidateStates();}
         public static void CheckEnhancementScene(string scene,string unlockScene,bool includeLater){
             if(scene==unlockScene){UnlockEnhancement();return;}
             if(!includeLater || string.IsNullOrEmpty(scene) || string.IsNullOrEmpty(unlockScene))return;
@@ -20,6 +20,6 @@ namespace Emergence.Level01
         public static bool IsUnlocked(RobotEmotion emotion)=>emotion==RobotEmotion.Blank || unlocked.Contains(emotion);
         public static bool Unlock(RobotEmotion emotion)=>IsPlayable(emotion) && unlocked.Add(emotion);
         public static void Remember(RobotEmotion emotion){if(IsUnlocked(emotion))Current=emotion;}
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] public static void Reset(){unlocked.Clear();Current=RobotEmotion.Blank;EnhancementUnlocked=false;}
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] public static void Reset(){unlocked.Clear();Current=RobotEmotion.Blank;EnhancementUnlocked=false;EmotionResonance.InvalidateStates();}
     }
 }

@@ -22,11 +22,12 @@ namespace Emergence.Level01
             var own=GetComponent<EmotionResonance>();
             foreach(var source in EmotionResonance.Actors){
                 // The NPC cannot keep itself visible merely by standing inside its own aura.
-                if(!source || source==own)continue;
-                source.RefreshState();
+                if(!source || source==own || source.Emotion!=RobotEmotion.Memory || ((Vector2)(source.transform.position-transform.position)).sqrMagnitude>source.radius*source.radius)continue;
+                source.EnsureState();
                 if(source.Enhanced && source.Emotion==RobotEmotion.Memory && Vector2.Distance(source.transform.position,transform.position)<=source.radius){inMemory=true;break;}
             }
-            state=inMemory?MemoryNpcState.Memory:MemoryNpcState.Normal;
+            var next=inMemory?MemoryNpcState.Memory:MemoryNpcState.Normal;
+            if(next!=state){state=next;EmotionResonance.InvalidateStates();}
             ApplyAlpha();
         }
         void LateUpdate(){ApplyAlpha();}
@@ -36,6 +37,7 @@ namespace Emergence.Level01
             // The face component copies the body's tint to its dynamically created screen.
             var face=GetComponent<RobotEmotionController>();if(face)face.RefreshVisual();
         }
-        void OnDisable(){if(visuals!=null)foreach(var visual in visuals)if(visual){var c=visual.color;c.a=1;visual.color=c;}}
+        void OnEnable(){EmotionResonance.InvalidateStates();}
+        void OnDisable(){EmotionResonance.InvalidateStates();if(visuals!=null)foreach(var visual in visuals)if(visual){var c=visual.color;c.a=1;visual.color=c;}}
     }
 }

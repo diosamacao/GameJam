@@ -36,7 +36,10 @@ namespace Emergence.Level01
         void FixedUpdate(){
             MotionVelocity=Vector2.zero;
             if(timeTarget.Frozen)return;
-            while(deferred.Count>0)deferred.Dequeue()();
+            // Process only the current batch: a newly frozen event may enqueue itself again.
+            int pendingCount=deferred.Count;
+            for(int i=0;i<pendingCount;i++)deferred.Dequeue()();
+            if(LocalTimeTarget.IsStopped(this))return;
             switches.RemoveWhere(s=>!s || !s.isActiveAndEnabled);
             bool held=switches.Count>0;
             if(activation==PlatformActivation.Continuous && !held){returning=true;wait=0;}
