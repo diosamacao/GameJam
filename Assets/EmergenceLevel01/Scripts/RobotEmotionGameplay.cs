@@ -36,7 +36,8 @@ namespace Emergence.Level01
         public RobotEmotion? TargetEmotion {get;private set;}
         public float Progress => IsSwitching ? Mathf.Clamp01((Time.time-started)/HoldSeconds) : 0;
         public bool EmotionMechanicsEnabled=>MemoryNpcStateController.AllowsEmotion(this);
-        public bool CanUseEmotionAbilities => EmotionMechanicsEnabled && !DialogueDirector.IsBlockingInput && !LevelFlowController.IsTransitioning && isActiveAndEnabled && !IsSwitching;
+        public bool CanResonate => EmotionMechanicsEnabled && !DialogueDirector.IsBlockingInput && !LevelFlowController.IsTransitioning && isActiveAndEnabled && !IsSwitching;
+        public bool CanUseEmotionAbilities => !GameMenuUI.BlocksGameplay && CanResonate;
         public bool CanBreak => CanUseEmotionAbilities && (CurrentEmotion==RobotEmotion.Anger || CurrentEmotion==RobotEmotion.StrongAnger);
         [Tooltip("Optional checkpoint. If unset, respawn at the initial player position.")]
         public Transform respawnPoint;
@@ -137,6 +138,7 @@ namespace Emergence.Level01
         }
         void Update()
         {
+            if(GameMenuUI.BlocksGameplay)return;
             if(IsSwitching && (!motor.IsGrounded || DialogueDirector.IsBlockingInput))CancelSwitch();
             if(keyboardInput) {
                 if(Input.GetKeyDown(joyKey))BeginSwitch(RobotEmotion.Joy);
@@ -174,6 +176,7 @@ namespace Emergence.Level01
         void OnDisable(){EmotionResonance.InvalidateStates();CancelSwitch();}
         void OnGUI()
         {
+            if(GameMenuUI.BlocksGameplay)return;
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},hudFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=hudFontSize,alignment=TextAnchor.MiddleCenter};

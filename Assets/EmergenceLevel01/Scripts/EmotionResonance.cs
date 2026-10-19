@@ -41,7 +41,7 @@ namespace Emergence.Level01
         void OnEnable(){if(!Actor)Actor=GetComponent<RobotEmotionGameplay>();if(!Actors.Contains(this))Actors.Add(this);InvalidateStates();}
         void OnDisable(){Actors.Remove(this);InvalidateStates();Enhanced=false;if(aura)aura.enabled=false;if(halo)halo.enabled=false;if(shield)shield.SetActive(false);}
         public bool Matches(EmotionResonance other){
-            if(!EmotionProgress.EnhancementUnlocked || !other || other==this || !isActiveAndEnabled || !other.isActiveAndEnabled || !Actor.CanUseEmotionAbilities || !other.Actor.CanUseEmotionAbilities)return false;
+            if(!EmotionProgress.EnhancementUnlocked || !other || other==this || !isActiveAndEnabled || !other.isActiveAndEnabled || !Actor.CanResonate || !other.Actor.CanResonate)return false;
             if((!Actor.isNpc && !other.Actor.isNpc) || Emotion==RobotEmotion.Blank || Emotion==RobotEmotion.Loading || Emotion!=other.Emotion)return false;
             float range=Actor.isNpc && other.Actor.isNpc?Mathf.Min(radius,other.radius):(Actor.isNpc?other.radius:radius);
             return ((Vector2)(transform.position-other.transform.position)).sqrMagnitude<=range*range;
@@ -76,7 +76,7 @@ namespace Emergence.Level01
                 float size=rangeEffect?radius:auraRadius*(1+Mathf.Sin(effectTime*pulseSpeed)*pulseAmount);
                 Circle(aura,size,auraWidth,color);color.a*=.2f;Circle(halo,size,auraWidth*4,color);
             }
-            bool protecting=Actor.CanUseEmotionAbilities && Emotion==RobotEmotion.Guardian;
+            bool protecting=Actor.CanResonate && Emotion==RobotEmotion.Guardian;
             if(!protecting){if(shield)shield.SetActive(false);return;}
             if(!shield){shield=new GameObject("EmotionShield",typeof(EmotionShield));shield.transform.SetParent(transform,false);front=shield.AddComponent<BoxCollider2D>();bubble=shield.AddComponent<CircleCollider2D>();front.isTrigger=bubble.isTrigger=true;shieldLine=NewLine("ShieldVisual",shield.transform);}
             shield.SetActive(true);front.enabled=!Enhanced;bubble.enabled=Enhanced;var motor=GetComponent<RobotMotor2D>();float facing=motor.visual && motor.visual.flipX?-1:1;

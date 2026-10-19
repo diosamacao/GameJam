@@ -10,6 +10,14 @@ namespace Emergence.Level01
         [Min(0)] public float fadeOutSeconds=.35f;
         [Min(0)] public float fadeInSeconds=.35f;
         [Min(0)] public float blackHoldSeconds=.1f;
+        [Header("可选：加载关卡前的黑幕文字")]
+        public string introText;
+        public Font introFont;
+        [Min(1)] public int introFontSize=36;
+        [Min(0)] public float introWaitSeconds=1f;
+        [Min(0)] public float introFadeInSeconds=.8f;
+        [Min(0)] public float introHoldSeconds=2f;
+        [Min(0)] public float introFadeOutSeconds=1f;
         [Serializable] public sealed class Route
         {
             public string fromScene;

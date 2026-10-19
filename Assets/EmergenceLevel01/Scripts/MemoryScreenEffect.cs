@@ -26,7 +26,7 @@ namespace Emergence.Level01
         }
         void OnDisable(){Opacity=0;remembering=false;elapsed=0;startAlpha=0;}
         void OnGUI(){
-            if(Opacity<=0)return;
+            if(GameMenuUI.IsPaused || Opacity<=0)return;
             var old=GUI.color;int depth=GUI.depth;GUI.depth=guiDepth;
             var color=tint;color.a*=Opacity;GUI.color=color;
             GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),Texture2D.whiteTexture);

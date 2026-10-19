@@ -17,7 +17,7 @@ namespace Emergence.Level01
         void Update(){if(gameObject.scene==SceneManager.GetActiveScene() && Input.GetKeyDown(resetKey))TryReset();}
         public void ResetScene(){TryReset();}
         public bool TryReset(){
-            if(gameObject.scene!=SceneManager.GetActiveScene())return false;
+            if(GameMenuUI.BlocksGameplay || gameObject.scene!=SceneManager.GetActiveScene())return false;
             var config=fadeConfig;
             if(!config)foreach(var exit in FindObjectsOfType<LevelExitInteraction>())if(exit.gameObject.scene==gameObject.scene && exit.flow){config=exit.flow;break;}
             return LevelFlowController.ResetCurrentScene(config?config.fadeOutSeconds:fadeOutSeconds,config?config.fadeInSeconds:fadeInSeconds,config?config.blackHoldSeconds:blackHoldSeconds);

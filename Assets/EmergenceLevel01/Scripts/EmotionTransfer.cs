@@ -41,6 +41,6 @@ namespace Emergence.Level01
         public bool TransferNearest(){return BeginTransfer();}
         void OnDisable(){CancelTransfer();consumed=false;}
         void OnApplicationFocus(bool focus){if(!focus){CancelTransfer();consumed=true;}}
-        void OnGUI(){if(showProgress && target)GUI.Box(progressRect,"传递情感 "+Mathf.CeilToInt(Progress*100)+"%");}
+        void OnGUI(){if(GameMenuUI.BlocksGameplay)return;if(showProgress && target)GUI.Box(progressRect,"传递情感 "+Mathf.CeilToInt(Progress*100)+"%");}
     }
 }

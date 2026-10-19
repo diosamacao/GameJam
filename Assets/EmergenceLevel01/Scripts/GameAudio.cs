@@ -60,7 +60,7 @@ namespace Emergence.Level01
             foreach(var voice in voices){if(Time.unscaledTime>=voice.until){chosen=voice;break;}if(voice.priority>=cue.priority && (chosen==null || voice.priority>chosen.priority || (voice.priority==chosen.priority && voice.until<chosen.until)))chosen=voice;}
             if(chosen==null)return false;
             float low=Mathf.Clamp(Mathf.Min(cue.pitchRange.x,cue.pitchRange.y),.1f,3);float high=Mathf.Clamp(Mathf.Max(cue.pitchRange.x,cue.pitchRange.y),low,3);
-            var audio=chosen.source;audio.Stop();audio.clip=clip;audio.pitch=Random.Range(low,high);audio.priority=cue.priority;
+            var audio=chosen.source;audio.Stop();audio.ignoreListenerPause=sound==GameSound.DialogueLine;audio.clip=clip;audio.pitch=Random.Range(low,high);audio.priority=cue.priority;
             chosen.gain=Mathf.Clamp01(cue.volume)*attenuation;audio.volume=chosen.gain*Mathf.Clamp01(config.masterVolume)*Mathf.Clamp01(volume);
             chosen.priority=cue.priority;chosen.until=Time.unscaledTime+clip.length/audio.pitch;audio.Play();
             lastPlayed[index]=Time.unscaledTime;LastSound=sound;PlayCount++;return true;

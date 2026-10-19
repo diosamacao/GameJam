@@ -16,6 +16,14 @@ namespace Emergence.Level01
         float opacity;
         Color curtainColor=Color.black;
         Camera handoffCamera;
+        string introText;
+        float introOpacity;
+        GUIStyle introStyle;
+        public static float IntroTextOpacity=>instance?instance.introOpacity:0;
+        public static void DisposeAfterTransition(LevelFlowConfig config){
+            if(instance)instance.StartCoroutine(instance.DisposeConfig(config));else Destroy(config);
+        }
+        IEnumerator DisposeConfig(LevelFlowConfig config){while(busy)yield return null;Destroy(config);}
         public static Color FadeColor=>instance?instance.curtainColor:Color.black;
         public static bool HasHandoffCamera=>instance && instance.handoffCamera && instance.handoffCamera.isActiveAndEnabled;
         void SetHandoffCamera(bool active){
@@ -66,12 +74,30 @@ namespace Emergence.Level01
             yield return Fade(1,config.fadeOutSeconds);
             // Render an opaque frame before loading, even when fade duration is zero.
             yield return null;
+            if(!string.IsNullOrWhiteSpace(config.introText)){
+                introText=config.introText;
+                introStyle=new GUIStyle{alignment=TextAnchor.MiddleCenter,font=config.introFont,fontSize=Mathf.Max(1,config.introFontSize)};
+                introStyle.normal.textColor=Color.white;
+                yield return IntroWait(config.introWaitSeconds);
+                yield return FadeIntro(1,config.introFadeInSeconds);
+                yield return IntroWait(config.introHoldSeconds);
+                yield return FadeIntro(0,config.introFadeOutSeconds);
+                introText=null;introStyle=null;
+            }
             yield return SceneManager.LoadSceneAsync(scene);
             yield return null;
             float elapsed=0;
             while(elapsed<config.blackHoldSeconds){elapsed+=Time.unscaledDeltaTime;yield return null;}
             yield return Fade(0,config.fadeInSeconds);
             fading=false;
+        }
+        IEnumerator IntroWait(float seconds){
+            float elapsed=0;while(elapsed<seconds){elapsed+=Time.unscaledDeltaTime;yield return null;}
+        }
+        IEnumerator FadeIntro(float target,float seconds){
+            float from=introOpacity,elapsed=0;
+            while(elapsed<seconds){elapsed+=Time.unscaledDeltaTime;introOpacity=Mathf.Lerp(from,target,Mathf.SmoothStep(0,1,Mathf.Clamp01(elapsed/seconds)));yield return null;}
+            introOpacity=target;
         }
         IEnumerator Fade(float target,float seconds){
             float from=opacity,elapsed=0;
@@ -86,6 +112,12 @@ namespace Emergence.Level01
             var color=GUI.color;var matrix=GUI.matrix;int depth=GUI.depth;
             GUI.depth=int.MinValue;GUI.matrix=Matrix4x4.identity;GUI.color=new Color(curtainColor.r,curtainColor.g,curtainColor.b,opacity);
             GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),Texture2D.whiteTexture);
+            if(introOpacity>0 && introStyle!=null){
+                GUI.color=new Color(1,1,1,introOpacity);
+                float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
+                GUI.matrix=Matrix4x4.Scale(new Vector3(scale,scale,1));
+                GUI.Label(new Rect(0,0,Screen.width/scale,Screen.height/scale),introText,introStyle);
+            }
             GUI.color=color;GUI.matrix=matrix;GUI.depth=depth;
         }
         void OnDestroy(){if(instance==this)instance=null;}

@@ -17,14 +17,14 @@ namespace Emergence.Level01
         void Awake(){if(!worldCamera)worldCamera=Camera.main;}
         void Update()
         {
-            if(DialogueDirector.IsBlockingInput)return;
+            if(GameMenuUI.BlocksPointer || DialogueDirector.IsBlockingInput)return;
             if(Input.GetMouseButtonDown(cancelMouseButton)||Input.GetKeyDown(cancelKey))CancelSelection();
             if(Input.GetMouseButtonDown(selectMouseButton)&&worldCamera)
             { var p=Input.mousePosition;p.z=-worldCamera.transform.position.z;ClickWorld(worldCamera.ScreenToWorldPoint(p)); }
         }
         public void ClickWorld(Vector2 point)
         {
-            if(DialogueDirector.IsBlockingInput)return;
+            if(GameMenuUI.BlocksPointer || DialogueDirector.IsBlockingInput)return;
             if(!targetDoor){CancelSelection();return;}
             if(pieces!=null)
             foreach(var piece in pieces)
@@ -45,6 +45,7 @@ namespace Emergence.Level01
         void OnDisable(){CancelSelection();}
         void OnGUI()
         {
+            if(GameMenuUI.BlocksGameplay)return;
             if(!targetDoor || targetDoor.sockets==null || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},titleFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=titleFontSize,alignment=TextAnchor.MiddleCenter};style.normal.textColor=titleColor;

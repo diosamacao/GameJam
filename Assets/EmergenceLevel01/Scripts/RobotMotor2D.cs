@@ -24,7 +24,7 @@ namespace Emergence.Level01
         [Range(0,1)] public float walkInputThreshold=.01f;
         public bool IsGrounded { get; private set; }
         public bool ControlsLocked { get; private set; }
-        public bool InputBlocked => ControlsLocked || DialogueDirector.IsBlockingInput || LevelFlowController.IsTransitioning;
+        public bool InputBlocked => GameMenuUI.BlocksGameplay || ControlsLocked || DialogueDirector.IsBlockingInput || LevelFlowController.IsTransitioning;
         RobotEmotionGameplay emotionGameplay;
         public float EffectiveJumpHeight => emotionGameplay && emotionGameplay.enabled ? emotionGameplay.JumpHeight : jumpHeight;
         public void SetControlsLocked(bool value) { ControlsLocked=value;if(value){input=0;jumpQueued=false;if(body)body.velocity=new Vector2(0,body.velocity.y);} }

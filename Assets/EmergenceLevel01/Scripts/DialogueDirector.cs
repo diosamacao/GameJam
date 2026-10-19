@@ -62,6 +62,7 @@ namespace Emergence.Level01
         public void Play(DialogueSequence sequence){TryPlay(sequence);}
         public bool Advance()
         {
+            if(GameMenuUI.IsPaused)return false;
             if(IsRevealing){CompleteCurrentLine();return true;}
             if(!CanAdvance)return false;
             if(LineIndex+1<Sequence.lines.Length){LineIndex++;SetLineTiming();LineChanged?.Invoke(Sequence,LineIndex);}
@@ -80,7 +81,9 @@ namespace Emergence.Level01
             float speed=CurrentLine.charactersPerSecond>0?CurrentLine.charactersPerSecond:Sequence.charactersPerSecond;
             reveal=new DialogueRevealTimeline(CurrentLine.text,speed);
         }
+        public void DelayTimeline(float seconds){if(!IsPlaying)return;float delay=Mathf.Max(0,seconds);revealStarted+=delay;completedAt+=delay;advanceAt+=delay;}
         void Update(){
+            if(GameMenuUI.IsPaused)return;
             if(!IsPlaying || Time.frameCount<=changedFrame)return;
             if(Input.GetKeyDown(advanceKey)){Advance();return;}
             if(Sequence.autoPlay && CanAdvance){
@@ -91,6 +94,7 @@ namespace Emergence.Level01
         void OnDisable(){Stop();if(Instance==this)Instance=null;}
         void OnGUI()
         {
+            if(GameMenuUI.BlocksGameplay)return;
             if(!IsPlaying)return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},bodyFontSize);
             float scale=Mathf.Clamp(Screen.width/Mathf.Max(1,referenceWidth),Mathf.Max(.01f,scaleRange.x),Mathf.Max(scaleRange.x,scaleRange.y));

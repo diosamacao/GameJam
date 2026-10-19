@@ -1,0 +1,26 @@
+主界面与暂停窗口配置
+
+打开 Assets/Scenes/MainMenu.unity 后运行即可预览主界面。
+MainMenu 已加入 Build Settings 第一位，原有关卡顺序保留。
+界面由 GameMenuUI 在运行时创建，因此编辑模式下场景中仅有摄像机。
+
+配置资源：Assets/EmergenceLevel01/Resources/GameMenuConfig.asset
+在 Inspector 中可修改标题、副标题、开始关卡、字体、配色、角色素材、位置、缩放、旋转、开始淡入淡出时间和暂停快捷键。
+角色素材复用已有机器人身体、表情头像和博士原图。
+默认开始关卡为 Level01_InitialLab；开始游戏会重置本次会话的情感解锁进度。
+
+游戏内点击右上角齿轮或按 Escape 打开暂停窗口。
+暂停会停止游戏时间、游戏音效、玩家操作和剧情播放计时；继续游戏恢复暂停前状态。
+退出游戏：打包版本关闭程序；Unity 编辑器内停止 Play。
+暂停窗口自动出现在各关卡，无需逐个场景挂载。
+
+验证：独立 Unity 测试工程中编译并通过 19 项运行检查。
+预览和检查报告：项目 Logs/GameMenu 文件夹。
+开始过渡：黑幕淡入 → 黑屏等待 1 秒 → “接入信号”淡入 0.8 秒 → 停留 2 秒 → 文字淡出 1 秒 → 加载第一关并揭开黑幕。
+在 GameMenuConfig 的“开始游戏 · 接入信号过渡”配置文字和时长；Start Fade Seconds 控制两端黑幕淡变时长。留空文字可跳过字幕。
+
+游戏通关交互：将 Prefabs/GameCompletionInteraction.prefab 拖到最终关卡的终点位置，或在已有物体上添加 GameCompletionInteraction。
+该预制体只提供交互逻辑，可放在现有终端、门等美术物体旁；不要在同一位置保留普通 LevelExitInteraction，以免交互目标冲突。
+玩家靠近后按 F；仍需收集完当前场景所有情感碎片。
+默认：黑幕淡入 0.8 秒 → 等待 1 秒 → “机械情感”换行“完”淡入 1 秒 → 完全显示 2 秒 → 返回主界面。
+组件 Inspector 可改交互半径、字幕、字体字号、各阶段时长和返回的主界面名称。
