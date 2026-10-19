@@ -51,5 +51,5 @@ MonoBehaviour:
     nextScene: Level05_InitialLab
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
   - fromScene: Level05_InitialLab
-    nextScene: Level05_InitialLab
+    nextScene: Level01_InitialLab re6
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}

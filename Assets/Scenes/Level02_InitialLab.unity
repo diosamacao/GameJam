@@ -1465,6 +1465,10 @@ PrefabInstance:
       propertyPath: route.Array.data[0].position.y
       value: -24.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1544606895816892230, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
+      propertyPath: route.Array.data[0].requiresPlayerInteraction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3946205830441536118, guid: d4b276d870e6d7e4a9cac389156ca2f4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 269.47
