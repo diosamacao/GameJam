@@ -7,6 +7,14 @@ namespace Emergence.Level01.Editor
 {
     public static class SetupGameMenu
     {
+        [MenuItem("Tools/Emergence/Create Emotion Switch Trigger Prefab")]
+        public static void CreateEmotionTriggerPrefab(){
+            const string path="Assets/EmergenceLevel01/Prefabs/EmotionSwitchTrigger.prefab";
+            if(AssetDatabase.LoadAssetAtPath<GameObject>(path))return;
+            var go=new GameObject("EmotionSwitchTrigger");go.AddComponent<EmotionSwitchTrigger>();
+            var area=go.GetComponent<BoxCollider2D>();area.isTrigger=true;area.size=new Vector2(2,3);
+            PrefabUtility.SaveAsPrefabAsset(go,path);Object.DestroyImmediate(go);AssetDatabase.SaveAssets();
+        }
         [MenuItem("Tools/Emergence/Create Game Completion Prefab")]
         public static void CreateCompletionPrefab(){
             const string path="Assets/EmergenceLevel01/Prefabs/GameCompletionInteraction.prefab";

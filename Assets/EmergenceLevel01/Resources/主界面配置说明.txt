@@ -24,3 +24,11 @@ MainMenu 已加入 Build Settings 第一位，原有关卡顺序保留。
 玩家靠近后按 F；仍需收集完当前场景所有情感碎片。
 默认：黑幕淡入 0.8 秒 → 等待 1 秒 → “机械情感”换行“完”淡入 1 秒 → 完全显示 2 秒 → 返回主界面。
 组件 Inspector 可改交互半径、字幕、字体字号、各阶段时长和返回的主界面名称。
+
+自动切换情感区域：Prefabs/EmotionSwitchTrigger.prefab。
+拖入关卡后调整 Box Collider 2D 的 Size/Offset 或 Edit Collider 设置范围，保持 Is Trigger 开启。
+Target Emotion 指定目标情感（Joy 开心、Anger 愤怒、Sadness 悲伤、Courage 勇气、Guardian 守护、Memory 怀念、Blank 无情感）。
+Unlock Target Emotion 默认开启，触发时一并解锁；关闭则目标未解锁时不执行，也不消耗单次触发。
+Trigger Once 默认开启，仅在当前场景实例成功触发一次；关闭后离开并再次进入可重复触发。重载场景后重置。
+玩家进入范围后立即切换，无需按键或蓄力；NPC 不受影响。暂停、剧情阻止输入、切场景或触发器时停时不会执行；仍在区域内时会在限制解除后重试。
+On Triggered 可绑定成功后的事件。外部代码可调用 TryTrigger(player)，ResetTrigger() 可重置使用状态。

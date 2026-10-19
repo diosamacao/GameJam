@@ -17,6 +17,7 @@ namespace Emergence.Level01.Editor
         static VerifyGameMenu(){EditorApplication.playModeStateChanged+=Mode;}
         const string Fixture="Assets/__MenuGameplayValidation.unity";
         public static void Batch(){
+            SetupGameMenu.CreateEmotionTriggerPrefab();
             EditorSceneManager.OpenScene("Assets/Scenes/Level01_InitialLab.unity");SetupGameMenu.Build();
             var scene=EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
             var camera=new GameObject("Game Camera").AddComponent<Camera>();camera.orthographic=true;camera.transform.position=new Vector3(0,0,-10);camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.025f,.047f,.075f);camera.tag="MainCamera";
@@ -90,6 +91,18 @@ namespace Emergence.Level01.Editor
             yield return RealWait(.08f);Check(director.LineIndex==0,"Resuming does not skip dialogue elapsed during pause");
             yield return RealWait(.3f);Check(director.LineIndex==1,"Dialogue autoplay resumes normally");
             Time.timeScale=1;director.Stop();Check(!motor.InputBlocked && player.CanUseEmotionAbilities,"Gameplay controls restored");
+            var trigger=new GameObject("Emotion trigger test").AddComponent<EmotionSwitchTrigger>();
+            trigger.transform.position=player.transform.position;trigger.GetComponent<BoxCollider2D>().isTrigger=true;
+            trigger.GetComponent<BoxCollider2D>().size=new Vector2(10,10);trigger.targetEmotion=RobotEmotion.Memory;
+            int triggerCount=0;trigger.onTriggered.AddListener(()=>triggerCount++);
+            yield return RealWait(.15f);
+            Check(trigger.HasTriggered && player.CurrentEmotion==RobotEmotion.Memory && EmotionProgress.IsUnlocked(RobotEmotion.Memory),"Physics entry switches and unlocks configured emotion");
+            Check(triggerCount==1 && !trigger.TryTrigger(player),"One-shot trigger fires once despite staying inside");
+            trigger.ResetTrigger();trigger.unlockTargetEmotion=false;trigger.targetEmotion=RobotEmotion.Guardian;
+            Check(!trigger.TryTrigger(player) && !trigger.HasTriggered,"Locked emotion failure does not consume trigger");
+            trigger.unlockTargetEmotion=true;ui.Pause();Check(!trigger.TryTrigger(player),"Pause blocks automatic emotion trigger");ui.Resume();
+            trigger.triggerOnce=false;Check(trigger.TryTrigger(player) && player.CurrentEmotion==RobotEmotion.Guardian,"Repeatable trigger switches through gameplay API");
+            UnityEngine.Object.Destroy(trigger.gameObject);
             player.requireEmotionUnlocks=false;player.TrySetEmotion(RobotEmotion.Joy);EmotionProgress.UnlockEnhancement();var npc=Spawn(true,(Vector2)player.transform.position+Vector2.right);npc.ReceiveEmotion(player);var resonance=player.GetComponent<EmotionResonance>();resonance.RefreshState();Check(resonance.Enhanced,"Enhancement fixture is active");ui.Pause();resonance.RefreshState();Check(resonance.Enhanced,"Pause preserves resonance and range mechanics");ui.Resume();UnityEngine.Object.Destroy(npc.gameObject);
             Check(ui.QuitButton && ui.ContinueButton,"Pause window contains quit and continue buttons");
             Check(EditorBuildSettings.scenes[0].path==SetupGameMenu.ScenePath,"Main menu is first build scene");
