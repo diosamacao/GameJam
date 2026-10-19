@@ -5,7 +5,7 @@ Project 窗口右键 → Create → Emergence → Memory Scene。
 也可以复制 MemoryScene_Default.asset，给每段回忆单独命名。
 Memory Scene：目标场景，默认 Level01_InitialLab；必须已加入 Build Settings。
 Dialogue：进入回忆场景后播放的 DialogueSequence。
-Fade Out Seconds / Fade In Seconds / Black Hold Seconds：往返黑幕时间。
+Fade Out Seconds / Fade In Seconds / Black Hold Seconds：往返淡入淡出时间。
 默认模板未指定 Dialogue，使用前请指定，避免播放空回忆。
 
 2. 剧情播完自动进入回忆
@@ -34,3 +34,5 @@ MemorySceneTrigger.ResetTrigger()：允许一次性触发器再次使用。
 回忆期间不能普通通关、重置或再进入另一段回忆。
 中止回忆对话也会安全返回原场景。
 原关卡暂时与回忆场景同时占用内存；自定义脚本如有 OnDisable 清理逻辑，应注意临时停用行为。
+
+回忆场景往返默认使用白色幕布，Transition Color 可自定义颜色；普通换关及 R 重置仍使用黑幕。

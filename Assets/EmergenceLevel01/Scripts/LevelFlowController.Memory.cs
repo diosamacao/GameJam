@@ -22,6 +22,7 @@ namespace Emergence.Level01
             instance.StartCoroutine(instance.MemoryTrip(config));return true;
         }
         IEnumerator MemoryTrip(MemorySceneConfig config){
+            curtainColor=config.transitionColor;
             var source=memorySource;
             var activeRoots=new List<GameObject>();
             var savedBodies=new Dictionary<Rigidbody2D,Vector2>();
@@ -66,6 +67,7 @@ namespace Emergence.Level01
                 if(source.IsValid() && source.isLoaded)SceneManager.SetActiveScene(source);
                 foreach(var root in activeRoots)if(root && !root.activeSelf)root.SetActive(true);
                 if(recalled.IsValid() && recalled.isLoaded)SceneManager.UnloadSceneAsync(recalled);
+                SetHandoffCamera(false);curtainColor=Color.black;
                 opacity=0;fading=busy=memoryTrip=false;memorySource=default;
                 EmotionResonance.InvalidateStates();
             }

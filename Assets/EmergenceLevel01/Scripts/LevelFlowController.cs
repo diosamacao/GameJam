@@ -14,6 +14,20 @@ namespace Emergence.Level01
         bool busy;
         bool fading;
         float opacity;
+        Color curtainColor=Color.black;
+        Camera handoffCamera;
+        public static Color FadeColor=>instance?instance.curtainColor:Color.black;
+        public static bool HasHandoffCamera=>instance && instance.handoffCamera && instance.handoffCamera.isActiveAndEnabled;
+        void SetHandoffCamera(bool active){
+            if(active && !handoffCamera){
+                var go=new GameObject("Transition Camera");go.transform.SetParent(transform,false);
+                handoffCamera=go.AddComponent<Camera>();handoffCamera.enabled=false;
+                handoffCamera.clearFlags=CameraClearFlags.SolidColor;handoffCamera.cullingMask=0;
+                handoffCamera.depth=-10000;handoffCamera.orthographic=true;
+                handoffCamera.allowHDR=false;handoffCamera.allowMSAA=false;handoffCamera.useOcclusionCulling=false;
+            }
+            if(handoffCamera){handoffCamera.backgroundColor=new Color(curtainColor.r,curtainColor.g,curtainColor.b,1);handoffCamera.enabled=active;}
+        }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetState(){instance=null;}
         public static bool Begin(LevelFlowConfig config){
             if(EmotionFragment.Remaining(SceneManager.GetActiveScene())>0 || !config || IsTransitioning || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return false;
@@ -46,6 +60,7 @@ namespace Emergence.Level01
             busy=false;
         }
         IEnumerator LoadWithFade(string scene,LevelFlowConfig config){
+            curtainColor=Color.black;
             GameAudio.Play(GameSound.SceneTransition);
             fading=true;
             yield return Fade(1,config.fadeOutSeconds);
@@ -62,11 +77,14 @@ namespace Emergence.Level01
             float from=opacity,elapsed=0;
             while(elapsed<seconds){elapsed+=Time.unscaledDeltaTime;opacity=Mathf.Lerp(from,target,Mathf.SmoothStep(0,1,Mathf.Clamp01(elapsed/seconds)));yield return null;}
             opacity=target;
+            // A GUI curtain alone does not count as a rendering camera in Game View.
+            // Keep a base camera alive across unload/deactivation until the reveal ends.
+            if(target>=1)SetHandoffCamera(true);else if(target<=0)SetHandoffCamera(false);
         }
         void OnGUI(){
             if(opacity<=0)return;
             var color=GUI.color;var matrix=GUI.matrix;int depth=GUI.depth;
-            GUI.depth=int.MinValue;GUI.matrix=Matrix4x4.identity;GUI.color=new Color(0,0,0,opacity);
+            GUI.depth=int.MinValue;GUI.matrix=Matrix4x4.identity;GUI.color=new Color(curtainColor.r,curtainColor.g,curtainColor.b,opacity);
             GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height),Texture2D.whiteTexture);
             GUI.color=color;GUI.matrix=matrix;GUI.depth=depth;
         }

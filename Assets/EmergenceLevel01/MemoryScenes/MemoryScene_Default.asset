@@ -17,3 +17,4 @@ MonoBehaviour:
   fadeOutSeconds: 0.35
   fadeInSeconds: 0.35
   blackHoldSeconds: 0.1
+  transitionColor: {r: 1, g: 1, b: 1, a: 1}
