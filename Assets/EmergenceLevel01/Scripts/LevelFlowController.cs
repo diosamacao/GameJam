@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 namespace Emergence.Level01
 {
-    public sealed class LevelFlowController : MonoBehaviour
+    public sealed partial class LevelFlowController : MonoBehaviour
     {
         static LevelFlowController instance;
         public static bool IsTransitioning=>instance && instance.busy;
         public static bool IsFading=>instance && instance.fading;
         public static float FadeOpacity=>instance?instance.opacity:0;
-        public static bool SuppressSceneIntro=>instance && instance.busy && instance.resettingScene;
+        public static bool SuppressSceneIntro=>instance && instance.busy && (instance.resettingScene || instance.memoryTrip);
         bool resettingScene;
         bool busy;
         bool fading;

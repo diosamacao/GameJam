@@ -65,7 +65,7 @@ namespace Emergence.Level01
             if(IsRevealing){CompleteCurrentLine();return true;}
             if(!CanAdvance)return false;
             if(LineIndex+1<Sequence.lines.Length){LineIndex++;SetLineTiming();LineChanged?.Invoke(Sequence,LineIndex);}
-            else {var finished=Sequence;Sequence=null;LineIndex=-1;onFinished.Invoke();Finished?.Invoke(finished);}
+            else {var finished=Sequence;Sequence=null;LineIndex=-1;onFinished.Invoke();Finished?.Invoke(finished);if(finished.memoryAfterCompletion && !LevelFlowController.IsMemoryTrip)LevelFlowController.BeginMemory(finished.memoryAfterCompletion);}
             return true;
         }
         public void Stop()

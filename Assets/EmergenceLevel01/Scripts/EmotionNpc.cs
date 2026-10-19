@@ -70,7 +70,7 @@ namespace Emergence.Level01
             }else motor.SetMoveInput(Mathf.Abs(delta.x)<=arrivalDistance?0:Mathf.Sign(delta.x));
         }
         void Advance(){released=false;waiting=false;jumped=false;JumpBlocked=false;if(useRoute && ++RouteIndex<route.Length)return;if(useRoute && loopRoute){RouteIndex=0;return;}StopMoving();onArrived.Invoke();}
-        protected override void OnDisable(){base.OnDisable();StopMoving();}
+        protected override void OnDisable(){base.OnDisable();if(!LevelFlowController.IsMemorySource(gameObject.scene))StopMoving();}
         void OnDrawGizmosSelected(){var from=transform.position;Gizmos.color=Color.green;if(route!=null && route.Length>0){foreach(var point in route){if(point==null)continue;var to=(Vector3)point.Position;Gizmos.color=point.movement==NpcRouteMovement.Jump?Color.yellow:Color.green;Gizmos.DrawLine(from,to);Gizmos.DrawWireSphere(to,.15f);from=to;}}else{var to=destination?destination.position:(Vector3)destinationPosition;Gizmos.DrawLine(from,to);Gizmos.DrawWireSphere(to,.15f);}}
     }
 }

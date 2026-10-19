@@ -1,0 +1,36 @@
+场景回忆配置
+
+1. 创建回忆配置
+Project 窗口右键 → Create → Emergence → Memory Scene。
+也可以复制 MemoryScene_Default.asset，给每段回忆单独命名。
+Memory Scene：目标场景，默认 Level01_InitialLab；必须已加入 Build Settings。
+Dialogue：进入回忆场景后播放的 DialogueSequence。
+Fade Out Seconds / Fade In Seconds / Black Hold Seconds：往返黑幕时间。
+默认模板未指定 Dialogue，使用前请指定，避免播放空回忆。
+
+2. 剧情播完自动进入回忆
+选择原剧情的 DialogueSequence 资源，将上面的回忆配置拖入 Memory After Completion。
+原剧情正常播放结束后进入回忆，取消原剧情不会触发。
+回忆对话播放结束后自动返回，无须在回忆对话配置另一条返回跳转。
+想全自动播放，请勾选回忆对话 Auto Play，等待时长仍使用 Auto Advance Delay。
+
+3. 碰撞触发回忆
+将 MemorySceneTrigger.prefab 拖到原关卡，调整 BoxCollider2D 的位置和 Size。
+保持 Is Trigger 勾选，把回忆配置拖入 Memory 字段。
+Trigger On Enter 控制是否通过碰撞触发；Play Once 默认勾选。
+仅玩家触发，NPC 不触发。玩家需要有 Collider2D 和 Rigidbody2D（现有玩家已配置）。
+只触发一次的记录会随原关卡保留，R 重置关卡后会重置。
+
+4. 对外接口
+LevelFlowController.BeginMemory(config)：返回是否成功启动。
+MemorySceneTrigger.Trigger()：可绑定 UnityEvent。
+MemorySceneTrigger.TryTrigger()：返回是否成功。
+MemorySceneTrigger.ResetTrigger()：允许一次性触发器再次使用。
+
+5. 返回行为
+原关卡临时停用并保留在内存，不重新加载；结束后恢复原关卡和玩家原位置。
+已收集碎片、已销毁方块和存档点保留。
+回忆场景临时加载，退出后卸载；其自带的开场对话不会抢播。
+回忆期间不能普通通关、重置或再进入另一段回忆。
+中止回忆对话也会安全返回原场景。
+原关卡暂时与回忆场景同时占用内存；自定义脚本如有 OnDisable 清理逻辑，应注意临时停用行为。

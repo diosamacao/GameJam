@@ -22,6 +22,8 @@ namespace Emergence.Level01
         public bool autoPlay=true;
         [Tooltip("全文显示完毕后的等待秒数，包含手动补全后的等待。")]
         [Min(0)] public float autoAdvanceDelay=2;
+        [Header("播放结束后进入回忆（可不配置）")]
+        public MemorySceneConfig memoryAfterCompletion;
         public Line[] lines=new Line[0];
         [TextArea(3,12)] public string stagingNotes;
     }

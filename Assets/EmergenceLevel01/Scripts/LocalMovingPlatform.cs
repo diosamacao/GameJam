@@ -55,6 +55,6 @@ namespace Emergence.Level01
             MotionVelocity=(next-body.position)/Time.fixedDeltaTime;
             body.MovePosition(next);
         }
-        void OnDisable(){deferred.Clear();switches.Clear();MotionVelocity=Vector2.zero;}
+        void OnDisable(){if(LevelFlowController.IsMemorySource(gameObject.scene))return;deferred.Clear();switches.Clear();MotionVelocity=Vector2.zero;}
     }
 }
