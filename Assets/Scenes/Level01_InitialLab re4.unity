@@ -520,7 +520,7 @@ PrefabInstance:
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: playOnStart
       value: 
-      objectReference: {fileID: 11400000, guid: 8f96843ee5a893b4b995008e4b659c5f, type: 2}
+      objectReference: {fileID: 11400000, guid: 7891f13e93f729147beae5ce1656729e, type: 2}
     - target: {fileID: 8431825932023387004, guid: c733545a773f4c547bba4787e292764f, type: 3}
       propertyPath: onStarted.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -587,8 +587,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5657629521655872999, guid: 6a681e274cde5b54db18741208cf03b0, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 24828b34eb63e414287d67d0999a247a, type: 2}
+    - target: {fileID: 5657629521655872999, guid: 6a681e274cde5b54db18741208cf03b0, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657629521655872999, guid: 6a681e274cde5b54db18741208cf03b0, type: 3}
+      propertyPath: interactionRadius
+      value: 4.21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -882,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 6275193560300950589, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8511ed7941e614a48be1fcc6b6c55c28, type: 3}
+      objectReference: {fileID: 21300000, guid: 7099c0e6f1d44621b90ff6c9e01536fe, type: 3}
     - target: {fileID: 6879504927973330936, guid: 7f647ca89d6a71d4291f1bb047117dc8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.28

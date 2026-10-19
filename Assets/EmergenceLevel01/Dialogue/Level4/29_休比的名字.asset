@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
   m_Name: "29_\u4F11\u6BD4\u7684\u540D\u5B57"
   m_EditorClassIdentifier: 
-  blockPlayerInput: 1
+  blockPlayerInput: 0
   typewriter: 1
   charactersPerSecond: 20
   autoPlay: 1
   autoAdvanceDelay: 2
+  memoryAfterCompletion: {fileID: 0}
   lines:
   - speaker: "\u4F0A"
     text: "\u90A3\u4F60\u7684\u540D\u5B57\u5462\uFF1F"
@@ -34,7 +35,12 @@ MonoBehaviour:
     minimumDisplaySeconds: 0
     cue: 
   - speaker: "\u4F11\u6BD4"
-    text: "\u54CE\u5440\uFF0C\u4E0D\u5C0F\u5FC3\u66B4\u9732\u4E86\u3002\n\u6BD4\u8D77\u8FD9\u4E2A\uFF0C\u5148\u6536\u96C6\u60C5\u611F\u788E\u7247\u5427\u3002"
+    text: "\u54CE\u5440\uFF0C\u4E0D\u5C0F\u5FC3\u66B4\u9732\u4E86\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F11\u6BD4"
+    text: "\u6BD4\u8D77\u8FD9\u4E2A\uFF0C\u5148\u6536\u96C6\u60C5\u611F\u788E\u7247\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

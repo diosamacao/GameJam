@@ -15,11 +15,22 @@ MonoBehaviour:
   blockPlayerInput: 1
   typewriter: 1
   charactersPerSecond: 20
-  autoPlay: 1
+  autoPlay: 0
   autoAdvanceDelay: 2
+  memoryAfterCompletion: {fileID: 11400000, guid: 1ae3ef533187f9b4bb44224fd7c89bd2, type: 2}
   lines:
   - speaker: "\u4F11\u6BD4"
-    text: "\u8FD9\u6837\uFF0C\u5C31\u591F\u4E86\u3002\n\u518D\u89C1\u4E86\uFF0C\u91CC\u514B\u3002"
+    text: "\u8FD9\u6837\uFF0C\u5C31\u591F\u4E86\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F11\u6BD4"
+    text: "\u518D\u89C1\u4E86\uFF0C\u91CC\u514B\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u91CC\u514B\uFF1F\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
     cue: 

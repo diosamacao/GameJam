@@ -39,14 +39,17 @@ MonoBehaviour:
     nextScene: Level04_InitialLab
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
   - fromScene: Level04_InitialLab
-    nextScene: Level01_InitialLab re3
-    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
-  - fromScene: Level01_InitialLab re3
-    nextScene: Level04_InitialLab 1
-    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
-  - fromScene: Level04_InitialLab 1
     nextScene: Level01_InitialLab re3 1
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
   - fromScene: Level01_InitialLab re3 1
-    nextScene: Level04_InitialLab 2
+    nextScene: Level04_InitialLab 3
+    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
+  - fromScene: Level04_InitialLab 3
+    nextScene: Level01_InitialLab re4
+    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
+  - fromScene: Level01_InitialLab re4
+    nextScene: Level05_InitialLab
+    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
+  - fromScene: Level05_InitialLab
+    nextScene: Level05_InitialLab
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}

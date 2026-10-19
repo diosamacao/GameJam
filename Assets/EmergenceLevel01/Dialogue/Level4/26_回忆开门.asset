@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
   m_Name: "26_\u56DE\u5FC6\u5F00\u95E8"
   m_EditorClassIdentifier: 
-  blockPlayerInput: 1
+  blockPlayerInput: 0
   typewriter: 1
   charactersPerSecond: 20
   autoPlay: 1
   autoAdvanceDelay: 2
+  memoryAfterCompletion: {fileID: 0}
   lines:
   - speaker: "\u5C3C"
     text: "\u8FD9\u662F\u5229\u7528\u56DE\u5FC6\uFF0C\u8BA9\u95E8\u56DE\u5230\u4E86\u6253\u5F00\u7684\u72B6\u6001\u5417......"

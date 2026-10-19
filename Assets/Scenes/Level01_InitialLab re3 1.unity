@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3915f505d5af449bafad66166a436973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionRadius: 2
+  interactionRadius: 2.6
   interactionHint: "E \u524D\u5F80\u4E0B\u4E00\u5173"
   showHint: 1
   hintSize: {x: 220, y: 30}

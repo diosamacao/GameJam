@@ -15,8 +15,9 @@ MonoBehaviour:
   blockPlayerInput: 1
   typewriter: 1
   charactersPerSecond: 20
-  autoPlay: 1
+  autoPlay: 0
   autoAdvanceDelay: 2
+  memoryAfterCompletion: {fileID: 0}
   lines:
   - speaker: "\u4F0A"
     text: "\u535A\u58EB\uFF01\u4F11\u6BD4\u600E\u4E48\u6CA1\u51FA\u6765\uFF1F"
