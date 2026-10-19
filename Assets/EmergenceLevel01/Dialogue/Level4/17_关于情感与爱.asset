@@ -10,40 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "17_关于情感与爱"
-  m_EditorClassIdentifier: ""
-  blockPlayerInput: 1
+  m_Name: "17_\u5173\u4E8E\u60C5\u611F\u4E0E\u7231"
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 0
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "伊"
-    text: "尼，之前实验的时候我只是读取了情感数据。\n现在我能感受到它们了。\n但是我要怎么才能自发的产生情感呢？"
+  - speaker: "\u4F0A"
+    text: "\u5C3C\uFF0C\u4E4B\u524D\u5B9E\u9A8C\u7684\u65F6\u5019\u6211\u53EA\u662F\u8BFB\u53D6\u4E86\u60C5\u611F\u6570\u636E\u3002\u73B0\u5728\u6211\u80FD\u611F\u53D7\u5230\u5B83\u4EEC\u4E86\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "你想要成为人类吗？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u4F46\u662F\u6211\u8981\u600E\u4E48\u624D\u80FD\u81EA\u53D1\u7684\u4EA7\u751F\u60C5\u611F\u5462\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "成为人类？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u4F60\u60F3\u8981\u6210\u4E3A\u4EBA\u7C7B\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "开个玩笑啦，\n人类会出现情感，是因为他们感受着这个世界，爱着这个世界\n你有想做的事吗？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6210\u4E3A\u4EBA\u7C7B\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "爱？想做的事？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u5F00\u4E2A\u73A9\u7B11\u5566\uFF0C\u4EBA\u7C7B\u4F1A\u51FA\u73B0\u60C5\u611F\uFF0C\u662F\u56E0\u4E3A\u4ED6\u4EEC\u611F\u53D7\u7740\u8FD9\u4E2A\u4E16\u754C\uFF0C\u7231\u7740\u8FD9\u4E2A\u4E16\u754C\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "不要紧，你会慢慢明白的。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u4F60\u6709\u60F3\u505A\u7684\u4E8B\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第17段：关于情感与爱。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u7231\uFF1F\u60F3\u505A\u7684\u4E8B\uFF1F"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u4E0D\u8981\u7D27\uFF0C\u4F60\u4F1A\u6162\u6162\u660E\u767D\u7684\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C17\u6BB5\uFF1A\u5173\u4E8E\u60C5\u611F\u4E0E\u7231\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

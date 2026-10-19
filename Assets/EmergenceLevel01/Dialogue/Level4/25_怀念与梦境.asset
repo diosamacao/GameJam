@@ -10,75 +10,77 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "25_怀念与梦境"
-  m_EditorClassIdentifier: ""
+  m_Name: "25_\u6000\u5FF5\u4E0E\u68A6\u5883"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "伊"
-    text: "尼？！"
+  - speaker: "\u4F0A"
+    text: "\u5C3C\uFF1F\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "哇！！"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u54C7\uFF01\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "突然怎么了，吓我一跳。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u7A81\u7136\u600E\u4E48\u4E86\uFF0C\u5413\u6211\u4E00\u8DF3\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "而且，你这是..."
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u800C\u4E14\uFF0C\u4F60\u8FD9\u662F..."
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "我好像做了一个梦？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6211\u597D\u50CF\u505A\u4E86\u4E00\u4E2A\u68A6\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "梦里，我对你说了一些话......"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u68A6\u91CC\uFF0C\u6211\u5BF9\u4F60\u8BF4\u4E86\u4E00\u4E9B\u8BDD......"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "你现在出现了怀念的情感诶。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u4F60\u73B0\u5728\u51FA\u73B0\u4E86\u6000\u5FF5\u7684\u60C5\u611F\u8BF6\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "那些是回忆？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u90A3\u4E9B\u662F\u56DE\u5FC6\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "也许是模拟空间出现了一些异常？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u4E5F\u8BB8\u662F\u6A21\u62DF\u7A7A\u95F4\u51FA\u73B0\u4E86\u4E00\u4E9B\u5F02\u5E38\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "（......）"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\uFF08......\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "先收集情感碎片，离开模拟空间吧。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u5148\u6536\u96C6\u60C5\u611F\u788E\u7247\uFF0C\u79BB\u5F00\u6A21\u62DF\u7A7A\u95F4\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "（我对尼说过那些话吗......）"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\uFF08\u6211\u5BF9\u5C3C\u8BF4\u8FC7\u90A3\u4E9B\u8BDD\u5417......\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "（那真的是我吗？）"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\uFF08\u90A3\u771F\u7684\u662F\u6211\u5417\uFF1F\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第25段：怀念与梦境。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C25\u6BB5\uFF1A\u6000\u5FF5\u4E0E\u68A6\u5883\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

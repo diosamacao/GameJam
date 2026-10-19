@@ -10,35 +10,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "23_情感数据波动"
-  m_EditorClassIdentifier: ""
+  m_Name: "23_\u60C5\u611F\u6570\u636E\u6CE2\u52A8"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "尼"
-    text: "怎么了？"
+  - speaker: "\u5C3C"
+    text: "\u600E\u4E48\u4E86\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "情感数据好像出现了一些波动？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u60C5\u611F\u6570\u636E\u597D\u50CF\u51FA\u73B0\u4E86\u4E00\u4E9B\u6CE2\u52A8\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "需要提前结束实验吗？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u9700\u8981\u63D0\u524D\u7ED3\u675F\u5B9E\u9A8C\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "没事，没什么异常。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6CA1\u4E8B\uFF0C\u6CA1\u4EC0\u4E48\u5F02\u5E38\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "（刚才那是......）"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\uFF08\u521A\u624D\u90A3\u662F......\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第23段：情感数据波动。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C23\u6BB5\uFF1A\u60C5\u611F\u6570\u636E\u6CE2\u52A8\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

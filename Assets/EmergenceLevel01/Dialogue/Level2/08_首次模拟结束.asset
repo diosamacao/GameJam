@@ -10,25 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "08_首次模拟结束"
-  m_EditorClassIdentifier: ""
+  m_Name: "08_\u9996\u6B21\u6A21\u62DF\u7ED3\u675F"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "博士"
-    text: "看来你已经收集到足够的情感碎片了。"
+  - speaker: "\u535A\u58EB"
+    text: "\u770B\u6765\u4F60\u5DF2\u7ECF\u6536\u96C6\u5230\u8DB3\u591F\u7684\u60C5\u611F\u788E\u7247\u4E86\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "先离开模拟空间，保存情感数据吧。"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u5148\u79BB\u5F00\u6A21\u62DF\u7A7A\u95F4\uFF0C\u4FDD\u5B58\u60C5\u611F\u6570\u636E\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "哦耶(#^.^#)"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u54E6\u8036(#^.^#)"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第08段：首次模拟结束。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C08\u6BB5\uFF1A\u9996\u6B21\u6A21\u62DF\u7ED3\u675F\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

@@ -10,15 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "05_悲伤教学"
-  m_EditorClassIdentifier: ""
+  m_Name: "05_\u60B2\u4F24\u6559\u5B66"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "尼"
-    text: "他好像很悲伤。T_T"
+  - speaker: "\u535A\u58EB"
+    text: "\u5B9E\u9A8C\u5931\u8D25\u4E86......"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第05段：悲伤教学。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u597D\u5566\u535A\u58EB\uFF0C\u4E0D\u8981\u96BE\u8FC7\u4E86\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C05\u6BB5\uFF1A\u60B2\u4F24\u6559\u5B66\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

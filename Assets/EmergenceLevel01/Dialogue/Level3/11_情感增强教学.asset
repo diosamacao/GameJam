@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "11_情感增强教学"
-  m_EditorClassIdentifier: ""
-  blockPlayerInput: 1
+  m_Name: "11_\u60C5\u611F\u589E\u5F3A\u6559\u5B66"
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 0
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "尼"
-    text: "对了，当你和身边的机器人拥有相同情感时，会让情感增强哦。"
+  - speaker: "\u5C3C"
+    text: "\u5BF9\u4E86\uFF0C\u5F53\u4F60\u548C\u8EAB\u8FB9\u7684\u673A\u5668\u4EBA\u62E5\u6709\u76F8\u540C\u60C5\u611F\u65F6\uFF0C\u4F1A\u8BA9\u60C5\u611F\u589E\u5F3A\u54E6\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第11段：情感增强教学。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C11\u6BB5\uFF1A\u60C5\u611F\u589E\u5F3A\u6559\u5B66\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

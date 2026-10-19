@@ -10,40 +10,67 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "14_第二次实验收获"
-  m_EditorClassIdentifier: ""
+  m_Name: "14_\u7B2C\u4E8C\u6B21\u5B9E\u9A8C\u6536\u83B7"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "尼"
-    text: "今天也收获满满呢！"
+  - speaker: "\u5C3C"
+    text: "\u4ECA\u5929\u4E5F\u6536\u83B7\u6EE1\u6EE1\u5462\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "怎么样？"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u600E\u4E48\u6837\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "没有出现数据错误之类的异常吧？"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u6CA1\u6709\u51FA\u73B0\u6570\u636E\u9519\u8BEF\u4E4B\u7C7B\u7684\u5F02\u5E38\u5427\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "没有问题。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6CA1\u6709\u95EE\u9898\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "只是，我感觉身体好像多了一些东西。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u53EA\u662F\uFF0C\u6211\u611F\u53D7\u5230\u4E86\u4E00\u4E9B\u4E1C\u897F\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "是感受到情感了吗？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u662F\u611F\u53D7\u5230\u60C5\u611F\u4E86\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第14段：第二次实验收获。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u8FD9\u662F\u4EBA\u7C7B\u7684\u60C5\u611F\u5417\uFF1F"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u54C8\u54C8\uFF01\u770B\u6765\u5B9E\u9A8C\u633A\u6210\u529F\u554A\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u518D\u591A\u8FDB\u884C\u51E0\u6B21\u5B9E\u9A8C\uFF0C\u5C31\u80FD\u8BA9\u4F60\u62E5\u6709\u5C5E\u4E8E\u81EA\u5DF1\u7684\u60C5\u611F\u4E86\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u6211\u5F97\u518D\u591A\u505A\u4E00\u4E9B\u60C5\u611F\u6838\u5FC3\uFF0C\u8BA9\u6240\u6709\u7684\u673A\u68B0\u90FD\u80FD\u6709\u81EA\u5DF1\u7684\u60C5\u611F\uFF01"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u53BB\u4F11\u606F\u4E00\u4E0B\uFF0C\u51C6\u5907\u4E0B\u4E00\u6B21\u5B9E\u9A8C\u5427\u3002"
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C14\u6BB5\uFF1A\u7B2C\u4E8C\u6B21\u5B9E\u9A8C\u6536\u83B7\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

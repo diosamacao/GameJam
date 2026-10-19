@@ -217,10 +217,16 @@ MonoBehaviour:
   fallbackHappyMinimumJumpCells: 1
   fallbackCellHeight: 1
   fallbackJumpMultiplier: 1.2
-  switchKey: 113
+  joyKey: 49
+  angerKey: 50
+  sadnessKey: 51
+  courageKey: 52
+  guardianKey: 53
+  memoryKey: 54
   cancelSwitchKey: 27
   keyboardInput: 1
   isNpc: 0
+  requireEmotionUnlocks: 1
   showSwitchProgress: 1
   respawnPoint: {fileID: 0}
   electricGraceSeconds: 0.5
@@ -305,7 +311,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 101
-  automaticTransfer: 0
+  transferRadius: 2
+  holdSeconds: 0.5
+  showProgress: 1
+  progressRect:
+    serializedVersion: 2
+    x: 20
+    y: 80
+    width: 260
+    height: 28
 --- !u!1 &8073755569527328643
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +393,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: 280939cfaf7eafa46a5096ea26dd4f42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7099c0e6f1d44621b90ff6c9e01536fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
