@@ -21,18 +21,18 @@ MonoBehaviour:
     nextScene: Level02_InitialLab
     laboratoryDialogue: {fileID: 0}
   - fromScene: Level02_InitialLab
-    nextScene: Level01_InitialLab re1
+    nextScene: Level01_InitialLabre1
     laboratoryDialogue: {fileID: 11400000, guid: 63f293cf4ef21ab41a67f19cd73aeac1, type: 2}
-  - fromScene: Level01_InitialLab re1
-    nextScene: Level01_InitialLab re1 1
+  - fromScene: Level01_InitialLabre1
+    nextScene: Level01_InitialLabre1-1
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
-  - fromScene: Level01_InitialLab re1 1
+  - fromScene: Level01_InitialLabre1-1
     nextScene: Level03_InitialLab
     laboratoryDialogue: {fileID: 11400000, guid: b2f6ddbafa8d04749b1fc2ed26fe7d15, type: 2}
   - fromScene: Level03_InitialLab
-    nextScene: Level01_InitialLab re2
+    nextScene: Level01_InitialLabre2
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
-  - fromScene: Level01_InitialLab re2
+  - fromScene: Level01_InitialLabre2
     nextScene: Level01_InitialLab re2 1
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
   - fromScene: Level01_InitialLab re2 1
@@ -49,10 +49,4 @@ MonoBehaviour:
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
   - fromScene: Level01_InitialLab re3 1
     nextScene: Level04_InitialLab 2
-    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
-  - fromScene: Level04_InitialLab 1
-    nextScene: Level01_InitialLab re3 1
-    laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}
-  - fromScene: Level04_InitialLab 1
-    nextScene: Level01_InitialLab re3 1
     laboratoryDialogue: {fileID: 11400000, guid: 36d497a545eb63b418d38cfd30f3d2b1, type: 2}

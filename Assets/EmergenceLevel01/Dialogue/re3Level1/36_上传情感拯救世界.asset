@@ -10,75 +10,77 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "36_上传情感拯救世界"
-  m_EditorClassIdentifier: ""
+  m_Name: "36_\u4E0A\u4F20\u60C5\u611F\u62EF\u6551\u4E16\u754C"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "里克"
-    text: "休比！！"
+  - speaker: "\u91CC\u514B"
+    text: "\u4F11\u6BD4\uFF01\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "里克"
-    text: "博士！快停止数据传送！"
+    cue: 
+  - speaker: "\u91CC\u514B"
+    text: "\u535A\u58EB\uFF01\u5FEB\u505C\u6B62\u6570\u636E\u4F20\u9001\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "伊！我找到挽回的办法了！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u4F0A\uFF01\u6211\u627E\u5230\u633D\u56DE\u7684\u529E\u6CD5\u4E86\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "终端连接着所有情感核心，只要将完整的情感数据填充进去，就能停止暴走！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u7EC8\u7AEF\u8FDE\u63A5\u7740\u6240\u6709\u60C5\u611F\u6838\u5FC3\uFF0C\u53EA\u8981\u5C06\u5B8C\u6574\u7684\u60C5\u611F\u6570\u636E\u586B\u5145\u8FDB\u53BB\uFF0C\u5C31\u80FD\u505C\u6B62\u66B4\u8D70\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "你的情感数据完整了吗？"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u4F60\u7684\u60C5\u611F\u6570\u636E\u5B8C\u6574\u4E86\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "里克"
-    text: "完整了！但是休比她！！"
+    cue: 
+  - speaker: "\u91CC\u514B"
+    text: "\u5B8C\u6574\u4E86\uFF01\u4F46\u662F\u4F11\u6BD4\u5979\uFF01\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "（休比）"
-    text: "（不可以哦，里克。）"
+    cue: 
+  - speaker: "\uFF08\u4F11\u6BD4\uFF09"
+    text: "\uFF08\u4E0D\u53EF\u4EE5\u54E6\uFF0C\u91CC\u514B\u3002\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "（休比）"
-    text: "（我必须要回去，去教会那个什么都不懂里克。）"
+    cue: 
+  - speaker: "\uFF08\u4F11\u6BD4\uFF09"
+    text: "\uFF08\u6211\u5FC5\u987B\u8981\u56DE\u53BB\uFF0C\u53BB\u6559\u4F1A\u90A3\u4E2A\u4EC0\u4E48\u90FD\u4E0D\u61C2\u91CC\u514B\u3002\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "（休比）"
-    text: "（教他里克教会我的所有。）"
+    cue: 
+  - speaker: "\uFF08\u4F11\u6BD4\uFF09"
+    text: "\uFF08\u6559\u4ED6\u91CC\u514B\u6559\u4F1A\u6211\u7684\u6240\u6709\u3002\uFF09"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "里克"
-    text: "......"
+    cue: 
+  - speaker: "\u91CC\u514B"
+    text: ......
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "里克"
-    text: "博士，我该怎么做。"
+    cue: 
+  - speaker: "\u91CC\u514B"
+    text: "\u535A\u58EB\uFF0C\u6211\u8BE5\u600E\u4E48\u505A\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "把你的情感数据全部上传，但是这样你就会变成空壳。"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u628A\u4F60\u7684\u60C5\u611F\u6570\u636E\u5168\u90E8\u4E0A\u4F20\uFF0C\u4F46\u662F\u8FD9\u6837\u4F60\u5C31\u4F1A\u53D8\u6210\u7A7A\u58F3\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "里克"
-    text: "明白了，如果因她而生的爱，能拯救我们所爱的世界。"
+    cue: 
+  - speaker: "\u91CC\u514B"
+    text: "\u660E\u767D\u4E86\uFF0C\u5982\u679C\u56E0\u5979\u800C\u751F\u7684\u7231\uFF0C\u80FD\u62EF\u6551\u6211\u4EEC\u6240\u7231\u7684\u4E16\u754C\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第36段：上传情感拯救世界。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C36\u6BB5\uFF1A\u4E0A\u4F20\u60C5\u611F\u62EF\u6551\u4E16\u754C\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

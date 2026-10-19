@@ -15,7 +15,7 @@ MonoBehaviour:
   blockPlayerInput: 1
   typewriter: 1
   charactersPerSecond: 20
-  autoPlay: 1
+  autoPlay: 0
   autoAdvanceDelay: 2
   lines:
   - speaker: 

@@ -522,7 +522,7 @@ MonoBehaviour:
   speed: 4
   gravityScale: 3
   arrivalDistance: 0.05
-  verticalTolerance: 0.2
+  verticalTolerance: 1
   activateOnStart: 0
   onArrived:
     m_PersistentCalls:
