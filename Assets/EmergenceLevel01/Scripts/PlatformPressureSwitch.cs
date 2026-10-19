@@ -19,7 +19,7 @@ namespace Emergence.Level01
         void OnTriggerExit2D(Collider2D other){occupants.Remove(other);Refresh();}
         void FixedUpdate(){occupants.RemoveWhere(c=>!c || !c.enabled || !c.gameObject.activeInHierarchy || !Eligible(c) || !GetComponent<Collider2D>().IsTouching(c));Refresh();}
         void Refresh(){if(LocalTimeTarget.IsStopped(this))return;SetPressed(occupants.Count>0);}
-        public void SetPressed(bool value){if(Pressed==value)return;Pressed=value;if(indicator)indicator.color=value?pressedColor:idleColor;if(platforms!=null)foreach(var platform in platforms)if(platform)platform.SetSwitch(this,value);}
+        public void SetPressed(bool value){if(Pressed==value)return;Pressed=value;if(value)GameAudio.Play(GameSound.SwitchPress,transform.position);if(indicator)indicator.color=value?pressedColor:idleColor;if(platforms!=null)foreach(var platform in platforms)if(platform)platform.SetSwitch(this,value);}
         void OnDisable(){occupants.Clear();SetPressed(false);}
         void Reset(){GetComponent<BoxCollider2D>().isTrigger=true;}
     }

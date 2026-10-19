@@ -1,0 +1,50 @@
+游戏音效配置
+
+配置入口：Assets/EmergenceLevel01/Resources/GameAudioConfig.asset
+音效自动随游戏启动，无需给每个场景重新挂载管理器。
+
+全局设置
+Master Volume：总音量，默认 0.65。
+Max Voices：最多同时播放数量，默认 12；上限 32。
+Npc Movement Sounds：是否播放 NPC 脚步、跳跃和落地声，默认关闭。
+Footstep Interval：脚步间隔，默认 0.28 秒。
+
+每个 Cues 条目
+Sound：对应的游戏事件；请保留每种事件各一个条目。
+Enabled：单独开关。
+Clips：音频数组，播放时随机选取；可拖入项目中现有 WAV/OGG 等资源替换。
+Volume：该事件音量。
+Pitch Range：随机音高范围；两个数设为一样可固定音高。
+Cooldown：同类音效最短播放间隔，防止多个方块或 NPC 同时触发时堆叠。
+Audible Distance：相对主摄像机的 2D 距离衰减范围，0 为不衰减的全局声音。
+Priority：数字越小越重要。声音池满时，低优先级声音不会打断高优先级声音。
+
+事件说明
+Footstep / Jump / DoubleJump / Land：脚步、跳跃、二段跳、落地。
+SwitchStart：开始切换情感。
+Joy / Anger / Sadness / Courage / Guardian / Memory：六种情感切换成功。
+Transfer / Resonance：成功传递情感、进入增强状态。
+Fragment / Death：碎片收集、死亡。
+BreakFragile / BreakReinforced：普通破坏、坚硬方块破坏。
+Vanish / Restore：悲伤方块开始渐隐、定时恢复。
+DoorOpen / DoorClose / SwitchPress / AssemblyPlace：开门、关门、踩开关、放入合成块。
+Checkpoint / Portal：存档点激活、传送。
+DialogueLine：每段对话开始的小提示音，不逐字发声。
+SceneTransition / MemoryEnter / MemoryReturn：换关、进入回忆、退出回忆。
+
+运行时控制
+Hierarchy 的 GameAudio 对象：Volume、Muted 可实时控制音量/静音。
+GameAudio.Instance.SetVolume(0.5f);
+GameAudio.Instance.SetMuted(true);
+GameAudio.Play(GameSound.Fragment, transform.position);
+普通 UnityEvent 可绑定挂在物体上的 GameSoundEmitter.Play()。
+
+配置注意
+正式关卡原本没有 AudioListener，管理器自动提供一个。场景存在其他已启用监听器时自动关闭备用监听器。
+如脚本在运行中新增监听器，可调用 GameAudio.Instance.RefreshListeners()。
+既有音频素材未删除、未修改。本套短音效使用程序合成，源脚本在 Tools/GenerateGameSfx.py。
+重新运行合成脚本会覆盖本套生成的 WAV；不会修改配置中的混音和资源引用。
+需要恢复缺失的初始配置时，可运行 Tools → Emergence → Setup Game Audio，已存在的配置不会被覆盖。
+
+试听文件：Logs/Audio/音效试听.wav
+顺序：脚步、跳跃、落地、开心、愤怒、悲伤、守护、传递、碎片、破坏、开门、进入回忆。

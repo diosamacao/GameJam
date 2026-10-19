@@ -18,7 +18,7 @@ namespace Emergence.Level01
             if(EmotionResonance.InEnhancedRange(map.GetCellCenterWorld(cell),RobotEmotion.Sadness))return false;
             var tile=map.GetTile(cell);
             if(!tile || (!allTilesBreakable && System.Array.IndexOf(breakableTiles,tile)<0))return false;
-            map.SetTile(cell,null);
+            GameAudio.Play(GameSound.BreakFragile,map.GetCellCenterWorld(cell));map.SetTile(cell,null);
             var collider=GetComponent<TilemapCollider2D>();if(collider)collider.ProcessTilemapChanges();
             return true;
         }

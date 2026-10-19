@@ -17,7 +17,7 @@ namespace Emergence.Level01
         void Update(){if(indicator)indicator.color=IsCurrent?activeColor:inactiveColor;}
         public bool Activate(RobotEmotionGameplay player){
             if(!player || player.isNpc || !isActiveAndEnabled || player.gameObject.scene!=gameObject.scene || LevelFlowController.IsTransitioning || LocalTimeTarget.IsStopped(this) || IsCurrent)return false;
-            SceneCheckpointState.Activate(gameObject.scene,SpawnPosition);onActivated.Invoke();return true;
+            GameAudio.Play(GameSound.Checkpoint,transform.position);SceneCheckpointState.Activate(gameObject.scene,SpawnPosition);onActivated.Invoke();return true;
         }
         void OnTriggerEnter2D(Collider2D other){Activate(other.GetComponentInParent<RobotEmotionGameplay>());}
         void OnTriggerStay2D(Collider2D other){Activate(other.GetComponentInParent<RobotEmotionGameplay>());}

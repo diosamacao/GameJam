@@ -46,6 +46,7 @@ namespace Emergence.Level01
             busy=false;
         }
         IEnumerator LoadWithFade(string scene,LevelFlowConfig config){
+            GameAudio.Play(GameSound.SceneTransition);
             fading=true;
             yield return Fade(1,config.fadeOutSeconds);
             // Render an opaque frame before loading, even when fade duration is zero.

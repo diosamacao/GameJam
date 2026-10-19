@@ -28,6 +28,7 @@ namespace Emergence.Level01
         public RobotEmotion Emotion => Normalize(Actor.CurrentEmotion);
         public float SecondJumpMaximum=>Mathf.Max(0,secondJumpMaximumCells)*Actor.GridCellHeight;
         public float SecondJumpMinimum=>Mathf.Min(secondJumpMinimumCells,secondJumpMaximumCells)*Actor.GridCellHeight;
+        bool soundEnhanced;
         float effectTime;
         static int stateVersion;
         int cachedVersion=-1, cachedFrame=-1;float cachedFixedTime;bool cachedFixedPhase, cachedInputBlocked;
@@ -46,7 +47,7 @@ namespace Emergence.Level01
             return ((Vector2)(transform.position-other.transform.position)).sqrMagnitude<=range*range;
         }
         public void RefreshState(){cachedInputBlocked=DialogueDirector.IsBlockingInput || LevelFlowController.IsTransitioning;cachedVersion=stateVersion;cachedFrame=Time.frameCount;cachedFixedTime=Time.fixedTime;cachedFixedPhase=Time.inFixedTimeStep;Enhanced=false;foreach(var other in Actors)if(Matches(other)){Enhanced=true;break;}}
-        void Update(){EnsureState();if(!LocalTimeTarget.IsStopped(this))effectTime+=Time.deltaTime;DrawEffects();}
+        void Update(){EnsureState();if(Enhanced && !soundEnhanced)GameAudio.Play(GameSound.Resonance,transform.position);soundEnhanced=Enhanced;if(!LocalTimeTarget.IsStopped(this))effectTime+=Time.deltaTime;DrawEffects();}
         public Color EmotionColor {get {switch(Emotion){case RobotEmotion.Joy:return joyColor;case RobotEmotion.Anger:return angerColor;case RobotEmotion.Sadness:return sadnessColor;case RobotEmotion.Courage:return courageColor;case RobotEmotion.Guardian:return guardianColor;case RobotEmotion.Memory:return memoryColor;default:return Color.white;}}}
         LineRenderer NewLine(string name,Transform parent){
             var go=new GameObject(name);go.transform.SetParent(parent,false);var line=go.AddComponent<LineRenderer>();line.useWorldSpace=false;line.sortingOrder=effectSortingOrder;

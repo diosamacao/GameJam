@@ -9,7 +9,7 @@ namespace Emergence.Level01
         public bool TryBreak(RobotEmotionGameplay source)
         {
             if(LocalTimeTarget.IsStopped(this) || Broken || !source || !source.CanBreak)return false;
-            Broken=true;onBroken.Invoke();gameObject.SetActive(false);return true;
+            GameAudio.Play(GameSound.BreakFragile,transform.position);Broken=true;onBroken.Invoke();gameObject.SetActive(false);return true;
         }
     }
 }

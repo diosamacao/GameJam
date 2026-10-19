@@ -16,7 +16,7 @@ namespace Emergence.Level01
         {
             if(LocalTimeTarget.IsStopped(this) || (piece && LocalTimeTarget.IsStopped(piece)) || !Accepts(piece))return false;
             Filled=true;if(installedVisual)installedVisual.enabled=true;
-            piece.Consume();Highlight(false);return true;
+            GameAudio.Play(GameSound.AssemblyPlace,transform.position);piece.Consume();Highlight(false);return true;
         }
     }
 }

@@ -1,0 +1,282 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1312788189845b582c34600f3f2a19f, type: 3}
+  m_Name: GameAudioConfig
+  m_EditorClassIdentifier: 
+  masterVolume: 0.65
+  maxVoices: 12
+  npcMovementSounds: 0
+  footstepInterval: 0.28
+  cues:
+  - sound: 0
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 59df720411f243188757f3b410241797, type: 3}
+    - {fileID: 8300000, guid: 27fc42ccd628456fbe992ea953ff8377, type: 3}
+    - {fileID: 8300000, guid: de58492db4e14169985084491e6582cf, type: 3}
+    volume: 0.2
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.12
+    audibleDistance: 22
+    priority: 220
+  - sound: 1
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 5a16a81478244359a7af42976e546cd5, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 2
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: f648ee8924c34a81ba129126de9a18f7, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 3
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: c39a6c9735534421b0bea49071d04981, type: 3}
+    volume: 0.28
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.15
+    audibleDistance: 22
+    priority: 200
+  - sound: 4
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: dfc6fb0dc22845869902f040cccb3c90, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 5
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 64820ccb77974fa5acf705de8fbe95f1, type: 3}
+    volume: 0.38
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 128
+  - sound: 6
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 9596ca7b9f364bfaa49efb5d908eff3e, type: 3}
+    volume: 0.38
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 128
+  - sound: 7
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: e8c6aa08b2494eb5ac7e43dc27f43acc, type: 3}
+    volume: 0.38
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 128
+  - sound: 8
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 43388a9a0fad4fb686133e2de6c633fb, type: 3}
+    volume: 0.38
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 128
+  - sound: 9
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: c4552de7973f4e81adb66f04d07c885a, type: 3}
+    volume: 0.38
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 128
+  - sound: 10
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: ce0e3ce9f9eb4e7690f1d36b581d9237, type: 3}
+    volume: 0.38
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 128
+  - sound: 11
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 9f421b21b3624b2891e4bb1b44e2a676, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 12
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 7e6cd1e0f09245f0bb97f0a9351b4cfc, type: 3}
+    volume: 0.35
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.5
+    audibleDistance: 22
+    priority: 128
+  - sound: 13
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 0370eb404bbb48b1ad59876e472b418d, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 14
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: f757a5901b8a4e8f8cc859f431409ddd, type: 3}
+    volume: 0.6
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.15
+    audibleDistance: 22
+    priority: 10
+  - sound: 15
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: a069363f58164ddbadc4b8c9b6f60556, type: 3}
+    volume: 0.42
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.09
+    audibleDistance: 22
+    priority: 128
+  - sound: 16
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 901e5df212da457aaa6ac1b9b6d91c94, type: 3}
+    volume: 0.42
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.09
+    audibleDistance: 22
+    priority: 128
+  - sound: 17
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 9767cb9cf30341a5860f978e270be3f2, type: 3}
+    volume: 0.28
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 180
+  - sound: 18
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 9f3ea8e8e74c4310a07c0f9f147eb3f2, type: 3}
+    volume: 0.28
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.2
+    audibleDistance: 22
+    priority: 180
+  - sound: 19
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 431b13f3018d45a2a2e07d8703d826e8, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 20
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: de81ea78587a47b1866cccf3e82b453b, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 21
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: acf32b74eb1e473aadb3ae03f3c998cd, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 22
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: de05e4944b424191b19d8268925a99d7, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 23
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 44b1537074ea4026bb18ed5618be7f51, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 24
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 2c29d9ee8f3f40818d0af86d6cf8eda1, type: 3}
+    volume: 0.5
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 22
+    priority: 128
+  - sound: 25
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: c68e6f5b70a540fcb32870051b0eb495, type: 3}
+    volume: 0.14
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.08
+    audibleDistance: 0
+    priority: 100
+  - sound: 26
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 1e1bd6b6583540119ca20f8f9c3a9001, type: 3}
+    volume: 0.45
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.25
+    audibleDistance: 0
+    priority: 20
+  - sound: 27
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 28b9715988f440028d17bb957a33d26a, type: 3}
+    volume: 0.45
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.25
+    audibleDistance: 0
+    priority: 20
+  - sound: 28
+    enabled: 1
+    clips:
+    - {fileID: 8300000, guid: 1904d3d3fd874080bed822b402801670, type: 3}
+    volume: 0.45
+    pitchRange: {x: 0.96, y: 1.04}
+    cooldown: 0.25
+    audibleDistance: 0
+    priority: 20

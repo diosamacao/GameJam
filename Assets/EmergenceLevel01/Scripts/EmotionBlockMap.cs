@@ -24,7 +24,7 @@ namespace Emergence.Level01
             if(tile.kind==EmotionBlockKind.Vanishing)return BeginVanish(cell);
             var renderer=GetComponent<TilemapRenderer>();
             if(renderer)BlockShatterEffect.Spawn(tile.sprite,map.transform.localToWorldMatrix*Matrix4x4.Translate(map.CellToLocalInterpolated((Vector3)cell+map.tileAnchor))*map.GetTransformMatrix(cell),renderer.sharedMaterial,renderer.sortingLayerID,renderer.sortingOrder,map.GetColor(cell)*map.color,shatter);
-            map.SetTile(cell,null);RefreshCollision();
+            GameAudio.Play(tile.kind==EmotionBlockKind.Reinforced?GameSound.BreakReinforced:GameSound.BreakFragile,map.GetCellCenterWorld(cell));map.SetTile(cell,null);RefreshCollision();
             return true;
         }
         [Header("悲伤方块")]
@@ -34,7 +34,7 @@ namespace Emergence.Level01
         [Header("破坏表现")]
         public BlockShatterSettings shatter=new BlockShatterSettings();
         System.Collections.IEnumerator Vanish(Vector3Int cell,TileBase tile){
-            var state=new HiddenCell{tile=tile,color=map.GetColor(cell),flags=map.GetTileFlags(cell),collider=map.GetColliderType(cell)};hidden.Add(cell,state);
+            GameAudio.Play(GameSound.Vanish,map.GetCellCenterWorld(cell));var state=new HiddenCell{tile=tile,color=map.GetColor(cell),flags=map.GetTileFlags(cell),collider=map.GetColliderType(cell)};hidden.Add(cell,state);
             map.SetTileFlags(cell,state.flags & ~TileFlags.LockColor);
             float elapsed=0;var color=state.color;
             while(elapsed<fadeSeconds || IsFrozenCell(cell)){
@@ -43,7 +43,7 @@ namespace Emergence.Level01
             }
             if(map.GetTile(cell)!=tile){hidden.Remove(cell);yield break;}
             color.a=fadedAlpha;map.SetColor(cell,color);map.SetColliderType(cell,Tile.ColliderType.None);RefreshCollision();
-            elapsed=0;while(elapsed<restoreSeconds || IsFrozenCell(cell)){if(!IsFrozenCell(cell))elapsed+=Time.deltaTime;yield return null;}Restore(cell);
+            elapsed=0;while(elapsed<restoreSeconds || IsFrozenCell(cell)){if(!IsFrozenCell(cell))elapsed+=Time.deltaTime;yield return null;}if(map.GetTile(cell)==tile)GameAudio.Play(GameSound.Restore,map.GetCellCenterWorld(cell));Restore(cell);
         }
         void Restore(Vector3Int cell){HiddenCell state;if(!hidden.TryGetValue(cell,out state))return;
             if(map && map.GetTile(cell)==state.tile){map.SetTileFlags(cell,TileFlags.None);map.SetColor(cell,state.color);map.SetColliderType(cell,state.collider);map.SetTileFlags(cell,state.flags);RefreshCollision();}hidden.Remove(cell);

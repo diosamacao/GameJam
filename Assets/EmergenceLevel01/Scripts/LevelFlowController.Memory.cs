@@ -31,6 +31,7 @@ namespace Emergence.Level01
             bool dialogueEnded=false;
             System.Action<DialogueSequence> ended=sequence=>{if(sequence==config.dialogue)dialogueEnded=true;};
             try{
+                GameAudio.Play(recalled.IsValid()?GameSound.MemoryReturn:GameSound.MemoryEnter);
                 fading=true;yield return Fade(1,config.fadeOutSeconds);yield return null;
                 // Suspend only active roots; objects already inactive stay inactive on return.
                 foreach(var root in source.GetRootGameObjects()){
@@ -52,6 +53,7 @@ namespace Emergence.Level01
                 if(!memoryDirector.TryPlay(config.dialogue)){Debug.LogError("回忆对话无法开始，将返回原场景。",config);dialogueEnded=true;}
                 while(memoryDirector && !dialogueEnded)yield return null;
                 if(memoryDirector){memoryDirector.Finished-=ended;memoryDirector.Cancelled-=ended;}
+                GameAudio.Play(recalled.IsValid()?GameSound.MemoryReturn:GameSound.MemoryEnter);
                 fading=true;yield return Fade(1,config.fadeOutSeconds);yield return null;
                 if(source.IsValid() && source.isLoaded)SceneManager.SetActiveScene(source);
                 if(recalled.IsValid() && recalled.isLoaded)yield return SceneManager.UnloadSceneAsync(recalled);

@@ -29,7 +29,7 @@ namespace Emergence.Level01
         void OnEnable(){Register();}
         void Update(){if(LocalTimeTarget.IsStopped(this))return;elapsed+=Time.deltaTime;Draw();}
         void Draw(){if(!visual)return;visual.startColor=visual.endColor=color;visual.startWidth=visual.endWidth=lineWidth;visual.sortingOrder=sortingOrder;float y=Mathf.Sin(elapsed*bobSpeed)*bobAmplitude;visual.SetPositions(new[]{new Vector3(0,y+size),new Vector3(size,y),new Vector3(0,y-size),new Vector3(-size,y)});}
-        public bool Collect(RobotEmotionGameplay actor){if(Collected || !actor || actor.isNpc || !isActiveAndEnabled || LocalTimeTarget.IsStopped(this))return false;Collected=true;Register();onCollected.Invoke();gameObject.SetActive(false);return true;}
+        public bool Collect(RobotEmotionGameplay actor){if(Collected || !actor || actor.isNpc || !isActiveAndEnabled || LocalTimeTarget.IsStopped(this))return false;Collected=true;GameAudio.Play(GameSound.Fragment,transform.position);Register();onCollected.Invoke();gameObject.SetActive(false);return true;}
         void OnTriggerStay2D(Collider2D other){Collect(other.GetComponentInParent<RobotEmotionGameplay>());}
         void OnDrawGizmos(){Gizmos.color=color;var p=transform.position;Gizmos.DrawLine(p+Vector3.up*size,p+Vector3.right*size);Gizmos.DrawLine(p+Vector3.right*size,p+Vector3.down*size);Gizmos.DrawLine(p+Vector3.down*size,p+Vector3.left*size);Gizmos.DrawLine(p+Vector3.left*size,p+Vector3.up*size);}
         void OnDestroy(){if(material)Destroy(material);}

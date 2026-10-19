@@ -32,6 +32,7 @@ namespace Emergence.Level01
         readonly ContactPoint2D[] contacts = new ContactPoint2D[32];
         float input, frameTime, landingUntil, localClock;
         bool jumpQueued,jumpHeld,jumpActive;int jumpsUsed;float takeoffY,activeMinimum;
+        bool groundObserved;float nextFootstep;
         bool directedJump;float directedVelocityX;
         public void CancelDirectedJump(){directedJump=false;}
         public bool LaunchDirectedJump(Vector2 target,float apexHeight,float maximumHorizontalSpeed){
@@ -40,7 +41,7 @@ namespace Emergence.Level01
             var delta=target-body.position;float height=Mathf.Max(0,delta.y)+Mathf.Max(.1f,apexHeight);
             float vy=Mathf.Sqrt(2*gravity*height);float flight=(vy+Mathf.Sqrt(Mathf.Max(0,vy*vy-2*gravity*delta.y)))/gravity;
             float vx=delta.x/flight;if(Mathf.Abs(vx)>maximumHorizontalSpeed)return false;
-            directedJump=true;directedVelocityX=vx;jumpActive=jumpQueued=false;IsGrounded=false;body.velocity=new Vector2(vx,vy);return true;
+            directedJump=true;directedVelocityX=vx;jumpActive=jumpQueued=false;IsGrounded=false;body.velocity=new Vector2(vx,vy);GameAudio.Movement(GameSound.Jump,emotionGameplay,transform.position);return true;
         }
         public void SetJumpHeld(bool held){jumpHeld=held;}
         void Awake() { body = GetComponent<Rigidbody2D>(); emotionGameplay=GetComponent<RobotEmotionGameplay>(); }
@@ -72,7 +73,9 @@ namespace Emergence.Level01
                 if(body.velocity.y>velocity.y+groundedVelocityTolerance)continue;
                 IsGrounded=true;supportVelocity=velocity;break;
             }
-            if (!wasGrounded && IsGrounded) landingUntil = localClock + landingDuration;
+            if (!wasGrounded && IsGrounded){landingUntil=localClock+landingDuration;if(groundObserved)GameAudio.Movement(GameSound.Land,emotionGameplay,transform.position);}
+            groundObserved=true;
+            if(IsGrounded && !InputBlocked && Mathf.Abs(input)>walkInputThreshold && Time.time>=nextFootstep){nextFootstep=Time.time+GameAudio.FootstepInterval;GameAudio.Movement(GameSound.Footstep,emotionGameplay,transform.position);}
             if(IsGrounded){jumpsUsed=0;jumpActive=false;directedJump=false;}
             float vy = body.velocity.y;
             var powers=GetComponent<EmotionResonance>();
@@ -84,6 +87,7 @@ namespace Emergence.Level01
                 {
                     float maximum=second ? powers.SecondJumpMaximum : EffectiveJumpHeight;
                     activeMinimum=Mathf.Clamp(second ? powers.SecondJumpMinimum : (emotionGameplay ? emotionGameplay.MinimumJumpHeight : minimumJumpHeight),0,maximum);
+                    GameAudio.Movement(second?GameSound.DoubleJump:GameSound.Jump,emotionGameplay,transform.position);
                     vy = Mathf.Sqrt(2f * gravity * maximum);takeoffY=body.position.y;jumpActive=true;jumpsUsed++;
                     IsGrounded = false;
                     landingUntil = 0;

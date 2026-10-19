@@ -24,7 +24,7 @@ namespace Emergence.Level01
         void OnEnable(){if(!doors.Contains(this))doors.Add(this);}
         void OnDisable(){doors.Remove(this);}
         void Awake(){if(upper)upperClosed=upper.localPosition;if(lower)lowerClosed=lower.localPosition;visuals=GetComponentsInChildren<SpriteRenderer>(true);if(enableMemoryStates)ApplyState();}
-        public void SetOpen(bool value){open=value && (!enableMemoryStates || state==VerticalDoorState.Memory);UpdateCollision();}
+        public void SetOpen(bool value){bool next=value && (!enableMemoryStates || state==VerticalDoorState.Memory);if(next!=open)GameAudio.Play(next?GameSound.DoorOpen:GameSound.DoorClose,transform.position);open=next;UpdateCollision();}
         [ContextMenu("Open (Play mode)")] void Open(){SetOpen(true);}
         [ContextMenu("Close (Play mode)")] void Close(){SetOpen(false);}
         bool CanInteract(RobotEmotionGameplay player)=>enableMemoryStates && isActiveAndEnabled && player && !player.isNpc && player.CanUseEmotionAbilities && !LocalTimeTarget.IsStopped(this) && Vector2.Distance(transform.position,player.transform.position)<=interactionRadius;

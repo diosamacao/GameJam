@@ -74,6 +74,7 @@ namespace Emergence.Level01
         }
         public void CompleteCurrentLine(){if(IsRevealing){completedAt=Time.unscaledTime;revealSkipped=true;}}
         void SetLineTiming(){
+            GameAudio.Play(GameSound.DialogueLine);
             advanceAt=Time.unscaledTime+Mathf.Max(0,CurrentLine.minimumDisplaySeconds);
             changedFrame=Time.frameCount;revealStarted=Time.unscaledTime;revealSkipped=!Sequence.typewriter;completedAt=revealStarted;
             float speed=CurrentLine.charactersPerSecond>0?CurrentLine.charactersPerSecond:Sequence.charactersPerSecond;

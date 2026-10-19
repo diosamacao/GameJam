@@ -24,7 +24,7 @@ namespace Emergence.Level01
             bool touching=false;foreach(var c in contacts)if(c && c.enabled && c.GetComponentInParent<RobotEmotionGameplay>()==actor && GetComponent<Collider2D>().IsTouching(c)){touching=true;break;}
             if(!touching)return false;
             int id=actor.GetInstanceID();if(cooldowns.TryGetValue(id,out float until) && Time.time<until)return false;
-            cooldowns[id]=Time.time+cooldownSeconds;
+            GameAudio.Play(GameSound.Portal,transform.position);cooldowns[id]=Time.time+cooldownSeconds;
             var motor=actor.GetComponent<RobotMotor2D>();var body=actor.GetComponent<Rigidbody2D>();
             actor.CancelSwitch();motor.CancelJumpRequest();motor.SetMoveInput(0);motor.ResetGroundState();
             EmotionResonance.InvalidateStates();body.position=destination?(Vector2)destination.position:destinationPosition;if(clearVelocity)body.velocity=Vector2.zero;

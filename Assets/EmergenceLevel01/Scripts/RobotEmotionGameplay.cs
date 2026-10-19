@@ -54,7 +54,7 @@ namespace Emergence.Level01
         // Lethal hazards bypass emotion immunity and cancel any pending switch.
         public bool DieAndRespawn(){
             if(Time.time<safeUntil || !isActiveAndEnabled || LevelFlowController.IsTransitioning || LocalTimeTarget.IsStopped(this))return false;
-            safeUntil=Time.time+electricGraceSeconds;
+            GameAudio.Play(GameSound.Death,transform.position);safeUntil=Time.time+electricGraceSeconds;
             CancelSwitch();
             var transfer=GetComponent<EmotionTransfer>();if(transfer)transfer.CancelTransfer();
             motor.SetMoveInput(0);motor.CancelJumpRequest();
@@ -94,7 +94,7 @@ namespace Emergence.Level01
             if(isNpc || !CanUseEmotionAbilities || !motor.IsGrounded || !IsEmotionUnlocked(target))return false;
             if(target==CurrentEmotion || (target!=RobotEmotion.Joy && target!=RobotEmotion.Anger && target!=RobotEmotion.Sadness && target!=RobotEmotion.Courage && target!=RobotEmotion.Guardian && target!=RobotEmotion.Memory))return false;
             EmotionResonance.InvalidateStates();IsSwitching=true;TargetEmotion=target;started=Time.time;motor.SetControlsLocked(true);
-            face.SetVisualEmotion(RobotEmotion.Loading);return true;
+            face.SetVisualEmotion(RobotEmotion.Loading);GameAudio.Play(GameSound.SwitchStart,transform.position);return true;
         }
         static RobotEmotion NextEmotion(RobotEmotion current)
         {
@@ -125,6 +125,7 @@ namespace Emergence.Level01
         public bool TrySetEmotion(RobotEmotion value)
         {
             if((isNpc && !receiving) || (!isNpc && !IsEmotionUnlocked(value)) || IsSwitching || value==RobotEmotion.Loading || !face.SetVisualEmotion(value))return false;
+            if(!isNpc && value!=CurrentEmotion && EmotionProgress.IsPlayable(value))GameAudio.Play(GameAudio.EmotionSound(value),transform.position);
             CurrentEmotion=value;EmotionResonance.InvalidateStates();if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
         }
         public bool ReceiveEmotion(RobotEmotionGameplay source){
@@ -132,7 +133,7 @@ namespace Emergence.Level01
             var transfer=source.GetComponent<EmotionTransfer>();
             if(!isActiveAndEnabled || !transfer || Vector2.Distance(transform.position,source.transform.position)>transfer.transferRadius)return false;
             if(source.CurrentEmotion==RobotEmotion.Blank || source.CurrentEmotion==RobotEmotion.Loading)return false;
-            receiving=true;try{return TrySetEmotion(source.CurrentEmotion==RobotEmotion.StrongAnger?RobotEmotion.Anger:source.CurrentEmotion);}finally{receiving=false;}
+            receiving=true;try{bool result=TrySetEmotion(source.CurrentEmotion==RobotEmotion.StrongAnger?RobotEmotion.Anger:source.CurrentEmotion);if(result)GameAudio.Play(GameSound.Transfer,transform.position);return result;}finally{receiving=false;}
         }
         void Update()
         {
