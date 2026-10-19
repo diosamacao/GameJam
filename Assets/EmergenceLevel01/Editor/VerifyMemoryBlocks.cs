@@ -34,6 +34,7 @@ namespace Emergence.Level01.Editor
         static bool Visible(UnityEngine.Tilemaps.Tilemap m,Vector3Int c)=>m.GetColor(c).a>.99f && m.GetColliderType(c)==UnityEngine.Tilemaps.Tile.ColliderType.Grid;
         static bool Hidden(UnityEngine.Tilemaps.Tilemap m,Vector3Int c)=>m.GetColor(c).a<.001f && m.GetColliderType(c)==UnityEngine.Tilemaps.Tile.ColliderType.None;
         static IEnumerator Tests(){
+            EmotionProgress.UnlockEnhancement();
             var appear=AssetDatabase.LoadAssetAtPath<MemoryBlockTile>(SetupMemoryBlocks.Dir+"Tiles/MemoryAppear.asset");var disappear=AssetDatabase.LoadAssetAtPath<MemoryBlockTile>(SetupMemoryBlocks.Dir+"Tiles/MemoryDisappear.asset");Check(appear && disappear && appear.sprite.rect.width==64 && appear.sprite.pixelsPerUnit==64,"Both 64x64 collision tile assets imported");
             var grid=new GameObject("MemoryGrid",typeof(Grid));grid.transform.position=new Vector3(1000,0);var child=new GameObject("MixedMap",typeof(UnityEngine.Tilemaps.Tilemap),typeof(UnityEngine.Tilemaps.TilemapRenderer));child.transform.SetParent(grid.transform,false);var map=child.GetComponent<UnityEngine.Tilemaps.Tilemap>();
             var a=Vector3Int.zero;var b=new Vector3Int(1,0,0);var farA=new Vector3Int(20,0,0);var farB=new Vector3Int(21,0,0);map.SetTile(a,appear);map.SetTile(b,disappear);map.SetTile(farA,appear);map.SetTile(farB,disappear);yield return Wait(.15f);

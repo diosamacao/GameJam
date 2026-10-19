@@ -6,7 +6,7 @@ namespace Emergence.Level01
     {
         static readonly List<StoryInteractable> targets=new List<StoryInteractable>();
         [Min(0)] public float interactionRadius=2;
-        public string interactionHint="E 交互";
+        public string interactionHint="F 交互";
         public bool showHint=true;
         public Vector2 hintSize=new Vector2(220,30);
         public float hintBottomOffset=120;
@@ -19,7 +19,7 @@ namespace Emergence.Level01
         protected abstract bool Interact(RobotEmotionGameplay player);
         static StoryInteractable Nearest(RobotEmotionGameplay player){StoryInteractable result=null;float nearest=float.PositiveInfinity;foreach(var item in targets){if(!item || !item.isActiveAndEnabled || !item.Available || !MemoryNpcStateController.AllowsEmotion(item) || LocalTimeTarget.IsStopped(item))continue;float distance=Vector2.Distance(player.transform.position,item.transform.position);if(distance<=item.interactionRadius && distance<nearest){result=item;nearest=distance;}}return result;}
         public static bool TryNearest(RobotEmotionGameplay player){var item=Nearest(player);if(!item)return false;item.TryInteract(player);return true;}
-        void OnGUI(){if(!showHint || LevelFlowController.IsTransitioning || DialogueDirector.IsBlockingInput)return;foreach(var actor in EmotionResonance.Actors){if(!actor || actor.Actor.isNpc || !actor.Actor.CanUseEmotionAbilities || Nearest(actor.Actor)!=this)continue;var transfer=actor.GetComponent<EmotionTransfer>();string hint=DisplayHint.Replace("E",transfer?transfer.interactKey.ToString():"E");GUI.Box(new Rect((Screen.width-hintSize.x)/2,Screen.height-hintBottomOffset,hintSize.x,hintSize.y),hint);break;}}
+        void OnGUI(){if(!showHint || LevelFlowController.IsTransitioning || DialogueDirector.IsBlockingInput)return;foreach(var actor in EmotionResonance.Actors){if(!actor || actor.Actor.isNpc || !actor.Actor.CanUseEmotionAbilities || Nearest(actor.Actor)!=this)continue;var transfer=actor.GetComponent<EmotionTransfer>();string hint=DisplayHint;if(hint.StartsWith("E ") || hint.StartsWith("F "))hint=(transfer?transfer.interactionKey.ToString():"F")+hint.Substring(1);GUI.Box(new Rect((Screen.width-hintSize.x)/2,Screen.height-hintBottomOffset,hintSize.x,hintSize.y),hint);break;}}
         void OnDrawGizmosSelected(){Gizmos.color=Color.yellow;Gizmos.DrawWireSphere(transform.position,interactionRadius);}
     }
 }

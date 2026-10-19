@@ -48,6 +48,7 @@ namespace Emergence.Level01.Editor
         static bool sawOpaque, sawPartial;static Vector2 loadedPosition;
         static void Loaded(UnityEngine.SceneManagement.Scene scene,UnityEngine.SceneManagement.LoadSceneMode mode){sawOpaque=LevelFlowController.FadeOpacity>=.999f;loadedPosition=Player().GetComponent<Rigidbody2D>().position;}
         static IEnumerator Tests(){
+            EmotionProgress.UnlockEnhancement();
             yield return Wait(.2f);DialogueDirector.Instance.Stop();var player=Player();var pb=player.GetComponent<Rigidbody2D>();var npc=Npc();var actor=npc.GetComponent<RobotEmotionGameplay>();var nb=npc.GetComponent<Rigidbody2D>();actor.electricGraceSeconds=.1f;player.electricGraceSeconds=.1f;
             yield return Wait(.4f);Check(npc.AwaitingInteraction && Mathf.Abs(nb.position.x-1002)<.05f,"Interactive waypoint waits before moving");
             pb.position=new Vector2(990,0);yield return Wait(.1f);Check(!npc.TryInteract(player),"Route interaction rejects distant player");pb.position=new Vector2(1001,0);yield return Wait(.1f);

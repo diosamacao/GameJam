@@ -36,9 +36,9 @@ namespace Emergence.Level01
         void OnEnable(){if(!Actor)Actor=GetComponent<RobotEmotionGameplay>();if(!Actors.Contains(this))Actors.Add(this);}
         void OnDisable(){Actors.Remove(this);Enhanced=false;if(aura)aura.enabled=false;if(halo)halo.enabled=false;if(shield)shield.SetActive(false);}
         public bool Matches(EmotionResonance other){
-            if(!other || other==this || !isActiveAndEnabled || !other.isActiveAndEnabled || !Actor.CanUseEmotionAbilities || !other.Actor.CanUseEmotionAbilities)return false;
-            if(Actor.isNpc==other.Actor.isNpc || Emotion==RobotEmotion.Blank || Emotion==RobotEmotion.Loading || Emotion!=other.Emotion)return false;
-            float range=Actor.isNpc?other.radius:radius;
+            if(!EmotionProgress.EnhancementUnlocked || !other || other==this || !isActiveAndEnabled || !other.isActiveAndEnabled || !Actor.CanUseEmotionAbilities || !other.Actor.CanUseEmotionAbilities)return false;
+            if((!Actor.isNpc && !other.Actor.isNpc) || Emotion==RobotEmotion.Blank || Emotion==RobotEmotion.Loading || Emotion!=other.Emotion)return false;
+            float range=Actor.isNpc && other.Actor.isNpc?Mathf.Min(radius,other.radius):(Actor.isNpc?other.radius:radius);
             return ((Vector2)(transform.position-other.transform.position)).sqrMagnitude<=range*range;
         }
         public void RefreshState(){Enhanced=false;foreach(var other in Actors)if(Matches(other)){Enhanced=true;break;}}

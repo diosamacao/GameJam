@@ -31,6 +31,7 @@ namespace Emergence.Level01.Editor
         static IEnumerator Wait(float seconds){float end=Time.time+seconds;while(Time.time<end)yield return null;}
         static LocalMovingPlatform Platform(Vector2 position,PlatformActivation mode){var go=new GameObject("TestPlatform");go.transform.position=position;go.AddComponent<BoxCollider2D>().size=new Vector2(3,.3f);go.AddComponent<Rigidbody2D>().bodyType=RigidbodyType2D.Kinematic;var p=go.AddComponent<LocalMovingPlatform>();p.activation=mode;p.travel=Vector2.right;p.speed=4;return p;}
         static IEnumerator Tests(){
+            EmotionProgress.UnlockEnhancement();
             var floor=new GameObject("Floor",typeof(BoxCollider2D));floor.transform.position=new Vector3(1000,-.5f);floor.GetComponent<BoxCollider2D>().size=new Vector2(20,1);
             var player=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/EmergenceLevel01/Prefabs/Characters/PlayerRobot.prefab"),new Vector3(1000,0),Quaternion.identity).GetComponent<RobotEmotionGameplay>();
             player.keyboardInput=false;player.requireEmotionUnlocks=false;player.GetComponent<RobotKeyboardInput>().enabled=false;

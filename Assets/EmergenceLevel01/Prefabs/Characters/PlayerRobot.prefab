@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2769377242966152987}
   - component: {fileID: 3268231440997505186}
   - component: {fileID: 7279245944140856413}
+  - component: {fileID: 7980644001623311471}
   m_Layer: 3
   m_Name: PlayerRobot
   m_TagString: Player
@@ -217,10 +218,16 @@ MonoBehaviour:
   fallbackHappyMinimumJumpCells: 1
   fallbackCellHeight: 1
   fallbackJumpMultiplier: 1.2
-  switchKey: 113
+  joyKey: 49
+  angerKey: 50
+  sadnessKey: 51
+  courageKey: 52
+  guardianKey: 53
+  memoryKey: 54
   cancelSwitchKey: 27
   keyboardInput: 1
   isNpc: 0
+  requireEmotionUnlocks: 1
   showSwitchProgress: 1
   respawnPoint: {fileID: 0}
   electricGraceSeconds: 0.5
@@ -305,7 +312,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactKey: 101
-  automaticTransfer: 0
+  interactionKey: 102
+  transferRadius: 2
+  holdSeconds: 0.5
+  showProgress: 1
+  progressRect:
+    serializedVersion: 2
+    x: 20
+    y: 80
+    width: 260
+    height: 28
+--- !u!114 &7980644001623311471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993940386601983178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b2b4dd5be24f598c8d92700376b654, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  effectEnabled: 1
+  entryAlpha: 0.45
+  restingAlpha: 0.12
+  fadeInSeconds: 0.3
+  settleSeconds: 0.8
+  fadeOutSeconds: 0.4
+  tint: {r: 1, g: 1, b: 1, a: 1}
+  guiDepth: 100
 --- !u!1 &8073755569527328643
 GameObject:
   m_ObjectHideFlags: 0

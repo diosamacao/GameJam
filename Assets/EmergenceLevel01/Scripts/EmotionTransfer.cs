@@ -4,7 +4,8 @@ namespace Emergence.Level01
     [RequireComponent(typeof(EmotionResonance))]
     public sealed class EmotionTransfer : MonoBehaviour
     {
-        public KeyCode interactKey=KeyCode.E;
+        [Tooltip("仅用于长按传递情感")] public KeyCode interactKey=KeyCode.E;
+        public KeyCode interactionKey=KeyCode.F;
         [Min(0)] public float transferRadius=2;
         [Min(0)] public float holdSeconds=.5f;
         public bool showProgress=true;
@@ -12,11 +13,15 @@ namespace Emergence.Level01
         EmotionResonance source,target;RobotEmotion initialEmotion;float elapsed;bool consumed;
         public float Progress=>target?Mathf.Clamp01(elapsed/Mathf.Max(.001f,holdSeconds)):0;
         void Awake(){source=GetComponent<EmotionResonance>();}
+        public bool TryInteract(){
+            if(source.Actor.isNpc || !source.Actor.CanUseEmotionAbilities)return false;
+            return LabDoor.TryInteractNearest(source.Actor) || StoryInteractable.TryNearest(source.Actor) || InteractionPortal.TryContact(source.Actor) || (source.Emotion==RobotEmotion.Memory && MemoryInteractable.TryNearest(source));
+        }
         void Update(){
+            if(Input.GetKeyDown(interactionKey)){CancelTransfer();consumed=true;TryInteract();return;}
             if(!Input.GetKey(interactKey)){CancelTransfer();consumed=false;return;}
             if(source.Actor.isNpc || !source.Actor.CanUseEmotionAbilities){CancelTransfer();consumed=true;return;}
             if(Input.GetKeyDown(interactKey)){
-                if(LabDoor.TryRememberNearest(source.Actor) || StoryInteractable.TryNearest(source.Actor) || InteractionPortal.TryContact(source.Actor) || (source.Emotion==RobotEmotion.Memory && MemoryInteractable.TryNearest(source))){consumed=true;return;}
                 BeginTransfer();
             }
             if(!consumed)AdvanceTransfer(Time.deltaTime);

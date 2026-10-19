@@ -87,7 +87,7 @@ namespace Emergence.Level01
         Font font;
         readonly ContactPoint2D[] contacts=new ContactPoint2D[64];
         void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=!isNpc && requireEmotionUnlocks?EmotionProgress.Current:face.CurrentEmotion;if(!isNpc)face.SetVisualEmotion(CurrentEmotion);initialPosition=transform.position;if(!isNpc && SceneCheckpointState.TryGet(gameObject.scene,out var checkpoint)){transform.position=new Vector3(checkpoint.x,checkpoint.y,transform.position.z);body.position=checkpoint;body.velocity=Vector2.zero;}}
-        void Start(){if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
+        void Start(){if(!isNpc){EmotionProgress.CheckEnhancementScene(gameObject.scene.name,abilities?abilities.enhancementUnlockScene:"Level03_InitialLab",!abilities || abilities.unlockInLaterNumberedLevels);if(!GetComponent<MemoryScreenEffect>())gameObject.AddComponent<MemoryScreenEffect>();}if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
         public bool BeginSwitch()=>BeginSwitch(NextEmotion(CurrentEmotion));
         public bool BeginSwitch(RobotEmotion target)
         {
@@ -175,7 +175,7 @@ namespace Emergence.Level01
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
             if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},hudFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=hudFontSize,alignment=TextAnchor.MiddleCenter};
-            if(!IsSwitching){var resonance=GetComponent<EmotionResonance>();var transfer=GetComponent<EmotionTransfer>();string suffix=resonance && resonance.Enhanced?"（增强）":"";string interaction=transfer?"  ·  "+transfer.interactKey+" 长按传递 / 交互":"";GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+suffix+"  ·  "+UnlockedHints()+interaction,style);return;}
+            if(!IsSwitching){var resonance=GetComponent<EmotionResonance>();var transfer=GetComponent<EmotionTransfer>();string suffix=resonance && resonance.Enhanced?"（增强）":"";string interaction=transfer?"  ·  "+transfer.interactKey+" 长按传递  ·  "+transfer.interactionKey+" 交互":"";GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+suffix+"  ·  "+UnlockedHints()+interaction,style);return;}
             float x=Screen.width*.5f,y=Screen.height-chargeBottomOffset;
             GUI.Box(Offset(chargePanel,x,y),GUIContent.none);
             string name=EmotionName(TargetEmotion??CurrentEmotion);

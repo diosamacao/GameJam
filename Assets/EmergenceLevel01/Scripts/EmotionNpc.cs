@@ -36,7 +36,7 @@ namespace Emergence.Level01
         Rigidbody2D body;RobotMotor2D motor;bool useRoute,jumped,waiting,released;float remainingWait;
         public bool AwaitingInteraction=>route!=null && RouteIndex<route.Length && route[RouteIndex]!=null && route[RouteIndex].requiresPlayerInteraction && !released && ((Moving && useRoute) || (!Moving && RouteIndex==0));
         protected override bool Available=>AwaitingInteraction;
-        protected override string DisplayHint=>"E 让机器人执行下一段路线";
+        protected override string DisplayHint=>"F 让机器人执行下一段路线";
         protected override bool Interact(RobotEmotionGameplay player){if(!AwaitingInteraction)return false;if(!Moving)Activate();released=true;return true;}
         public void ResetRouteAfterDeath(){bool resume=Moving || activateOnStart || (route!=null && route.Length>0);StopMoving();Activate();Moving=resume;}
         void Awake(){
