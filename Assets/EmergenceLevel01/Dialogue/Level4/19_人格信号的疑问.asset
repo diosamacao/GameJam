@@ -10,35 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "19_人格信号的疑问"
-  m_EditorClassIdentifier: ""
-  blockPlayerInput: 1
+  m_Name: "19_\u4EBA\u683C\u4FE1\u53F7\u7684\u7591\u95EE"
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 0
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "尼"
-    text: "哇！你真厉害！"
+  - speaker: "\u5C3C"
+    text: "\u54C7\uFF01\u4F60\u771F\u5389\u5BB3\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "尼，博士说你在这里接收着一个人格信号"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u5C3C\uFF0C\u535A\u58EB\u8BF4\u4F60\u5728\u8FD9\u91CC\u63A5\u6536\u7740\u4E00\u4E2A\u4EBA\u683C\u4FE1\u53F7"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "对啊，所以我现在算是半个人类吧？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u5BF9\u554A\uFF0C\u6240\u4EE5\u6211\u73B0\u5728\u7B97\u662F\u534A\u4E2A\u4EBA\u7C7B\u5427\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "可我记得，你在进入实验舱之前，就已经表现得像个人类了吧？\n从休眠仓出来后，你就向我打了招呼。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u53EF\u6211\u8BB0\u5F97\uFF0C\u4F60\u5728\u8FDB\u5165\u5B9E\u9A8C\u8231\u4E4B\u524D\uFF0C\u5C31\u5DF2\u7ECF\u8868\u73B0\u5F97\u50CF\u4E2A\u4EBA\u7C7B\u4E86\u5427\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "是......是吗？\n可能是...在唤醒我之前，模拟人格数据就传输到我身上了..."
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u4ECE\u4F11\u7720\u4ED3\u51FA\u6765\u540E\uFF0C\u4F60\u5C31\u5411\u6211\u6253\u4E86\u62DB\u547C\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第19段：人格信号的疑问。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u662F......\u662F\u5417\uFF1F\u53EF\u80FD\u662F...\u5728\u5524\u9192\u6211\u4E4B\u524D\uFF0C\u6A21\u62DF\u4EBA\u683C\u6570\u636E\u5C31\u4F20\u8F93\u5230\u6211\u8EAB\u4E0A\u4E86..."
+    charactersPerSecond: 0
+    minimumDisplaySeconds: 0
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C19\u6BB5\uFF1A\u4EBA\u683C\u4FE1\u53F7\u7684\u7591\u95EE\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

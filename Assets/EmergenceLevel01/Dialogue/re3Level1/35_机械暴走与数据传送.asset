@@ -10,50 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "35_机械暴走与数据传送"
-  m_EditorClassIdentifier: ""
+  m_Name: "35_\u673A\u68B0\u66B4\u8D70\u4E0E\u6570\u636E\u4F20\u9001"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "伊"
-    text: "博士！休比怎么没出来？"
+  - speaker: "\u4F0A"
+    text: "\u535A\u58EB\uFF01\u4F11\u6BD4\u600E\u4E48\u6CA1\u51FA\u6765\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "什么休比？我量产了情感核心，结果搭载了它的机械都出现了异常！！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u4EC0\u4E48\u4F11\u6BD4\uFF1F\u6211\u91CF\u4EA7\u4E86\u60C5\u611F\u6838\u5FC3\uFF0C\u7ED3\u679C\u642D\u8F7D\u4E86\u5B83\u7684\u673A\u68B0\u90FD\u51FA\u73B0\u4E86\u5F02\u5E38\uFF01\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "它们都失控暴走了！！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u5B83\u4EEC\u90FD\u5931\u63A7\u66B4\u8D70\u4E86\uFF01\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "怎么回事？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u600E\u4E48\u56DE\u4E8B\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "可能是情感数据紊乱了，现在没有办法了。"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u53EF\u80FD\u662F\u60C5\u611F\u6570\u636E\u7D0A\u4E71\u4E86\uFF0C\u73B0\u5728\u6CA1\u6709\u529E\u6CD5\u4E86\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "只能将你们的数据传送回过去来避免这场灾难了！！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u53EA\u80FD\u5C06\u4F60\u4EEC\u7684\u6570\u636E\u4F20\u9001\u56DE\u8FC7\u53BB\u6765\u907F\u514D\u8FD9\u573A\u707E\u96BE\u4E86\uFF01\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "快！进入实验仓！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u5FEB\uFF01\u8FDB\u5165\u5B9E\u9A8C\u4ED3\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "所以休比才会留在那里吗？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6240\u4EE5\u4F11\u6BD4\u624D\u4F1A\u7559\u5728\u90A3\u91CC\u5417\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第35段：机械暴走与数据传送。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C35\u6BB5\uFF1A\u673A\u68B0\u66B4\u8D70\u4E0E\u6570\u636E\u4F20\u9001\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

@@ -10,45 +10,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "16_感到开心的早晨"
-  m_EditorClassIdentifier: ""
+  m_Name: "16_\u611F\u5230\u5F00\u5FC3\u7684\u65E9\u6668"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "尼"
-    text: "早上好呀，伊。"
+  - speaker: "\u5C3C"
+    text: "\u65E9\u4E0A\u597D\u5440\uFF0C\u4F0A\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "今天感觉心情怎么样？"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u4ECA\u5929\u611F\u89C9\u5FC3\u60C5\u600E\u4E48\u6837\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "心情？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u5FC3\u60C5\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "我觉得很开心？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u6211\u89C9\u5F97\u5F88\u5F00\u5FC3\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "那就是心情很好咯！"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u90A3\u5C31\u662F\u5FC3\u60C5\u5F88\u597D\u54AF\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "走吧，我们去进行实验吧。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u8D70\u5427\uFF0C\u6211\u4EEC\u53BB\u8FDB\u884C\u5B9E\u9A8C\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "O(∩_∩)O~"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "O(\u2229_\u2229)O~"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第16段：感到开心的早晨。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C16\u6BB5\uFF1A\u611F\u5230\u5F00\u5FC3\u7684\u65E9\u6668\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

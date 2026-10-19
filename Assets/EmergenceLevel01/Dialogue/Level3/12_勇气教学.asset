@@ -10,20 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "12_勇气教学"
-  m_EditorClassIdentifier: ""
+  m_Name: "12_\u52C7\u6C14\u6559\u5B66"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "博士"
-    text: "小心，别轻易碰到那些地方！很危险！"
+  - speaker: "\u535A\u58EB"
+    text: "\u5C0F\u5FC3\uFF0C\u522B\u8F7B\u6613\u78B0\u5230\u90A3\u4E9B\u5730\u65B9\uFF01\u5F88\u5371\u9669\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "除非，你拥有和我一样的勇气！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u9664\u975E\uFF0C\u4F60\u62E5\u6709\u548C\u6211\u4E00\u6837\u7684\u52C7\u6C14\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第12段：勇气教学。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C12\u6BB5\uFF1A\u52C7\u6C14\u6559\u5B66\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

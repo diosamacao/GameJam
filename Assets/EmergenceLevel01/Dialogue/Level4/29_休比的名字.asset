@@ -10,30 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "29_休比的名字"
-  m_EditorClassIdentifier: ""
+  m_Name: "29_\u4F11\u6BD4\u7684\u540D\u5B57"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "伊"
-    text: "那你的名字呢？"
+  - speaker: "\u4F0A"
+    text: "\u90A3\u4F60\u7684\u540D\u5B57\u5462\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "我叫休比，是一个非常好的人给我取的哦。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u6211\u53EB\u4F11\u6BD4\uFF0C\u662F\u4E00\u4E2A\u975E\u5E38\u597D\u7684\u4EBA\u7ED9\u6211\u53D6\u7684\u54E6\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "你从一开始就拥有情感了？"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u4F60\u4ECE\u4E00\u5F00\u59CB\u5C31\u62E5\u6709\u60C5\u611F\u4E86\uFF1F"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "休比"
-    text: "哎呀，不小心暴露了。\n比起这个，先收集情感碎片吧。"
+    cue: 
+  - speaker: "\u4F11\u6BD4"
+    text: "\u54CE\u5440\uFF0C\u4E0D\u5C0F\u5FC3\u66B4\u9732\u4E86\u3002\n\u6BD4\u8D77\u8FD9\u4E2A\uFF0C\u5148\u6536\u96C6\u60C5\u611F\u788E\u7247\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第29段：休比的名字。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C29\u6BB5\uFF1A\u4F11\u6BD4\u7684\u540D\u5B57\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

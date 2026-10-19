@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "02_情感状态提示"
-  m_EditorClassIdentifier: ""
-  blockPlayerInput: 1
+  m_Name: "02_\u60C5\u611F\u72B6\u6001\u63D0\u793A"
+  m_EditorClassIdentifier: 
+  blockPlayerInput: 0
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 1
+  autoAdvanceDelay: 1.5
   lines:
-  - speaker: "尼"
-    text: "不同的情感会让你拥有不同状态，试着去理解吧。"
+  - speaker: "\u5C3C"
+    text: "\u4E0D\u540C\u7684\u60C5\u611F\u4F1A\u8BA9\u4F60\u62E5\u6709\u4E0D\u540C\u72B6\u6001\uFF0C\u8BD5\u7740\u53BB\u7406\u89E3\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第02段：情感状态提示。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C02\u6BB5\uFF1A\u60C5\u611F\u72B6\u6001\u63D0\u793A\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"

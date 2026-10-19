@@ -10,30 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa0be747ec7cf4b4798737b2a1dc4e98, type: 3}
-  m_Name: "09_首次返回实验室"
-  m_EditorClassIdentifier: ""
+  m_Name: "09_\u9996\u6B21\u8FD4\u56DE\u5B9E\u9A8C\u5BA4"
+  m_EditorClassIdentifier: 
   blockPlayerInput: 1
   typewriter: 1
-  charactersPerSecond: 30
+  charactersPerSecond: 20
+  autoPlay: 0
+  autoAdvanceDelay: 2
   lines:
-  - speaker: "博士"
-    text: "看来实验进行得很成功啊，你们进入休眠仓好好睡一觉吧。"
+  - speaker: "\u535A\u58EB"
+    text: "\u5B9E\u9A8C\u8FDB\u884C\u5F97\u5F88\u6210\u529F\u554A\uFF0C\u4F60\u4EEC\u8FDB\u5165\u4F11\u7720\u4ED3\u597D\u597D\u7761\u4E00\u89C9\u5427\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "博士"
-    text: "我还得处理一些数据，明天见！"
+    cue: 
+  - speaker: "\u535A\u58EB"
+    text: "\u6211\u8FD8\u5F97\u5904\u7406\u4E00\u4E9B\u6570\u636E\uFF0C\u660E\u5929\u89C1\uFF01"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "伊"
-    text: "好的，博士。"
+    cue: 
+  - speaker: "\u4F0A"
+    text: "\u597D\u7684\uFF0C\u535A\u58EB\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  - speaker: "尼"
-    text: "明天见。"
+    cue: 
+  - speaker: "\u5C3C"
+    text: "\u660E\u5929\u89C1\u3002"
     charactersPerSecond: 0
     minimumDisplaySeconds: 0
-    cue: ""
-  stagingNotes: "原稿第09段：首次返回实验室。句尾c为手动翻页标记，已移除；未标c的同角色连续行保留换行。尚未绑定场景触发、情感解锁或演出事件。"
+    cue: 
+  stagingNotes: "\u539F\u7A3F\u7B2C09\u6BB5\uFF1A\u9996\u6B21\u8FD4\u56DE\u5B9E\u9A8C\u5BA4\u3002\u53E5\u5C3Ec\u4E3A\u624B\u52A8\u7FFB\u9875\u6807\u8BB0\uFF0C\u5DF2\u79FB\u9664\uFF1B\u672A\u6807c\u7684\u540C\u89D2\u8272\u8FDE\u7EED\u884C\u4FDD\u7559\u6362\u884C\u3002\u5C1A\u672A\u7ED1\u5B9A\u573A\u666F\u89E6\u53D1\u3001\u60C5\u611F\u89E3\u9501\u6216\u6F14\u51FA\u4E8B\u4EF6\u3002"
