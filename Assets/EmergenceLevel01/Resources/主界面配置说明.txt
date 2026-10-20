@@ -37,3 +37,12 @@ On Triggered 可绑定成功后的事件。外部代码可调用 TryTrigger(play
 NPC 即使被增强悲伤时停，仍能通过 E 接收玩家传递的情感；路线移动继续遵循时停规则。
 危险区域持续检查重叠角色，NPC 静止或休眠时失去增强勇气也会受伤。
 怀念共鸣状态在读取时刷新。已删除进入怀念情感时的泛白；回忆剧情切场景的白色淡入淡出保留。
+
+移动端适配（Android / iOS 横屏）
+手机自动显示触控；电脑默认保持键鼠操作。在 GameMenuConfig 勾选 Mobile Preview 可在 Game 视图预览触控。
+左侧 ◀ ▶ 移动；右侧跳跃（按住跳更高）、交互、传递（长按）；底部选择六种已解锁情感。
+剧情非自动播放时显示“继续对话”；点击场景选择/放置拼装件，“取消选择”清空选中。
+可配置 Mobile Button Scale、Mobile Button Opacity、Mobile Target Frame Rate。按钮与对话框避开安全区；暂停、切场景、切后台会清理触控输入。
+中文字体使用 Fonts/NotoSansCJKsc-Regular.otf，授权见同目录 OFL.txt；GameMenuConfig.Font 可替换为其他有授权的中文字体。
+当前编辑器只有 Windows/WebGL 支持模块。Android 需 Unity Hub 安装对应版本 Android Build Support、SDK/NDK/OpenJDK；iOS 需 iOS Build Support，并在 macOS/Xcode 上完成签名与真机安装。
+Android 正式发布配置建议在安装模块后选择 IL2CPP/ARM64，配置包名和签名；iOS 配置 Bundle Identifier、签名团队。此轮不包含签名、商店发布或真机性能结论。

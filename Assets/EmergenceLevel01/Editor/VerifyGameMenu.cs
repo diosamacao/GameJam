@@ -53,9 +53,11 @@ namespace Emergence.Level01.Editor
             UnityEngine.Rendering.GraphicsSettings.defaultRenderPipeline=null;QualitySettings.renderPipeline=null;
             var texture=new RenderTexture(1280,720,24);texture.Create();var oldTarget=camera.targetTexture;int mask=camera.cullingMask;camera.cullingMask=1<<5;
             camera.targetTexture=texture;ui.Canvas.renderMode=RenderMode.ScreenSpaceCamera;ui.Canvas.worldCamera=camera;ui.Canvas.planeDistance=1;
+            var touchCanvas=MobileControls.Instance.Canvas;touchCanvas.renderMode=RenderMode.ScreenSpaceCamera;touchCanvas.worldCamera=camera;touchCanvas.planeDistance=1;
             yield return null;yield return null;Canvas.ForceUpdateCanvases();camera.Render();
             var before=RenderTexture.active;RenderTexture.active=texture;var image=new Texture2D(1280,720,TextureFormat.RGB24,false);image.ReadPixels(new Rect(0,0,1280,720),0,0);image.Apply();Directory.CreateDirectory("Logs/GameMenu");File.WriteAllBytes("Logs/GameMenu/"+name+".png",image.EncodeToPNG());
             RenderTexture.active=before;camera.targetTexture=oldTarget;camera.cullingMask=mask;ui.Canvas.renderMode=RenderMode.ScreenSpaceOverlay;ui.Canvas.worldCamera=null;
+            touchCanvas.renderMode=RenderMode.ScreenSpaceOverlay;touchCanvas.worldCamera=null;
             UnityEngine.Object.Destroy(image);texture.Release();UnityEngine.Object.Destroy(texture);QualitySettings.renderPipeline=quality;UnityEngine.Rendering.GraphicsSettings.defaultRenderPipeline=graphics;
         }
         static IEnumerator Tests(){
@@ -81,6 +83,19 @@ namespace Emergence.Level01.Editor
             Check(!EmotionProgress.IsUnlocked(RobotEmotion.Joy),"New game resets emotion progress");Check(ui.GearButton.gameObject.activeInHierarchy,"Gear appears inside gameplay");yield return Capture("GameplayGear");
             Check(UnityEngine.Object.FindObjectsOfType<UnityEngine.EventSystems.EventSystem>().Length==1,"UI retains one event system after scene load");
             var player=UnityEngine.Object.FindObjectOfType<RobotEmotionGameplay>();var motor=player.GetComponent<RobotMotor2D>();
+            ui.config.mobilePreview=true;yield return RealWait(.1f);
+            var touch=MobileControls.Instance;
+            Check(MobileControls.Active,"Mobile preview enables touch controls on desktop");
+            var holds=touch.GetComponentsInChildren<TouchHoldButton>();Check(holds.Length==4,"Movement jump and transfer hold buttons exist");
+            var pointer=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=1};
+            var pointer2=new UnityEngine.EventSystems.PointerEventData(UnityEngine.EventSystems.EventSystem.current){pointerId=2};
+            TouchHoldButton move=null,jump=null;foreach(var h in holds){if(h.action==TouchAction.Right)move=h;if(h.action==TouchAction.Jump)jump=h;}
+            move.OnPointerDown(pointer);jump.OnPointerDown(pointer2);Check(MobileControls.Held(TouchAction.Right) && MobileControls.Held(TouchAction.Jump),"Two fingers can move and hold jump simultaneously");
+            yield return RealWait(.1f);Check(player.GetComponent<Rigidbody2D>().velocity.x>0,"Touch movement drives existing player motor");
+            move.OnPointerExit(pointer);jump.OnPointerUp(pointer2);Check(MobileControls.MoveAxis==0 && !MobileControls.Held(TouchAction.Jump),"Release and slide-off clear held input");
+            move.OnPointerDown(pointer);ui.Pause();Check(MobileControls.MoveAxis==0,"Pause clears touch holds");ui.Resume();
+            yield return Capture("MobileControls");
+            ui.config.mobilePreview=false;yield return RealWait(.1f);
             var dialogue=ScriptableObject.CreateInstance<DialogueSequence>();dialogue.typewriter=false;dialogue.autoPlay=true;dialogue.autoAdvanceDelay=.25f;dialogue.lines=new[]{new DialogueSequence.Line{text="暂停时对话不会继续。"},new DialogueSequence.Line{text="继续游戏后恢复。"}};
             var director=DialogueDirector.Instance;director.TryPlay(dialogue);Time.timeScale=.5f;ui.GearButton.onClick.Invoke();
             Check(GameMenuUI.IsPaused && Time.timeScale==0 && ui.PausePanel.activeSelf,"Gear click opens pause window and freezes game");

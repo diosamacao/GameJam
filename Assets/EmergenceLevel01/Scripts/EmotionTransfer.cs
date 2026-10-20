@@ -19,9 +19,9 @@ namespace Emergence.Level01
         }
         void Update(){
             if(Input.GetKeyDown(interactionKey)){CancelTransfer();consumed=true;TryInteract();return;}
-            if(!Input.GetKey(interactKey)){CancelTransfer();consumed=false;return;}
+            if(!Input.GetKey(interactKey) && !MobileControls.Held(TouchAction.Transfer)){CancelTransfer();consumed=false;return;}
             if(source.Actor.isNpc || !source.Actor.CanUseEmotionAbilities){CancelTransfer();consumed=true;return;}
-            if(Input.GetKeyDown(interactKey)){
+            if(Input.GetKeyDown(interactKey) || MobileControls.TakeDown(TouchAction.Transfer)){
                 BeginTransfer();
             }
             if(!consumed)AdvanceTransfer(Time.deltaTime);
@@ -41,6 +41,6 @@ namespace Emergence.Level01
         public bool TransferNearest(){return BeginTransfer();}
         void OnDisable(){CancelTransfer();consumed=false;}
         void OnApplicationFocus(bool focus){if(!focus){CancelTransfer();consumed=true;}}
-        void OnGUI(){if(GameMenuUI.BlocksGameplay)return;if(showProgress && target)GUI.Box(progressRect,"传递情感 "+Mathf.CeilToInt(Progress*100)+"%");}
+        void OnGUI(){if(GameMenuUI.BlocksGameplay || MobileControls.Active)return;if(showProgress && target)GUI.Box(progressRect,"传递情感 "+Mathf.CeilToInt(Progress*100)+"%");}
     }
 }

@@ -176,9 +176,10 @@ namespace Emergence.Level01
         void OnDisable(){EmotionResonance.InvalidateStates();CancelSwitch();}
         void OnGUI()
         {
+            if(MobileControls.Active)return;
             if(GameMenuUI.BlocksGameplay)return;
             if(!showSwitchProgress || DialogueDirector.IsBlockingInput)return;
-            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},hudFontSize);
+            if(!font)font=GameMenuUI.Instance && GameMenuUI.Instance.config.font?GameMenuUI.Instance.config.font:Font.CreateDynamicFontFromOSFont(GameMenuUI.FontNames,hudFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=hudFontSize,alignment=TextAnchor.MiddleCenter};
             if(!IsSwitching){var resonance=GetComponent<EmotionResonance>();var transfer=GetComponent<EmotionTransfer>();string suffix=resonance && resonance.Enhanced?"（增强）":"";string interaction=transfer?"  ·  "+transfer.interactKey+" 长按传递  ·  "+transfer.interactionKey+" 交互":"";GUI.Label(new Rect(hudSideMargin,Screen.height-statusBottomOffset,Screen.width-hudSideMargin*2,statusHeight),"当前："+EmotionName(CurrentEmotion)+suffix+"  ·  "+UnlockedHints()+interaction,style);return;}
             float x=Screen.width*.5f,y=Screen.height-chargeBottomOffset;
@@ -198,6 +199,6 @@ namespace Emergence.Level01
         }
         static string KeyLabel(KeyCode key)=>key.ToString().Replace("Alpha", "");
         public static string EmotionName(RobotEmotion value){switch(value){case RobotEmotion.Joy:return "开心";case RobotEmotion.Anger:return "愤怒";case RobotEmotion.Sadness:return "悲伤";case RobotEmotion.StrongAnger:return "加强愤怒";case RobotEmotion.Courage:return "勇气";case RobotEmotion.Guardian:return "守护";case RobotEmotion.Memory:return "怀念";case RobotEmotion.Loading:return "加载中";default:return "空白";}}
-        void OnDestroy(){if(font)Destroy(font);}
+        void OnDestroy(){if(font && (!GameMenuUI.Instance || font!=GameMenuUI.Instance.config.font))Destroy(font);}
     }
 }

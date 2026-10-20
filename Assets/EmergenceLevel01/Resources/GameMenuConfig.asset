@@ -16,7 +16,7 @@ MonoBehaviour:
   firstLevel: Level01_InitialLab
   title: "\u673A\u68B0\u60C5\u611F"
   subtitle: "\u5F53\u6570\u636E\uFF0C\u5F00\u59CB\u62E5\u6709\u60C5\u611F\u3002"
-  font: {fileID: 0}
+  font: {fileID: 12800000, guid: f8667973ede44564a07e7a98a1345e13, type: 3}
   background: {r: 0.025, g: 0.047, b: 0.075, a: 1}
   panel: {r: 0.055, g: 0.095, b: 0.135, a: 1}
   accent: {r: 0.52, g: 0.93, b: 0.91, a: 1}
@@ -41,3 +41,7 @@ MonoBehaviour:
   startTextHoldSeconds: 2
   startTextFadeOutSeconds: 1
   startTextFontSize: 36
+  mobilePreview: 0
+  mobileButtonScale: 1
+  mobileButtonOpacity: 0.75
+  mobileTargetFrameRate: 60

@@ -10,9 +10,9 @@ namespace Emergence.Level01
         public static float AxisFromKeys(bool a, bool d) { return (d ? 1 : 0) - (a ? 1 : 0); }
         void Update()
         {
-            motor.SetMoveInput(AxisFromKeys(Input.GetKey(leftKey), Input.GetKey(rightKey)));
-            if (Input.GetKeyDown(jumpKey)) motor.RequestJump();
-            motor.SetJumpHeld(Input.GetKey(jumpKey));
+            motor.SetMoveInput(Mathf.Clamp(AxisFromKeys(Input.GetKey(leftKey), Input.GetKey(rightKey))+MobileControls.MoveAxis,-1,1));
+            if (Input.GetKeyDown(jumpKey) || MobileControls.TakeDown(TouchAction.Jump)) motor.RequestJump();
+            motor.SetJumpHeld(Input.GetKey(jumpKey) || MobileControls.Held(TouchAction.Jump));
         }
         void ClearInput() { if (motor) { motor.SetMoveInput(0); motor.CancelJumpRequest(); } }
         void OnDisable() { ClearInput(); }

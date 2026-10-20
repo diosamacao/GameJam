@@ -18,8 +18,14 @@ namespace Emergence.Level01
         void Update()
         {
             if(GameMenuUI.BlocksPointer || DialogueDirector.IsBlockingInput)return;
+            if(Input.touchCount>0){
+                foreach(var touch in Input.touches)if(touch.phase==TouchPhase.Began && !MobileControls.PointerOverUI(touch.position) && worldCamera){
+                    var point=new Vector3(touch.position.x,touch.position.y,-worldCamera.transform.position.z);ClickWorld(worldCamera.ScreenToWorldPoint(point));
+                }
+                return;
+            }
             if(Input.GetMouseButtonDown(cancelMouseButton)||Input.GetKeyDown(cancelKey))CancelSelection();
-            if(Input.GetMouseButtonDown(selectMouseButton)&&worldCamera)
+            if(Input.GetMouseButtonDown(selectMouseButton)&&worldCamera && !MobileControls.PointerOverUI((Vector2)Input.mousePosition))
             { var p=Input.mousePosition;p.z=-worldCamera.transform.position.z;ClickWorld(worldCamera.ScreenToWorldPoint(p)); }
         }
         public void ClickWorld(Vector2 point)
@@ -47,13 +53,13 @@ namespace Emergence.Level01
         {
             if(GameMenuUI.BlocksGameplay)return;
             if(!targetDoor || targetDoor.sockets==null || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return;
-            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},titleFontSize);
+            if(!font)font=GameMenuUI.Instance && GameMenuUI.Instance.config.font?GameMenuUI.Instance.config.font:Font.CreateDynamicFontFromOSFont(GameMenuUI.FontNames,titleFontSize);
             var style=new GUIStyle(GUI.skin.label){font=font,fontSize=titleFontSize,alignment=TextAnchor.MiddleCenter};style.normal.textColor=titleColor;
             string text=targetDoor.Complete?"门已修复  "+targetDoor.FilledCount+" / "+targetDoor.sockets.Length+"  ·  点击门开关":"修复出口门  "+targetDoor.FilledCount+" / "+targetDoor.sockets.Length+"  ·  "+(Selected?"点击门上的虚线框放入选中门板":"点击场景中的门板进行选择");
             GUI.Label(new Rect(sideMargin,titleTop,Screen.width-sideMargin*2,titleHeight),text,style);
             style.fontSize=hintFontSize;style.normal.textColor=hintColor;
-            GUI.Label(new Rect(sideMargin,Screen.height-hintBottom,Screen.width-sideMargin*2,hintHeight),"A / D 移动    ·    鼠标左键选择 / 放入    ·    右键或 Esc 取消",style);
+            if(!MobileControls.Active)GUI.Label(new Rect(sideMargin,Screen.height-hintBottom,Screen.width-sideMargin*2,hintHeight),"A / D 移动    ·    鼠标左键选择 / 放入    ·    右键或 Esc 取消",style);
         }
-        void OnDestroy(){if(font)Destroy(font);}
+        void OnDestroy(){if(font && (!GameMenuUI.Instance || font!=GameMenuUI.Instance.config.font))Destroy(font);}
     }
 }

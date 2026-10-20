@@ -23,5 +23,10 @@ namespace Emergence.Level01
         [Min(0)] public float startTextFadeOutSeconds=1f;
         [Min(1)] public int startTextFontSize=36;
         public KeyCode pauseKey=KeyCode.Escape;
+        [Header("移动端（横屏）")]
+        public bool mobilePreview;
+        [Range(.75f,1.15f)] public float mobileButtonScale=1;
+        [Range(.2f,1)] public float mobileButtonOpacity=.75f;
+        public int mobileTargetFrameRate=60;
     }
 }

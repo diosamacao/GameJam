@@ -96,9 +96,10 @@ namespace Emergence.Level01
         {
             if(GameMenuUI.BlocksGameplay)return;
             if(!IsPlaying)return;
-            if(!font)font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},bodyFontSize);
+            if(!font)font=GameMenuUI.Instance && GameMenuUI.Instance.config.font?GameMenuUI.Instance.config.font:Font.CreateDynamicFontFromOSFont(GameMenuUI.FontNames,bodyFontSize);
             float scale=Mathf.Clamp(Screen.width/Mathf.Max(1,referenceWidth),Mathf.Max(.01f,scaleRange.x),Mathf.Max(scaleRange.x,scaleRange.y));
-            float width=Mathf.Min(Screen.width-screenMargin,panelWidth*scale),x=(Screen.width-width)*.5f,y=topOffset*scale,pad=padding*scale;
+            var safe=Screen.safeArea;
+            float width=Mathf.Min(safe.width-screenMargin,panelWidth*scale),x=safe.x+(safe.width-width)*.5f,y=Screen.height-safe.yMax+topOffset*scale,pad=padding*scale;
             var body=new GUIStyle(GUI.skin.label){font=font,fontSize=Mathf.RoundToInt(bodyFontSize*scale),wordWrap=true,richText=false};body.normal.textColor=bodyColor;
             var heading=new GUIStyle(body){fontSize=Mathf.RoundToInt(speakerFontSize*scale),fontStyle=FontStyle.Bold};heading.normal.textColor=speakerColor;
             float speakerHeight=string.IsNullOrEmpty(CurrentLine.speaker)?0:speakerLineHeight*scale;
@@ -110,8 +111,9 @@ namespace Emergence.Level01
             GUI.Label(new Rect(x+pad,y+pad+speakerHeight,width-pad*2,textHeight),VisibleText,body);
             if(!ShowAdvanceHint)return;
             var hint=new GUIStyle(heading){alignment=TextAnchor.MiddleRight,fontSize=Mathf.RoundToInt(hintFontSize*scale),fontStyle=FontStyle.Normal};
-            GUI.Label(new Rect(x+pad,y+height-footerHeight*scale,width-pad*2,hintHeight*scale),IsRevealing?advanceKey+"  显示全文":CanAdvance?advanceKey+"  "+(LineIndex==Sequence.lines.Length-1?"结束对话":"下一段"):"…",hint);
+            string key=MobileControls.Active?"点击继续对话":advanceKey.ToString();
+            GUI.Label(new Rect(x+pad,y+height-footerHeight*scale,width-pad*2,hintHeight*scale),IsRevealing?key+"  显示全文":CanAdvance?key+"  "+(LineIndex==Sequence.lines.Length-1?"结束对话":"下一段"):"…",hint);
         }
-        void OnDestroy(){if(font)Destroy(font);}
+        void OnDestroy(){if(font && (!GameMenuUI.Instance || font!=GameMenuUI.Instance.config.font))Destroy(font);}
     }
 }

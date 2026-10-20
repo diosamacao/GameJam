@@ -16,6 +16,7 @@ namespace Emergence.Level01
         public GameMenuConfig config;
         public Canvas Canvas {get;private set;}
         public Font DisplayFont=>font;
+        public static readonly string[] FontNames={"Microsoft YaHei","PingFang SC","Heiti SC","Noto Sans CJK SC","NotoSansCJK-Regular","Droid Sans Fallback","SimHei","Arial"};
         public Button StartButton {get;private set;}
         public Button GearButton=>gear;
         public Button ContinueButton {get;private set;}
@@ -23,6 +24,7 @@ namespace Emergence.Level01
         public Button QuitButton {get;private set;}
         public GameObject PausePanel=>pauseRoot;
         GameObject menuRoot,pauseRoot;Button gear;Font font;bool ownsFont,paused,mainMenu,starting;
+        RectTransform mainDesign,pauseWindow;
         float previousTimeScale;bool previousAudioPause;DialogueDirector pausedDialogue;float dialoguePauseStart;
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetStatic(){Instance=null;}
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] static void Install(){if(!Instance)new GameObject("GameMenuUI").AddComponent<GameMenuUI>();}
@@ -30,8 +32,9 @@ namespace Emergence.Level01
             if(Instance && Instance!=this){Destroy(gameObject);return;}Instance=this;DontDestroyOnLoad(gameObject);
             if(!config)config=Resources.Load<GameMenuConfig>("GameMenuConfig");
             if(!config){enabled=false;return;}
-            font=config.font;if(!font){font=Font.CreateDynamicFontFromOSFont(new[]{"Microsoft YaHei","SimHei","Arial"},32);ownsFont=true;}
+            font=config.font;if(!font){font=Font.CreateDynamicFontFromOSFont(GameMenuUI.FontNames,32);ownsFont=true;}
             Build();SceneManager.activeSceneChanged+=ActiveChanged;ActiveChanged(default,SceneManager.GetActiveScene());
+            var touch=new GameObject("Mobile Controls");DontDestroyOnLoad(touch);touch.AddComponent<MobileControls>();
         }
         RectTransform Rect(Transform parent,string name,Vector2 position,Vector2 size){
             var go=new GameObject(name,typeof(RectTransform));go.transform.SetParent(parent,false);var r=go.GetComponent<RectTransform>();
@@ -64,6 +67,7 @@ namespace Emergence.Level01
             if(!EventSystem.current){var events=new GameObject("Menu EventSystem",typeof(EventSystem),typeof(StandaloneInputModule));events.transform.SetParent(transform,false);}
             var background=Box(transform,"Main Menu",Vector2.zero,Vector2.zero,config.background,true);Stretch(background.rectTransform);menuRoot=background.gameObject;
             var design=Design(menuRoot.transform,"Menu composition");
+            mainDesign=design;
             Box(design,"Illustration panel",new Vector2(590,54),new Vector2(630,610),config.panel);
             for(int x=610;x<1220;x+=48)Box(design,"Grid",new Vector2(x,54),new Vector2(1,610),new Color(.15f,.24f,.29f,.35f));
             for(int y=72;y<665;y+=48)Box(design,"Grid",new Vector2(590,y),new Vector2(630,1),new Color(.15f,.24f,.29f,.35f));
@@ -84,6 +88,7 @@ namespace Emergence.Level01
             var icon=Rect(gear.transform,"Gear",new Vector2(11,11),new Vector2(26,26)).gameObject.AddComponent<GearGraphic>();icon.color=config.accent;icon.raycastTarget=false;
             var shade=Box(transform,"Pause overlay",Vector2.zero,Vector2.zero,new Color(.015f,.025f,.04f,.86f),true);Stretch(shade.rectTransform);pauseRoot=shade.gameObject;
             var modal=Box(pauseRoot.transform,"Pause window",Vector2.zero,new Vector2(440,410),config.panel,true);modal.rectTransform.anchorMin=modal.rectTransform.anchorMax=modal.rectTransform.pivot=Vector2.one*.5f;modal.rectTransform.anchoredPosition=Vector2.zero;
+            pauseWindow=modal.rectTransform;
             Box(modal.transform,"Accent",Vector2.zero,new Vector2(440,3),config.accent);
             Label(modal.transform,"游戏已暂停",new Vector2(36,30),new Vector2(368,56),30,config.text,TextAnchor.MiddleCenter);
             Label(modal.transform,"PAUSED",new Vector2(36,87),new Vector2(368,24),13,config.accent,TextAnchor.MiddleCenter);
@@ -95,10 +100,19 @@ namespace Emergence.Level01
         }
         void ActiveChanged(Scene previous,Scene current){if(paused)Resume();mainMenu=config && current.name==config.mainMenuScene;if(menuRoot)menuRoot.SetActive(mainMenu);if(gear)gear.gameObject.SetActive(!mainMenu);}
         bool CanPause=>!mainMenu && !starting && !LevelFlowController.IsFading && (!LevelFlowController.IsTransitioning || LevelFlowController.IsMemoryTrip);
-        void Update(){if(!config)return;if(gear)gear.interactable=CanPause && !paused;if(Input.GetKeyDown(config.pauseKey)){if(paused)Resume();else if(CanPause)Pause();}}
+        void Update(){
+            if(!config)return;
+            float scale=Mathf.Max(.01f,Canvas.scaleFactor);var safe=Screen.safeArea;
+            Vector2 center=(safe.center-new Vector2(Screen.width,Screen.height)*.5f)/scale;
+            if(mainDesign){mainDesign.anchoredPosition=center;mainDesign.localScale=Vector3.one*Mathf.Min(1,safe.width/(1280*scale),safe.height/(720*scale));}
+            if(pauseWindow){pauseWindow.anchoredPosition=center;pauseWindow.localScale=Vector3.one*Mathf.Min(1,safe.width/(464*scale),safe.height/(434*scale));}
+            if(gear){gear.interactable=CanPause && !paused;var rect=gear.GetComponent<RectTransform>();rect.anchoredPosition=new Vector2(-24-(Screen.width-safe.xMax)/scale,-24-(Screen.height-safe.yMax)/scale);rect.sizeDelta=Vector2.one*(MobileControls.Active?72:48);var icon=gear.GetComponentInChildren<GearGraphic>();if(icon)icon.rectTransform.anchoredPosition=new Vector2(MobileControls.Active?23:11,MobileControls.Active?-23:-11);}
+            if(Input.GetKeyDown(config.pauseKey)){if(paused)Resume();else if(CanPause)Pause();}
+        }
         public void Pause(){
             if(paused || !CanPause)return;previousTimeScale=Time.timeScale;previousAudioPause=AudioListener.pause;
             paused=true;dialoguePauseStart=Time.unscaledTime;pausedDialogue=DialogueDirector.Instance;Time.timeScale=0;AudioListener.pause=true;
+            if(MobileControls.Instance)MobileControls.Instance.Clear();
             foreach(var actor in EmotionResonance.Actors)if(actor && !actor.Actor.isNpc){var motor=actor.GetComponent<RobotMotor2D>();motor.SetMoveInput(0);motor.CancelJumpRequest();var transfer=actor.GetComponent<EmotionTransfer>();if(transfer)transfer.CancelTransfer();}
             pauseRoot.SetActive(true);if(EventSystem.current)EventSystem.current.SetSelectedGameObject(ContinueButton.gameObject);
         }

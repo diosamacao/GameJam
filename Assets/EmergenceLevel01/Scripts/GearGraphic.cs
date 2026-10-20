@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 namespace Emergence.Level01
 {
+    [RequireComponent(typeof(CanvasRenderer))]
     public sealed class GearGraphic : MaskableGraphic
     {
         protected override void OnPopulateMesh(VertexHelper vh){
