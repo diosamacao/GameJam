@@ -842,34 +842,11 @@ Transform:
   - {fileID: 326449109}
   m_Father: {fileID: 5526239894497568248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1782935673 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 466908417874321893, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
-  m_PrefabInstance: {fileID: 3630731544706701792}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1925953718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8684167014431305360, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
   m_PrefabInstance: {fileID: 3630731544706701792}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1925953719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782935673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3915f505d5af449bafad66166a436973, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionRadius: 2
-  interactionHint: "E \u524D\u5F80\u4E0B\u4E00\u5173"
-  showHint: 1
-  hintSize: {x: 220, y: 30}
-  hintBottomOffset: 120
-  flow: {fileID: 11400000, guid: 6efb79beab74dfb409caea7b6233d079, type: 2}
 --- !u!1001 &2093078700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1487,10 +1464,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 466908417874321893, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1925953719}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
 --- !u!4 &4017639881018505407
 Transform:

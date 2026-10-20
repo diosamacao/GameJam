@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: -1, y: 0}
-  maxDistance: 40
+  maxDistance: 50
   beamWidth: 0.08
   blockingLayers:
     serializedVersion: 2

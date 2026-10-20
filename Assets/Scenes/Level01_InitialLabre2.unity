@@ -7686,6 +7686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5526239894497568248}
     m_Modifications:
+    - target: {fileID: 8007906037403337, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 466908417874321893, guid: 7e72cd7be23a97045a8e5f44de5d52b6, type: 3}
       propertyPath: m_Name
       value: ExperimentPod1

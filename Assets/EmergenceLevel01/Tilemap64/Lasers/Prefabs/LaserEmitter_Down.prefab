@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
-  maxDistance: 40
+  maxDistance: 50
   beamWidth: 0.08
   blockingLayers:
     serializedVersion: 2
