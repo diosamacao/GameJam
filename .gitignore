@@ -30,3 +30,4 @@ sysinfo.txt
 .env
 .env.*
 !.env.example
+ProjectSettings/ProjectVersion.txt
