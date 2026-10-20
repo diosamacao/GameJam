@@ -19,6 +19,7 @@ namespace Emergence.Level01
         public Button StartButton {get;private set;}
         public Button GearButton=>gear;
         public Button ContinueButton {get;private set;}
+        public Button ResetButton {get;private set;}
         public Button QuitButton {get;private set;}
         public GameObject PausePanel=>pauseRoot;
         GameObject menuRoot,pauseRoot;Button gear;Font font;bool ownsFont,paused,mainMenu,starting;
@@ -82,12 +83,13 @@ namespace Emergence.Level01
             var gr=gear.GetComponent<RectTransform>();gr.anchorMin=gr.anchorMax=gr.pivot=Vector2.one;gr.anchoredPosition=new Vector2(-24,-24);
             var icon=Rect(gear.transform,"Gear",new Vector2(11,11),new Vector2(26,26)).gameObject.AddComponent<GearGraphic>();icon.color=config.accent;icon.raycastTarget=false;
             var shade=Box(transform,"Pause overlay",Vector2.zero,Vector2.zero,new Color(.015f,.025f,.04f,.86f),true);Stretch(shade.rectTransform);pauseRoot=shade.gameObject;
-            var modal=Box(pauseRoot.transform,"Pause window",Vector2.zero,new Vector2(440,330),config.panel,true);modal.rectTransform.anchorMin=modal.rectTransform.anchorMax=modal.rectTransform.pivot=Vector2.one*.5f;modal.rectTransform.anchoredPosition=Vector2.zero;
+            var modal=Box(pauseRoot.transform,"Pause window",Vector2.zero,new Vector2(440,410),config.panel,true);modal.rectTransform.anchorMin=modal.rectTransform.anchorMax=modal.rectTransform.pivot=Vector2.one*.5f;modal.rectTransform.anchoredPosition=Vector2.zero;
             Box(modal.transform,"Accent",Vector2.zero,new Vector2(440,3),config.accent);
             Label(modal.transform,"游戏已暂停",new Vector2(36,30),new Vector2(368,56),30,config.text,TextAnchor.MiddleCenter);
             Label(modal.transform,"PAUSED",new Vector2(36,87),new Vector2(368,24),13,config.accent,TextAnchor.MiddleCenter);
             ContinueButton=Button(modal.transform,"继续游戏",new Vector2(46,140),new Vector2(348,60),true,Resume);
-            QuitButton=Button(modal.transform,"退出游戏",new Vector2(46,220),new Vector2(348,58),false,QuitGame);
+            ResetButton=Button(modal.transform,"重置关卡",new Vector2(46,220),new Vector2(348,58),false,ResetLevel);
+            QuitButton=Button(modal.transform,"退出游戏",new Vector2(46,300),new Vector2(348,58),false,QuitGame);
             pauseRoot.SetActive(false);
             foreach(var rect in GetComponentsInChildren<RectTransform>(true))rect.gameObject.layer=5;
         }
@@ -109,6 +111,13 @@ namespace Emergence.Level01
             if(!mainMenu || starting || LevelFlowController.IsTransitioning)return;
             if(!Application.CanStreamedLevelBeLoaded(config.firstLevel)){Debug.LogError("开始关卡未加入 Build Settings："+config.firstLevel);return;}
             EmotionProgress.Reset();Time.timeScale=1;AudioListener.pause=false;starting=true;StartButton.interactable=false;StartCoroutine(StartLevel());
+        }
+        public void ResetLevel(){
+            if(!paused || LevelFlowController.IsTransitioning)return;
+            SceneResetController reset=null;
+            foreach(var item in FindObjectsOfType<SceneResetController>())if(item.gameObject.scene==SceneManager.GetActiveScene()){reset=item;break;}
+            if(!reset)return;
+            Resume();if(!reset.TryReset())Pause();
         }
         IEnumerator StartLevel(){
             var flow=ScriptableObject.CreateInstance<LevelFlowConfig>();flow.fadeInSeconds=flow.fadeOutSeconds=config.startFadeSeconds;flow.blackHoldSeconds=0;

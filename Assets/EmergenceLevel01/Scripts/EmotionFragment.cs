@@ -16,12 +16,20 @@ namespace Emergence.Level01
         public bool Collected {get;private set;}
         sealed class Entry {public EmotionFragment item;public int scene;public bool required,collected;}
         static readonly Dictionary<int,Entry> entries=new Dictionary<int,Entry>();
+        static readonly HashSet<string> reloadCollected=new HashSet<string>();
+        static string reloadScene;
+        string stableKey;
+        string StableKey {get {if(stableKey==null){stableKey="";for(var node=transform;node;node=node.parent)stableKey="/"+node.GetSiblingIndex()+":"+node.name+stableKey;}return stableKey;}}
+        public static void PrepareReload(Scene scene){
+            reloadCollected.Clear();reloadScene=scene.path;Scan(scene);
+            foreach(var entry in entries.Values)if(entry.scene==scene.handle && entry.item && entry.item.Collected)reloadCollected.Add(entry.item.StableKey);
+        }
         LineRenderer visual;Material material;float elapsed;
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetRegistry(){entries.Clear();SceneManager.sceneLoaded-=Loaded;SceneManager.sceneLoaded+=Loaded;SceneManager.sceneUnloaded-=Unloaded;SceneManager.sceneUnloaded+=Unloaded;}
-        static void Loaded(Scene scene,LoadSceneMode mode){Scan(scene);}
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetRegistry(){entries.Clear();reloadCollected.Clear();reloadScene=null;SceneManager.sceneLoaded-=Loaded;SceneManager.sceneLoaded+=Loaded;SceneManager.sceneUnloaded-=Unloaded;SceneManager.sceneUnloaded+=Unloaded;}
+        static void Loaded(Scene scene,LoadSceneMode mode){Scan(scene);if(scene.path==reloadScene){reloadScene=null;reloadCollected.Clear();}}
         static void Unloaded(Scene scene){var remove=new List<int>();foreach(var pair in entries)if(pair.Value.scene==scene.handle)remove.Add(pair.Key);foreach(int id in remove)entries.Remove(id);}
         static void Scan(Scene scene){if(!scene.IsValid() || !scene.isLoaded)return;foreach(var root in scene.GetRootGameObjects())foreach(var fragment in root.GetComponentsInChildren<EmotionFragment>(true))fragment.Register();}
-        void Register(){int id=GetInstanceID();if(!entries.ContainsKey(id))entries[id]=new Entry{item=this,scene=gameObject.scene.handle,required=requiredForExit,collected=Collected};}
+        void Register(){if(gameObject.scene.path==reloadScene && reloadCollected.Contains(StableKey)){Collected=true;gameObject.SetActive(false);}int id=GetInstanceID();if(!entries.ContainsKey(id))entries[id]=new Entry{item=this,scene=gameObject.scene.handle,required=requiredForExit,collected=Collected};}
         public static int Remaining(Scene scene){Scan(scene);int count=0;foreach(var entry in entries.Values){if(entry.item){entry.required=entry.item.requiredForExit;entry.collected=entry.item.Collected;}if(entry.scene==scene.handle && entry.required && !entry.collected)count++;}return count;}
         void Awake(){Register();GetComponent<CircleCollider2D>().isTrigger=true;GetComponent<CircleCollider2D>().radius=pickupRadius;
             var child=new GameObject("FragmentVisual");child.transform.SetParent(transform,false);visual=child.AddComponent<LineRenderer>();visual.useWorldSpace=false;visual.loop=true;visual.positionCount=4;

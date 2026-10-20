@@ -23,7 +23,8 @@ namespace Emergence.Level01
         [Min(.01f)] public float shieldLineWidth=.06f;
         [Range(12,128)] public int circleSegments=48;
         public int effectSortingOrder=35;
-        public bool Enhanced {get;private set;}
+        bool enhanced;
+        public bool Enhanced {get{if(Actor)EnsureState();return enhanced;}private set{enhanced=value;}}
         public RobotEmotionGameplay Actor {get;private set;}
         public RobotEmotion Emotion => Normalize(Actor.CurrentEmotion);
         public float SecondJumpMaximum=>Mathf.Max(0,secondJumpMaximumCells)*Actor.GridCellHeight;

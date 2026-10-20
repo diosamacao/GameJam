@@ -52,7 +52,7 @@ SessionState.SetBool(Key,true);EditorSceneManager.NewScene(NewSceneSetup.EmptySc
             player.transform.position=Vector3.zero;var transfer=player.GetComponent<EmotionTransfer>();Check(transfer.interactKey==KeyCode.E && transfer.interactionKey==KeyCode.F,"E transfer and F interaction bindings");
             var door=UnityEngine.Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/EmergenceLevel01/Prefabs/Equipment/VerticalDoor.prefab"),Vector3.zero,Quaternion.identity).GetComponent<LabDoor>();
             player.TrySetEmotion(RobotEmotion.Memory);yield return Wait(.15f);
-            Check(player.GetComponent<MemoryScreenEffect>().Opacity>0,"Entering memory fades in white overlay");
+            Check(player.GetComponent<MemoryScreenEffect>().Opacity==0,"Entering memory does not whiten the screen");
             Check(transfer.TryInteract() && door.state==VerticalDoorState.Memory,"F recalls ordinary door");
             Check(transfer.TryInteract() && door.open,"Next F opens memory door");yield return Wait(.8f);Check(!door.blocker.enabled,"Fully open memory door has no collision");
             Check(transfer.TryInteract() && !door.open && door.blocker.enabled,"Closing immediately restores collision");

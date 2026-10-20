@@ -88,7 +88,7 @@ namespace Emergence.Level01
         Font font;
         readonly ContactPoint2D[] contacts=new ContactPoint2D[64];
         void Awake(){motor=GetComponent<RobotMotor2D>();face=GetComponent<RobotEmotionController>();body=GetComponent<Rigidbody2D>();CurrentEmotion=!isNpc && requireEmotionUnlocks?EmotionProgress.Current:face.CurrentEmotion;if(!isNpc)face.SetVisualEmotion(CurrentEmotion);initialPosition=transform.position;if(!isNpc && SceneCheckpointState.TryGet(gameObject.scene,out var checkpoint)){transform.position=new Vector3(checkpoint.x,checkpoint.y,transform.position.z);body.position=checkpoint;body.velocity=Vector2.zero;}}
-        void Start(){if(!isNpc){EmotionProgress.CheckEnhancementScene(gameObject.scene.name,abilities?abilities.enhancementUnlockScene:"Level03_InitialLab",!abilities || abilities.unlockInLaterNumberedLevels);if(!GetComponent<MemoryScreenEffect>())gameObject.AddComponent<MemoryScreenEffect>();}if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
+        void Start(){if(!isNpc){EmotionProgress.CheckEnhancementScene(gameObject.scene.name,abilities?abilities.enhancementUnlockScene:"Level03_InitialLab",!abilities || abilities.unlockInLaterNumberedLevels);}if(!levelGrid)levelGrid=FindObjectOfType<Grid>();}
         public bool BeginSwitch()=>BeginSwitch(NextEmotion(CurrentEmotion));
         public bool BeginSwitch(RobotEmotion target)
         {
@@ -130,7 +130,7 @@ namespace Emergence.Level01
             CurrentEmotion=value;EmotionResonance.InvalidateStates();if(!isNpc && requireEmotionUnlocks)EmotionProgress.Remember(value);return true;
         }
         public bool ReceiveEmotion(RobotEmotionGameplay source){
-            if(!CanUseEmotionAbilities || LocalTimeTarget.IsStopped(this) || !isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
+            if(!CanUseEmotionAbilities || !isNpc || !source || source.isNpc || !source.CanUseEmotionAbilities)return false;
             var transfer=source.GetComponent<EmotionTransfer>();
             if(!isActiveAndEnabled || !transfer || Vector2.Distance(transform.position,source.transform.position)>transfer.transferRadius)return false;
             if(source.CurrentEmotion==RobotEmotion.Blank || source.CurrentEmotion==RobotEmotion.Loading)return false;

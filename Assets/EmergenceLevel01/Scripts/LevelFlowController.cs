@@ -51,6 +51,7 @@ namespace Emergence.Level01
             if(!instance){var go=new GameObject("LevelFlowController");instance=go.AddComponent<LevelFlowController>();DontDestroyOnLoad(go);}
             instance.busy=instance.resettingScene=true;
             SceneCheckpointState.PrepareReload(scene);
+            EmotionFragment.PrepareReload(scene);
             if(DialogueDirector.Instance)DialogueDirector.Instance.Stop();
             instance.StartCoroutine(instance.ResetScene(scene.path,fadeOut,fadeIn,hold));return true;
         }
