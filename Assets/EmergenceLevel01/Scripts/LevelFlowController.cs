@@ -38,7 +38,7 @@ namespace Emergence.Level01
         }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] static void ResetState(){instance=null;}
         public static bool Begin(LevelFlowConfig config){
-            if(EmotionFragment.Remaining(SceneManager.GetActiveScene())>0 || !config || IsTransitioning || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return false;
+            if(!config || IsTransitioning || (DialogueDirector.Instance && DialogueDirector.Instance.IsPlaying))return false;
             string source=SceneManager.GetActiveScene().name;var route=config.Find(source);
             if(route==null || string.IsNullOrWhiteSpace(route.nextScene))return false;
             if(!Application.CanStreamedLevelBeLoaded(route.nextScene)){Debug.LogError("关卡未加入Build Settings，请运行Setup Doctor And Level Flow或检查LevelFlow配置。",config);return false;}

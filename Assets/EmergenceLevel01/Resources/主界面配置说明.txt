@@ -21,7 +21,7 @@ MainMenu 已加入 Build Settings 第一位，原有关卡顺序保留。
 
 游戏通关交互：将 Prefabs/GameCompletionInteraction.prefab 拖到最终关卡的终点位置，或在已有物体上添加 GameCompletionInteraction。
 该预制体只提供交互逻辑，可放在现有终端、门等美术物体旁；不要在同一位置保留普通 LevelExitInteraction，以免交互目标冲突。
-玩家靠近后按 F；仍需收集完当前场景所有情感碎片。
+玩家靠近后按 F；无需收集完当前场景的情感碎片即可通关。
 默认：黑幕淡入 0.8 秒 → 等待 1 秒 → “机械情感”换行“完”淡入 1 秒 → 完全显示 2 秒 → 返回主界面。
 组件 Inspector 可改交互半径、字幕、字体字号、各阶段时长和返回的主界面名称。
 

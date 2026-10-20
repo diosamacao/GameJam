@@ -21,9 +21,8 @@ namespace Emergence.Level01
         bool triggered;
         void Reset(){interactionHint="F 完成游戏";}
         protected override bool Available=>!triggered;
-        protected override string DisplayHint=>EmotionFragment.Remaining(gameObject.scene)>0?"收集全部情感碎片后通关":interactionHint;
         protected override bool Interact(RobotEmotionGameplay player){
-            if(triggered || EmotionFragment.Remaining(gameObject.scene)>0)return false;
+            if(triggered)return false;
             var flow=ScriptableObject.CreateInstance<LevelFlowConfig>();
             flow.fadeOutSeconds=blackFadeSeconds;flow.fadeInSeconds=revealMenuSeconds;flow.blackHoldSeconds=0;
             flow.introText=endingText;flow.introFont=endingFont?endingFont:GameMenuUI.Instance?GameMenuUI.Instance.DisplayFont:null;
